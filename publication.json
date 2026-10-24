@@ -1,0 +1,36 @@
+{
+  "preferredProvider": "github-pages",
+  "repository": "https://github.com/urpig/K12-yujen",
+  "repositoryVisibility": "public",
+  "githubPages": {
+    "status": "pending",
+    "authorization": "The user explicitly authorized making this repo public on 2026-10-25 after initially choosing private.",
+    "sourceBranch": "gh-pages",
+    "sourceFolder": "/",
+    "publishCommand": "node publish-pages.mjs"
+  },
+  "previousPublicDeployment": {
+    "provider": "netlify",
+    "site": "whimsical-babka-221c30",
+    "url": "https://whimsical-babka-221c30.netlify.app/",
+    "deployId": "6add0fa73b84e3e7169c710e",
+    "status": "published",
+    "publishedAtDisplay": "2026-10-25 04:06 Asia/Taipei (minute precision from dashboard)",
+    "sourceCommit": "56efa9804420e626dd16b447a9496e8e7bf10a16",
+    "sourceDirectory": "dist",
+    "sourceTree": "53fdefc95427a3be896c1509a3bbf08d803c98ec",
+    "fileCount": 167,
+    "archiveSha256": "167ec8f7cb332dad3f7452f34bf1c3cc5e2672ff6ef102853190416e726af585",
+    "anonymousHttpVerifiedAt": "2026-10-24T20:14:11.409Z",
+    "anonymousHttpChecksPassed": 7,
+    "httpVerification": "No cookies or authorization supplied; all seven requests returned 200. JavaScript and image contents match the repo. HTML static text and app entry match after hosting link/comment processing.",
+    "browserVerification": [
+      "Public page renders the current story and antioxidant epilogue.",
+      "A prediction can be selected and submitted; the ore responds to keyboard rotation and records evidence.",
+      "Prediction and evidence survive reload; reset restores four choices and a visible scene preview.",
+      "No console errors or warnings observed during the smoke check."
+    ],
+    "verificationLimits": "This publication smoke check did not repeat every lesson interaction or mobile interaction. The unchanged application source previously passed all 123 automated tests.",
+    "publicationSequence": "Published to the existing Netlify site under the explicit public-link request before the user selected GitHub Pages for future publication. No further Netlify publication is authorized by this record."
+  }
+}

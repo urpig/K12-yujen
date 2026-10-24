@@ -4,6 +4,18 @@
 
 此專案收錄目前本機的完整網站版本，包括插圖、互動程式、樣式、第一章化學反應教材與自動化測試。
 
+## 分享與發布
+
+後續發布統一使用 GitHub Pages，repo 已依使用者授權設為公開。作品仍在 `main` 的 `dist/` 修改；Pages 從同一 repo 的 `gh-pages` 分支根目錄發布。
+
+完成下方建置與測試、將來源 commit 並 push 至 `main` 後，執行：
+
+```sh
+node publish-pages.mjs
+```
+
+工具會確認工作目錄沒有未提交變更、本機與遠端 `main` 一致，再將已提交的 `dist/` 原樣推送到 `gh-pages`，由 GitHub Pages 更新網站。首次需在 Settings → Pages 選擇 **Deploy from a branch → gh-pages → /(root)**。每次發布後仍須確認公開網址可開啟與操作，實際部署紀錄見 `publication.json`。
+
 ## 本機預覽
 
 需要 Node.js 24 或更新版本，無需安裝額外套件。在專案目錄執行：
@@ -33,4 +45,4 @@ node --test tests/*.test.mjs
 - `build.mjs`、`build-chemistry.mjs`：單檔 HTML 打包工具。
 - `server.mjs`：本機預覽伺服器。
 
-若需要靜態網站代管，網站根目錄設為 `dist/` 即可。此 repo 的提交與推送不會自動更新既有公開網站。
+完整網站的發布目錄為 `dist/`。此 repo 的提交與推送不會自動更新既有公開網站。
