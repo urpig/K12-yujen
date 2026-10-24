@@ -1,0 +1,12 @@
+{
+  "name": "lost-forge-science-lesson",
+  "version": "3.4.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "test": "node --test tests/hands-on.test.mjs tests/ore-geometry.test.mjs tests/lab-scenes.test.mjs tests/eight-card-revision.test.mjs tests/combined-combustion.test.mjs tests/workshops.test.mjs tests/spoon-heating.test.mjs tests/crucible-heating.test.mjs tests/bottle-ph.test.mjs tests/finishing-workshops.test.mjs tests/chemistry.test.mjs tests/everyday-redox.test.mjs tests/predictions.test.mjs",
+    "build": "node build.mjs",
+    "build:chemistry": "node build-chemistry.mjs"
+  }
+}

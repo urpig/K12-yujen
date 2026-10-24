@@ -1,0 +1,141 @@
+/* One continuous laboratory card: the entire rack sits above the apparatus. */
+#card-2 .integrated-studio{display:grid;grid-template-columns:minmax(0,1fr);gap:0;border:1px solid #a9bfc0;border-radius:12px;background:#e5eded;box-shadow:0 9px 24px #29444315;isolation:isolate;scroll-margin-top:12px;overflow:visible}
+#card-2 .integrated-studio .specimen-shelf{display:grid;grid-template-columns:1fr 1fr;column-gap:24px;border:0;border-radius:11px 11px 0 0;margin:0;padding:10px 18px 12px;background:linear-gradient(#eef3ee,#d7e3de);box-shadow:inset 0 1px #fff,0 5px 10px #233f3e16;z-index:10;position:relative}
+#card-2 .integrated-studio .shelf-heading{grid-column:1/-1;display:flex;flex-direction:row;justify-content:space-between;align-items:center;font-size:13px;line-height:1.5;margin:0 0 6px;gap:10px}
+#card-2 .integrated-studio .shelf-heading span{font-size:11px}
+#card-2 .integrated-studio .specimen-group{min-width:0;margin:0}
+#card-2 .integrated-studio .specimen-group h4{margin:0 0 7px;padding:4px 8px;font-size:12px;line-height:1.4;background:#dce8dc}
+#card-2 .integrated-studio .specimen-group.nonmetals h4{background:#e8e4d9}
+#card-2 .integrated-studio .specimen-group h4 small{display:inline;font-size:10px}
+#card-2 .integrated-studio .shelf-rail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0;padding:0 5px 5px;border-bottom:7px solid #71847a;box-shadow:0 3px #435e56,0 7px 7px #243b3520}
+#card-2 .integrated-studio .specimen-vial{height:56px;margin:0 12px 5px;border-radius:5px 5px 10px 10px}
+#card-2 .integrated-studio .shelf-specimen>b{font-size:12px;line-height:1.4;min-height:17px}
+#card-2 .integrated-studio .shelf-specimen>small{font-size:10px;line-height:1.3}
+#card-2 .integrated-studio .bench-workspace{padding:0 0 8px;min-width:0;border-top:1px solid #9eb4b0;background:linear-gradient(#d4e2e2,#e9eeea);border-radius:0 0 11px 11px}
+#card-2 .integrated-studio .bench-sequence{padding:7px 6px;justify-content:center;font-size:11px;line-height:1.4;gap:9px}
+#card-2 .integrated-studio [data-stage-purpose]{display:none}
+#card-2 .integrated-studio .combustion-workbench{width:100%;max-width:none;box-sizing:border-box;margin-inline:0;border-radius:0;border-color:#a9bebd}
+#card-2 .integrated-studio .combustion-step{padding:7px 10px;margin:7px 0 3px;font-size:12px;line-height:1.5}
+#card-2 .integrated-studio .combustion-condition{font-size:10px;line-height:1.5;margin:0 2px}
+#card-2 .integrated-studio .shelf-specimen.dragging{z-index:40}
+@media(max-width:800px){#card-2 .integrated-studio .specimen-shelf{padding:9px 10px 11px;column-gap:14px}#card-2 .integrated-studio .specimen-vial{height:48px;margin-inline:4px}#card-2 .integrated-studio .shelf-rail{gap:5px}#card-2 .integrated-studio .shelf-specimen>b{font-size:10px;min-height:28px}#card-2 .integrated-studio .shelf-specimen>small{font-size:9px}#card-2 .integrated-studio .specimen-group h4 small{display:none}}
+@media(max-width:500px){#card-2 .integrated-studio .shelf-heading{font-size:11px;gap:5px}#card-2 .integrated-studio .shelf-heading span{font-size:9px}#card-2 .integrated-studio .specimen-shelf{column-gap:8px}#card-2 .integrated-studio .specimen-vial{height:39px;margin-inline:0}#card-2 .integrated-studio .shelf-specimen>b{font-size:9px}#card-2 .integrated-studio .shelf-specimen>small{font-size:8px}}
+
+/* The furnace gets the full row; detailed explanation sits directly beneath. */
+#card-5 .factory-layout{display:flex;flex-direction:column}
+#card-5 .factory-stage{width:100%}
+#card-5 .factory-visual{width:min(100%,calc((100svh - 215px)*1.384615));margin-inline:auto}
+#card-5 .factory-topline{padding:10px 17px}
+#card-5 .factory-feed-rack{padding:8px 17px;gap:10px}
+#card-5 .factory-feed{grid-template-columns:76px 1fr;padding:5px}
+#card-5 .factory-feed>svg{width:76px;height:57px}
+#card-5 .factory-panel{display:grid;grid-template-columns:minmax(180px,.75fr) minmax(250px,1.4fr) minmax(180px,.85fr);gap:7px 26px;border-left:0;border-top:1px solid #b6c6b3;padding:16px 21px}
+#card-5 .factory-panel-kicker{grid-column:1;grid-row:1;font-size:10px}
+#card-5 .factory-panel h3{grid-column:1;grid-row:2;margin:0;font-size:22px}
+#card-5 .factory-equation{grid-column:1;grid-row:3/5;min-height:0;margin:0;padding:7px 0;font-size:19px;line-height:1.6}
+#card-5 .factory-panel [data-zone-description]{grid-column:2;grid-row:1/4;font-size:12px;line-height:1.8;margin:0}
+#card-5 .factory-requirement{grid-column:2;grid-row:4;font-size:11px;padding:6px 9px}
+#card-5 .factory-product-status{grid-column:3;grid-row:1/5;margin:0;padding:0;display:block}
+#card-5 .factory-next-hint{display:none}
+#card-5 .factory-motion-controls{padding:8px 13px}
+#card-5 .factory-live-equation{position:absolute;left:2%;top:11%;width:35%;padding:8px 10px;box-sizing:border-box;background:#173236e8;color:#f5ecd6;border-left:2px solid #d6b77c;border-radius:3px;z-index:4;margin:0;pointer-events:none;box-shadow:0 4px 9px #10282b22}
+#card-5 .factory-live-equation small{display:block;font-size:10px;color:#b6cdc1;letter-spacing:.4px;margin-bottom:4px}
+#card-5 .factory-live-equation b{display:block;font-weight:500;font-family:Georgia,'Noto Serif TC',serif;font-size:15px;line-height:1.5}
+#card-5 .factory-hotspot{padding:7px 9px;width:21%}
+#card-5 .factory-hotspot:not([data-zone=charge]) small{display:none}
+#card-5 .factory-step-guide{position:absolute;inset:0;pointer-events:none;z-index:3}
+#card-5 .factory-step-guide>span{position:absolute;right:2%;top:5%;padding:4px 7px;color:#dce8d1;background:#20393be8;border-radius:4px;font-size:10px}
+#card-5 .factory-step-guide>svg{display:block;width:100%;height:100%;overflow:visible}
+#card-5 .factory-step-rail{fill:none;stroke:#bdd0bb66;stroke-width:2;stroke-dasharray:3 5}
+#card-5 [data-zone-leader]{fill:none;stroke:#f4d4a0;stroke-width:1.6;stroke-dasharray:5 4}
+#card-5 [data-zone-point]{fill:#f4d4a0;stroke:#263a3e;stroke-width:1.5}
+@media(max-width:550px){#card-5 .factory-step-guide>span{font-size:8px;padding:2px 4px}}
+#card-5 .factory-hotspot span{font-size:12px}
+#card-5 .factory-hotspot small{font-size:9px}
+@media(max-width:950px){#card-5 .factory-feed{display:grid;grid-template-columns:48px 1fr;grid-template-rows:1fr 1fr;gap:0}#card-5 .factory-feed>svg{width:48px;height:50px}#card-5 .factory-feed>span{font-size:11px;align-self:end}#card-5 .factory-feed>small{font-size:9px;align-self:start}#card-5 .factory-panel{grid-template-columns:1fr 1fr;gap:8px 18px}#card-5 .factory-product-status{grid-column:1/-1;grid-row:5;display:flex;gap:25px}#card-5 .factory-visual{width:min(100%,calc((100svh - 225px)*1.384615))}#card-5 .factory-live-equation b{font-size:12px}}
+@media(max-width:550px){#card-5 .factory-feed{display:flex}#card-5 .factory-feed>small{display:none}#card-5 .factory-hotspot{padding:4px;gap:3px}#card-5 .factory-hotspot span{font-size:9px}#card-5 .factory-hotspot small{display:none}#card-5 .factory-live-equation{padding:5px 6px}#card-5 .factory-live-equation small{font-size:8px}#card-5 .factory-live-equation b{font-size:10px}#card-5 .factory-panel{padding:12px}#card-5 .factory-equation{font-size:16px}}
+
+/* Full-width apparatus enlarges the furnace; explanation remains beside it. */
+#card-5 .factory-layout{display:grid;grid-template-columns:minmax(0,1fr) 28%;gap:0;align-items:stretch}
+#card-5 .factory-visual{width:100%;margin-inline:auto}
+#card-5 .factory-panel{display:flex;flex-direction:column;gap:12px;padding:20px 16px;border-left:1px solid #b6c6b3;border-top:0;justify-content:flex-start}
+#card-5 .factory-panel h3{font-size:22px}
+#card-5 .factory-equation{font-size:21px;min-height:90px;padding:14px 0;overflow-wrap:anywhere}
+#card-5 .factory-panel [data-zone-description]{font-size:13px;line-height:1.9}
+#card-5 .factory-product-status{display:block;margin-top:auto}
+#card-5 .factory-next-hint{display:block;margin:0}
+#card-5 .factory-live-equation{display:none}
+#card-5 .factory-feed-rack{grid-template-columns:repeat(3,1fr)}
+#card-5 .factory-connected{position:absolute;left:24%;top:66%;width:18%;color:#e9f0d8;background:#18373dd9;font-size:10px;text-align:center;z-index:4;border:1px solid #8eab96;border-radius:4px}
+#card-5 .factory-hotspot:disabled{opacity:.6;cursor:default}
+#card-5 .factory-hotspot[aria-pressed=true]{opacity:1;box-shadow:0 0 15px #f6d89288;border-color:#fff0b4}
+#card-5 .factory-hotspot.is-done{opacity:1;background:#c4d9bb}
+#card-5 .factory-simulator[data-sequence-started=false] .factory-zone-ring,#card-5 .factory-simulator[data-sequence-started=false] [data-zone-leader],#card-5 .factory-simulator[data-sequence-started=false] [data-zone-point]{opacity:0}
+#card-5 .factory-simulator[data-iron-tapped=false] .factory-iron-stream,#card-5 .factory-simulator[data-slag-tapped=false] .factory-slag-stream{opacity:0}
+#card-5 .factory-simulator[data-iron-tapped=false] ellipse.factory-iron-pool,#card-5 .factory-simulator[data-slag-tapped=false] ellipse.factory-slag-pool{opacity:0}
+#card-5 [data-factory-heat]{background:#d5e7b8;color:#24453c;font-weight:700}
+#card-5 .step-arriving [data-zone-equation],#card-5 .step-arriving [data-zone-description]{animation:factory-explain-in .5s ease-out both}
+@keyframes factory-explain-in{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+@media(max-width:950px){#card-5 .factory-layout{grid-template-columns:minmax(0,1fr) 30%}#card-5 .factory-panel{padding:12px 10px;gap:8px}#card-5 .factory-panel h3{font-size:17px}#card-5 .factory-equation{font-size:16px;min-height:70px}#card-5 .factory-panel [data-zone-description]{font-size:11px}#card-5 .factory-hotspot{padding:3px;gap:3px}#card-5 .factory-hotspot span{font-size:10px}#card-5 .factory-hotspot small{display:none}#card-5 .factory-step-guide>span{font-size:8px}#card-5 .factory-connected{font-size:8px}}
+@media(max-width:550px){#card-5 .factory-layout{grid-template-columns:1fr}#card-5 .factory-panel{border-left:0;border-top:1px solid #b6c6b3}#card-5 .factory-next-hint{display:none}}
+@media(prefers-reduced-motion:reduce){#card-5 .step-arriving [data-zone-equation],#card-5 .step-arriving [data-zone-description]{animation:none}}
+
+/* Compact materials match the enlarged skip, with a daylight factory interior. */
+#card-5 .factory-feed-rack{display:flex;justify-content:flex-start;align-items:center;gap:20px;padding:10px 25px;background:linear-gradient(#f7f8f0,#e3ecdd)}
+#card-5 .factory-feed{display:flex;flex-direction:column;width:var(--feed-size,85px);height:calc(var(--feed-size,85px)*.75);flex:0 0 var(--feed-size,85px);padding:3px;gap:0;background:#fcfdf4;border:1px solid #b6c7af;border-radius:12px;box-shadow:0 3px 7px #435d4520}
+#card-5 .factory-feed>svg{width:85%;height:62%;flex:1;min-height:0}
+#card-5 .factory-feed>span{font-size:11px;align-self:center;white-space:nowrap;line-height:1.3}
+#card-5 .factory-feed.dragging{background:#fffdf0;box-shadow:0 10px 16px #334d432b}
+#card-5 .factory-stage{background:#d5e1da}
+#card-5 .factory-charge-target{left:7%;top:39%;width:15%;height:13%;background:#fff9df20;border:2px dashed #9b8249;color:#4e563f;border-radius:9px}
+#card-5 .factory-charge-target>span{position:absolute;bottom:-20px;left:0;width:100%;background:#faf7e9e8;color:#4a5b44;font-size:11px;border-radius:3px;text-align:center}
+#card-5 .factory-heater{position:absolute;left:23%;top:65%;width:21%;min-height:34px;z-index:7;border-radius:7px;border:1px solid #426d5a;background:#426d5a;color:white;font-size:12px;font-weight:650;box-shadow:0 3px 7px #31463833}
+#card-5 .factory-heater:disabled{opacity:.72;background:#e3e9df;color:#536553;border-color:#9cae97}
+#card-5 .factory-heater.heater-ready{background:#316449;color:#fff7db;box-shadow:0 0 0 3px #f9db91,0 4px 10px #31463833}
+#card-5 .factory-heater span{font-size:18px;vertical-align:middle}
+#card-5 .factory-motion-controls{background:#d9e4d7;border-color:#b8cbb7}
+#card-5 .factory-motion-controls button{background:#eef4e8;border-color:#a3b89f;color:#3f5d48}
+#card-5 .factory-step-guide>span{background:#f1f5e9e8;color:#45604d}
+#card-5 .factory-step-rail{stroke:#5a755b77}
+#card-5 [data-zone-leader]{stroke:#936627;stroke-width:2}
+#card-5 [data-zone-point]{fill:#936627;stroke:#fff7db}
+#card-5 .factory-zone-ring{filter:drop-shadow(0 0 1px #705423)}
+@media(max-width:950px){#card-5 .factory-heater{font-size:10px;min-height:28px}#card-5 .factory-heater span{font-size:13px}#card-5 .factory-feed>span{font-size:9px}#card-5 .factory-charge-target>span{font-size:9px;bottom:-16px}}
+
+/* Continuous sampling: the hit area follows the visible spoon bowl. */
+#card-2 .combustion-workbench .shelf-load-target{width:11%;height:12%;opacity:0;pointer-events:none;border-radius:50%;transition:opacity .12s}
+#card-2 .combustion-workbench .shelf-load-target.drop-active{opacity:1;background:#d6e8cb44;border-color:#638c67;box-shadow:0 0 0 4px #c4e2b455,0 0 18px #d6edbb77}
+#card-2 .combustion-workbench .shelf-load-target.drop-hover{background:#b7d7a788;box-shadow:0 0 0 6px #dceccb77,0 0 22px #c9edb7aa}
+#card-2 .combustion-workbench .shelf-load-target span{top:110%;left:-30%;width:160%;font-size:11px;text-align:center;color:#375d46;background:#f6faefef;border-radius:4px;padding:4px 6px}
+#card-2 .fresh-spoon .precision-spoon{animation:clean-spoon-arrive .35s ease-out}
+@keyframes clean-spoon-arrive{from{opacity:.5;filter:brightness(1.35)}to{opacity:1;filter:brightness(1)}}
+@media(prefers-reduced-motion:reduce){#card-2 .fresh-spoon .precision-spoon{animation:none}#card-2 .combustion-workbench .shelf-load-target{transition:none}}
+
+/* Start with the visible spoon over the outer flame; all drag targets follow its bowl. */
+#card-2 .combustion-workbench .spoon-rest,#card-2 .combustion-workbench .combustion-spoon:not(.bench-product-spoon){left:38.28947%;top:4.418605%;width:21.052632%;height:53.488372%;z-index:5}
+/* Independent SVG sheets morph their contours; never rotate the entire flame. */
+.alcohol-flame-fallback .alcohol-envelope{animation:none;transform:none}
+.redox-scene .alcohol-flame-fallback{transform-origin:320px 287px;transform:scaleY(1.4)}
+@media(prefers-reduced-motion:reduce){.alcohol-flame-fallback .alcohol-envelope{animation:none!important}}
+
+/* The instrument remains draggable while heating; location controls exposure. */
+#card-2 .free-spoon .reaction-coat{animation:none;opacity:var(--reaction-progress,0)}
+#card-2 .free-spoon .reactant-surface{animation:none;opacity:calc(1 - var(--reaction-progress,0))}
+#card-2 .free-spoon{cursor:grab;touch-action:none}
+#card-2 .free-spoon.dragging{cursor:grabbing;filter:drop-shadow(3px 6px 4px #23434b44)}
+#card-2 .free-spoon>span{left:20%;top:7%;font-size:11px}
+#card-2 .free-spoon.specimen-burning .precision-spoon{filter:drop-shadow(0 0 3px #f4c76866)}
+.heat-contact-zone{position:absolute;left:38.55%;top:49.07%;width:7.11%;height:12.09%;border:1px dashed #b8a67944;border-radius:50%;pointer-events:none;z-index:4;box-sizing:border-box}
+.heat-contact-zone.receiving-heat{border-color:#c89c54aa;background:radial-gradient(ellipse,#f9d98911,#f9b75011 65%,transparent)}
+.spoon-heat-readout{position:absolute;left:2%;top:3%;width:27%;max-width:240px;background:#f5f8f0ee;border:1px solid #b6c8bb;border-left:3px solid #9db7ad;border-radius:6px;padding:10px 12px;box-sizing:border-box;color:#4f6b62;pointer-events:none;z-index:6}
+.spoon-heat-readout b,.spoon-heat-readout>span{display:block;font-size:12px;line-height:1.6}
+.spoon-heat-readout>span{font-size:11px;color:#77867a;margin-top:4px}
+[data-heating=active] .spoon-heat-readout{border-left-color:#c39656}
+.spoon-heat-progress{height:4px;border-radius:3px;background:#d5e1da;margin-top:8px;overflow:hidden}
+.spoon-heat-progress i{display:block;height:100%;width:0;background:#bd975e;transition:none}
+[data-heating=paused] .spoon-heat-progress i{background:#8aa69e}
+.mobile-combustion .jar-mouth-zone{pointer-events:none}
+.mobile-specimen-fallback{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;display:none}
+.specimen-burning .mobile-specimen-fallback{display:block}
+.atmosphere-ready .mobile-specimen-fallback{display:none}
+@media(max-width:800px){.spoon-heat-readout{padding:6px 8px;width:29%}.spoon-heat-readout b{font-size:10px}.spoon-heat-readout>span{font-size:9px;margin-top:2px}#card-2 .free-spoon>span{font-size:9px}.spoon-heat-progress{margin-top:5px}}

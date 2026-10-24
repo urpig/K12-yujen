@@ -1,0 +1,5 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createOreGeometry,createOreTexture} from '../dist/ore-geometry.js';
+test('ore surface has finite positions and outward unit normals, including the pole and fracture boundaries',()=>{const mesh=createOreGeometry(24,36);assert.ok(mesh.triangles>1000);assert.equal(mesh.positions.length,mesh.normals.length);for(let i=0;i<mesh.positions.length;i+=3){const p=mesh.positions.slice(i,i+3),n=mesh.normals.slice(i,i+3);assert.ok([...p,...n].every(Number.isFinite));assert.ok(Math.abs(Math.hypot(...n)-1)<.00001);assert.ok(p.reduce((sum,x,j)=>sum+x*n[j],0)>0);assert.ok(Math.hypot(...p)>.6&&Math.hypot(...p)<1.3);}});
+test('ore material is deterministic and contains continuous colour and height variation rather than face colours',()=>{const a=createOreTexture(64),b=createOreTexture(64);assert.deepEqual(a,b);assert.equal(a.length,64*64*4);const heights=new Set(),reds=new Set();for(let i=0;i<a.length;i+=4){reds.add(a[i]);heights.add(a[i+3]);assert.ok(a[i+3]>0);}assert.ok(reds.size>40);assert.ok(heights.size>40);});

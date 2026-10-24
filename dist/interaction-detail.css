@@ -1,0 +1,36 @@
+/* Defined outlines keep every furnace annotation legible in the daylight scene. */
+#card-5 .factory-hotspot,#card-5 .factory-hotspot:disabled{border:1.5px solid #65806a;opacity:1;background:#f3f6edee;box-shadow:0 2px 5px #29463525}
+#card-5 .factory-hotspot.is-done{background:#d7e5c9;border-color:#66845e}
+#card-5 .factory-hotspot[aria-pressed=true]{border:2px solid #876627;background:#f1e9b9;box-shadow:0 0 0 3px #fff2ca88}
+#card-5 .factory-step-guide>span,#card-5 .factory-charge-target>span{border:1px solid #6b8065;box-sizing:border-box}
+#card-5 .factory-requirement{border:1px solid #b09b77;border-left-width:3px;border-radius:4px}
+#card-5 .factory-molten{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+#card-5 .molten-ready .factory-flow{visibility:hidden}
+.blade-studio .finish-top>div{flex-wrap:wrap;row-gap:5px}
+.blade-studio .finish-top b{line-height:1.6}
+/* A hand-operated atom ledger: broad drop target and large, tactile molecule tiles. */
+#card-4 .iron-studio{border:1px solid #9aafa4;border-radius:13px;overflow:hidden;background:#e8efea;box-shadow:0 9px 25px #25453618}
+#card-4 .iron-head{background:#304e4c;color:#f3f5e9;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:16px}
+#card-4 .iron-head b{font-size:17px;font-weight:550}.iron-head span{font-size:12px;color:#d5e3d7}
+#card-4 .iron-transfer-board{position:relative;aspect-ratio:900/460;max-width:1100px;margin:auto;touch-action:pan-y;isolation:isolate}
+.iron-transfer-art{display:block;width:100%;height:100%}
+#card-4 .iron-react-zone{position:absolute;left:7%;top:17%;width:39%;height:67%;border:2px dashed #7c9f91;border-radius:16px;pointer-events:none;box-sizing:border-box;transition:background .15s,border-color .15s}
+#card-4 .iron-react-zone>span{position:absolute;bottom:3%;left:4%;width:92%;text-align:center;font-size:13px;color:#365e50;background:#f3f7eced;border:1px solid #9eb7a4;border-radius:5px;padding:5px;box-sizing:border-box}
+#card-4 .iron-react-zone.drop-active{background:#c8e8c41a;border-color:#448f6f;box-shadow:0 0 0 4px #c4dfbb66}
+#card-4 .iron-react-zone.drop-hover{background:#d0eabe66;border:3px solid #347d59;box-shadow:inset 0 0 20px #fff7}
+#card-4 .iron-co,#card-4 .iron-co2{position:absolute;left:66%;width:24%;height:19%;box-sizing:border-box;display:flex;justify-content:center;align-items:center;border:1px solid #9bafa8;border-radius:11px;background:linear-gradient(140deg,#fffefa,#e1e9e5);box-shadow:0 4px 7px #2f4a4526;touch-action:none}
+#card-4 .iron-co svg,#card-4 .iron-co2 svg{width:80%;height:74%;pointer-events:none}
+#card-4 .iron-co small,#card-4 .iron-co2 small{position:absolute;bottom:3%;font-size:11px;color:#506b61}
+#card-4 .iron-co.dragging{z-index:8;box-shadow:0 10px 20px #243b3e44;border-color:#3e8062;background:#fbfff5}
+#card-4 .iron-co:hover{border-color:#438a6c;box-shadow:0 0 0 3px #cee1c6}
+#card-4 .iron-co:focus-visible{outline:3px solid #a87b2f;outline-offset:3px}
+#card-4 .iron-co2{background:linear-gradient(130deg,#f9ffef,#d4e3cf);border-color:#85a479}
+#card-4 .iron-co[hidden],#card-4 .iron-co2[hidden]{display:none}
+#card-4 .iron-oxygen{transition:transform .85s cubic-bezier(.4,0,.2,1),opacity .2s}
+#card-4 .iron-oxygen.transferring{transform:translate(var(--dx),var(--dy))}
+#card-4 .iron-result{display:flex;gap:20px;justify-content:space-between;align-items:center;padding:13px 20px;background:#f4f7ed;border-top:1px solid #b7c9b9;font-size:13px;color:#34564a}
+#card-4 .iron-result p{margin:0}.iron-progress{white-space:nowrap;font-variant-numeric:tabular-nums}
+#card-4 .iron-account{padding:11px 20px;font-size:12px;display:flex;flex-wrap:wrap;gap:7px 24px;background:#e1eadc;border-top:1px solid #b6c9b5}
+#card-4 .iron-account b{color:#295e45}.iron-free-Fe{transition:filter .8s}.iron-complete .iron-free-Fe{filter:drop-shadow(0 0 8px #fff4b9)}
+@media(max-width:800px){#card-4 .iron-head{padding:10px;font-size:12px}#card-4 .iron-head b{font-size:14px}#card-4 .iron-head span{font-size:10px}#card-4 .iron-react-zone>span{font-size:10px}#card-4 .iron-co small,#card-4 .iron-co2 small{font-size:9px}#card-4 .iron-result{padding:10px;gap:9px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){#card-4 .iron-oxygen{transition:none}}

@@ -1,0 +1,37 @@
+/* Viewport navigation reserves its own space, including beside the prologue. */
+@media(min-width:1001px){
+ body{padding-left:196px}
+ .lesson-shell{display:block;padding:24px;max-width:1680px}
+ .route-panel{position:fixed;inset:0 auto 0 0;width:196px;height:100dvh;margin:0;padding:30px 13px 20px;border:0;border-right:1px solid #c7d3bc;border-radius:0;background:linear-gradient(155deg,#edf2e5,#e1e9d7);z-index:50;overflow:auto;box-shadow:3px 0 20px #304d3410}
+ .route-top{display:flex;flex-direction:column;align-items:flex-start;gap:7px;padding:0 7px}
+ .route-top .eyebrow{font-size:12px;letter-spacing:.08em}
+ .route-panel progress{margin:15px 7px 18px;width:calc(100% - 14px)}
+ #route{display:flex;flex-direction:column;gap:8px;max-height:none;overflow:visible;padding:0}
+ #route a{width:100%;padding:12px 6px;grid-template-columns:20px minmax(0,1fr) 14px;font-size:12px;line-height:1.7;border-bottom:1px solid #cbd7c455;border-radius:5px}
+ #route a>span:nth-child(2){white-space:normal;overflow:visible}
+ .route-panel .route-note,.route-panel #storage-note{display:block;padding:0 7px;font-size:10px}
+ .cover{padding:30px 28px;gap:30px}.masthead{padding-inline:28px}
+ .story-prologue{margin:0 24px 28px;padding:22px;gap:24px}
+ .chapter-body,.chapter-header{padding-left:24px;padding-right:24px}
+}
+.story-arrival{align-self:center}.story-arrival img{height:auto;min-height:0;max-height:none;object-fit:contain;aspect-ratio:4/3}
+.story-scene-intro.with-forge-scene{display:grid;grid-template-columns:minmax(240px,.95fr) minmax(0,1.05fr);gap:24px;align-items:center}
+.locked-forge-scene{margin:0;position:relative;border-radius:10px;overflow:hidden;background:#4a3929;border:1px solid #a99574}
+.locked-forge-scene img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain}
+.locked-forge-scene figcaption{padding:9px 12px;font-size:12px;line-height:1.6;background:#f3ebdb;color:#705b3e}
+.with-forge-scene .story-dialogue{grid-template-columns:1fr;gap:10px}.with-forge-scene .story-speech{padding:10px;gap:10px;grid-template-columns:70px minmax(0,1fr)}
+.with-forge-scene .story-portrait{width:70px;height:70px}
+#card-5 .factory-hotspot{padding:5px 8px;min-height:30px}#card-5 .factory-hotspot:not([data-zone=charge]) small{display:none}
+#card-5 .factory-main-product{filter:drop-shadow(0 2px 3px #85460b26)}
+.comparison-sheet .combustion-product-record b{display:block;font-size:13px;color:#365c4b}
+.combustion-record-equation{display:block;font-size:15px;font-weight:650;white-space:nowrap;color:#78552c;margin:3px 0}
+.combustion-product-record small{display:block;font-size:11px;line-height:1.6;color:#71806e}
+.comparison-sheet table{width:100%;table-layout:auto}.comparison-sheet th:first-child{width:12%}.comparison-sheet .combustion-product-record{width:36%}
+@media(max-width:1100px){.story-scene-intro.with-forge-scene{grid-template-columns:1fr 1fr;gap:15px}.with-forge-scene .story-speech{grid-template-columns:54px 1fr}.with-forge-scene .story-portrait{width:54px;height:54px}}
+@media(max-width:700px){.story-scene-intro.with-forge-scene{grid-template-columns:1fr}.comparison-sheet{overflow:auto}.comparison-sheet table{min-width:680px}}
+@media print{body{padding-left:0}.route-panel{display:none}}
+
+.comparison-sheet td,.comparison-sheet th{padding:7px 10px;line-height:1.55}.combustion-product-record small{font-size:10px;line-height:1.5}.combustion-record-equation{line-height:1.6;margin:2px 0}
+.story-arrival figcaption{position:static;padding:9px 12px;background:#f3ebdb;color:#705b3e;font-size:12px;line-height:1.6;border-top:1px solid #d4c8ae}
+
+.story-forged-scene{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:center;gap:28px;margin:24px 0;padding:24px;border:1px solid #c8cbb9;border-radius:15px;background:#fffdf5;box-shadow:0 7px 22px #41513b0a;scroll-margin-top:22px}.story-forged-scene img{display:block;width:100%;height:auto;border-radius:9px}.story-forged-scene figcaption{padding:8px 6px}.story-forged-scene figcaption>span{font-size:11px;letter-spacing:.12em;color:#967044}.story-forged-scene h2{font-size:23px;line-height:1.5;color:#31534a;margin:14px 0}.story-forged-scene p{font-size:14px;line-height:1.9;color:#61715c;margin:0}@media(max-width:700px){.story-forged-scene{grid-template-columns:1fr;padding:16px;gap:12px}.story-forged-scene h2{font-size:20px;margin:9px 0}}

@@ -1,0 +1,7 @@
+import fs from 'node:fs';import {storyScene} from '../dist/story-scenes.js';import {metalBurnVisual} from '../dist/burning-specimens.js';import {nonmetalBench} from '../dist/lesson-materials.js';import {wetLabMarkup} from '../dist/wet-lab.js';import {metals,nonmetals} from '../dist/model.js';
+const scenes=[];for(const type of ['mine','activity','redox','reduction','furnace','slag','steel'])for(const phase of ['before','heating','after'])for(const selected of ({activity:['ZnCu','CuZn'],furnace:['ore','coke','full'],steel:['pig','pure','steel']}[type]||['']))scenes.push({name:`${type}-${phase}-${selected}`,html:storyScene(type,{phase,pair:selected,recipe:selected,material:selected})});
+for(const symbol of ['Na','Mg','Zn','Cu'])for(const phase of ['before','heating','product'])scenes.push({name:`metal-${symbol}-${phase}`,html:metalBurnVisual(symbol,phase)});
+scenes.push({name:'metal-Zn-cooled',html:metalBurnVisual('Zn','product',true)});
+for(const symbol of ['S','P','C','CO'])for(const phase of ['before','heating','product'])scenes.push({name:`nonmetal-${symbol}-${phase}`,html:nonmetalBench(symbol,phase)});
+for(const symbol of ['Na','Mg','Zn','Cu','S','P','C','CO'])scenes.push({name:`wet-${symbol}`,html:wetLabMarkup(metals[symbol]||nonmetals[symbol],symbol)});
+fs.mkdirSync('tests/results',{recursive:true});fs.writeFileSync('tests/results/scenes.json',JSON.stringify(scenes));console.log(`Exported ${scenes.length} scene variants for structural verification`);

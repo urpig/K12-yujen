@@ -1,0 +1,19 @@
+// A deterministic irregular 3-D mesh; pointer movement rotates its actual faces.
+export function mountOreFallback(canvas,onObserved){
+ const ctx=canvas.getContext('2d');let yaw=.45,pitch=-.15,travel=0,observed=false,pointer=null;
+ const rings=12,slices=20,vertices=[],faces=[];
+ for(let j=0;j<=rings;j++){const t=Math.PI*j/rings;for(let i=0;i<slices;i++){const p=i*Math.PI*2/slices,r=1+.11*Math.sin(i*2.17+j*1.37)+.06*Math.cos(i*4.3-j*2.1);vertices.push([r*Math.sin(t)*Math.cos(p),r*Math.cos(t)*.91,r*Math.sin(t)*Math.sin(p)]);}}
+ for(let j=0;j<rings;j++)for(let i=0;i<slices;i++){const a=j*slices+i,b=j*slices+(i+1)%slices,c=(j+1)*slices+i,d=(j+1)*slices+(i+1)%slices;faces.push([a,b,c],[b,d,c]);}
+ function draw(){const rect=canvas.getBoundingClientRect(),w=rect.width,h=rect.height;if(!w||!h)return;const scale=Math.min(devicePixelRatio||1,2);canvas.width=w*scale;canvas.height=h*scale;ctx.setTransform(scale,0,0,scale,0,0);ctx.clearRect(0,0,w,h);const r=Math.min(w*.34,h*.32),cx=w*.5,cy=h*.49;const bg=ctx.createRadialGradient(cx,cy,1,cx,cy,w*.6);bg.addColorStop(0,'#f7eee0');bg.addColorStop(1,'#e5ebdc');ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);ctx.save();ctx.translate(cx,h*.82);ctx.scale(1,.19);const sh=ctx.createRadialGradient(0,0,2,0,0,r);sh.addColorStop(0,'#384b3f55');sh.addColorStop(1,'#384b3f00');ctx.fillStyle=sh;ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.fill();ctx.restore();
+ const verts=vertices.map(([x,y,z])=>{const xx=x*Math.cos(yaw)+z*Math.sin(yaw),zz=-x*Math.sin(yaw)+z*Math.cos(yaw);return [xx,y*Math.cos(pitch)-zz*Math.sin(pitch),y*Math.sin(pitch)+zz*Math.cos(pitch)];});
+ const ordered=faces.map((ids,i)=>({ids,i,z:ids.reduce((a,k)=>a+verts[k][2],0)/3})).sort((a,b)=>a.z-b.z);
+ for(const f of ordered){const [a,b,c]=f.ids.map(i=>verts[i]);const u=b.map((v,i)=>v-a[i]),v=c.map((x,i)=>x-a[i]);let n=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]];const len=Math.hypot(...n)||1;n=n.map(x=>x/len);const light=.52+.3*Math.abs(n[0]*-.45+n[1]*.6+n[2]*.65),shade=Math.floor(42*light+10*Math.sin(f.i*13.4));const ps=[a,b,c].map(([x,y,z])=>[cx+x*r*(1+z*.08),cy-y*r*(1+z*.08)]);ctx.beginPath();ctx.moveTo(...ps[0]);ctx.lineTo(...ps[1]);ctx.lineTo(...ps[2]);ctx.closePath();ctx.fillStyle=`hsl(${15+4*Math.sin(f.i)},${34+f.i%8}%,${shade}%)`;ctx.fill();ctx.strokeStyle=ctx.fillStyle;ctx.lineWidth=.5;ctx.stroke();ctx.save();ctx.clip();for(let k=0;k<4;k++){const u0=((f.i*17+k*31)%97)/97,v0=(1-u0)*((f.i*13+k*19)%89)/89;const x=ps[0][0]+(ps[1][0]-ps[0][0])*u0+(ps[2][0]-ps[0][0])*v0,y=ps[0][1]+(ps[1][1]-ps[0][1])*u0+(ps[2][1]-ps[0][1])*v0;ctx.fillStyle=k%2?'#2a1c1744':'#ebbc8760';ctx.fillRect(x,y,1.3,1.6);}ctx.restore();}
+ ctx.fillStyle='#61715a';ctx.textAlign='center';ctx.font='12px "Microsoft JhengHei",sans-serif';ctx.fillText('↔ 按住礦石拖動旋轉 ↕',cx,h-26);canvas.dataset.rotation=Math.round(yaw*180/Math.PI)+','+Math.round(pitch*180/Math.PI);
+ }
+ function rotate(dx,dy){yaw+=dx*.012;pitch=Math.max(-1.2,Math.min(1.2,pitch+dy*.009));travel+=Math.abs(dx)+Math.abs(dy);draw();if(!observed&&travel>100){observed=true;onObserved();}}
+ canvas.addEventListener('pointerdown',e=>{if(e.button!==0)return;e.preventDefault();pointer={id:e.pointerId,x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);canvas.classList.add('turning');});
+ canvas.addEventListener('pointermove',e=>{if(pointer?.id!==e.pointerId)return;rotate(e.clientX-pointer.x,e.clientY-pointer.y);pointer.x=e.clientX;pointer.y=e.clientY;});
+ const stop=()=>{pointer=null;canvas.classList.remove('turning');};canvas.addEventListener('pointerup',stop);canvas.addEventListener('pointercancel',stop);
+ canvas.addEventListener('keydown',e=>{const step={ArrowLeft:[-25,0],ArrowRight:[25,0],ArrowUp:[0,-25],ArrowDown:[0,25]}[e.key];if(step){e.preventDefault();rotate(...step);}});
+ const resize=new ResizeObserver(draw);resize.observe(canvas);draw();return ()=>resize.disconnect();
+}

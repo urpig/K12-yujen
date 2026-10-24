@@ -1,0 +1,5 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {lessons,materialCases,migrateEight,isReady} from '../dist/journey-cards.js';
+test('joining the two labs keeps every observation but requires answering the new combined question',()=>{const c=lessons.find(c=>c.type==='combustion');const metals=c.required.filter(k=>!['S','P','C','CO'].some(x=>k.startsWith(x+':'))),nonmetals=c.required.filter(k=>!metals.includes(k));const s=migrateEight(c,{2:{evidence:metals,answer:2,quizOpen:true},3:{evidence:nonmetals,answer:3,quizOpen:true}});assert.ok(isReady(c,s));assert.equal(s.quizOpen,false);assert.equal(s.answer,null);assert.equal(materialCases.combustion.length,7);});
+test('renumbering the later chapters preserves progress by previous card identity',()=>{for(const c of lessons.filter(c=>c.id>2)){const s=migrateEight(c,{[c.previousId]:{evidence:c.required,answer:c.quiz.answer,quizOpen:true}});assert.ok(isReady(c,s));assert.equal(s.answer,c.quiz.answer);assert.equal(s.quizOpen,true);}});

@@ -1,0 +1,54 @@
+import {sampleVisual} from './specimens.js';
+
+export function materialFigure(symbol,oxide,title,caption,id,options={}){
+ return `<figure class="lesson-material"><div class="material-picture">${sampleVisual(symbol,oxide,true,id,options)}</div><figcaption><b>${title}</b><span>${caption}</span></figcaption></figure>`;
+}
+export function benchArtwork(title,body,caption,id='bench'){
+ return `<div class="physical-bench"><div class="observation-heading"><span>肉眼觀察 <i>／</i> ${title}</span><b>依實物外觀繪製</b></div><svg class="bench-artwork" viewBox="0 0 640 320" role="img" aria-label="${title}的物質外觀示意"><defs><linearGradient id="${id}-bg" x2="0" y2="1"><stop stop-color="#e0e8dd"/><stop offset="1" stop-color="#f5f4e9"/></linearGradient><linearGradient id="${id}-silver"><stop stop-color="#8a9691"/><stop offset=".35" stop-color="#ecf0e9"/><stop offset=".6" stop-color="#aab7b0"/><stop offset="1" stop-color="#697972"/></linearGradient><linearGradient id="${id}-copper"><stop stop-color="#6d3423"/><stop offset=".4" stop-color="#dfaa7e"/><stop offset=".65" stop-color="#bb6a45"/><stop offset="1" stop-color="#733e2a"/></linearGradient><linearGradient id="${id}-glass" x2=".7" y2="1"><stop stop-color="#fff" stop-opacity=".1"/><stop offset=".4" stop-color="#f9fff9" stop-opacity=".4"/><stop offset="1" stop-color="#b5cec1" stop-opacity=".23"/></linearGradient><radialGradient id="${id}-heat"><stop stop-color="#f5c16b"/><stop offset=".5" stop-color="#d16932"/><stop offset="1" stop-color="#922c19"/></radialGradient><filter id="${id}-texture"><feTurbulence baseFrequency=".45" numOctaves="3" seed="14"/><feComposite in2="SourceGraphic" operator="in"/><feBlend in="SourceGraphic" mode="multiply"/></filter></defs><path d="M0 0H640V236H0Z" fill="url(#${id}-bg)"/><path d="M0 236H640V320H0Z" fill="#dde5d5"/><g fill="none" stroke="#a5b69d" stroke-width=".7" opacity=".25"><path d="M0 56H640M0 116H640M0 176H640M0 236H640M80 0V236M160 0V236M240 0V236M320 0V236M400 0V236M480 0V236M560 0V236M0 266H640M0 307H640M320 236L0 320M320 236L160 320M320 236V320M320 236L480 320M320 236L640 320"/></g>${body}</svg><p class="bench-caption">${caption}</p></div>`;
+}
+function nestedSample(symbol,oxide,id,options={}){
+ return sampleVisual(symbol,oxide,true,id,options).replace('<svg ','<svg x="0" y="0" width="300" height="190" aria-hidden="true" ');
+}
+
+export function nonmetalBench(symbol,phase){
+ const raw=symbol==='CO'?'C':symbol,burning=phase==='heating',done=phase==='product',id='nonmetal-'+symbol;
+ const name=raw==='S'?'硫粉':raw==='P'?'紅磷粉末':'木炭';
+ const sample=nestedSample(raw,false,id+'-raw',raw==='C'?{vessel:'ceramic'}:{form:'powder',vessel:'ceramic'});
+ let fire='';
+ if(burning&&raw!=='C')fire=`<g class="material-flame" style="--flame-colour:${raw==='S'?'#679dd7':'#fff5c2'}"><path d="M131 165C105 140 133 106 139 83C156 105 158 105 168 59C191 98 217 134 193 164Z" fill="${raw==='S'?'#6e9ddf':'#fff6d2'}" opacity=".8"/><path d="M148 165Q132 137 160 109Q188 143 174 168Z" fill="#eef9ff" opacity=".8"/></g>`;
+ if(burning&&raw==='C')fire='<ellipse cx="153" cy="148" rx="58" ry="18" fill="#e37335" opacity=".6" class="charcoal-ember"/>';
+ const smoke=burning&&raw==='P'?'<g class="phosphorus-smoke" fill="#fffef6" opacity=".85"><path d="M145 112C127 92 145 70 168 72C159 43 182 32 200 43C204 13 236 11 251 29C272 13 303 39 282 58C305 82 271 108 250 91C226 116 197 92 185 111C167 128 151 126 145 112Z"/><path d="M168 103C151 83 174 62 191 76C185 50 213 49 226 63C248 49 266 76 247 88C225 103 215 82 203 100Z" fill="#e1e5da" opacity=".3"/></g>':'';
+ const formula=symbol==='CO'?'CO 等':raw==='S'?'SO₂':'CO₂';
+ const shown=done?raw==='P'?nestedSample('P',true,id+'-oxide',{form:'powder',colour:'#f8f7ed'}):'<ellipse cx="150" cy="188" rx="62" ry="12" fill="#d0c9ac"/>':sample;
+ const left=`<g transform="translate(19 43)">${shown}${fire}${smoke}</g>`;
+ const label=raw==='P'?(burning?'白煙：固體微粒上升':'白色固體：磷氧化物'):`${formula} 氣體向上逸散`;
+ const flow=raw!=='P'&&phase!=='before'?'<g class="gas-flow-arrows" fill="none" stroke="#859a83" stroke-width="2"><path d="M146 180V100m-5 7 5-7 5 7M180 151V71m-5 7 5-7 5 7"/></g>':'';
+ const caption=raw==='P'?'白煙是細小固體，部分會沉積；不是白色氣體。':raw==='S'?'SO₂ 是無色氣體；藍色是火焰。箭頭只表示逸散方向。':symbol==='CO'?'氧不足時可能產生 CO，並混有 CO₂ 與剩餘的碳。箭頭不是煙霧。':'CO₂ 是無色氣體。木炭減少，產物向空氣中逸散；箭頭不是煙霧。';
+ return benchArtwork(name+'的燃燒',left+flow+`<text x="168" y="32" text-anchor="middle" fill="#526b50" font-size="14">${phase==='before'?'加熱後會留下什麼？':label}</text><text x="168" y="285" text-anchor="middle" fill="#6c8064" font-size="12">${burning?'反應進行中':done?(raw==='P'?'留下白色固體':'固體原料減少'):'反應前'}</text><text x="413" y="143" fill="#526b50" font-size="18">${raw==='P'?'白煙 ≠ 氣體':'看不見 ≠ 沒有產物'}</text><text x="413" y="174" fill="#78876d" font-size="12">${raw==='P'?'白煙由細小固體組成':'觀察原料減少與產物逸散'}</text>`,caption,id).replace('class="physical-bench"','class="physical-bench nonmetal-'+phase+'"');
+}
+
+export function rockIllustration(colour,id,porous=false){
+ let pores='';for(let i=0;i<22;i++){const x=87+(i*37%128),y=90+(i*23%47);pores+=`<ellipse cx="${x}" cy="${y}" rx="${2+i%4}" ry="${1+i%3}" fill="${porous?'#070c0b':'#fff9e8'}" opacity="${porous?'.5':'.14'}"/>`;}
+ return `<svg viewBox="0 0 300 190" class="material-illustration" role="img" aria-label="原料塊狀外觀繪製示意"><defs><linearGradient id="${id}" x2=".6" y2="1"><stop stop-color="${colour}"/><stop offset="1" stop-color="${porous?'#101714':'#6e6c57'}"/></linearGradient></defs><ellipse cx="150" cy="153" rx="112" ry="14" fill="#425a40" opacity=".1"/><path d="M66 128L72 111L79 108L80 91L93 88L100 78L118 72L132 81L141 80L152 95L158 119L164 126L156 141L143 143L127 155L108 149L92 151L79 141L70 143Z" fill="url(#${id})"/><path d="M167 141L160 129L158 114L169 104L172 92L184 78L201 82L209 79L224 88L229 103L239 113L238 128L228 137L225 149L209 153L194 148L183 153Z" fill="url(#${id})"/><path d="M83 89L117 73L153 94L117 108Z" fill="#fff" opacity=".14"/><path d="M184 77L221 86L201 111L157 112Z" fill="#fff" opacity=".1"/><path d="M115 107L103 119L113 132M119 108L137 116L142 140M202 110L194 127L207 145M202 110L222 113" stroke="#3d342b" stroke-width="1.2" fill="none" opacity=".33"/>${pores}${Array.from({length:95},(_,i)=>{const x=88+i*29%139,y=99+i*31%40;return '<path d="M'+x+' '+y+'l2 -1 2 2 -3 1Z" fill="'+(i%3?'#342f27':'#edc1a1')+'" opacity="'+(porous?.17:.12)+'"/>';}).join('')}</svg>`;
+}
+export function factoryMaterials(){
+ const raw=[['赤鐵礦','以紅棕色 Fe₂O₃ 礦石為例','#96543e','ore'],['焦炭','黑色、多孔的碳材','#42483e','coke'],['石灰石','灰白色 CaCO₃ 礦石','#d7d3bf','limestone']];
+ return `<div class="appearance-heading"><span>肉眼觀察 <small>原料的實物質感</small></span></div><div class="factory-materials">${raw.map(([title,caption,colour,id])=>`<figure class="lesson-material"><div class="material-picture">${rockIllustration(colour,'factory-'+id,id==='coke')}</div><figcaption><b>${title}</b><span>${caption}</span></figcaption></figure>`).join('')}</div>`;
+}
+export function dailyMaterial(id,active){
+ const key='daily-'+id;
+ if(id==='rust'){
+  let rust='';for(let i=0;i<40;i++){const x=252+(i*17%55),y=103+(i*31%128);rust+=`<ellipse cx="${x}" cy="${y}" rx="${2+i%5}" ry="${1+i%4}" fill="${['#93502f','#b77543','#ce9860'][i%3]}"/>`;}
+  const nail=`<ellipse cx="317" cy="259" rx="139" ry="16" fill="#526949" opacity=".12"/><g transform="rotate(-28 320 163)"><path d="M253 71H381V96H334V237L320 262L305 237V96H253Z" fill="url(#${key}-silver)" stroke="#7f8e80"/><path d="M259 76H375M313 110V230" stroke="#fff" stroke-opacity=".6" stroke-width="3"/>${active?`<defs><clipPath id="${key}-nail-clip"><path d="M253 71H381V96H334V237L320 262L305 237V96H253Z"/></clipPath></defs><g clip-path="url(#${key}-nail-clip)"><g data-rust-layer transform="translate(41 0)">${rust}</g></g>`:''}</g>`;
+  return benchArtwork(active?'潮濕空氣中的鐵釘':'鐵釘與環境',nail,active?'銀灰色鐵釘表面出現紅棕色、粗糙的鐵鏽。這是時間縮短後的外觀示意。':'在這個條件下，鐵釘沒有明顯鏽層；並不代表所有實際鐵釘都完全不變。',key);
+ }
+ if(id==='warmer'){
+  const bag=`<defs><linearGradient id="${key}-fabric" x2=".8" y2="1"><stop stop-color="#faf7e9"/><stop offset=".6" stop-color="#e9e3d0"/><stop offset="1" stop-color="#c9c4ad"/></linearGradient></defs><ellipse cx="309" cy="257" rx="159" ry="17" fill="#5f7453" opacity=".12"/><path d="M176 83Q177 73 193 72H440Q455 74 454 90L442 246Q440 255 423 255H190Q175 253 177 240Z" fill="url(#${key}-fabric)" stroke="#acae9a"/><path d="M188 88H443L431 241H189Z" fill="none" stroke="#c5c2ac" stroke-width="2" stroke-dasharray="4 4"/><path d="M201 114H421M201 121H421M201 128H421M201 135H421M201 142H421M201 149H421M201 156H421M201 163H421M201 170H421M201 177H421M201 184H421M201 191H421M201 198H421M201 205H421M201 212H421" stroke="#b9baa6" opacity=".16"/><text x="313" y="109" text-anchor="middle" fill="#91947e" font-size="12">透氣內袋</text><ellipse cx="313" cy="160" rx="78" ry="34" fill="#d9d4bf" stroke="#c1bda7"/><text x="313" y="214" text-anchor="middle" fill="#868871" font-size="11">剖面示意：鐵粉</text><g transform="translate(215 75) scale(.65)">${nestedSample('Fe',false,key+'-powder',{form:'powder',colour:'#4f5149',vessel:'none'})}</g>${active?'<g data-warm-air fill="none" stroke="#c58b54" stroke-width="2" opacity=".6"><path d="M263 61Q247 46 264 30M315 61Q299 46 316 30M367 61Q351 46 368 30"/></g>':''}`;
+  return benchArtwork(active?'已拆封的暖暖包':'外袋密封的暖暖包',bag,active?'透氣內袋中的鐵粉接觸空氣後緩慢氧化。剖面用來標示內部粉末，暖暖包本身沒有火焰。':'不透氣的外袋限制氧進入；內部的鐵粉不會立即明顯放熱。',key);
+ }
+ if(id==='respiration'){
+  const cell=`<defs><radialGradient id="${key}-cell" cx=".35" cy=".25" r=".9"><stop stop-color="#f9fae7"/><stop offset=".55" stop-color="#dce5c7"/><stop offset="1" stop-color="#a1b491"/></radialGradient><radialGradient id="${key}-nucleus" cx=".3" cy=".25"><stop stop-color="#dce6c8"/><stop offset="1" stop-color="#8da179"/></radialGradient><linearGradient id="${key}-mito" x2=".75" y2="1"><stop stop-color="#efc6a0"/><stop offset=".45" stop-color="#c3946c"/><stop offset="1" stop-color="#8f6346"/></linearGradient></defs><ellipse cx="320" cy="160" rx="219" ry="112" fill="url(#${key}-cell)" stroke="#899e80" stroke-width="3"/><ellipse cx="310" cy="150" rx="202" ry="95" fill="#f5f6df" opacity=".2"/><ellipse cx="237" cy="143" rx="51" ry="43" fill="url(#${key}-nucleus)" stroke="#92a486"/><ellipse cx="223" cy="134" rx="17" ry="16" fill="#95a587"/><path d="M319 136C324 93 403 103 421 137S418 210 381 205S314 178 319 136Z" fill="url(#${key}-mito)" stroke="#976e53" stroke-width="2"/><path d="M335 134Q351 112 358 144T380 148T403 143Q419 164 394 185T368 175T345 163" fill="none" stroke="#edc6a0" stroke-width="5"/><ellipse cx="263" cy="91" rx="106" ry="16" fill="#fffef1" opacity=".2"/><g fill="#9da58a" opacity=".5"><ellipse cx="164" cy="182" rx="13" ry="8"/><ellipse cx="291" cy="222" rx="15" ry="7"/><ellipse cx="455" cy="111" rx="11" ry="6"/></g><text x="387" y="244" text-anchor="middle" fill="#806f58" font-size="11">粒線體（示意）</text>`;
+  return benchArtwork('細胞中的有氧呼吸',cell,'細胞與胞器以立體示意繪製，並非顯微照片。呼吸作用由許多受酵素控制的步驟組成，整體會消耗葡萄糖與氧氣，產生二氧化碳和水。',key);
+ }
+ return '';
+}
