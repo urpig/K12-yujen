@@ -1,0 +1,58 @@
+#card-3 .interactive-lab{max-width:none}
+#card-3 .redox-workshop{max-width:none;margin:0;border:1px solid #a9bfc0;border-radius:12px;background:#e5eded;overflow:visible;isolation:isolate;scroll-margin-top:12px}
+.redox-sample-rack{position:relative;z-index:12;background:linear-gradient(#eef3ee,#d7e3de);border-radius:11px 11px 0 0;padding:12px 18px 15px;border-bottom:1px solid #9eb4b0;box-shadow:0 5px 10px #233f3e16}
+.redox-rack-heading{display:flex;justify-content:space-between;gap:12px;align-items:center;color:#46625c;font-size:13px;margin-bottom:9px}.redox-rack-heading span{font-size:11px;color:#6c8278}
+.redox-rack-rail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;border-bottom:7px solid #71847a;box-shadow:0 3px #435e56,0 7px 7px #243b3520;padding:0 5px 8px}
+.redox-rack-sample{position:relative;min-width:0;padding:3px 8px 7px;border:1px solid transparent;border-radius:7px;text-align:center;touch-action:none;color:#355e58;background:#f3f8ef44}
+.redox-rack-sample svg{display:block;width:100%;height:90px;pointer-events:none;filter:drop-shadow(2px 4px 2px #294c3b22)}
+.redox-rack-sample b{display:block;font-size:13px;font-weight:550;line-height:1.5}.redox-rack-sample small{display:block;font-size:10px;color:#718577;line-height:1.5}
+.redox-rack-sample.selected{border-color:#a6baa1;background:#f8faf1;box-shadow:inset 0 0 0 2px #e3eddb}.redox-rack-sample.dragging{z-index:50;box-shadow:0 14px 24px #1c363944;background:#f6faf3}
+#card-3 .redox-scene{border:0;border-radius:0;width:100%;aspect-ratio:760/430}
+#card-3 .redox-phase{margin:0;padding:11px 16px;font-size:13px;background:#e6efea;border-left:0;border-top:1px solid #c2d4ca;line-height:1.7}
+#card-3 .redox-replay{margin:9px 14px}
+.redox-load-target{position:absolute;left:13%;top:57%;width:20%;height:22%;font-size:12px;color:#46615e;z-index:7;pointer-events:none}
+.redox-load-target.occupied:not(.drop-active){opacity:0}
+.redox-load-target>span{position:absolute;top:100%;padding-top:5px;white-space:nowrap}
+#card-3 .redox-cup{left:13%;top:57%;width:20%;height:22%;z-index:6}
+#card-3 .redox-cup>span{font-size:11px;top:-21px}
+#card-3 .redox-cup.heating,#card-3 .redox-cup.finished{left:32.1%;top:34.5%}
+#card-3 .redox-detail{left:61%;top:15%;width:35%;padding:16px;background:#f5f8efed;box-shadow:0 7px 20px #25484217}
+#card-3 .redox-detail b{font-size:16px}
+#card-3 .redox-detail p{font-size:13px;line-height:1.8}
+.redox-comparison-views{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center;margin:10px 0 4px}
+.redox-comparison-views>div{background:#e8efe3;border:1px solid #c6d2c0;border-radius:5px;padding:6px 4px}
+#card-3 .redox-comparison-views svg{height:81px;width:100%;display:block}.redox-comparison-views small{font-size:10px;color:#607865}
+.redox-heat-meter{position:absolute;left:13%;right:13%;bottom:4%;height:6px;border-radius:10px;background:#cbdbd2;overflow:hidden}
+.redox-heat-meter:after{content:'';display:block;width:0;height:100%;background:linear-gradient(90deg,#80a8b5,#e5c17e)}
+[data-phase=heating] .redox-heat-meter:after{animation:redox-heat-fill 6.5s linear forwards}
+[data-phase=cooling] .redox-heat-meter:after,[data-phase=done] .redox-heat-meter:after{width:100%;background:#8eaa86}
+.redox-changing .redox-powder-before{animation:redox-powder-fade 6.5s ease-in forwards}.redox-changing .redox-powder-after{opacity:0;animation:redox-powder-arrive 6.5s ease-in forwards}
+.redox-powder-after,.redox-hot-glow{opacity:0}#card-3 .redox-cup:not(.heating) .redox-hot-glow{opacity:0}
+#card-3 .redox-scene[data-phase=done] .flame-art{display:none}
+@keyframes redox-heat-fill{to{width:100%}}@keyframes redox-powder-fade{0%,30%{opacity:1}85%,100%{opacity:0}}@keyframes redox-powder-arrive{0%,30%{opacity:0}85%,100%{opacity:1}}
+@media(max-width:950px){.redox-sample-rack{padding:10px 10px 13px}.redox-rack-rail{gap:7px}.redox-rack-sample{padding-inline:3px}.redox-rack-sample svg{height:68px}.redox-rack-sample b{font-size:11px}#card-3 .redox-detail{padding:11px}#card-3 .redox-detail b{font-size:13px}#card-3 .redox-detail p{font-size:11px}#card-3 .redox-comparison-views svg{height:50px}.redox-rack-heading{font-size:12px}}
+@media(max-width:600px){.redox-rack-heading span{font-size:9px}.redox-rack-sample svg{height:48px}.redox-rack-sample b{font-size:9px}.redox-rack-sample small{font-size:8px}#card-3 .redox-detail{padding:7px;top:11%}#card-3 .redox-detail p{font-size:9px;line-height:1.6;margin-block:5px}#card-3 .redox-detail b{font-size:10px}#card-3 .redox-detail .redox-formula{font-size:10px;padding-top:4px}.redox-load-target{font-size:9px}#card-3 .redox-cup>span{font-size:8px}.redox-comparison-views{gap:4px;margin:4px 0}#card-3 .redox-comparison-views svg{height:31px}.redox-comparison-views small{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.redox-changing .redox-powder-before{animation:none;opacity:0}.redox-changing .redox-powder-after{animation:none;opacity:1}[data-phase=heating] .redox-heat-meter:after{animation:none;width:100%}}
+
+/* The cup stays under the pointer. Only time actually above the lamp counts. */
+#card-3 .redox-cup.free-crucible{width:21.052632%;height:23.255814%;cursor:grab;transition:none;user-select:none}
+#card-3 .redox-cup.free-crucible.dragging{cursor:grabbing;z-index:10}
+#card-3 .redox-cup.free-crucible svg,#card-3 .redox-cup.free-crucible>span{pointer-events:none}
+#card-3 .redox-cup.free-crucible:focus-visible{outline:2px solid #608f95;outline-offset:4px;border-radius:12px}
+.redox-free-scene .redox-powder-before{animation:none!important;opacity:calc(1 - var(--redox-progress,0))}
+.redox-free-scene .redox-powder-after{animation:none!important;opacity:var(--redox-progress,0)}
+#card-3 .redox-cup.free-crucible .redox-hot-glow{animation:none!important;opacity:var(--cup-glow,0)}
+.redox-free-scene .redox-load-target{left:10.526316%;top:64.883721%;width:21.052632%;height:23.255814%}
+.redox-free-scene .redox-load-target.drop-active{opacity:1;background:#d9e6c744;border-color:#7d9b75;box-shadow:0 0 16px #c9e1b755}
+.redox-free-scene .redox-load-target>span{padding-top:3px;font-size:11px}
+.redox-free-scene .redox-heat-target{left:31.578947%;top:32.55814%;width:21.052632%;height:26.046512%;pointer-events:none;opacity:.5;border-style:dashed;z-index:5}
+.redox-free-scene .redox-heat-target>span{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);white-space:nowrap;padding-bottom:5px}
+.redox-free-scene .redox-heat-target.receiving-heat{opacity:.8;border-color:#ca986b;box-shadow:inset 0 0 20px #e8ab6133}
+.redox-free-scene .redox-current-target{position:absolute;width:21.052632%;height:23.255814%;z-index:7;pointer-events:none;opacity:0;font-size:10px;color:#47645e}
+.redox-free-scene .redox-current-target>span{position:absolute;bottom:100%;white-space:nowrap}
+.redox-free-scene .drop-active,.redox-free-scene .drop-hover{opacity:1}
+.redox-heat-summary{margin-top:9px;color:#677f71;font-size:11px}
+.redox-free-scene .redox-heat-meter{position:static;margin-top:6px;height:5px}
+.redox-free-scene .redox-heat-meter:after{display:none!important;animation:none!important}
+.redox-free-scene .redox-heat-meter>i{display:block;height:100%;background:linear-gradient(90deg,#80a8b5,#dfb46d)}
+#card-3 .redox-free-scene:not(.atmosphere-ready) .alcohol-flame-fallback{display:inline!important}
