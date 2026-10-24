@@ -3,11 +3,35 @@
   "repository": "https://github.com/urpig/K12-yujen",
   "repositoryVisibility": "public",
   "githubPages": {
-    "status": "pending",
+    "status": "published",
     "authorization": "The user explicitly authorized making this repo public on 2026-10-25 after initially choosing private.",
     "sourceBranch": "gh-pages",
     "sourceFolder": "/",
-    "publishCommand": "node publish-pages.mjs"
+    "publishCommand": "node publish-pages.mjs",
+    "url": "https://urpig.github.io/K12-yujen/",
+    "sourceCommit": "e1747fd904d1a84ac88bd0e71ddceddc16e17fe9",
+    "pagesCommit": "2812e58980fa6e8f2f12ebf7783b0a5cfbe5a1a0",
+    "sourceTree": "1f6083cc60f1081a6eaff0f6d3c02ecb8afeec89",
+    "verifiedAt": "2026-10-24T20:21:40.693Z"
+  },
+  "currentPublicDeployment": {
+    "provider": "github-pages",
+    "url": "https://urpig.github.io/K12-yujen/",
+    "status": "published",
+    "sourceCommit": "e1747fd904d1a84ac88bd0e71ddceddc16e17fe9",
+    "pagesCommit": "2812e58980fa6e8f2f12ebf7783b0a5cfbe5a1a0",
+    "fileCount": 168,
+    "anonymousHttpVerifiedAt": "2026-10-24T20:21:40.693Z",
+    "anonymousHttpChecksPassed": 7,
+    "httpVerification": "No cookies or authorization supplied. Homepage, story app, prediction module, antioxidant epilogue, story image, chemistry homepage and chemistry app all returned 200 and match source SHA-256 after text line-ending normalisation.",
+    "browserVerification": [
+      "Current story, navigation and visible scene previews render on the GitHub Pages project URL.",
+      "A prediction can be selected and submitted; keyboard ore rotation records observation evidence.",
+      "Prediction and observation survive reload; reset restores the four choices.",
+      "Everyday redox accepts the water-to-oxygen oxidation path and displays the paired oxidation/reduction explanation; reset works.",
+      "No console errors or warnings observed during these interactions."
+    ],
+    "verificationLimits": "Not every lesson interaction or mobile interaction was repeated for publication. The application code is unchanged from the version that passed all 123 automated tests. The publishing helper was executed successfully and verified the remote gh-pages commit and dist tree."
   },
   "previousPublicDeployment": {
     "provider": "netlify",

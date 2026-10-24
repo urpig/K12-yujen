@@ -6,6 +6,8 @@
 
 ## 分享與發布
 
+[開啟公開作品：失落的神兵](https://urpig.github.io/K12-yujen/)（免登入，可直接操作）
+
 後續發布統一使用 GitHub Pages，repo 已依使用者授權設為公開。作品仍在 `main` 的 `dist/` 修改；Pages 從同一 repo 的 `gh-pages` 分支根目錄發布。
 
 完成下方建置與測試、將來源 commit 並 push 至 `main` 後，執行：
