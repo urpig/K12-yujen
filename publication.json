@@ -1,6 +1,15 @@
 {
   "preferredProvider": "github-pages",
-  "repository": "https://github.com/urpig/K12-yujen",
+  "repository": "https://github.com/urpig/ch2",
+  "repositoryRename": {
+    "date": "2026-10-25",
+    "previousName": "K12-yujen",
+    "name": "ch2",
+    "previousRepositoryUrl": "https://github.com/urpig/K12-yujen",
+    "previousPagesUrl": "https://urpig.github.io/K12-yujen/",
+    "verifiedAt": "2026-10-25T03:42:43.860Z",
+    "verifiedRepositoryId": "1432439014"
+  },
   "repositoryVisibility": "public",
   "githubPages": {
     "status": "published",
@@ -8,20 +17,20 @@
     "sourceBranch": "gh-pages",
     "sourceFolder": "/",
     "publishCommand": "node publish-pages.mjs",
-    "url": "https://urpig.github.io/K12-yujen/",
+    "url": "https://urpig.github.io/ch2/",
     "sourceCommit": "e1747fd904d1a84ac88bd0e71ddceddc16e17fe9",
     "pagesCommit": "2812e58980fa6e8f2f12ebf7783b0a5cfbe5a1a0",
     "sourceTree": "1f6083cc60f1081a6eaff0f6d3c02ecb8afeec89",
-    "verifiedAt": "2026-10-24T20:21:40.693Z"
+    "verifiedAt": "2026-10-25T03:42:43.860Z"
   },
   "currentPublicDeployment": {
     "provider": "github-pages",
-    "url": "https://urpig.github.io/K12-yujen/",
+    "url": "https://urpig.github.io/ch2/",
     "status": "published",
     "sourceCommit": "e1747fd904d1a84ac88bd0e71ddceddc16e17fe9",
     "pagesCommit": "2812e58980fa6e8f2f12ebf7783b0a5cfbe5a1a0",
     "fileCount": 168,
-    "anonymousHttpVerifiedAt": "2026-10-24T20:21:40.693Z",
+    "anonymousHttpVerifiedAt": "2026-10-25T03:42:43.860Z",
     "anonymousHttpChecksPassed": 7,
     "httpVerification": "No cookies or authorization supplied. Homepage, story app, prediction module, antioxidant epilogue, story image, chemistry homepage and chemistry app all returned 200 and match source SHA-256 after text line-ending normalisation.",
     "browserVerification": [

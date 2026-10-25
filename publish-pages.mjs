@@ -12,7 +12,7 @@ try{
  if(git('status','--porcelain'))throw new Error('Commit all changes before publishing.');
  if(git('branch','--show-current')!=='main')throw new Error('Publish from the main branch.');
  const origin=git('remote','get-url','origin');
- if(!['https://github.com/urpig/K12-yujen.git','https://github.com/urpig/K12-yujen','git@github.com:urpig/K12-yujen.git'].includes(origin))throw new Error('The origin does not match urpig/K12-yujen.');
+ if(!['https://github.com/urpig/ch2.git','https://github.com/urpig/ch2','git@github.com:urpig/ch2.git'].includes(origin))throw new Error('The origin does not match urpig/ch2.');
  const sourceCommit=git('rev-parse','HEAD');
  const remoteMain=git('ls-remote','origin','refs/heads/main').split(/\s+/)[0];
  if(remoteMain!==sourceCommit)throw new Error('Push main and resolve any remote changes before publishing.');
@@ -23,5 +23,5 @@ try{
  git('push','origin',pagesCommit+':refs/heads/gh-pages');
  const remotePages=git('ls-remote','origin','refs/heads/gh-pages').split(/\s+/)[0];
  if(remotePages!==pagesCommit)throw new Error('Remote Pages commit verification failed.');
- console.log(JSON.stringify({sourceCommit,pagesCommit,sourceTree,expectedUrl:'https://urpig.github.io/K12-yujen/',next:'Confirm GitHub Pages deployment and test the public URL.'},null,2));
+ console.log(JSON.stringify({sourceCommit,pagesCommit,sourceTree,expectedUrl:'https://urpig.github.io/ch2/',next:'Confirm GitHub Pages deployment and test the public URL.'},null,2));
 }catch(error){console.error(error.message);process.exitCode=1;}
