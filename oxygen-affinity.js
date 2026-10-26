@@ -1,4 +1,5 @@
-import {oxygenAffinitySeries,compareWithCarbon,ironOxygenLedger} from './forge-prep-model.js';
+import {ironReactionMarkup} from './iron-paired-reaction.js';
+import {oxygenAffinitySeries,compareWithCarbon} from './forge-prep-model.js';
 
 const specimenDescription={K:'油中保存的銀灰色鉀金屬塊',Na:'油中保存的銀白色鈉金屬塊',Ca:'封存於玻璃瓶內的銀灰色鈣金屬顆粒',Mg:'銀白色鎂帶',Al:'銀白色鋁箔',C:'深灰黑色、有層狀紋理的石墨',Zn:'帶藍灰色光澤的鋅金屬塊',Cr:'銀灰色、有晶面光澤的鉻金屬塊',Fe:'灰色鐵棒與鐵塊',Sn:'銀白色錫金屬塊',Pb:'暗藍灰色鉛金屬塊',H:'密閉玻璃瓶中的無色氫氣，氣體本身看不見',Cu:'紅棕色銅片與銅塊',Hg:'封閉玻璃容器中的銀白色液態汞',Ag:'銀白色銀金屬塊',Pt:'灰白色鉑金屬塊',Au:'金黃色金屬塊'};
 function specimenArt(symbol){return `<span class="element-specimen specimen-${symbol}" role="img" aria-label="${specimenDescription[symbol]}，外觀示意"></span>`;}
@@ -41,20 +42,4 @@ export function pairedRedoxPrinciple(){
  return `<div class="redox-principle"><span>一個反應，兩邊一起變</span><strong>氧化必定伴隨還原，還原也必定伴隨氧化。</strong><p>在這些氧轉移反應中：一方得到氧，另一方就失去氧。追蹤同一批氧，便能同時找到兩邊。</p></div>`;
 }
 
-export function ironRedoxScene(pairs){
- const {count,oxideOxygen,gasOxygen}=ironOxygenLedger(pairs);
- return `<p class="prep-instruction">選一份 CO，讓它接走氧化鐵中的一個氧。<b>同時看：誰被還原？誰被氧化？</b></p>
- <div class="iron-pair-scene" data-iron-pair-count="${count}">
-  <div class="iron-pair-donor"><small>氧原本在氧化鐵中</small><h4>${count===3?'留下金屬鐵':'氧化鐵 Fe₂O₃'}</h4>
-   <div class="iron-pair-atoms"><div><span class="prep-atom metal">Fe</span><span class="prep-atom metal">Fe</span></div><div>${[0,1,2].map(j=>`<span class="prep-atom ${j<count?'empty-oxygen':'oxygen'}" aria-label="${j<count?'這個氧已轉移':'待轉移的氧原子'}">${j<count?'○':'O'}</span>`).join('')}</div></div>
-   <p>氧化鐵端剩下 <b>${oxideOxygen}</b> 個氧</p>
-  </div>
-  <div class="iron-pair-direction" aria-hidden="true"><span>同一個氧</span><b>→</b></div>
-  <div class="iron-pair-gases"><small>點一份尚未接氧的 CO</small>${[0,1,2].map(j=>`<button data-iron-co="${j}" class="iron-pair-co ${pairs.includes(j)?'received':''}" ${pairs.includes(j)?'disabled':''} aria-label="第 ${j+1} 份${pairs.includes(j)?' CO₂，已接到氧':' CO，接走一個氧'}"><span class="iron-pair-molecule"><span class="prep-atom ${pairs.includes(j)?'oxygen new-oxygen':'socket'}">${pairs.includes(j)?'O':'＋'}</span><span class="prep-atom carbon">C</span><span class="prep-atom oxygen">O</span></span><span><b>${pairs.includes(j)?'CO₂':'CO'}</b><small>${pairs.includes(j)?'✓ 已得氧':'接走一個氧'}</small></span></button>`).join('')}</div>
- </div>
- <div class="prep-paired iron-redox-paired"><p><b>還原 · 失去氧</b>Fe₂O₃ → Fe<span>${count?'已移走 '+count+' 個氧':'等待氧離開'}</span></p><i>同時發生<br>⇄</i><p><b>氧化 · 得到氧</b>CO → CO₂<span>${count?'已接到 '+count+' 個氧':'等待接到氧'}</span></p></div>
- <p class="iron-pair-ledger" role="status">已追蹤 ${count} / 3 個氧　｜　氧化鐵端 ${oxideOxygen} ＋ 氣體端 ${gasOxygen} ＝ <b>6 個氧</b></p>
- <div class="prep-equation ${count===3?'complete':''}"><small>合適高溫條件下的總反應</small><strong>Fe₂O₃ + 3CO → 2Fe + 3CO₂</strong><span>氧化鐵被還原；CO 被氧化，也是這個反應的還原劑。</span></div>
- <div class="iron-carbon-link"><b>碳怎麼幫上忙？</b><p>碳（焦炭）提供熱，也參與生成 CO：<strong>CO₂ + C → 2CO</strong>。CO 再帶走鐵礦中的氧。碳的活性比較，幫助我們選擇還原方法；這個總反應，則讓我們看清楚氧去了哪裡。</p></div>
- <p class="prep-model-note">逐個移氧只用來追蹤原子收支，不是真實反應機構；實際鐵氧化物的還原分多步進行。球色、大小與路徑皆為示意。</p>`;
-}
+export function ironRedoxScene(pairs){return ironReactionMarkup(pairs);}
