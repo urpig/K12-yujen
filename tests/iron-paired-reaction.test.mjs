@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createIronReaction,ironReactionMarkup} from '../dist/iron-paired-reaction.js';
+import {magnesiumReactionMarkup} from '../dist/magnesium-paired-reaction.js';
 
 function clock(){
  let time=0,next=0;const pending=new Map(),all=[];
@@ -31,4 +32,17 @@ test('initial and saved results keep the iron reaction balanced with exactly thr
  assert.match(initial,/氧化鐵端 3 ＋ 氣體端 3 ＝ 6/);
  assert.match(complete,/氧化鐵端 0 ＋ 氣體端 6 ＝ 6/);
  assert.match(complete,/金屬鐵 · 2Fe/);assert.match(complete,/二氧化碳 · 3CO₂/);
+});
+
+test('magnesium transfers both CO2 oxygens to two separate Mg destinations and preserves the saved outcome',()=>{
+ const initial=magnesiumReactionMarkup(),complete=magnesiumReactionMarkup([0,1],[0,1]);
+ assert.equal((initial.match(/data-oxygen-source=/g)||[]).length,2);
+ assert.equal((initial.match(/data-oxygen-target=/g)||[]).length,2);
+ assert.match(initial,/CO₂ 端 2 ＋ 鎂這一端 0 ＝ 2/);
+ assert.match(complete,/CO₂ 端 0 ＋ 鎂這一端 2 ＝ 2/);
+ assert.match(complete,/留下碳 · C/);
+ assert.match(complete,/氧化鎂 · 2MgO/);
+ assert.match(complete,/CO₂ 被還原/);
+ assert.match(complete,/鎂被氧化/);
+ assert.match(complete,/data-phase="complete"/);
 });

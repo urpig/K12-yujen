@@ -2,16 +2,24 @@ import {ironOxygenLedger} from './forge-prep-model.js';
 import {createFoodPlayback} from './food-playback.js';
 
 const atom=(kind,label)=>`<span class="reaction-atom reaction-atom-${kind}">${label}</span>`;
+export function pairedReactionEquation(kind='iron'){
+ const magnesium=kind==='magnesium';
+ const species=magnesium?[[2,'Mg'],[0,'CO₂'],[2,'MgO'],[0,'C']]:[[0,'Fe₂O₃'],[3,'CO'],[2,'Fe'],[3,'CO₂']];
+ const terms=species.map(([coefficient,formula])=>`<b class="reaction-species">${coefficient?`<span class="reaction-coefficient">${coefficient}</span>`:''}<span>${formula}</span></b>`);
+ const oxidation=magnesium?[110,635]:[365,890],reduction=magnesium?[365,890]:[110,635];
+ return `<div class="reaction-equation" aria-label="${magnesium?'需點燃並在合適條件下，2Mg 加 CO₂ 生成 2MgO 加 C':'合適高溫下，Fe₂O₃ 加 3CO 生成 2Fe 加 3CO₂'}">
+  <small>${magnesium?'需點燃並在合適條件下的總反應':'合適高溫條件下的總反應'}</small>
+  <div class="reaction-mapping reaction-mapping-above" aria-hidden="true"><svg viewBox="0 0 1000 46" preserveAspectRatio="none"><path class="oxidation-map" d="M${oxidation[0]} 46 V16 H${oxidation[1]} V46 m-7-10 7 10 7-10"/></svg><span class="reaction-map-label oxidation-label" style="left:${(oxidation[0]+oxidation[1])/20}%;right:auto">得到氧 · 被氧化</span></div>
+  <div class="reaction-formula">${terms[0]}<span>＋</span>${terms[1]}<span>→</span>${terms[2]}<span>＋</span>${terms[3]}</div>
+  <div class="reaction-mapping reaction-mapping-below" aria-hidden="true"><svg viewBox="0 0 1000 46" preserveAspectRatio="none"><path class="reduction-map" d="M${reduction[0]} 0 V28 H${reduction[1]} V0 m-7 10 7-10 7 10"/></svg><span class="reaction-map-label reduction-label" style="left:${(reduction[0]+reduction[1])/20}%">失去氧 · 被還原</span></div>
+ </div>`;
+}
 export function ironReactionMarkup(pairs){
  const {count,oxideOxygen,gasOxygen}=ironOxygenLedger(pairs);
  return `<section class="iron-reaction" data-iron-reaction data-phase="${count?'complete':'ready'}" aria-label="氧化鐵與一氧化碳的氧轉移">
   <div class="reaction-heading"><div><small>追蹤同一批氧</small><h4>氧沒有消失，只是換了夥伴。</h4></div><button type="button" class="primary reaction-start" data-react>${count?'↻ 重播反應':'開始反應 →'}</button></div>
   <p class="reaction-instruction">按下反應鍵，看氧化鐵中的 <b>3 個氧</b> 移到 <b>3 份 CO</b>，同時觀察兩邊的變化。</p>
-  <div class="reaction-equation" aria-label="合適高溫下，Fe₂O₃ 加 3CO 生成 2Fe 加 3CO₂">
-   <small>合適高溫條件下的總反應</small>
-   <div class="reaction-formula"><b>Fe₂O₃</b><span>＋</span><b>3CO</b><span>→</span><b>2Fe</b><span>＋</span><b>3CO₂</b></div>
-   <div class="reaction-mapping" aria-hidden="true"><svg viewBox="0 0 1000 116" preserveAspectRatio="none"><path class="reduction-map" d="M110 0 V34 H635 V0 m-7 10 7-10 7 10"/><path class="oxidation-map" d="M365 0 V88 H890 V0 m-7 10 7-10 7 10"/></svg><span class="reaction-map-label reduction-label">失去氧 · 被還原</span><span class="reaction-map-label oxidation-label">得到氧 · 被氧化</span></div>
-  </div>
+  ${pairedReactionEquation()}
   <div class="reaction-board" data-reaction-board>
    <div class="reaction-sample reaction-donor"><small>氧的出發處</small><h5 data-oxide-name>${count===3?'金屬鐵 · 2Fe':'氧化鐵 · Fe₂O₃'}</h5><div class="reaction-iron-atoms">${atom('iron','Fe')}${atom('iron','Fe')}</div><div class="reaction-oxygen-row">${[0,1,2].map(j=>`<span class="reaction-socket" data-oxygen-source="${j}"><span class="reaction-original" ${pairs.includes(j)?'hidden':''}>${atom('oxygen','O')}</span></span>`).join('')}</div><p data-oxide-count>${oxideOxygen?'還有 '+oxideOxygen+' 個氧':'氧已被帶走，留下鐵'}</p></div>
    <div class="reaction-journey" aria-hidden="true"><span>氧轉移</span><b>→</b></div>
@@ -43,6 +51,7 @@ export function createIronReaction({onProgress=()=>{},onComplete=()=>{},reducedM
 }
 
 export function bindIronReaction(scene,onComplete){
+ const magnesium=scene.dataset.reactionKind==='magnesium';
  const button=scene.querySelector('[data-react]'),board=scene.querySelector('[data-reaction-board]');
  const travellers=[...scene.querySelectorAll('[data-traveller]')];
  const sources=[...scene.querySelectorAll('[data-oxygen-source]')],targets=[...scene.querySelectorAll('[data-oxygen-target]')];
@@ -62,10 +71,10 @@ export function bindIronReaction(scene,onComplete){
   scene.dataset.phase='running';
   scene.querySelectorAll('.reaction-original,.reaction-arrived').forEach(el=>el.hidden=true);
   travellers.forEach(el=>el.hidden=false);
-  scene.querySelector('[data-oxide-name]').textContent='氧化鐵 → 鐵';
-  scene.querySelector('[data-gas-name]').textContent='CO → CO₂';
-  scene.querySelector('[data-oxide-count]').textContent='追蹤離開的 3 個氧';
-  scene.querySelector('[data-reaction-ledger]').textContent='同一批氧正在轉移；整個反應中，總共仍有 6 個氧。';
+  scene.querySelector('[data-oxide-name]').textContent=magnesium?'CO₂ → 碳':'氧化鐵 → 鐵';
+  scene.querySelector('[data-gas-name]').textContent=magnesium?'鎂 → 氧化鎂':'CO → CO₂';
+  scene.querySelector('[data-oxide-count]').textContent='追蹤離開的 '+travellers.length+' 個氧';
+  scene.querySelector('[data-reaction-ledger]').textContent='同一批氧正在轉移；整個反應中，總共仍有 '+(magnesium?2:6)+' 個氧。';
   scene.scrollIntoView({block:'start',behavior:'instant'});
   syncVisibility();playback.start();
  };

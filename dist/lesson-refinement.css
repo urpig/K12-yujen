@@ -1,0 +1,37 @@
+/* One viewport for taking a sample and using the bench. The rack shares its width. */
+@media(min-width:850px){
+ #card-2 .integrated-studio{width:min(100%,calc((100svh - 265px)*1.76744));margin:22px auto 0;scroll-margin-top:12px}
+ #card-2 .integrated-studio .specimen-shelf{padding:7px 12px 9px;column-gap:14px}
+ #card-2 .integrated-studio .specimen-vial{height:39px;margin:0 5px 3px}
+ #card-2 .integrated-studio .specimen-group h4{padding:2px 6px;margin-bottom:3px}
+ #card-2 .integrated-studio .shelf-heading{margin-bottom:3px}
+ #card-2 .integrated-studio .bench-sequence{padding:4px}
+ #card-2 .integrated-studio .combustion-step{font-size:11px;margin:2px 0;padding:3px 8px}
+ #card-2 .integrated-studio .combustion-condition{font-size:9px}
+}
+#card-4 .iron-linked-view{display:grid;grid-template-columns:minmax(0,1fr) 30%;align-items:start}
+#card-4 .iron-linked-view .iron-transfer-board{width:100%;margin:0}
+#card-4 .iron-linked-view .iron-appearance{border-top:0;border-left:1px solid #b4c4b0;padding:12px;height:100%;box-sizing:border-box}
+#card-4 .iron-appearance-head{display:block}
+#card-4 .iron-appearance-head b{font-size:13px}
+#card-4 .iron-appearance-head span{display:block;font-size:10px}
+#card-4 .iron-sample-comparison{grid-template-columns:1fr;gap:8px;margin-top:8px}
+#card-4 .iron-sample-model{height:112px}
+#card-4 .iron-sample-comparison figcaption{font-size:11px;padding:5px 7px}
+#card-4 .iron-appearance p{font-size:11px;margin-top:8px}
+#card-4 .iron-appearance small{font-size:9px;line-height:1.5}
+#card-4 .iron-sample-progress{margin-top:8px}
+#card-4 .iron-studio{scroll-margin-top:12px}
+#card-4 .iron-appearance-note{font-size:10px;margin-top:8px;color:#77846a}
+#card-4 .iron-appearance-note summary{cursor:pointer}
+@media(min-width:850px){#card-3 .redox-workshop{width:min(100%,calc((100svh - 235px)*1.76744));margin-inline:auto}}
+#card-3 .redox-load-target{display:none!important}
+#card-3 .redox-scene[data-phase=done] .redox-detail{top:9%;bottom:8%;left:55%;width:42%;box-sizing:border-box;background:#fffdf3}
+#card-3 .redox-scene[data-phase=done] .redox-heat-summary{display:none}
+#card-3 .redox-scene[data-phase=done] .redox-heat-target{visibility:hidden}
+@media(max-width:760px){
+ #card-4 .iron-linked-view{grid-template-columns:1fr}
+ #card-4 .iron-linked-view .iron-appearance{border-left:0;border-top:1px solid #b4c4b0}
+ #card-4 .iron-sample-comparison{grid-template-columns:1fr 1fr}
+ #card-4 .iron-sample-model{height:100px}
+}

@@ -35,11 +35,11 @@ export function mountFurnace(root,c,{record,notice,delay,onCleanup}){
  const ready=()=>['ore','coke','lime'].every(k=>loaded.has(k))&&!loading;
  onCleanup(()=>{alive=false;tour++;fx?.dispose();molten?.dispose();});
  function paint(){
-  const heating=step>=1,iron=step>=3,slag=step>=5;
+  const heating=running||step>=1,iron=step>=3,slag=step>=5;
   root.dataset.furnaceFeeds=[...loaded].join(',');root.dataset.furnacePhase=completed?'complete':running?(paused?'paused':'running'):'loading';root.dataset.furnaceStep=String(step+1);
   for(const [k,v] of Object.entries({hasOre:loaded.has('ore'),hasCoke:loaded.has('coke'),hasLime:loaded.has('lime'),hasHeat:heating,hasIron:iron,hasSlag:slag,ironTapped:step>=7,slagTapped:step>=6,sequenceStarted:step>=0}))sim.dataset[k]=v;
   fx?.set(heating,paused);molten?.set({iron,slag,ironTapped:step>=7,slagTapped:step>=6},paused);heatButton.disabled=!ready()||running||completed;heatButton.classList.toggle('heater-ready',ready()&&!running&&!completed);heatButton.textContent='加熱';pauseButton.disabled=!running;replayButton.disabled=!completed;
-  root.querySelector('[data-factory-live]').textContent=completed?'1–8 觀察完成':running?(paused?'解說已暫停':'依序解說 '+(step+1)+' / 8'):ready()?'原料齊備 · 可以加熱':'先加入三種原料';
+  root.querySelector('[data-factory-live]').textContent=completed?'1–8 觀察完成':running?(paused?'解說已暫停':step<0?'加熱啟動 · 1 秒後開始解說':'依序解說 '+(step+1)+' / 8'):ready()?'原料齊備 · 可以加熱':'先加入三種原料';
   root.querySelector('[data-iron-status]').textContent=step>=7?'由下層出口流出':iron?'爐內形成，等待出鐵':'尚未形成';
   root.querySelector('[data-slag-status]').textContent=step>=6?'由上層出口排出':slag?'浮在鐵水上，等待出渣':'尚未形成';
   for(const k of ['ore','coke','lime'])root.querySelector('[data-furnace-step="'+k+'"]').textContent=(loaded.has(k)?'✓ ':'○ ')+labels[k].slice(2);
@@ -56,10 +56,10 @@ export function mountFurnace(root,c,{record,notice,delay,onCleanup}){
   panel.classList.remove('step-arriving');void panel.offsetWidth;panel.classList.add('step-arriving');
  }
  function begin(){
-  if(!ready()||running)return;tour++;const token=tour;running=true;completed=false;paused=false;step=0;elapsed=0;sim.classList.remove('factory-paused');pauseButton.textContent='暫停說明';
-  inspect(step);paint();sim.scrollIntoView({block:'start',behavior:'instant'});say('原料已齊備，從 1 開始依序觀察；右側會同步浮現反應式。');let last=performance.now();
+  if(!ready()||running)return;tour++;const token=tour;running=true;completed=false;paused=false;step=-1;elapsed=0;sim.classList.remove('factory-paused');pauseButton.textContent='暫停說明';
+  for(const b of root.querySelectorAll('button[data-zone]')){b.disabled=true;b.setAttribute('aria-pressed','false');b.classList.remove('is-done');}paint();sim.scrollIntoView({block:'start',behavior:'instant'});say('加熱已啟動，1 秒後開始解說。');let last=performance.now();
   function tick(){if(!alive||token!==tour)return;const now=performance.now();if(!paused&&!document.hidden)elapsed+=Math.min(now-last,500);last=now;
-   if(elapsed>=6000){elapsed=0;if(step<7){step++;inspect(step);paint();}else{running=false;completed=true;record('air');paint();inspect(7);say('八步觀察完成：焦炭供熱、CO 還原、石灰石除雜，最後分別排出熔渣與生鐵。可重播或點選已完成的步驟複習。');return;}}
+   if(elapsed>=(step<0?1000:6000)){elapsed=0;if(step<7){step++;inspect(step);paint();}else{running=false;completed=true;record('air');paint();inspect(7);say('八步觀察完成：焦炭供熱、CO 還原、石灰石除雜，最後分別排出熔渣與生鐵。可重播或點選已完成的步驟複習。');return;}}
    delay(tick,100);
   }delay(tick,100);
  }

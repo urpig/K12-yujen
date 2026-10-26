@@ -7,7 +7,6 @@ export const dictionaryChapters=[
  {id:'iron',label:'05 · CO 與氧化鐵',target:'card-4'},
  {id:'furnace',label:'06 · 高爐裡的分工',target:'card-5'},
  {id:'blade',label:'07 · 生鐵、鋼與熟鐵',target:'card-6'},
- {id:'rust',label:'08 · 生鏽與防鏽',target:'card-7'},
  {id:'epilogue',label:'尾聲 · 身體與抗氧化',target:'epilogue-antioxidants'}
 ];
 export const dictionarySources={
@@ -34,9 +33,9 @@ export const scienceTerms=[
  term('molecule','分子','由原子以化學鍵結合而成、可辨認為一個整體的粒子。','一個 CO₂ 分子含 1 個碳原子與 2 個氧原子。','不是所有物質都由一顆顆獨立分子組成；本課的氧化鐵是固體晶體。',['prep','iron','life'],['atom','compound']),
  term('electron','電子','帶負電的微小粒子；化學反應中，電子的轉移可用來判斷氧化與還原。','失去電子的一方被氧化，得到電子的一方被還原。','電子不是氧原子；沒有氧參與，也可能發生氧化還原。',['prep','life'],['oxidation','reduction'],[],'redox'),
  term('compound','化合物','由兩種以上元素以一定組成比例化學結合而成的純物質。','一氧化碳 CO 與二氧化碳 CO₂ 是不同化合物。','不同元素混在一起，不一定已經形成化合物。',['ore','prep','combustion','iron'],['element','oxide','carbonmonoxide']),
- term('oxygen','氧氣','氧元素形成的一種氣態單質，通常以 O₂ 分子存在。','燃燒匙中的鎂與集氣瓶內的氧氣反應。','O 是元素符號，O₂ 是氧氣；氧化物裡的氧不等於一團氧氣。',['prep','combustion','rust'],['element','oxidation'],['O₂','O2']),
+ term('oxygen','氧氣','氧元素形成的一種氣態單質，通常以 O₂ 分子存在。','燃燒匙中的鎂與集氣瓶內的氧氣反應。','O 是元素符號，O₂ 是氧氣；氧化物裡的氧不等於一團氧氣。',['prep','combustion'],['element','oxidation'],['O₂','O2']),
  term('oxide','氧化物','氧與另一種元素組成的一類化合物，本課常見如 CuO 與 Fe₂O₃。','銅得到氧，形成氧化銅。','不能把所有氧化物遇水後的性質都當成一樣；鈉的代表燃燒產物另介紹為過氧化鈉。',['ore','prep','combustion','copper','iron'],['oxidation','copperoxide','sodiumperoxide']),
- term('oxidation','氧化','本課先用「物質得到氧」來理解；更一般地說，是失去電子的變化。','碳得到氧成為 CO₂，被氧化。','沒有火焰也可能氧化；氧化必定伴隨還原。',['prep','life','combustion','copper','iron','rust','epilogue'],['reduction','redox'],['氧化反應','被氧化'],'redox'),
+ term('oxidation','氧化','本課先用「物質得到氧」來理解；更一般地說，是失去電子的變化。','碳得到氧成為 CO₂，被氧化。','沒有火焰也可能氧化；氧化必定伴隨還原。',['prep','life','combustion','copper','iron','epilogue'],['reduction','redox'],['氧化反應','被氧化'],'redox'),
  term('reduction','還原','本課先用「氧化物失去氧」來理解；更一般地說，是得到電子的變化。','氧化銅失去氧，生成金屬銅，被還原。','還原不只是把外觀變回原樣，也不是讓物質或原子消失。',['prep','life','copper','iron','furnace'],['oxidation','redox','reducingagent'],['還原反應','被還原'],'redox'),
  term('redox','氧化還原反應','同時發生氧化與還原的化學反應；一方失去電子，另一方得到電子。','CO 得氧被氧化時，氧化鐵同時失氧被還原。','不能只看單一物質變色，就把整個反應判斷完。',['prep','life','copper','iron','epilogue'],['oxidation','reduction','electron'],['氧化還原'],'redox'),
  term('affinity','對氧活性','本課用來比較元素與氧結合傾向的說法，幫助預測誰較能從氧化物中取走氧。','在合適條件下，碳能幫助鐵的氧化物失氧。','排序是比較線索，仍受溫度、材料表面與反應條件影響，不是無條件保證。',['prep','combustion','copper','iron'],['reducingagent','condition'],['對氧活性大小','對氧氣活性','元素對氧的活性'],'affinity'),
@@ -91,9 +90,9 @@ export const scienceTerms=[
  term('toughness','韌性','材料在破裂前，吸收能量、承受變形的能力。','好刀材常需兼顧硬度與韌性，才不易一受衝擊就斷裂。','韌不等於硬，也不等於受力後一定完全回彈。',['blade'],['hardness','brittleness','elasticity'],[],'steel'),
  term('brittleness','脆性','材料在還沒有明顯永久變形前，就容易破裂的性質。','本課生鐵刀的脆裂，呈現脆性的代表情形。','硬的材料不一定韌；硬度與脆性是不同觀察面向。',['blade'],['toughness','pigiron'],['硬脆','脆裂'],'steel'),
  term('elasticity','彈性','材料受力變形後，在適當範圍內移除外力，可以恢復原狀的性質。','本課鋼刀在設定負載下，卸載後回彈。','超過可恢復的範圍，仍可能留下永久變形或破裂。',['blade'],['toughness','steel'],['回彈'],'steel'),
- term('rusting','生鏽','鐵在有水與氧等條件下，經反應形成鏽層的過程。','潮濕且可接觸氧的鐵片，較容易出現鏽斑。','這是較緩慢的氧化；不是因為鐵表面沾上原有的紅色粉末。',['prep','rust'],['rust','oxidation','rustprevention'],['鐵生鏽','生銹']),
- term('rust','鐵鏽','鐵腐蝕後形成的複雜鏽層，通常含水合氧化物、氧氫化物等。','潮濕鐵片表面出現紅棕色、較疏鬆的鏽層。','鐵鏽不是單一純 Fe₂O₃，疏鬆鏽層通常不能可靠地保護底下的鐵。',['rust','ore'],['rusting','ironoxide']),
- term('rustprevention','防鏽','藉由減少或阻隔生鏽所需條件，讓鐵較不容易形成鏽層。','保持乾燥，或用完整油膜減少水與氧接觸鐵表面。','塗層破損後仍可能生鏽；防鏽不是把鐵的化學性質永久改掉。',['rust'],['rusting','oxygen'],['油膜','塗層']),
+ term('rusting','生鏽','鐵在有水與氧等條件下，經反應形成鏽層的過程。','潮濕且可接觸氧的鐵片，較容易出現鏽斑。','這是較緩慢的氧化；不是因為鐵表面沾上原有的紅色粉末。',['prep'],['rust','oxidation','rustprevention'],['鐵生鏽','生銹']),
+ term('rust','鐵鏽','鐵腐蝕後形成的複雜鏽層，通常含水合氧化物、氧氫化物等。','潮濕鐵片表面出現紅棕色、較疏鬆的鏽層。','鐵鏽不是單一純 Fe₂O₃，疏鬆鏽層通常不能可靠地保護底下的鐵。',['prep','ore'],['rusting','ironoxide']),
+ term('rustprevention','防鏽','藉由減少或阻隔生鏽所需條件，讓鐵較不容易形成鏽層。','保持乾燥，或用完整油膜減少水與氧接觸鐵表面。','塗層破損後仍可能生鏽；防鏽不是把鐵的化學性質永久改掉。',['prep'],['rusting','oxygen'],['油膜','塗層']),
  term('photosynthesis','光合作用','植物等生物利用光能，把二氧化碳與水等原料轉成有機物的過程。','本課以 CO₂ 與水形成葡萄糖、並釋出氧氣的總反應表示。','釋出的氧氣來自水；放出氧氣不表示只有還原、沒有氧化。',['life'],['chloroplast','chlorophyll','redox'],[],'photo'),
  term('chloroplast','葉綠體','植物與藻類細胞內，進行光合作用的重要構造。','葉片放大圖中的葉綠體，能把光能的作用接到養分的形成。','葉綠體是細胞構造，葉綠素則是其中吸收光的色素。',['life'],['chlorophyll','photosynthesis'],[],'photo'),
  term('chlorophyll','葉綠素','能吸收部分光能、參與光合作用的綠色色素。','葉綠素幫助葉片利用光，但不是總反應中被消耗的原料。','葉綠素和葉綠體不是同一個東西。',['life'],['chloroplast','photosynthesis'],[],'photo'),
@@ -137,7 +136,7 @@ const elementNotes=[
  ['Pt','鉑','一種對氧活性較小的金屬元素，符號 Pt。','本課排序中，鉑在銀之後、金之前。','鉑與銀是不同元素，不因外觀相近就相同。'],
  ['Au','金','金黃色金屬元素，符號 Au，在本課排序中對氧活性較小。','本課用金與較活潑的金屬作比較。','活性小不等於在任何條件下都不會反應。']
 ];
-for(const [symbol,name,definition,example,note] of elementNotes)scienceTerms.push(term('element-'+symbol,name,definition,example,note,['prep',...(['Na','Mg','Zn','Cu','C'].includes(symbol)?['combustion']:[]),...(symbol==='Fe'?['ore','iron','blade','rust']:[])],symbol==='C'?['charcoal','coke','affinity']:['element','affinity'],[symbol,name+'元素',...(symbol==='Hg'?['水銀']:[])],'elements'));
+for(const [symbol,name,definition,example,note] of elementNotes)scienceTerms.push(term('element-'+symbol,name,definition,example,note,['prep',...(['Na','Mg','Zn','Cu','C'].includes(symbol)?['combustion']:[]),...(symbol==='Fe'?['ore','iron','blade']:[])],symbol==='C'?['charcoal','coke','affinity']:['element','affinity'],[symbol,name+'元素',...(symbol==='Hg'?['水銀']:[])],'elements'));
 
 export const primerTerms={
  ore:['hematite','ironoxide','smelting'],
@@ -145,6 +144,6 @@ export const primerTerms={
  life:[['photosynthesis','respiration','electron'],['bleaching','oxidizer','reducingagent'],['antioxidant','vitaminc','oxidation']],
  combustion:['oxide','litmus','acid','alkali'],copper:['reduction','reducingagent','copperoxide'],
  iron:['ironoxide','carbonmonoxide','conservation'],furnace:['coke','slag','pigiron'],
- blade:['pigiron','steel','wrought'],rust:['rusting','rust','rustprevention'],
+ blade:['pigiron','steel','wrought'],
  epilogue:['ros','oxidativestress','antioxidant']
 };

@@ -8,7 +8,7 @@ function foodIllustration(kind){
 export function mountAntioxidantEpilogue(lesson){
  const section=document.createElement('section');section.id='epilogue-antioxidants';section.className='exploration-card antioxidant-epilogue';section.tabIndex=-1;section.setAttribute('aria-labelledby','epilogue-title');
  section.innerHTML=`<header class="chapter-header"><div class="chapter-kicker"><span>回家後的小問題</span><span>故事尾聲 · 把氧化還原帶回生活</span></div><h2 id="epilogue-title">「阿公，你也是被氧化了嗎？」</h2><p class="core-question">從細胞呼吸的小玩笑，認識身體裡的抗氧化保護。</p></header>
- <div class="chapter-body"><p class="epilogue-intro">回到熟悉的實驗室，小葵翻開「細胞呼吸」那一頁，突然抬頭看著阿公。</p>
+ <div class="chapter-body"><p class="epilogue-intro">兩人獻上寶劍，皇帝歸還時空裝置。回到熟悉的實驗室，小葵翻開「細胞呼吸」那一頁，突然抬頭看著阿公。</p>
  <div class="epilogue-dialogue" aria-label="小葵與阿公的回家對話">
  ${speech('kui','curious','「阿公，細胞呼吸作用會氧化養分……那你這麼老，也是被氧化了嗎？」')}
  ${speech('grandpa','gentle','「哈哈哈，你這臭小孩！<span class="epilogue-joke">是有關係啦，但可不能把老化全算在氧化頭上。</span>阿公可不是一把生鏽的鐵劍！」')}
@@ -30,6 +30,6 @@ export function mountAntioxidantEpilogue(lesson){
  ${speech('grandpa','encourage','「對啦！<strong>有抗氧化作用，不代表吃越多越好，也不保證抗老。</strong>再說，沒有細胞呼吸提供能量，我哪來力氣陪你穿越、打鐵呀？」')}
  </div><p class="epilogue-endnote">小葵笑著補上一筆：<br>「氧化不全是壞事。看懂作用，也要看懂證據。」</p>
  <details class="epilogue-sources"><summary>阿公這段話的科學依據</summary><p>這是生物與營養的概念延伸。圖中的食物只舉例來源，沒有比較含量。成分具有化學作用，與補充後能否帶來人體健康效益，需要分別看證據。</p><ul><li><a href="https://www.nccih.nih.gov/health/antioxidant-supplements-what-you-need-to-know" target="_blank" rel="noopener">NCCIH：正常活性氧、身體防禦與抗氧化補充劑</a></li><li><a href="https://www.medlineplus.gov/ency/article/004012.htm" target="_blank" rel="noopener">MedlinePlus：老化是複雜的過程</a></li><li><a href="https://ods.od.nih.gov/factsheets/VitaminC-Consumer/" target="_blank" rel="noopener">NIH：維生素 C 與食物來源</a></li><li><a href="https://ods.od.nih.gov/factsheets/VitaminE-HealthProfessional/" target="_blank" rel="noopener">NIH：維生素 E 與食物來源</a></li><li><a href="https://lpi.oregonstate.edu/mic/dietary-factors/phytochemicals/resveratrol" target="_blank" rel="noopener">OSU：白藜蘆醇的體外作用與人體證據</a></li></ul></details></div>
- <footer class="chapter-footer"><a class="previous" href="#card-7">← 回看護劍的觀察</a><span>小葵與阿公的鍛造筆記 · 完</span><a class="next" href="#card-1">回到故事起點 <b>↑</b></a></footer>`;
+ <footer class="chapter-footer"><a class="previous" href="#card-6">← 回看刀材的比較</a><span>小葵與阿公的鍛造筆記 · 完</span><a class="next" href="#card-1">回到故事起點 <b>↑</b></a></footer>`;
  lesson.append(section);return section;
 }

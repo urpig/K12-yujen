@@ -17,7 +17,7 @@ test('不能把褪色當作所有漂白劑被還原，先觀察才能記錄',()=
 });
 test('錯誤與未知反應不給分、重複正解不重複計分',()=>{
  const s=freshLife();assert.equal(lifeRecord(s,'photo','reduction'),false);assert.equal(lifeRecord(s,'garbage','oxidation'),false);
- for(let n=0;n<10;n++)lifeRecord(s,'photo','oxidation');assert.deepEqual(s.evidence,['photo']);assert.equal(lifeReady(s),false);
+ assert.equal(lifeRecord(s,'photo','oxidation'),false);s.seen.push('photo');for(let n=0;n<10;n++)lifeRecord(s,'photo','oxidation');assert.deepEqual(s.evidence,['photo']);assert.equal(lifeReady(s),false);
 });
 test('保護為有限、定性、比較同一時點；必須看到後段才可回答',()=>{
  const s=freshLife();assert.equal(lifeRecord(s,'food','oxidation'),false);s.time=3;assert.equal(lifeRecord(s,'food','reduction'),false);assert.equal(lifeRecord(s,'food','oxidation'),true);

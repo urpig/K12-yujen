@@ -15,13 +15,13 @@ export function lifeMastered(s){return lifeReady(s)&&s.answer===lifeQuiz.answer;
 export function restoreLife(raw){const s=freshLife();if(!raw||typeof raw!=='object')return s;
  if([0,1,2].includes(raw.tab))s.tab=raw.tab;if(Object.hasOwn(lifeBiology,raw.bio))s.bio=raw.bio;if(Object.hasOwn(lifeBleaches,raw.bleach))s.bleach=raw.bleach;
  if(Number.isFinite(raw.time))s.time=Math.max(0,Math.min(4,Math.round(raw.time)));
- s.seen=[...new Set((Array.isArray(raw.seen)?raw.seen:[]).filter(k=>Object.hasOwn(lifeBleaches,k)))];
+ s.seen=[...new Set((Array.isArray(raw.seen)?raw.seen:[]).filter(k=>(Object.hasOwn(lifeBleaches,k)||Object.hasOwn(lifeBiology,k))))];
  s.evidence=[...new Set((Array.isArray(raw.evidence)?raw.evidence:[]).filter(k=>lifeEvidence.includes(k)))];
  if(lifeReady(s)&&[0,1,2,3].includes(raw.answer))s.answer=raw.answer;return s;
 }
 export function lifeRecord(s,key,role){
  let correct=false;
- if(Object.hasOwn(lifeBiology,key))correct=role==='oxidation';
+ if(Object.hasOwn(lifeBiology,key))correct=(s.seen.includes(key)||s.evidence.includes(key))&&role==='oxidation';
  else if(Object.hasOwn(lifeBleaches,key))correct=s.seen.includes(key)&&role===lifeBleaches[key].role;
  else if(key==='food')correct=s.time>=3&&role==='oxidation';
  if(correct&&!s.evidence.includes(key))s.evidence.push(key);return correct;
