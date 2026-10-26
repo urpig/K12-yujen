@@ -3,7 +3,7 @@ export function createMoltenFlow(canvas){
  const ctx=canvas.getContext('2d');if(!ctx)return null;
  let state={},paused=false,alive=true,visible=true,frame=0,time=0,last=0;
  const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
- const paths={iron:[[503,523],[552,560],[765,560],[800,572]],slag:[[507,492],[574,499],[605,499],[640,505]]};
+ const paths={iron:[[503,523],[552,560],[765,560],[800,565]],slag:[[507,492],[574,499],[605,499],[640,505]]};
  function point(points,q){const lengths=points.slice(1).map((p,i)=>Math.hypot(p[0]-points[i][0],p[1]-points[i][1])),total=lengths.reduce((a,b)=>a+b,0);let d=Math.max(0,Math.min(.99999,q))*total;for(let i=0;i<lengths.length;i++){if(d<=lengths[i]){const f=d/lengths[i],a=points[i],b=points[i+1],dx=(b[0]-a[0])/lengths[i],dy=(b[1]-a[1])/lengths[i];return [a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f,-dy,dx];}d-=lengths[i];}return [...points.at(-1),0,1];}
  function line(points,color,width){ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(...p):ctx.moveTo(...p));ctx.strokeStyle=color;ctx.lineWidth=width;ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();}
  function pool(x,y,rx,ry,iron,impact=false){
@@ -17,7 +17,7 @@ export function createMoltenFlow(canvas){
   // Advected, irregular ribbons replace schematic dashed arrows.
   for(let j=0;j<5;j++){const pts=[];for(let i=0;i<=100;i++){const q=i/100,[x,y,nx,ny]=point(p,q),w=(j-2)*width*.17+Math.sin(q*48-time*(iron?5:1.6)+j)*.6;pts.push([x+nx*w,y+ny*w]);}line(pts,(iron?['#b7450e','#f28b27','#ffe1a0','#ffcf68','#e6741b']:['#594a36','#b28b50','#efca86','#d3a366','#78603f'])[j],1.5);}
   for(let i=0;i<20;i++){const q=(i*.0617+time*(iron?.28:.09))%1,pts=[];for(let k=0;k<5;k++){const [x,y,nx,ny]=point(p,Math.min(.999,q+k*.003));const o=Math.sin(i*4.1)*width*.26;pts.push([x+nx*o,y+ny*o]);}line(pts,iron?'#fff1b366':'#403a2f99',iron?.65:1.7);}
-  const [x,y]=p.at(-1);pool(x,y+1,iron?64:43,iron?10:7.4,iron,true);
+  const [x,y]=p.at(-1);pool(x,y+1,iron?57:42,iron?7.6:6.3,iron,true);
   for(let i=0;i<(iron?7:3);i++){const q=(time*(iron?.8:.4)+i*.161)%1,dx=Math.sin(i*2.4)*q*(iron?13:7),dy=-Math.sin(q*Math.PI)*(iron?12:5);ctx.globalAlpha=(1-q)*.65;ctx.fillStyle=iron?'#ffdb83':'#d9ae64';ctx.beginPath();ctx.ellipse(x+dx,y+dy,.6,1.1,dx*.08,0,Math.PI*2);ctx.fill();}ctx.restore();
  }
  function draw(now){frame=0;if(!alive)return;time+=paused||reduced?0:Math.max(0,Math.min(.08,(now-(last||now))/1000));last=now;const r=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,1.5),w=Math.max(1,Math.round(r.width*d)),h=Math.max(1,Math.round(r.height*d));if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}ctx.setTransform(w/900,0,0,h/650,0,0);ctx.clearRect(0,0,900,650);

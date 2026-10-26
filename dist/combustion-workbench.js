@@ -2,7 +2,7 @@ import {laboratoryBackground,spoonIllustration,alcoholLamp} from './laboratory-a
 import {mountBenchWater} from './bench-water.js';
 import {createCombustionAtmosphere} from './combustion-atmosphere.js';
 import {bindFreeSpoon} from './direct-manipulation.js';
-import {spoonNearFlame,spoonInJar,spoonAtMouth,newSpoonHeating,advanceSpoonHeating,spoonTiming} from './spoon-heating.js';
+import {spoonNearFlame,spoonInJar,spoonBottlePlacement,newSpoonHeating,advanceSpoonHeating,spoonTiming} from './spoon-heating.js';
 import {scopeMarkup} from './card-markup.js';
 import {gasCollectionBottle} from './glass-bottle.js';
 const atmospherePool=new WeakMap();
@@ -51,8 +51,8 @@ export function combustionArtwork(key,stage,isMetal,cool=true,spoonOrigin=null){
 
 export function mountCombustion(root,{key,isMetal,autoLoad=false,spoonOrigin=null,onCleanup=()=>{},completed=false,cool=true,token,name,delay,notice,onStart,onComplete,onWetComplete,onCool}){
  const owner=root.closest('.interactive-lab');let atmosphere=atmospherePool.get(owner);if(!atmosphere){atmosphere=createCombustionAtmosphere();if(atmosphere){atmospherePool.set(owner,atmosphere);onCleanup(()=>{atmosphere.dispose();atmospherePool.delete(owner);});}}
- const condition=(isMetal?(key==='Cu'?'空氣中加熱；銅片形成黑色表層，通常沒有自身火焰。':'空氣中加熱，觀察樣本的燃燒與產物。'):key==='CO'?'氧不足案例可能有混合產物；CO 不以有色煙呈現。':'瓶內預先充氧，用來觀察燃燒及保留產物；無色氣體不染色。')+(key==='Na'||key==='P'||key==='CO'?' 此案例僅虛擬操作。':'');
- root.innerHTML=scopeMarkup(`<div class="combustion-workbench ${completed?'':'mobile-combustion'}" data-combustion-stage="${completed?'done':autoLoad?'loaded':'load'}" data-element="${key}" data-bottle-covered="${!isMetal&&completed?'true':'false'}">${combustionArtwork(key,completed?'done':'load',isMetal,cool,spoonOrigin)}<div data-shelf-target class="shelf-load-target drop-target"><span>放到燃燒匙凹槽 ↓</span></div>${completed?'':`<div class="heat-contact-zone" data-heat-zone aria-hidden="true"></div><div class="combustion-spoon" data-spoon aria-label="${autoLoad?'裝有'+name:'空的'}燃燒匙">${spoonIllustration(key,{empty:!autoLoad,progress:autoLoad})}${mobileSpecimenFallback(key)}<span>按住匙柄拖動 · 可移開</span></div>${isMetal?'':'<div class="drop-target jar-mouth-zone" data-jar-mouth><span>點燃後，匙端由瓶口移入 ↓</span></div>'}<div class="spoon-heat-readout"><b data-heat-label></b><span data-heat-detail></span><div class="spoon-heat-progress" role="progressbar" aria-label="樣本受熱或觀察進度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div></div>`}</div><p class="combustion-step" aria-live="polite"></p><p class="combustion-condition">${condition}${completed?(['S','C','CO'].includes(key)?' 先封口冷卻再加水；冷卻時間縮短示意。':' 產物呈現冷卻後外觀，省略冷卻時間。'):' 受熱時間簡化，未計殘熱。'}</p>`,'combustion-'+key);
+ const condition=(isMetal?(key==='Cu'?'空氣中加熱；銅片形成黑色表層，通常沒有自身火焰。':'空氣中加熱，觀察樣本的燃燒與產物。'):key==='CO'?'氧不足案例可能有混合產物；CO 不以有色煙呈現。':'瓶內預先充氧，用來觀察燃燒及保留產物；無色氣體不染色；移入路徑簡化示意。')+(key==='Na'||key==='P'||key==='CO'?' 此案例僅虛擬操作。':'');
+ root.innerHTML=scopeMarkup(`<div class="combustion-workbench ${completed?'':'mobile-combustion'}" data-combustion-stage="${completed?'done':autoLoad?'loaded':'load'}" data-element="${key}" data-bottle-covered="${!isMetal&&completed?'true':'false'}">${combustionArtwork(key,completed?'done':'load',isMetal,cool,spoonOrigin)}<div data-shelf-target class="shelf-load-target drop-target"><span>放到燃燒匙凹槽 ↓</span></div>${completed?'':`<div class="heat-contact-zone" data-heat-zone aria-hidden="true"></div><div class="combustion-spoon" data-spoon aria-label="${autoLoad?'裝有'+name:'空的'}燃燒匙">${spoonIllustration(key,{empty:!autoLoad,progress:autoLoad})}${mobileSpecimenFallback(key)}<span>按住匙柄拖動 · 可移開</span></div>${isMetal?'':'<div class="drop-target jar-body-zone" data-jar-target><span>點燃後，拖進瓶內 ↓</span></div>'}<div class="spoon-heat-readout"><b data-heat-label></b><span data-heat-detail></span><div class="spoon-heat-progress" role="progressbar" aria-label="樣本受熱或觀察進度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div></div>`}</div><p class="combustion-step" aria-live="polite"></p><p class="combustion-condition">${condition}${completed?(['S','C','CO'].includes(key)?' 先封口冷卻再加水；冷卻時間縮短示意。':' 產物呈現冷卻後外觀，省略冷卻時間。'):' 受熱時間簡化，未計殘熱。'}</p>`,'combustion-'+key);
  const board=root.querySelector('.combustion-workbench'),step=root.querySelector('.combustion-step');
  if(atmosphere){board.append(atmosphere.canvas);board.classList.add('atmosphere-ready');atmosphere.update({key,stage:completed?'done':'load',isMetal,mobile:completed,bowl:spoonOrigin||[320,224],specimenActive:false});}
  mountBenchWater(board,{key,completed,cool,spoonOrigin,delay,onCleanup,notice,onCool,onComplete:onWetComplete});
@@ -69,10 +69,10 @@ export function mountCombustion(root,{key,isMetal,autoLoad=false,spoonOrigin=nul
   let message;
   if(!state.loaded){label.textContent='空匙 · 可直接拖動';detail.textContent='從上架放入樣本';message='先把樣本放上匙口；按住匙柄可移動空匙。';}
   else if(!state.ignited){label.textContent=heating?'正在加熱':'已移開 · 停止加熱';detail.textContent=(key==='Cu'?'受熱示意':'點燃準備')+' '+Math.round(ratio*100)+'%';message=heating?'匙端正靠近火焰，正在加熱；拖開就停止。':'匙端已離開火焰，停止加熱；移回可接續。';}
-  else{label.textContent=heating?'外部加熱中 · 樣本已點燃':'已停止加熱 · 樣本仍燃燒';detail.textContent=isMetal?'燃燒後比較產物':inJar?'瓶內觀察 '+Math.round(ratio*100)+'%':'將匙端由瓶口移入';message=isMetal?(heating?'樣本已點燃；可以移離酒精燈，觀察持續燃燒。':'已移離酒精燈，停止外部加熱；樣本已點燃，仍在燃燒。'):inJar?'燃燒匙已在瓶內，觀察並保留產物；仍可抓住匙柄移出。':'樣本已點燃。把匙端拖到瓶口，鬆開後伸入瓶內。';}
+  else{label.textContent=heating?'外部加熱中 · 樣本已點燃':'已停止加熱 · 樣本仍燃燒';detail.textContent=isMetal?'燃燒後比較產物':inJar?'瓶內觀察 '+Math.round(ratio*100)+'%':'拖進瓶身範圍即可';message=isMetal?(heating?'樣本已點燃；可以移離酒精燈，觀察持續燃燒。':'已移離酒精燈，停止外部加熱；樣本已點燃，仍在燃燒。'):inJar?'燃燒匙已在瓶內，觀察並保留產物；仍可抓住匙柄移出。':'樣本已點燃。把燃燒匙直接拖進瓶內，鬆開後觀察產物。';}
   if(state.complete){label.textContent='觀察完成';detail.textContent=held?'鬆開匙柄，查看產物':'準備查看產物';message=held?'觀察完成；鬆開匙柄，再比較產物。':'觀察完成。';}
   meter.setAttribute('aria-valuenow',String(Math.round(ratio*100)));meter.querySelector('i').style.width=(ratio*100)+'%';
-  const jarTarget=board.querySelector('[data-jar-mouth]');if(jarTarget)jarTarget.hidden=!state.ignited||inJar;
+  const jarTarget=board.querySelector('[data-jar-target]');if(jarTarget)jarTarget.hidden=!state.ignited||inJar;
   if(message!==previousMessage){step.textContent=message;notice(message);previousMessage=message;}
   if(atmosphere)atmosphere.update({key,stage,isMetal,mobile:true,bowl:point,specimenActive:state.ignited&&!state.complete}, {preserveTime:true});
   shelfTarget(board);
@@ -85,7 +85,7 @@ export function mountCombustion(root,{key,isMetal,autoLoad=false,spoonOrigin=nul
   if(['heatMs','burnMs','observationMs','externalHeating','complete','ignited'].some(k=>state[k]!==before[k]))show();
   if(state.complete&&!held){dispose();onComplete([...point]);return;}if(state.loaded)timer=setTimeout(tick,40);
  }
- const releaseDrag=bindFreeSpoon(spoon,board,{position:point,onGrab:()=>{held=true;},onMove:(next,grabbing)=>{point=next;held=grabbing;if(inJar&&!spoonInJar(point))inJar=false;show();},onRelease:p=>{if(!isMetal&&state.ignited&&spoonAtMouth(p)){inJar=true;return [560,283];}}});
+ const releaseDrag=bindFreeSpoon(spoon,board,{position:point,onGrab:()=>{held=true;},onMove:(next,grabbing)=>{point=next;held=grabbing;inJar=!isMetal&&state.ignited&&spoonInJar(point);show();},onRelease:p=>{const placed=spoonBottlePlacement(p,state);inJar=!!placed;if(placed)return placed;}});
  function dispose(){if(!alive)return;alive=false;clearTimeout(timer);releaseDrag();}
  onCleanup(dispose);tick();
 }
