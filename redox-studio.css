@@ -56,3 +56,4 @@
 .redox-free-scene .redox-heat-meter:after{display:none!important;animation:none!important}
 .redox-free-scene .redox-heat-meter>i{display:block;height:100%;background:linear-gradient(90deg,#80a8b5,#dfb46d)}
 #card-3 .redox-free-scene:not(.atmosphere-ready) .alcohol-flame-fallback{display:inline!important}
+#card-3 .redox-free-scene[data-phase=done] .alcohol-flame-fallback{display:none!important}.redox-free-scene[data-phase=done] .redox-heat-summary{display:none}

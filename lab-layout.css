@@ -134,7 +134,7 @@
 .spoon-heat-progress{height:4px;border-radius:3px;background:#d5e1da;margin-top:8px;overflow:hidden}
 .spoon-heat-progress i{display:block;height:100%;width:0;background:#bd975e;transition:none}
 [data-heating=paused] .spoon-heat-progress i{background:#8aa69e}
-.mobile-combustion .jar-mouth-zone{pointer-events:none}
+.mobile-combustion .jar-body-zone{pointer-events:none}
 .mobile-specimen-fallback{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;display:none}
 .specimen-burning .mobile-specimen-fallback{display:block}
 .atmosphere-ready .mobile-specimen-fallback{display:none}
