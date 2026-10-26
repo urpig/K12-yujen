@@ -18,29 +18,48 @@
     "sourceFolder": "/",
     "publishCommand": "node publish-pages.mjs",
     "url": "https://urpig.github.io/ch2/",
-    "sourceCommit": "e1747fd904d1a84ac88bd0e71ddceddc16e17fe9",
-    "pagesCommit": "2812e58980fa6e8f2f12ebf7783b0a5cfbe5a1a0",
-    "sourceTree": "1f6083cc60f1081a6eaff0f6d3c02ecb8afeec89",
-    "verifiedAt": "2026-10-25T03:42:43.860Z"
+    "sourceCommit": "670953a0663a17c4d706b457c6aa6cf27cc6a0c9",
+    "pagesCommit": "f5e3814f17c1f672cebcca2217e4400f3d36d3fd",
+    "sourceTree": "0213bddbe4e7d3fac082e5bd0dc16f4f3cb333ae",
+    "verifiedAt": "2026-10-26T06:26:26.563Z"
   },
   "currentPublicDeployment": {
     "provider": "github-pages",
     "url": "https://urpig.github.io/ch2/",
     "status": "published",
-    "sourceCommit": "e1747fd904d1a84ac88bd0e71ddceddc16e17fe9",
-    "pagesCommit": "2812e58980fa6e8f2f12ebf7783b0a5cfbe5a1a0",
-    "fileCount": 168,
-    "anonymousHttpVerifiedAt": "2026-10-25T03:42:43.860Z",
-    "anonymousHttpChecksPassed": 7,
-    "httpVerification": "No cookies or authorization supplied. Homepage, story app, prediction module, antioxidant epilogue, story image, chemistry homepage and chemistry app all returned 200 and match source SHA-256 after text line-ending normalisation.",
-    "browserVerification": [
-      "Current story, navigation and visible scene previews render on the GitHub Pages project URL.",
-      "A prediction can be selected and submitted; keyboard ore rotation records observation evidence.",
-      "Prediction and observation survive reload; reset restores the four choices.",
-      "Everyday redox accepts the water-to-oxygen oxidation path and displays the paired oxidation/reduction explanation; reset works.",
-      "No console errors or warnings observed during these interactions."
+    "sourceCommit": "670953a0663a17c4d706b457c6aa6cf27cc6a0c9",
+    "pagesCommit": "f5e3814f17c1f672cebcca2217e4400f3d36d3fd",
+    "sourceTree": "0213bddbe4e7d3fac082e5bd0dc16f4f3cb333ae",
+    "fileCount": 175,
+    "anonymousHttpVerifiedAt": "2026-10-26T06:23:45.915Z",
+    "anonymousHttpChecksPassed": 12,
+    "httpVerification": "No cookies or authorization supplied. All twelve requests returned HTTP 200 and matched the committed source SHA-256 after text line-ending normalisation.",
+    "verifiedFiles": [
+      "index.html",
+      "story-app.js",
+      "chapter-navigation.css",
+      "terminology-data.js",
+      "terminology.js",
+      "food-playback.js",
+      "everyday-redox.js",
+      "spoon-heating.js",
+      "combustion-workbench.js",
+      "crucible-controller.js",
+      "factory-ladles.js",
+      "chemistry/index.html"
     ],
-    "verificationLimits": "Not every lesson interaction or mobile interaction was repeated for publication. The application code is unchanged from the version that passed all 123 automated tests. The publishing helper was executed successfully and verified the remote gh-pages commit and dist tree."
+    "browserVerifiedAt": "2026-10-26T06:26:26.563Z",
+    "browserVerification": [
+      "Public homepage renders the latest ore logo, chapter navigation, story and images without a login screen.",
+      "Science glossary opens, accepts Fe2O3 with subscripts, and shows iron oxide definitions and related terms.",
+      "A prediction can be selected and submitted on the ore card.",
+      "Keyboard rotation changes the ore view and records observation evidence.",
+      "Card reset restores all four prediction options and clears ore observation evidence.",
+      "No broken images or console errors or warnings observed during the checks."
+    ],
+    "automatedTestsPassed": 133,
+    "verificationLimits": "Publication smoke check covered the homepage, glossary and ore interaction. It did not repeat every lesson or physical mobile-device interaction. Source is the same version that passed all 133 tests and the single-file build.",
+    "screenshot": "outputs/ch2-GitHub-Pages-已發布.png"
   },
   "previousPublicDeployment": {
     "provider": "netlify",
@@ -65,5 +84,24 @@
     ],
     "verificationLimits": "This publication smoke check did not repeat every lesson interaction or mobile interaction. The unchanged application source previously passed all 123 automated tests.",
     "publicationSequence": "Published to the existing Netlify site under the explicit public-link request before the user selected GitHub Pages for future publication. No further Netlify publication is authorized by this record."
+  },
+  "previousGitHubPagesDeployment": {
+    "provider": "github-pages",
+    "url": "https://urpig.github.io/ch2/",
+    "status": "published",
+    "sourceCommit": "e1747fd904d1a84ac88bd0e71ddceddc16e17fe9",
+    "pagesCommit": "2812e58980fa6e8f2f12ebf7783b0a5cfbe5a1a0",
+    "fileCount": 168,
+    "anonymousHttpVerifiedAt": "2026-10-25T03:42:43.860Z",
+    "anonymousHttpChecksPassed": 7,
+    "httpVerification": "No cookies or authorization supplied. Homepage, story app, prediction module, antioxidant epilogue, story image, chemistry homepage and chemistry app all returned 200 and match source SHA-256 after text line-ending normalisation.",
+    "browserVerification": [
+      "Current story, navigation and visible scene previews render on the GitHub Pages project URL.",
+      "A prediction can be selected and submitted; keyboard ore rotation records observation evidence.",
+      "Prediction and observation survive reload; reset restores the four choices.",
+      "Everyday redox accepts the water-to-oxygen oxidation path and displays the paired oxidation/reduction explanation; reset works.",
+      "No console errors or warnings observed during these interactions."
+    ],
+    "verificationLimits": "Not every lesson interaction or mobile interaction was repeated for publication. The application code is unchanged from the version that passed all 123 automated tests. The publishing helper was executed successfully and verified the remote gh-pages commit and dist tree."
   }
 }
