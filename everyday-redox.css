@@ -25,8 +25,8 @@
 @media(max-width:600px){.life-playback-heading{font-size:12px}.life-time-stages{gap:5px;margin:13px 0}.life-time-stages li{padding:9px 4px;font-size:10px}.life-playback-controls>span{flex-basis:100%;margin-bottom:3px}.life-playback-controls>button{min-height:42px}}
 @media(prefers-reduced-motion:reduce){.life-apple-brown,.life-reserve i{transition:none}}
 
-/* Workshop C shares a single reaction pattern across the daily examples. */
-.redox-examples{grid-template-columns:repeat(4,minmax(0,1fr))}
+/* Workshop D shares a single reaction pattern across the daily examples. */
+.redox-examples{grid-template-columns:repeat(3,minmax(0,1fr))}
 .redox-examples button{min-height:52px}
 .life-integrated{padding:0 20px 18px;scroll-margin-top:20px}
 .life-integrated-intro{display:flex;gap:15px;align-items:baseline;flex-wrap:wrap;margin:20px 0 12px;font-size:12px}

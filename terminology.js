@@ -47,9 +47,12 @@ export function mountTerminology(){
  document.addEventListener('click',onClick);search.addEventListener('input',()=>{selected='';renderList();});filter.addEventListener('change',renderList);
  const skip='button,a,svg,canvas,script,style,input,select,textarea,label,summary,dialog,code,[data-glossary-skip],[role="status"],[aria-live],.interactive-lab,.prediction-block,.prediction-review,.practice,.prep-quiz,.evidence-panel,.keyboard-help,.reaction-equation,.life-equation,.prep-scenes,.oxygen-series,.iron-pair-scene';
  function ensurePrimer(card){
-  const chapter=chapterForCard.get(card.id);if(!chapter)return;
-  const choices=primerTerms[chapter],host=card.querySelector('[data-prediction-host]');
-  const tab=Math.max(0,Math.min(2,Number(host?.dataset.predictionHost.split('-').at(-1))||0));
+  let chapter=chapterForCard.get(card.id);if(!chapter)return;
+  const host=card.querySelector('[data-prediction-host]');
+  if(chapter==='prep'&&host?.dataset.predictionHost==='prep-3')chapter='life';
+  const choices=primerTerms[chapter];
+  const lifeTab=['biology','bleach','food'].indexOf(card.querySelector('[data-redox-example][aria-pressed=true]')?.dataset.redoxExample);
+  const tab=Math.max(0,Math.min(2,chapter==='life'?lifeTab:Number(host?.dataset.predictionHost.split('-').at(-1))||0));
   const ids=Array.isArray(choices[0])?choices[tab]:choices,signature=ids.join('|');
   const existing=card.querySelector('[data-term-primer]');if(existing?.dataset.termPrimer===signature)return;
   const primer=document.createElement('aside');primer.className='term-primer';primer.dataset.termPrimer=signature;primer.dataset.glossarySkip='';primer.setAttribute('aria-label','本卡名詞小抄');
