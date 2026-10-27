@@ -24,9 +24,9 @@ test('migration keeps earlier operations and A answer but does not carry answers
  const raw={tab:1,sorted:['burn','rust','breath','ice'],order:['Mg','C','Fe','Cu'],moved:[1,0],targets:[0,1],answers:[1,0,2]};
  const s=restorePrep(raw);assert.deepEqual(s.order,raw.order);assert.deepEqual(s.moved,raw.moved);assert.deepEqual(s.answers,[1,null,null]);assert.equal(s.version,2);
 });
-test('iron transfers persist independently of the magnesium example; incomplete evidence cannot master C',()=>{
- const raw={...freshPrep(),ironPairs:[2,2,1,-1,5],reaction:'invalid',referenceElement:'invalid',answers:[null,null,2]};
- const partial=restorePrep(raw);assert.deepEqual(partial.ironPairs,[2,1]);assert.equal(partial.answers[2],null);assert.equal(partial.referenceElement,'Fe');assert.equal(partial.reaction,'iron');
- const full=restorePrep({...raw,ironPairs:[2,1,0],reaction:'magnesium',referenceElement:'Mg'});
- assert.equal(prepMastered(full,2),true);assert.deepEqual(full.moved,[]);assert.equal(full.reaction,'magnesium');assert.equal(full.referenceElement,'Mg');
+test('removed iron intro migrates to magnesium without awarding its observation',()=>{
+ const raw={...freshPrep(),ironPairs:[2,1,0],reaction:'iron',answers:[null,null,2]};
+ const restored=restorePrep(raw);assert.equal(restored.reaction,'magnesium');assert.equal(prepMastered(restored,2),false);assert.equal(restored.answers[2],null);
+ for(const reaction of ['magnesium','biology','bleach','food'])assert.equal(restorePrep({...raw,reaction}).reaction,reaction);
+ const complete=restorePrep({...raw,moved:[0,1],targets:[0,1]});assert.equal(prepMastered(complete,2),true);
 });

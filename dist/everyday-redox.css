@@ -24,3 +24,71 @@
 .life-playback-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;flex-wrap:wrap}.life-time-stages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;padding:0;margin:16px 0;list-style:none}.life-time-stages li{padding:10px 8px;border:1px solid #d2d8c2;border-radius:7px;background:#f8f8ee;color:#7e866d;font-size:11px;text-align:center}.life-time-stages li[aria-current]{background:#e0e9d2;border-color:#8eaa78;color:#365a41;box-shadow:inset 0 -2px #91a479;font-weight:650}.life-playback-controls{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.life-playback-controls>span{margin-right:auto;color:#7b805f;font-size:11px}.life-playback-controls>button{min-height:38px;padding:8px 12px;border:1px solid #b8c4a8;border-radius:6px;background:#fcfcf2;color:#406049;font-size:11px}.life-playback-controls>button:disabled{opacity:.45}.life-playback-controls>button:hover:not(:disabled){background:#e3ecd7}.life-playback-controls>button:focus-visible{outline:3px solid #b78843;outline-offset:3px}
 @media(max-width:600px){.life-playback-heading{font-size:12px}.life-time-stages{gap:5px;margin:13px 0}.life-time-stages li{padding:9px 4px;font-size:10px}.life-playback-controls>span{flex-basis:100%;margin-bottom:3px}.life-playback-controls>button{min-height:42px}}
 @media(prefers-reduced-motion:reduce){.life-apple-brown,.life-reserve i{transition:none}}
+
+/* Workshop C shares a single reaction pattern across the daily examples. */
+.redox-examples{grid-template-columns:repeat(4,minmax(0,1fr))}
+.redox-examples button{min-height:52px}
+.life-integrated{padding:0 20px 18px;scroll-margin-top:20px}
+.life-integrated-intro{display:flex;gap:15px;align-items:baseline;flex-wrap:wrap;margin:20px 0 12px;font-size:12px}
+.life-integrated-intro b{font-size:15px}.life-integrated .life-selector{margin:0 0 16px}
+.life-paired-reaction{border:1px solid #bdcbb4;border-radius:12px;background:#fffdf3;overflow:hidden;scroll-margin-top:18px}
+.life-paired-reaction .reaction-heading{padding:20px 22px;margin:0}
+.life-paired-reaction .reaction-heading h4{font-size:19px;margin:7px 0 0}
+.life-paired-equation{margin:0 20px 18px;padding:13px 16px;border:1px solid #d9dbc5;border-radius:8px;text-align:center;background:#f6f4e7}
+.life-paired-equation small{display:block;color:#8c7853;font-size:11px;margin-bottom:8px}
+.life-paired-equation>b{font-family:Georgia,'Times New Roman',serif;font-size:clamp(15px,1.8vw,24px);font-weight:500}
+.life-pair-layout{display:grid;grid-template-columns:minmax(0,1fr) 27%;gap:16px;padding:0 20px 18px}
+.life-pair-board{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:18px;padding-bottom:43px;min-width:0}
+.life-pair-sample{border:1px solid #bfcec2;border-radius:10px;padding:14px 10px 0;text-align:center;background:linear-gradient(140deg,#eff3e8,#e2eadc);min-width:0}
+.life-pair-sample.oxidation{background:linear-gradient(140deg,#fbf1df,#eee3d2);border-color:#d9c3a3}
+.life-pair-sample>small{font-size:11px;color:#7b785f}
+.life-substance-change{position:relative;min-height:145px}
+.life-substance-before,.life-substance-after{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;padding:8px 0;will-change:opacity,transform}
+.life-substance-before{opacity:calc(1 - var(--life-progress));transform:translateY(calc(var(--life-progress)*-9px))}
+.life-substance-after{opacity:var(--life-progress);transform:translateY(calc((1 - var(--life-progress))*9px))}
+.life-substance-change strong{font-size:14px;line-height:1.6;max-width:100%}
+.life-substance-change span{font-size:10px;color:#76856d}
+.life-molecule{display:flex;align-items:center;justify-content:center;min-height:45px}
+.life-molecule-atom{display:flex;align-items:center;justify-content:center;width:35px;height:35px;border-radius:50%;font:700 15px Georgia,serif;color:white;box-shadow:0 3px 5px #28494435;background:radial-gradient(circle at 30% 25%,#d2a383,#a34b31 75%);margin-left:-3px}
+.life-atom-C{background:radial-gradient(circle at 30% 25%,#a3b0a6,#344a43 75%)}.life-atom-H{width:25px;height:25px;background:radial-gradient(circle at 30% 25%,#faffee,#7d9f9e 80%)}
+.life-sugar-symbol,.life-substance-symbol{display:grid;place-items:center;width:57px;height:48px;background:#d7c28e;border:2px solid #b09c69;color:#4d5f47;border-radius:13px;font-size:12px;font-style:normal}
+.life-substance-symbol{border-radius:50%;font:700 24px Georgia,serif}
+.life-pair-label{opacity:clamp(0,calc(var(--life-progress)*3),1);border-top:1px solid #bdc9b5;padding:11px 0;margin:0;color:#316967;font-size:14px}
+.life-pair-sample.oxidation .life-pair-label{color:#9a5728;border-color:#d3bda3}
+.life-electron-track{position:absolute;bottom:0;left:18%;right:18%;height:36px;border-top:1px dashed #a99a74;text-align:center}
+.life-electron-track>span{font-size:10px;color:#7a795e}
+.life-electron-track>i{position:absolute;top:-13px;left:calc(var(--life-progress)*100%);transform:translateX(-50%);display:grid;place-items:center;width:26px;height:26px;background:#af8e4c;border:2px solid #fffbdf;border-radius:50%;color:#fff;font:600 12px Georgia,serif;opacity:0}
+.life-paired-reaction[data-phase=running] .life-electron-track>i{opacity:1}
+.life-reaction-context{margin:0;align-self:center;border-radius:9px;border:1px solid #c8d0ba;overflow:hidden;background:#e8eddd}
+.life-reaction-context svg{display:block;width:100%;height:160px;object-fit:contain}
+.life-reaction-context .life-cell-picture{min-height:160px}
+.life-reaction-context figcaption{display:block;font-size:11px;text-align:center;line-height:1.7;padding:10px}
+.life-pair-model{margin:0;padding:12px 20px;color:#7c856c;font-size:10px;line-height:1.8}
+.life-paired-reaction[data-life-reaction=food] .life-pair-layout{grid-template-columns:1fr 1fr}
+.paired-apples{grid-template-columns:1fr 1fr;gap:8px;margin:0;align-self:center}
+.paired-apples svg{height:135px}.paired-apples figcaption{padding:9px 4px}.paired-apples figcaption b{font-size:11px}.paired-apples figcaption span{font-size:10px}
+.life-paired-time{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px;border-top:1px solid #d5ddc5;padding-top:10px}
+.life-integrated-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:16px 0}.life-integrated-footer small{font-size:10px;color:#7d846e}
+.life-integrated .prep-note{margin:15px 0 0}.life-integrated .life-path-task{padding:20px 0 8px}.life-integrated .life-records{margin:14px 0}
+.life-integrated .life-integrated-quiz{margin:18px 0 0}
+@media(max-width:850px){
+ .life-pair-layout{grid-template-columns:1fr 25%;padding:0 14px 14px;gap:10px}.life-pair-board{gap:8px}
+ .life-pair-sample{padding:12px 6px 0}.life-substance-change strong{font-size:12px}
+ .life-molecule-atom{width:28px;height:28px;font-size:13px}.life-atom-H{width:22px;height:22px}
+ .life-paired-reaction[data-life-reaction=food] .life-pair-layout{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+ .redox-examples{grid-template-columns:1fr 1fr}.redox-examples button{font-size:12px}
+ .life-integrated{padding:0 12px 15px}.life-integrated-intro{gap:4px}
+ .life-paired-reaction .reaction-heading{padding:15px;gap:12px;flex-wrap:wrap}
+ .life-paired-reaction .reaction-heading h4{font-size:17px}
+ .life-paired-equation{margin-inline:12px;padding:10px 6px}
+ .life-pair-layout{grid-template-columns:1fr}
+ .life-reaction-context{width:100%;display:flex;align-items:center;max-height:120px}
+ .life-reaction-context svg,.life-reaction-context .life-cell-picture{width:50%;height:110px;min-height:110px}.life-reaction-context figcaption{flex:1;padding:8px}
+ .life-pair-label{font-size:12px}.life-integrated-footer{flex-wrap:wrap}
+ .life-paired-time{flex-wrap:wrap}.life-substance-change{min-height:135px}
+}
+@media(prefers-reduced-motion:reduce){.life-substance-before,.life-substance-after{transform:none;will-change:auto}}
+
+.life-qualitative-equation span{display:inline-block;white-space:nowrap}.life-paired-equation>.life-qualitative-equation{font-size:14px;font-weight:500;line-height:1.9}
