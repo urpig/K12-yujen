@@ -2,7 +2,7 @@ import {ironReactionMarkup} from './iron-paired-reaction.js';
 import {oxygenAffinitySeries,compareWithCarbon} from './forge-prep-model.js';
 
 const specimenDescription={K:'油中保存的銀灰色鉀金屬塊',Na:'油中保存的銀白色鈉金屬塊',Ca:'封存於玻璃瓶內的銀灰色鈣金屬顆粒',Mg:'銀白色鎂帶',Al:'銀白色鋁箔',C:'深灰黑色、有層狀紋理的石墨',Zn:'帶藍灰色光澤的鋅金屬塊',Cr:'銀灰色、有晶面光澤的鉻金屬塊',Fe:'灰色鐵棒與鐵塊',Sn:'銀白色錫金屬塊',Pb:'暗藍灰色鉛金屬塊',H:'密閉玻璃瓶中的無色氫氣，氣體本身看不見',Cu:'紅棕色銅片與銅塊',Hg:'封閉玻璃容器中的銀白色液態汞',Ag:'銀白色銀金屬塊',Pt:'灰白色鉑金屬塊',Au:'金黃色金屬塊'};
-function specimenArt(symbol){return `<span class="element-specimen specimen-${symbol}" role="img" aria-label="${specimenDescription[symbol]}，外觀示意"></span>`;}
+export function specimenArt(symbol){return `<span class="element-specimen specimen-${symbol}" role="img" aria-label="${specimenDescription[symbol]}，外觀示意"></span>`;}
 
 function comparisonCopy(symbol){
  const x=compareWithCarbon(symbol);
@@ -10,7 +10,7 @@ function comparisonCopy(symbol){
   Fe:['碳排在鐵前面，所以能幫鐵「脫氧」。','在合適高溫條件下，碳可使鐵的氧化物被還原。高爐裡，碳會先參與生成 CO，再由 CO 帶走鐵礦中的氧。'],
   Mg:['鎂排在碳前面，MgO 不容易把氧交給碳。','不能把「碳能還原鐵」套用到鎂。反過來，在合適條件下鎂能從 CO₂ 取得氧；下一張可以比較這個例子。'],
   Al:['鋁排在碳前面，不能照煉鐵的方法提煉鋁。','氧化鋁與氧的結合很穩定，提煉鋁通常採用電解。鋁表面的保護層也會影響看到的反應快慢。'],
-  Cu:['碳排在銅前面，也能讓氧化銅失氧。','合適加熱條件下：2CuO + C → 2Cu + CO₂。接著在 04，用氧化銅和木炭驗證這個預測。'],
+  Cu:['碳排在銅前面，也能讓氧化銅失氧。','合適加熱條件下：2CuO + C → 2Cu + CO₂。在 03 的延伸對照，用氧化銅和木炭驗證這個預測。'],
   C:['碳是這次的比較基準。','碳是非金屬。它放在鋁與鋅之間，是為了判斷哪些金屬氧化物可考慮用碳還原，不是把碳當成金屬。'],
   H:['氫也用來比較，但氫不是金屬。','氫排在碳後面。這裡比較的是元素對氧的活性；不是把所有元素當成金屬，也不是用排名直接預測每一種反應。'],
   Cr:['碳排在鉻前面，但排名不是純金屬的保證。','高溫下可用碳還原鉻的氧化物，但也可能形成碳化物；實際產物還要看溫度、原料與反應條件。']

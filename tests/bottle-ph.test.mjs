@@ -1,8 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {newBottleLitmus,bottleLitmusStep,bottleLitmusResult} from '../dist/bottle-ph-state.js';
+import {newBottleLitmus,bottleLitmusStep,bottleLitmusResult,bottleNextAction} from '../dist/bottle-ph-state.js';
 import {lessons,restoreState,isReady} from '../dist/journey-cards.js';
 function ready(){let s=newBottleLitmus();for(const type of ['water'])s=bottleLitmusStep(s,{type});for(let i=0;i<4;i++)s=bottleLitmusStep(s,{type:'shake',distance:24});return s;}
+test('next-action guidance follows mixing and resampling, and never sends a second drop to a tested paper',()=>{
+ let s=newBottleLitmus();assert.equal(bottleNextAction(s).id,'water');s=bottleLitmusStep(s,{type:'water'});assert.equal(bottleNextAction(s).id,'shake');
+ s=ready();assert.equal(bottleNextAction(s).id,'sample');s=bottleLitmusStep(s,{type:'take'});assert.equal(bottleNextAction(s).target,'[data-litmus-paper=red]');
+ s=bottleLitmusStep(s,{type:'spot',paper:'red',key:'S'});assert.equal(bottleNextAction(s).id,'sample');s=bottleLitmusStep(s,{type:'take'});assert.equal(bottleNextAction(s).target,'[data-litmus-paper=blue]');
+ s=bottleLitmusStep(s,{type:'spot',paper:'blue',key:'S'});assert.equal(bottleNextAction(s).tool,null);assert.equal(bottleNextAction(s).target,null);
+ let reverse=bottleLitmusStep(ready(),{type:'take'});reverse=bottleLitmusStep(reverse,{type:'spot',paper:'blue',key:'S'});reverse=bottleLitmusStep(reverse,{type:'take'});assert.equal(bottleNextAction(reverse).target,'[data-litmus-paper=red]');
+});
 test('after automatic spoon removal and cooling, water addition is immediate but sampling still requires mixing',()=>{let s=newBottleLitmus();assert.equal(s.phase,'pour');for(const type of ['shake','take','spot','close','open'])assert.equal(bottleLitmusStep(s,{type,distance:100,paper:'red',key:'S'}),s);s=bottleLitmusStep(s,{type:'water'});assert.equal(s.phase,'shake');assert.equal(bottleLitmusStep(s,{type:'take'}),s);assert.equal(bottleLitmusStep(s,{type:'water'}),s);assert.equal(ready().phase,'test');});
 test('gentle repeated movement is needed and invalid motion cannot complete the mixing',()=>{let s=newBottleLitmus();for(const type of ['water'])s=bottleLitmusStep(s,{type});s=bottleLitmusStep(s,{type:'shake',distance:NaN});assert.equal(s.shake,0);s=bottleLitmusStep(s,{type:'shake',distance:10000});assert.equal(s.phase,'shake');s=bottleLitmusStep(s,{type:'shake',distance:-48});assert.equal(s.phase,'test');});
 test('one loaded pipette must sample again before testing the second paper; duplicates cannot complete',()=>{for(const key of ['S','C','CO']){let s=ready();assert.equal(bottleLitmusStep(s,{type:'spot',key,paper:'red'}),s);s=bottleLitmusStep(s,{type:'take'});s=bottleLitmusStep(s,{type:'spot',key,paper:'red'});assert.equal(s.phase,'test');assert.equal(s.loaded,false);assert.equal(bottleLitmusStep(s,{type:'spot',key,paper:'blue'}),s);s=bottleLitmusStep(s,{type:'take'});assert.equal(bottleLitmusStep(s,{type:'spot',key,paper:'red'}),s);assert.equal(bottleLitmusStep(s,{type:'spot',key:'invalid',paper:'blue'}),s);s=bottleLitmusStep(s,{type:'spot',key,paper:'blue'});assert.equal(s.phase,'complete');assert.equal(s.loaded,false);assert.equal(bottleLitmusStep(s,{type:'take'}),s);}});

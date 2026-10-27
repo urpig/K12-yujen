@@ -186,3 +186,5 @@
 .bio-photon-path{animation:bio-photons 3s linear infinite}@keyframes bio-photons{to{stroke-dashoffset:-44}}
 @media(max-width:600px){.bio-molecule-rack{gap:8px}.bio-supply-item{gap:4px;padding:0 0 4px}.bio-supply-item+.bio-supply-item{border-top:0;padding-top:0;border-left:1px solid #bdccb680}.bio-molecule-handle{min-height:72px}.bio-molecule-model{height:87px}.bio-supply-item>strong{font-size:11px}.bio-supply-item>[data-input-state]{font-size:9px}.life-biology-lab[data-life-reaction=photo] .bio-stage-drop>span{font-size:9px;padding:4px;left:12%;right:12%}}
 @media(prefers-reduced-motion:reduce){.bio-photon-path{animation:none}.bio-molecule-model{transition:none}}
+
+.bio-stage-art:has(.resp-detailed-art){background:#e9e3cf url('./assets/story/prep-breath-realistic.png') center/cover no-repeat}.life-biology-lab[data-life-reaction=resp] .bio-stage-drop{inset:25% 7% 16%}.life-biology-lab[data-life-reaction=resp] .bio-stage-drop>span{bottom:3%;left:25%;right:25%}

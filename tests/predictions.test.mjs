@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {predictionQuestions,restorePredictions,commitPrediction,clearPredictionRecord,escapePredictionText} from '../dist/prediction-model.js';
-test('14個操作單元都有獨立問題；所有選項含不確定都可留猜想',()=>{
- const ids=[...Array.from({length:7},(_,i)=>'main-'+(i+1)),...Array.from({length:4},(_,i)=>'prep-'+i),...Array.from({length:3},(_,i)=>'life-'+i)];
+test('操作單元與 03 新版都有獨立問題，舊版猜想仍可還原；所有選項含不確定都可留猜想',()=>{
+ const ids=[...Array.from({length:7},(_,i)=>'main-'+(i+1)),'main-3-affinity',...Array.from({length:4},(_,i)=>'prep-'+i),...Array.from({length:3},(_,i)=>'life-'+i)];
  assert.deepEqual(Object.keys(predictionQuestions).sort(),ids.sort());
  for(const id of ids){assert.equal(predictionQuestions[id].choices.length,4);assert.match(predictionQuestions[id].choices[3],/不確定/);for(let choice=0;choice<4;choice++){const data={};assert.equal(commitPrediction(data,id,choice,'我的理由'),true);assert.equal(data[id].choice,choice);}}
 });
