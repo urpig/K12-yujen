@@ -3,7 +3,7 @@ export const dictionaryChapters=[
  {id:'prep',label:'01 · 氧化、活性與還原',target:'forge-prep'},
  {id:'life',label:'01 D · 日常生活中的氧化還原',target:'everyday-redox'},
  {id:'combustion',label:'02 · 燃燒與產物',target:'card-2'},
- {id:'copper',label:'03 · 碳與氧化銅',target:'card-3'},
+ {id:'copper',label:'03 · 活性與氧的轉移',target:'card-3'},
  {id:'iron',label:'04 · CO 與氧化鐵',target:'card-4'},
  {id:'furnace',label:'05 · 高爐裡的分工',target:'card-5'},
  {id:'blade',label:'06 · 生鐵、鋼與熟鐵',target:'card-6'},

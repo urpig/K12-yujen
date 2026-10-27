@@ -1,7 +1,7 @@
 import {bindDrop,bindFreeInstrument,inside} from './direct-manipulation.js';
 import {scopeMarkup} from './card-markup.js';
 import {restingSpoon} from './bottle-analysis-art.js';
-import {newBottleLitmus,bottleLitmusStep,bottleLitmusResult,litmusColours} from './bottle-ph-state.js';
+import {newBottleLitmus,bottleLitmusStep,bottleLitmusResult,bottleNextAction,litmusColours} from './bottle-ph-state.js';
 
 export function mountBottleAnalysis(board,{key,completed,delay,onCleanup=()=>{},notice,onComplete}){
  if(!completed){const hint=document.createElement('p');hint.className='bottle-idle';hint.textContent='燃燒後自動取匙、示意冷卻；加入水並輕搖，再用滴管取液滴到紅、藍石蕊試紙。';board.append(hint);return;}
@@ -33,7 +33,7 @@ export function mountBottleAnalysis(board,{key,completed,delay,onCleanup=()=>{},
  function dispatch(event){const before=state;state=bottleLitmusStep(state,event);if(before!==state)show();}
  function enable(tool,yes){tool.classList.toggle('unavailable',!yes);tool.setAttribute('aria-disabled',String(!yes));tool.tabIndex=yes?0:-1;}
  function show(){
-  station.dataset.phase=state.phase;station.dataset.shake=String(Math.round(state.shake));water.setAttribute('visibility',state.water?'visible':'hidden');say(messages[state.phase]);
+  station.dataset.phase=state.phase;station.dataset.shake=String(Math.round(state.shake));water.setAttribute('visibility',state.water?'visible':'hidden');
   lid.classList.toggle('is-covered',state.phase==='shake');lid.tabIndex=-1;enable(wash,state.phase==='pour');enable(shaker,state.phase==='shake'||shakingHeld);mouth.hidden=state.phase!=='pour';
   const tool=station.querySelector('[data-pipette=sample]');enable(tool,state.phase==='test');tool.classList.toggle('charged',state.loaded);tool.dataset.loaded=String(state.loaded);
   for(const paper of ['red','blue']){
@@ -44,6 +44,11 @@ export function mountBottleAnalysis(board,{key,completed,delay,onCleanup=()=>{},
    strip.querySelector('i').style.background=state.spotted[paper]?litmusColours[result]:'transparent';
    panel.querySelector('[data-litmus-record='+paper+']').textContent=name+'石蕊：'+(state.spotted[paper]?(result===paper?'顏色不變':'滴液處變成'+resultName):'尚未滴液');
   }
+  const next=bottleNextAction(state);station.dataset.next=next.id;
+  station.querySelectorAll('.analysis-next-tool,.analysis-next-target').forEach(el=>{el.classList.remove('analysis-next-tool','analysis-next-target');el.removeAttribute('data-next-label');});
+  if(next.tool){const el=station.querySelector(next.tool);el.classList.add('analysis-next-tool');el.dataset.nextLabel=next.label;}
+  if(next.target)station.querySelector(next.target).classList.add('analysis-next-target');
+  say(next.instruction||messages[state.phase]);
   if(state.phase==='complete'&&!committed){committed=true;onComplete();}
  }
  releases.push(bindDrop(wash,mouth,{anchor:[.89,.1],keep:true,disabled:()=>state.phase!=='pour',onDrop:()=>{station.classList.add('pouring');dispatch({type:'water'});delay(()=>{if(!alive||!board.isConnected)return;station.classList.remove('pouring');wash.style.left=(255/760*100)+'%';wash.style.top=(200/430*100)+'%';wash.style.transform='';},650);},onMiss:()=>say('把洗瓶細口對準集氣瓶瓶口；不是把整個瓶身放進去。')}));
