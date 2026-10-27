@@ -164,3 +164,25 @@
 @media(prefers-reduced-motion:reduce){.life-biology-lab .life-result-path{transition:none}.life-manual-reaction[data-phase=running] .bleach-agent-trail{animation:none}}
 .life-biology-lab[data-phase=running] .bio-stage-drop>span,.life-biology-lab[data-phase=complete] .bio-stage-drop>span{visibility:hidden}.life-biology-lab[data-bio-step="1"] .bio-stage-drop>span{top:45%;bottom:auto;left:55%;right:5%;font-size:11px}.life-biology-lab .life-result-path{opacity:1}.life-biology-lab .life-result-path:not(.revealed)>p{visibility:hidden}
 .bleach-dose-animation{opacity:0}.life-manual-reaction[data-phase=running] .bleach-dose-animation{opacity:1}.life-reactor-art .life-dye-after{transition:opacity .08s linear}
+
+/* Only the molecule moves; its name and the supply shelf stay in place. */
+.bio-molecule-rack{background:linear-gradient(150deg,#f0f2e4,#dce6d8);gap:12px;overflow:visible}
+.bio-supply-item{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;position:relative;padding:4px 0 12px}
+.bio-supply-item+.bio-supply-item{border-top:1px solid #bdccb680;padding-top:14px}
+.bio-molecule-rest{width:100%;position:relative;isolation:isolate}
+.bio-molecule-rest:after{content:"";position:absolute;z-index:-1;width:64%;height:11px;bottom:1px;left:18%;border-radius:50%;background:#5e7b6027;filter:blur(3px)}
+.bio-molecule-handle{display:block;position:relative;width:100%;padding:0;min-height:105px;border:0;background:transparent;box-shadow:none;border-radius:50%;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;color:inherit}
+.bio-molecule-model{display:block;width:100%;height:auto;max-height:134px;overflow:visible;pointer-events:none;filter:drop-shadow(0 4px 4px #23483112);transition:filter .2s}
+.bio-molecule-handle:hover:not(:disabled) .bio-molecule-model,.bio-molecule-handle[aria-pressed=true] .bio-molecule-model{filter:drop-shadow(0 0 7px #d2b362a8)}
+.bio-molecule-handle:focus-visible{outline:2px dashed #a78740;outline-offset:3px}
+.bio-molecule-handle:disabled{cursor:default;opacity:.45}
+.bio-molecule-handle.life-being-dragged{z-index:20;cursor:grabbing;filter:drop-shadow(0 12px 9px #203d3c40);transition:none}
+.bio-supply-item:has(.life-being-dragged){z-index:20}.bio-molecule-rest:has(.life-being-dragged){z-index:20}
+.bio-supply-item>strong{font-size:12px;font-weight:700}.bio-supply-item>[data-input-state]{font-size:10px;min-height:16px;color:#8d713c}
+.bio-supply-item:has(button:disabled)>[data-input-state]{color:#6d856b}
+.life-biology-lab[data-life-reaction=photo] .bio-stage-drop{inset:21% 8% 10%}
+.life-biology-lab[data-life-reaction=photo] .bio-stage-drop>span{bottom:2%;font-size:11px;left:24%;right:24%}
+.life-biology-lab[data-life-reaction=photo][data-bio-step="1"] .bio-stage-drop>span{top:45%;bottom:auto;left:55%;right:4%}
+.bio-photon-path{animation:bio-photons 3s linear infinite}@keyframes bio-photons{to{stroke-dashoffset:-44}}
+@media(max-width:600px){.bio-molecule-rack{gap:8px}.bio-supply-item{gap:4px;padding:0 0 4px}.bio-supply-item+.bio-supply-item{border-top:0;padding-top:0;border-left:1px solid #bdccb680}.bio-molecule-handle{min-height:72px}.bio-molecule-model{height:87px}.bio-supply-item>strong{font-size:11px}.bio-supply-item>[data-input-state]{font-size:9px}.life-biology-lab[data-life-reaction=photo] .bio-stage-drop>span{font-size:9px;padding:4px;left:12%;right:12%}}
+@media(prefers-reduced-motion:reduce){.bio-photon-path{animation:none}.bio-molecule-model{transition:none}}

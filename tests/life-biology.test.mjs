@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {biologyStages,freshBiology,addBiologyReactant,finishBiologyStage} from '../dist/life-biology-model.js';
 import {biologyMarkup} from '../dist/life-biology-lab.js';
+import {moleculeFragment} from '../dist/bio-molecule-art.js';
 test('biology requires ordered additions and completed observation of each stage',()=>{
  for(const key of ['photo','resp']){
   const [first,second]=biologyStages[key],s=freshBiology(key);
@@ -13,6 +14,12 @@ test('biology requires ordered additions and completed observation of each stage
   assert.equal(finishBiologyStage(s),true);assert.equal(s.phase,'complete');assert.equal(s.step,2);
   assert.equal(addBiologyReactant(s,second.id),false);assert.equal(finishBiologyStage(s),false);
   assert.deepEqual(freshBiology(key,true),s);assert.equal(freshBiology(key).step,0);
+ }
+});
+test('reactant molecular models have the atom composition of their labels',()=>{
+ for(const [id,composition] of Object.entries({water:{H:2,O:1},co2:{C:1,O:2},oxygen:{O:2},glucose:{C:6,H:12,O:6}})){
+  const atoms=[...moleculeFragment(id,'test').matchAll(/data-atom="([CHO])"/g)].map(m=>m[1]);
+  assert.deepEqual(atoms.reduce((counts,atom)=>(counts[atom]=(counts[atom]||0)+1,counts),{}),composition,id);
  }
 });
 test('staged biology preserves the paired processes and does not imply direct carbon-to-glucose or oxygen-free respiration',()=>{
