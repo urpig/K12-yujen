@@ -17,7 +17,7 @@ export function mountEverydayRedox(root,{tab=0}={}){
  const activeKey=()=>s.tab===0?s.bio:s.tab===1?s.bleach:'food';
  function render(focus){
   cleanup();cleanup=()=>{};const key=activeKey(),seen=key==='food'?(s.time>=4||s.evidence.includes('food')):s.seen.includes(key)||s.evidence.includes(key);
-  root.innerHTML=`<div class="life-integrated-intro"><b>從工坊，看回生活</b><span>同樣按下反應鍵，找出同時發生的氧化與還原。</span></div>
+  root.innerHTML=`<div class="life-integrated-intro"><b>從工坊，看回生活</b><span>拿取反應物、放入反應區，找出同時發生的氧化與還原。</span></div>
   ${s.tab<2?`<div class="life-selector" role="group" aria-label="${s.tab===0?'選擇生物反應':'選擇漂白方式'}">${Object.entries(s.tab===0?lifeBiology:lifeBleaches).map(([k,b])=>`<button data-life-choice="${k}" aria-pressed="${key===k}">${b.name}${s.evidence.includes(k)?' ✓':''}</button>`).join('')}</div>`:''}
   ${lifePairedMarkup(key,seen)}
   <section class="life-path-task" aria-label="反應後的小問題"><h4>${s.tab===0?(key==='photo'?'光合作用放出氧氣，代表它沒有氧化嗎？':'細胞裡沒有火焰，養分還會被氧化嗎？'):labels[key]+'在這次反應中，自己發生什麼變化？'}</h4>
@@ -30,7 +30,7 @@ export function mountEverydayRedox(root,{tab=0}={}){
   cleanup=bindLifePairedReaction(root.querySelector('[data-life-observation]'),()=>{
    if(!hasPrediction('prep-3'))return;
    if(key==='food')s.time=4;else if(!s.seen.includes(key))s.seen.push(key);
-   message='觀察完成，試著回答下面的小問題。';render('[data-life-play]');save();root.dispatchEvent(new CustomEvent('life-observed',{bubbles:true}));
+   message='觀察完成，試著回答下面的小問題。';render('[data-life-retry]');save();root.dispatchEvent(new CustomEvent('life-observed',{bubbles:true}));
   });
   root.querySelectorAll('[data-life-choice]').forEach(b=>b.onclick=()=>{if(s.tab===0)s.bio=b.dataset.lifeChoice;else s.bleach=b.dataset.lifeChoice;message='';render('[data-life-choice="'+activeKey()+'"]');save();});
   root.querySelectorAll('[data-life-check]').forEach(b=>b.onclick=()=>{
