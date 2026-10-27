@@ -142,7 +142,7 @@ export const primerTerms={
  ore:['hematite','ironoxide','smelting'],
  prep:[['oxidation','combustion','physical'],['affinity','oxide','reducingagent'],['redox','oxidation','reduction']],
  life:[['photosynthesis','respiration','electron'],['bleaching','oxidizer','reducingagent'],['antioxidant','vitaminc','oxidation']],
- combustion:['oxide','litmus','acid','alkali'],copper:['reduction','reducingagent','copperoxide'],
+ combustion:['oxide','litmus','acid','alkali'],copper:['reduction','reducingagent','ironoxide'],
  iron:['ironoxide','carbonmonoxide','conservation'],furnace:['coke','slag','pigiron'],
  blade:['pigiron','steel','wrought'],
  epilogue:['ros','oxidativestress','antioxidant']
