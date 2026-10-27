@@ -1,7 +1,7 @@
 export const dictionaryChapters=[
  {id:'ore',label:'序章 · 礦石與金屬',target:'card-1'},
  {id:'prep',label:'01 · 氧化、活性與還原',target:'forge-prep'},
- {id:'life',label:'01 · 成對反應與生活',target:'everyday-redox'},
+ {id:'life',label:'01 D · 日常生活中的氧化還原',target:'everyday-redox'},
  {id:'combustion',label:'02 · 燃燒與產物',target:'card-2'},
  {id:'copper',label:'03 · 碳與氧化銅',target:'card-3'},
  {id:'iron',label:'04 · CO 與氧化鐵',target:'card-4'},

@@ -22,11 +22,22 @@ test('each accepted oxygen leaves the oxide and arrives at CO without duplicatin
 });
 test('migration keeps earlier operations and A answer but does not carry answers into revised B/C questions',()=>{
  const raw={tab:1,sorted:['burn','rust','breath','ice'],order:['Mg','C','Fe','Cu'],moved:[1,0],targets:[0,1],answers:[1,0,2]};
- const s=restorePrep(raw);assert.deepEqual(s.order,raw.order);assert.deepEqual(s.moved,raw.moved);assert.deepEqual(s.answers,[1,null,null]);assert.equal(s.version,2);
+ const s=restorePrep(raw);assert.deepEqual(s.order,raw.order);assert.deepEqual(s.moved,raw.moved);assert.deepEqual(s.answers,[1,null,null]);assert.equal(s.version,3);
 });
 test('removed iron intro migrates to magnesium without awarding its observation',()=>{
  const raw={...freshPrep(),ironPairs:[2,1,0],reaction:'iron',answers:[null,null,2]};
  const restored=restorePrep(raw);assert.equal(restored.reaction,'magnesium');assert.equal(prepMastered(restored,2),false);assert.equal(restored.answers[2],null);
  for(const reaction of ['magnesium','biology','bleach','food'])assert.equal(restorePrep({...raw,reaction}).reaction,reaction);
  const complete=restorePrep({...raw,moved:[0,1],targets:[0,1]});assert.equal(prepMastered(complete,2),true);
+});
+
+test('moving life examples to D preserves records and keeps C independently selectable',()=>{
+ for(const reaction of ['biology','bleach','food']){
+  const raw={...freshPrep(),version:2,tab:2,reaction,moved:[0,1],targets:[0,1],answers:[null,null,2]};
+  const migrated=restorePrep(raw);assert.equal(migrated.tab,3);assert.equal(migrated.reaction,reaction);assert.equal(prepMastered(migrated,2),true);
+  const backToC=restorePrep({...migrated,tab:2});assert.equal(backToC.tab,2);assert.equal(backToC.reaction,reaction);
+  assert.equal(prepReady(migrated,3),false);assert.equal(prepMastered(migrated,3),false);
+ }
+ assert.equal(restorePrep({...freshPrep(),version:2,tab:2,reaction:'magnesium'}).tab,2);
+ assert.equal(restorePrep({...freshPrep(),tab:3}).tab,3);
 });

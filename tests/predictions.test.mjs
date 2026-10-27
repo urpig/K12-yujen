@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {predictionQuestions,restorePredictions,commitPrediction,clearPredictionRecord,escapePredictionText} from '../dist/prediction-model.js';
-test('13個操作單元都有獨立問題；所有選項含不確定都可留猜想',()=>{
- const ids=[...Array.from({length:7},(_,i)=>'main-'+(i+1)),...Array.from({length:3},(_,i)=>'prep-'+i),...Array.from({length:3},(_,i)=>'life-'+i)];
+test('14個操作單元都有獨立問題；所有選項含不確定都可留猜想',()=>{
+ const ids=[...Array.from({length:7},(_,i)=>'main-'+(i+1)),...Array.from({length:4},(_,i)=>'prep-'+i),...Array.from({length:3},(_,i)=>'life-'+i)];
  assert.deepEqual(Object.keys(predictionQuestions).sort(),ids.sort());
  for(const id of ids){assert.equal(predictionQuestions[id].choices.length,4);assert.match(predictionQuestions[id].choices[3],/不確定/);for(let choice=0;choice<4;choice++){const data={};assert.equal(commitPrediction(data,id,choice,'我的理由'),true);assert.equal(data[id].choice,choice);}}
 });
@@ -17,4 +17,10 @@ test('重設某一子卡只刪自己的猜想，未改其他卡或觀察進度',
 });
 test('儲存入口過濾無效內容與限制長度，使用者文字安全顯示',()=>{
  const data=restorePredictions({'main-1':{choice:1,reason:'x'.repeat(999),review:'y'.repeat(999)},'prep-0':{choice:'0'},unknown:{choice:0}});assert.equal(Object.keys(data).length,1);assert.equal(data['main-1'].reason.length,240);assert.equal(data['main-1'].review.length,400);assert.equal(escapePredictionText('<img onerror="x"> & \'text\''),'&lt;img onerror=&quot;x&quot;&gt; &amp; &#39;text&#39;');assert.deepEqual(restorePredictions(null),{});
+});
+
+test('C and D predictions unlock and reset independently',()=>{
+ const data={};commitPrediction(data,'prep-2',1);assert.equal(data['prep-3'],undefined);
+ commitPrediction(data,'prep-3',3);clearPredictionRecord(data,'prep-2');assert.equal(data['prep-3'].choice,3);
+ commitPrediction(data,'prep-2',0);clearPredictionRecord(data,'prep-3');assert.equal(data['prep-2'].choice,0);
 });
