@@ -1,12 +1,12 @@
 export const dictionaryChapters=[
  {id:'ore',label:'序章 · 礦石與金屬',target:'card-1'},
  {id:'prep',label:'01 · 氧化、活性與還原',target:'forge-prep'},
- {id:'life',label:'02 · 生活中的氧化還原',target:'everyday-redox'},
- {id:'combustion',label:'03 · 燃燒與產物',target:'card-2'},
- {id:'copper',label:'04 · 碳與氧化銅',target:'card-3'},
- {id:'iron',label:'05 · CO 與氧化鐵',target:'card-4'},
- {id:'furnace',label:'06 · 高爐裡的分工',target:'card-5'},
- {id:'blade',label:'07 · 生鐵、鋼與熟鐵',target:'card-6'},
+ {id:'life',label:'01 · 成對反應與生活',target:'everyday-redox'},
+ {id:'combustion',label:'02 · 燃燒與產物',target:'card-2'},
+ {id:'copper',label:'03 · 碳與氧化銅',target:'card-3'},
+ {id:'iron',label:'04 · CO 與氧化鐵',target:'card-4'},
+ {id:'furnace',label:'05 · 高爐裡的分工',target:'card-5'},
+ {id:'blade',label:'06 · 生鐵、鋼與熟鐵',target:'card-6'},
  {id:'epilogue',label:'尾聲 · 身體與抗氧化',target:'epilogue-antioxidants'}
 ];
 export const dictionarySources={

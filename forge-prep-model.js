@@ -21,7 +21,7 @@ export const prepQuizzes=[
  {question:'為什麼碳可以用來還原鐵，卻不能照樣用來提煉鎂？',options:['碳對氧活性比鐵大、比鎂小；還原仍需要合適條件','只要溫度夠高，碳就能還原所有金屬氧化物','因為碳是金屬，而且比鐵重'],answer:0,reason:'本課排列為 Mg ＞ C ＞ Fe。碳較能與氧結合，可在合適高溫條件下使鐵的氧化物失氧；MgO 較難把氧交給碳。高爐中，碳還會生成 CO，由 CO 帶走鐵礦中的氧。'},
  {question:'追蹤同一批氧後，哪個說法正確？',options:['氧化物失去氧，氧就消失了','只有失氧的一方反應，得氧的一方沒有變化','得氧的一方被氧化，失氧的一方被還原；兩者同時發生'],answer:2,reason:'在這裡的氧轉移反應中，氧離開一方，也同時與另一方結合。氧化必定伴隨還原，還原也必定伴隨氧化；更一般的判斷是失去電子與得到電子必須配對。'}
 ];
-export function freshPrep(){return {version:2,tab:0,sorted:[],order:[],moved:[],targets:[],ironPairs:[],reaction:'iron',referenceElement:'Fe',answers:[null,null,null]};}
+export function freshPrep(){return {version:2,tab:0,sorted:[],order:[],moved:[],targets:[],ironPairs:[],reaction:'magnesium',referenceElement:'Fe',answers:[null,null,null]};}
 export function restorePrep(raw){
  const s=freshPrep();if(!raw||typeof raw!=='object')return s;
  s.tab=Number.isInteger(raw.tab)&&raw.tab>=0&&raw.tab<3?raw.tab:0;
@@ -30,12 +30,12 @@ export function restorePrep(raw){
  s.moved=[...new Set(Array.isArray(raw.moved)?raw.moved:[])].filter(id=>id===0||id===1);
  s.targets=[...new Set(Array.isArray(raw.targets)?raw.targets:s.moved)].filter(id=>id===0||id===1).slice(0,s.moved.length);if(s.targets.length!==s.moved.length)s.targets=[...s.moved];
  s.ironPairs=[...new Set(Array.isArray(raw.ironPairs)?raw.ironPairs:[])].filter(id=>Number.isInteger(id)&&id>=0&&id<3);
- s.reaction=raw.reaction==='magnesium'?'magnesium':'iron';
+ s.reaction=['magnesium','biology','bleach','food'].includes(raw.reaction)?raw.reaction:'magnesium';
  s.referenceElement=compareWithCarbon(raw.referenceElement)?raw.referenceElement:'Fe';
  // Preserve previous observations; revised B/C questions need a fresh answer.
  s.answers=s.answers.map((_,i)=>(i===0||raw.version===2)&&prepReady(s,i)&&Number.isInteger(raw.answers?.[i])&&raw.answers[i]>=0&&raw.answers[i]<3?raw.answers[i]:null);return s;
 }
-export function prepReady(s,i){return i===0?s.sorted.length===4:i===1?s.order.length===4&&s.order.every((v,j)=>v===affinityOrder[j]):s.moved.length===2||(s.ironPairs?.length===3);}
+export function prepReady(s,i){return i===0?s.sorted.length===4:i===1?s.order.length===4&&s.order.every((v,j)=>v===affinityOrder[j]):s.moved.length===2;}
 export function prepMastered(s,i){return prepReady(s,i)&&s.answers[i]===prepQuizzes[i].answer;}
 export function checkAffinity(order){return order.length===4&&order.every((v,i)=>v===affinityOrder[i]);}
 export function ironAppearanceStage(n){const count=Number.isFinite(n)?Math.max(0,Math.min(3,Math.floor(n))):0;return {count,fraction:count/3,label:['氧化鐵 · 紅棕色','還原進行中 · 觀察外觀改變','還原持續 · 氧逐步離開','金屬鐵 · 灰黑、多孔'][count],description:['先把上方的 CO 拖入反應區，觀察這份樣本。','樣本的外觀隨還原而改變；還沒有全部成為金屬鐵。','還原繼續進行。畫面的灰色範圍只表示進度，不是成分比例。','留下的是多孔的固態鐵示意，還不是亮晶晶的寶劍，也不是熔融鐵水。'][count]};}
