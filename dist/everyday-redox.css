@@ -92,3 +92,67 @@
 @media(prefers-reduced-motion:reduce){.life-substance-before,.life-substance-after{transform:none;will-change:auto}}
 
 .life-qualitative-equation span{display:inline-block;white-space:nowrap}.life-paired-equation>.life-qualitative-equation{font-size:14px;font-weight:500;line-height:1.9}
+
+/* D: the learner supplies both partners before the reaction begins. */
+.life-manual-reaction{overflow:visible}
+.life-manual-reaction .reaction-heading{padding:17px 20px 8px}
+.life-manual-reaction .reaction-heading h4{margin:6px 0 0;font-size:20px}
+.life-manual-reaction [data-life-retry]{white-space:nowrap;font-size:12px}
+.life-mix-instruction{margin:4px 20px 15px;font-size:13px;line-height:1.8;color:#456452}
+.life-mix-instruction strong{margin-inline:4px;color:#8f642c}.life-mix-instruction>span{display:block;font-size:11px;color:#7b826d}
+.life-mix-workbench{display:grid;grid-template-columns:172px minmax(0,1fr);gap:18px;margin:0 20px;align-items:stretch}
+.life-reactant-rack{display:grid;grid-template-rows:auto 1fr 1fr;gap:10px;padding:12px;background:linear-gradient(145deg,#e1e9dc,#eff1e4);border:1px solid #bbcbb2;border-radius:10px;position:relative;z-index:3}
+.life-reactant-rack>small{font-size:11px;letter-spacing:.06em;color:#637a5c}
+.life-reactant{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-width:0;padding:10px 6px;border:1px solid #bdc7ae;border-radius:8px;background:linear-gradient(145deg,#fffdf4,#f2f2e7);box-shadow:0 3px 6px #2b4f3b12;color:#35574b;font-family:inherit;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.life-reactant>.life-molecule{min-height:38px}.life-reactant>strong{font-size:13px;line-height:1.5}.life-reactant>small{font-size:10px;line-height:1.6;color:#85856b}.life-reactant [data-input-state]{font-size:10px;color:#9c713d;font-weight:600}
+.life-reactant .life-molecule-atom{width:28px;height:28px;font-size:12px}.life-reactant .life-atom-H{width:19px;height:19px}.life-reactant .life-sugar-symbol,.life-reactant .life-substance-symbol{height:37px;width:46px;font-size:12px}
+.life-atom-S{background:radial-gradient(circle at 30% 25%,#edda96,#ab8b45 75%)}.life-atom-Cl{background:radial-gradient(circle at 30% 25%,#d5dcb1,#7c9762 75%)}.life-atom-Na{background:radial-gradient(circle at 30% 25%,#e3e4dd,#8c9b98 75%)}.life-pigment-symbol{background:#d7c0c7;border-color:#a68d9d;color:#745970}
+.life-reactant:hover:not(:disabled),.life-reactant[aria-pressed=true]{border-color:#a78643;box-shadow:0 0 0 2px #d4bc7e55;background:#fff9e7}
+.life-reactant:disabled{opacity:.62;cursor:default;box-shadow:none}.life-reactant:disabled [data-input-state]{color:#46694b}
+.life-reactant.life-being-dragged{z-index:10;cursor:grabbing;box-shadow:0 12px 24px #21463236;border-color:#ac8b4a;opacity:.95;transition:none}
+.life-reactor-panel{min-width:0;border:1px solid #c3cfb8;border-radius:10px;background:radial-gradient(ellipse at 30% 5%,#fff9e3,#e8efdf);overflow:hidden}
+.life-reactor-condition{font-size:11px;color:#88703d;padding:11px 16px;border-bottom:1px solid #dbe0c9;background:#f4f3e4}
+.life-reactor-art{position:relative;min-width:0}.life-reactor-art>svg{width:100%;height:253px;display:block;object-fit:fill}
+.life-reactor-drop{position:absolute;left:46%;top:20%;width:48%;height:63%;border:2px dashed #7b955b;border-radius:50%;padding:0;background:transparent;color:#365537;font:inherit;cursor:pointer;transition:background .15s,border-color .15s,box-shadow .15s}
+.life-zone-name{position:absolute;top:6%;left:5%;right:5%;font-size:14px;font-weight:700;text-shadow:0 1px 3px #f7f8d7;background:#f5f6ddbf;border-radius:12px;margin:auto;width:max-content;max-width:90%;padding:2px 12px}
+.life-drop-hint{position:absolute;bottom:6%;left:5%;right:5%;font-size:11px;font-weight:600;text-align:center;background:#f5f6dddb;border-radius:12px;margin:auto;width:max-content;max-width:90%;padding:3px 9px}
+.life-reactor-drop.life-item-selected,.life-reactor-drop.life-drop-hover{background:#f5e4a62b;border-color:#b58a32;box-shadow:0 0 0 5px #dac17b4d}.life-reactor-drop.life-drop-hover{background:#fff1b73d}
+.life-reactor-drop:disabled{opacity:1;cursor:default;border-style:solid;border-color:#89a57666}
+.life-reactor-resp .life-reactor-drop{left:13%;top:15%;width:76%;height:70%;border-radius:45%}
+.life-reactor-peroxide .life-reactor-drop,.life-reactor-chlorine .life-reactor-drop,.life-reactor-sulfur .life-reactor-drop{left:55%;top:14%;width:33%;height:65%;border-radius:8px}
+.life-reactor-food .life-reactor-drop{left:53%;top:8%;width:44%;height:67%;border-radius:40%}
+.life-reactor-products{opacity:var(--life-progress);transform:translateY(calc((1 - var(--life-progress))*10px))}
+.life-mix-slots{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:10px 12px;border-top:1px solid #cfdbc3;background:#f5f6eb;font-size:10px}
+.life-mix-slots>span{padding:5px 8px;border:1px dashed #c2cbb3;border-radius:6px;color:#8a907b;background:#fffdf2}.life-mix-slots>span.added{border-style:solid;border-color:#9caf7d;color:#426246;background:#e6edda}.life-mix-slots>b{color:#5d7454;font-variant-numeric:tabular-nums;white-space:nowrap}
+.life-manual-reaction .life-observe-status{margin:12px 20px;padding:11px 14px;border-radius:7px;background:#edf1e4;min-height:42px;font-size:12px;line-height:1.8}
+.life-manual-results{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 20px 15px}
+.life-result-path{display:grid;grid-template-columns:1fr 22px 1fr;align-items:center;gap:7px;padding:12px 12px 0;border:1px solid #d8cbb3;border-radius:9px;background:#f8f1e5;min-width:0}
+.life-result-path.reduction{background:#eaf1e9;border-color:#b8cfc3}
+.life-source-name,.life-result-destination{font-size:13px;font-weight:600;text-align:center;line-height:1.6;min-width:0}.life-result-arrow{text-align:center;color:#9c8147;font-size:21px}
+.life-result-destination{position:relative;min-height:47px;display:grid;place-items:center}.life-result-destination>*{grid-area:1/1;min-width:0}
+.life-result-destination [data-life-product]{opacity:var(--life-progress);transform:translateY(calc((1 - var(--life-progress))*7px));font-size:13px}
+.life-result-wait{opacity:calc(1 - var(--life-progress));font-size:11px;font-weight:400;color:#8c8d75}
+.life-result-path .life-pair-label{grid-column:1/-1;padding:9px 0;font-size:13px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;align-items:center;color:#9a5728;border-color:#ddc8a9}
+.life-result-path.reduction .life-pair-label{color:#316967;border-color:#b7cebd}.life-result-path .life-pair-label small{font-size:10px;font-weight:400}
+.life-manual-reaction .life-paired-equation{margin-bottom:0;padding:9px 12px;background:#f8f7ec}.life-manual-reaction .life-paired-equation>b{font-size:18px}.life-manual-reaction .life-paired-equation small{font-size:10px;margin-bottom:3px}
+.life-reactor-apples{margin:0;padding:6px 10px;gap:8px}.life-reactor-apples svg{height:200px}.life-reactor-apples figcaption{padding:7px 2px}.life-reactor-apples figcaption b{font-size:10px}.life-reactor-apples figcaption span{font-size:9px}
+.life-manual-reaction .life-paired-time{padding:9px 12px;background:#f8f5e8;font-size:10px}
+.life-reactant:focus-visible,.life-reactor-drop:focus-visible,.life-manual-reaction [data-life-retry]:focus-visible{outline:3px solid #b8873c;outline-offset:3px}
+@media(max-width:850px){.life-mix-workbench{grid-template-columns:142px minmax(0,1fr);gap:12px;margin-inline:14px}.life-reactant-rack{padding:8px}.life-reactor-art>svg{height:235px}.life-manual-results{margin-inline:14px}.life-source-name,.life-result-destination [data-life-product]{font-size:12px}.life-result-path{padding:10px 8px 0;gap:4px}.life-zone-name{font-size:12px;padding-inline:8px}}
+@media(max-width:600px){
+ .life-mix-instruction{margin-inline:14px;font-size:12px}.life-mix-instruction>span{font-size:10px}
+ .life-mix-workbench{grid-template-columns:1fr;gap:10px;margin-inline:12px}
+ .life-reactant-rack{grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr;gap:8px;padding:8px}.life-reactant-rack>small{grid-column:1/-1}
+ .life-reactant{padding:8px 4px;gap:4px}.life-reactant>strong{font-size:11px}.life-reactant>small{font-size:9px}.life-reactant .life-molecule{min-height:31px}.life-reactant .life-molecule-atom{width:24px;height:24px;font-size:10px}.life-reactant .life-atom-H{width:17px;height:17px}
+ .life-reactor-art>svg{height:196px}.life-reactor-condition{font-size:10px;padding:9px}.life-drop-hint{font-size:9px;padding:3px 5px}.life-zone-name{font-size:11px;padding:2px 5px}
+ .life-mix-slots{gap:5px;padding:8px 4px;font-size:9px}.life-mix-slots>span{padding:4px}.life-manual-reaction .life-observe-status{margin:10px 12px;padding:9px 11px;font-size:11px}
+ .life-manual-results{margin:0 12px 12px;gap:8px}.life-result-path{grid-template-columns:1fr;gap:0;padding:9px 5px 0}.life-result-arrow{line-height:1.3;transform:rotate(90deg);font-size:16px}.life-source-name,.life-result-destination [data-life-product]{font-size:11px}.life-result-destination{min-height:42px}.life-result-path .life-pair-label{font-size:11px;gap:1px;flex-direction:column;padding:6px 0}.life-result-path .life-pair-label small{font-size:9px}
+ .life-reactor-apples{gap:4px;padding:5px}.life-reactor-apples svg{height:161px}.life-reactor-apples figcaption b{font-size:9px}.life-reactor-apples figcaption span{font-size:8px}
+ .life-manual-reaction .life-paired-equation>b{font-size:14px}.life-manual-reaction .life-pair-model{padding:10px 12px;font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){.life-reactor-drop,.life-result-destination [data-life-product],.life-reactor-products{transition:none;transform:none}}
+
+/* Keep each drop zone aligned with its SVG at every viewport width. */
+.life-reactor-art:not(.life-reactor-food){width:100%;max-width:541px;margin-inline:auto}
+.life-reactor-art:not(.life-reactor-food)>svg{height:auto;object-fit:contain}
+.life-reactor-art.life-reactor-peroxide,.life-reactor-art.life-reactor-chlorine,.life-reactor-art.life-reactor-sulfur{max-width:457px}

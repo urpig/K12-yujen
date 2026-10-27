@@ -12,11 +12,11 @@ test('each life example tracks both changed partners, including opposite bleachi
  assert.match(lifeReactionPair('sulfur').oxidation.from,/二氧化硫/);assert.equal(lifeReactionPair('food').oxidation.from,'維生素 C');
  assert.throws(()=>lifeReactionPair('unknown'));
 });
-test('all six scenes expose the same explicit reaction control and model boundaries',()=>{
+test('all six scenes expose the same explicit two-reactant operation and model boundaries',()=>{
  for(const key of ['photo','resp','peroxide','chlorine','sulfur','food']){
-  const initial=lifePairedMarkup(key);assert.match(initial,/data-phase="ready"/);assert.match(initial,/開始反應/);assert.match(initial,/不代表數量或實際路徑/);
+  const initial=lifePairedMarkup(key);assert.match(initial,/data-phase="ready"/);assert.match(initial,/data-life-drop/);assert.equal((initial.match(/data-life-input=/g)||[]).length,2);assert.doesNotMatch(initial,/data-life-play/);assert.match(initial,/不代表數量或實際路徑/);
   assert.equal((initial.match(/data-life-pair-label/g)||[]).length,2);
   assert.match(lifePairedMarkup(key,true),/data-phase="complete"/);
  }
- assert.match(lifePairedMarkup('food'),/保護用完後仍會褐變/);
+ assert.match(lifePairedMarkup('food'),/保護用完後仍會褐變/);assert.match(lifePairedMarkup('food'),/維生素 C被氧化/);
 });
