@@ -1,3 +1,4 @@
+import {bleachLabArt} from './life-bleach-art.js';
 import {clothArt,appleArt} from './everyday-redox-art.js';
 export function lifeReactorArt(key){
  if(key==='photo')return `<svg viewBox="0 0 620 290" aria-hidden="true"><defs><linearGradient id="mix-leaf" x2=".8" y2="1"><stop stop-color="#b2c67c"/><stop offset=".46" stop-color="#638f4b"/><stop offset="1" stop-color="#2b5941"/></linearGradient><radialGradient id="mix-plast"><stop stop-color="#e5edb2"/><stop offset="1" stop-color="#9ebd70"/></radialGradient><radialGradient id="mix-sun"><stop stop-color="#ffeabc"/><stop offset="1" stop-color="#ffeabc" stop-opacity="0"/></radialGradient></defs>
@@ -13,5 +14,5 @@ export function lifeReactorArt(key){
  ${[[351,99,-12],[448,178,16]].map(([x,y,a])=>`<g transform="translate(${x} ${y}) rotate(${a})"><ellipse rx="66" ry="32" fill="url(#mix-mito)" stroke="#af7955" stroke-width="2"/><path d="M-52 0q9-24 17-5t14 0 14-2 14 1 14 0 22-4" fill="none" stroke="#f9d9a4" stroke-width="6"/><path d="M-51 0q9 23 17 5t14 0 14 2 14-1 14 0 22 4" fill="none" stroke="#9f6346" stroke-width="2"/></g>`).join('')}
  <g fill="#a9be9a" opacity=".55">${[[290,195],[316,165],[389,51],[493,91],[127,198],[372,216]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5"/>`).join('')}</g><g class="life-reactor-products"><path d="M336 150l12-24-2 20h14l-19 30 4-26Z" fill="#d0a453"/><circle cx="478" cy="76" r="10" fill="#dae7e7"/></g><text x="320" y="276" text-anchor="middle" fill="#667b5b" font-size="12">細胞質與粒線體 · 多步反應的整體示意</text></svg>`;
  if(key==='food')return `<div class="life-apples life-reactor-apples">${['plain','protected'].map(k=>`<figure>${appleArt(k)}<figcaption><b>${k==='plain'?'沒有維生素 C':'加入維生素 C 的切面'}</b><span data-apple-caption="${k}"></span></figcaption></figure>`).join('')}</div>`;
- return clothArt(key).replace('</svg>','<text x="152" y="277" text-anchor="middle" fill="#4c685b" font-size="13">原色對照</text><text x="394" y="277" text-anchor="middle" fill="#4c685b" font-size="13">參與反應的布料</text></svg>');
+ return bleachLabArt(key);
 }

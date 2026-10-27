@@ -1,0 +1,6 @@
+const links={
+ 3:{title:'先用對氧活性，找出奪氧的方向',chain:['碳 C','＞','鐵 Fe','＞','銅 Cu'],text:'在本課比較中，碳比鐵、銅更容易與氧結合。先用 CuO 驗證：碳能接走它的氧；鋅也能，銅卻不能反過來還原 ZnO。這是挑選還原劑的線索。',next:'下一步看鐵：高爐中碳會參與生成 CO，CO 又能接氧變成 CO₂。'},
+ 4:{title:'CO 已經有氧，為什麼還能還原鐵？',chain:['氧化鐵的氧','→','CO','→','CO₂'],text:'01 的線索是 C ＞ Fe：碳對氧活性比鐵大。高爐中，碳參與生成 CO；在合適高溫與 CO／CO₂ 比例下，CO 接氧變成 CO₂ 的反應，能使鐵的氧化物失氧。',next:'拖一份 CO 試試看：CO 多接一個氧，自己被氧化；氧化鐵同時被還原。'},
+ 5:{title:'把活性線索，放進整座高爐',chain:['焦炭中的碳','→','產生 CO','→','接氧成 CO₂'],text:'碳比鐵更容易與氧結合，是選用碳材的線索。焦炭提供熱，也參與生成 CO；在合適的爐內條件下，CO 接走鐵礦中的氧，鐵才被還原出來。',next:'留意第 3、4 步：先生成 CO，再由 CO 還原鐵礦。石灰石的工作是除雜。'}
+};
+export function affinityBridge(id){const d=links[id];return d?`<aside class="affinity-bridge" aria-label="對氧活性與還原能力"><small>沿用 01 的活性線索</small><h3>${d.title}</h3><div class="affinity-chain">${d.chain.map((x,i)=>i%2?`<i aria-hidden="true">${x}</i>`:`<b>${x}</b>`).join('')}</div><p>${d.text}</p><p class="affinity-next">${d.next}</p><small>CO 是化合物，不列入元素活性表；能否還原也取決於溫度與氣體組成。</small></aside>`:'';}
