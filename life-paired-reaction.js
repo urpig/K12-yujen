@@ -1,8 +1,10 @@
 import {lifeBiology,lifeBleaches,appleComparison} from './everyday-redox-model.js';
+import {bleachSupply} from './life-bleach-art.js';
 import {lifeReactorArt} from './life-reactor-art.js';
 import {lifeLabDefinition,freshLifeMix,addLifeReactant,finishLifeMix} from './life-reactant-model.js';
 import {bindReactantPickup} from './life-reactant-drag.js';
 import {createFoodPlayback} from './food-playback.js';
+import {biologyMarkup,bindBiologyLab} from './life-biology-lab.js';
 
 // Each entry records BOTH sides of one representative reaction. The electron
 // marker conveys direction only, not a literal electron count or mechanism.
@@ -32,15 +34,16 @@ function substance(label){
  return `<div class="life-molecule">${icon}</div><strong>${label}</strong>`;
 }
 export function lifePairedMarkup(key,complete=false){
+ if(key==='photo'||key==='resp')return biologyMarkup(key,complete);
  const p=lifeReactionPair(key),lab=lifeLabDefinition(key);
  return `<section class="life-paired-reaction life-manual-reaction" data-glossary-skip data-life-observation data-life-reaction="${key}" data-phase="${complete?'complete':'ready'}" style="--life-progress:${complete?1:0}" aria-label="${p.title}的氧化還原配對">
  <div class="reaction-heading"><div><small>親手加入反應物 · 看兩邊一起變</small><h4>${p.title}</h4></div><button type="button" class="text-button" data-life-retry>↺ 重新取用</button></div>
- <p class="life-mix-instruction">把兩種反應物拖進<strong>${lab.zone}</strong>，反應就會開始。<span>也可以先點反應物，再點反應區。</span></p>
- <div class="life-mix-workbench"><div class="life-reactant-rack" aria-label="反應物供應區"><small>拿取反應物</small>${lab.inputs.map(x=>`<button type="button" class="life-reactant" data-life-input="${x.id}" aria-pressed="false" aria-label="拿取${x.label}，拖曳或點選後放入${lab.zone}" ${complete?'disabled':''}>${substance(x.label)}<small>${x.hint}</small><span data-input-state>${complete?'✓ 已加入':'拿取 →'}</span></button>`).join('')}</div>
+ <p class="life-mix-instruction">${lab.inputs.length===1?'取用試劑，加入右側的':'把兩種反應物拖進'}<strong>${lab.zone}</strong>，觀察反應。<span>也可以先點反應物，再點反應區。</span></p>
+ <div class="life-mix-workbench"><div class="life-reactant-rack" aria-label="反應物供應區"><small>拿取反應物</small>${lab.inputs.map(x=>`<button type="button" class="life-reactant" data-life-input="${x.id}" aria-pressed="false" aria-label="拿取${x.label}，拖曳或點選後放入${lab.zone}" ${complete?'disabled':''}>${lab.inputs.length===1?bleachSupply(key):substance(x.label)}<small>${x.hint}</small><span data-input-state>${complete?'✓ 已加入':'拿取 →'}</span></button>`).join('')}</div>
  <div class="life-reactor-panel"><div class="life-reactor-condition">${lab.condition}</div><div class="life-reactor-art life-reactor-${key}">${lifeReactorArt(key)}<button type="button" class="life-reactor-drop" data-life-drop aria-label="${lab.zone}，放入選取的反應物" ${complete?'disabled':''}><span class="life-zone-name">${lab.zone}</span><span class="life-drop-hint" data-life-drop-hint>放到這裡 ↓</span></button></div>
- <div class="life-mix-slots" aria-label="反應物加入進度">${lab.inputs.map(x=>`<span data-life-slot="${x.id}" class="${complete?'added':''}">${complete?'✓':'○'} ${x.label}</span>`).join('')}<b data-life-mix-count>${complete?2:0} / 2</b></div>
+ <div class="life-mix-slots" aria-label="反應物加入進度">${lab.inputs.map(x=>`<span data-life-slot="${x.id}" class="${complete?'added':''}">${complete?'✓':'○'} ${x.label}</span>`).join('')}<b data-life-mix-count>${complete?lab.inputs.length:0} / ${lab.inputs.length}</b></div>
  ${key==='food'?'<div class="life-paired-time"><b data-life-time-label>剛切開</b><span>維生素 C 的保護能力：<strong data-life-reserve-label>尚未消耗</strong></span></div>':''}</div></div>
- <p class="life-observe-status" data-life-animation-status role="status">${complete?p.finding:'反應物還沒到齊，先取一份放進'+lab.zone+'。'}</p>
+ <p class="life-observe-status" data-life-animation-status role="status">${complete?p.finding:lab.inputs.length===1?'拿取左側試劑，加入右側'+lab.zone+'；左側保留原樣對照。':'反應物還沒到齊，先取一份放進'+lab.zone+'。'}</p>
  <div class="life-manual-results" aria-label="同時追蹤氧化與還原">${['oxidation','reduction'].map((role,i)=>`<div class="life-result-path ${role}"><div class="life-source-name">${p[role].from}</div><span class="life-result-arrow" aria-hidden="true">→</span><div class="life-result-destination"><span class="life-result-wait">等候反應</span><strong data-life-product>${p[role].to}</strong></div><p class="life-pair-label" data-life-pair-label><b>${p[role].from.replace(/ (?:H₂O₂|H₂O|CO₂|O₂|C₆H₁₂O₆|SO₂|NaClO)$/,'')}${i===0?'被氧化':'被還原'}</b><small>${i===0?'失去電子':'得到電子'}</small></p></div>`).join('')}</div>
  <div class="life-paired-equation"><small>${p.equation?'多步反應的整體表示':'適用情境的質性比較'}</small>${p.equation?`<b>${p.equation}</b>`:'<b class="life-qualitative-equation">兩邊同時改變：一方被氧化，另一方被還原。</b>'}</div>
  <p class="life-pair-model">每張反應物圖卡代表一種物質的供應，並非各一個分子；顏色、速度與位置為示意。電子的得失表示整體收支，不代表數量或實際路徑。${lab.note}${key==='photo'?'放出的氧氣來自水；葡萄糖用來表示合成的養分。':key==='food'?'時間與變色為示意，保護用完後仍會褐變。':''}</p></section>`;
@@ -56,6 +59,7 @@ function paintFood(scene,progress){
 }
 export function bindLifePairedReaction(scene,onComplete){
  if(!scene)return ()=>{};
+ if(['photo','resp'].includes(scene.dataset.lifeReaction))return bindBiologyLab(scene,onComplete);
  const key=scene.dataset.lifeReaction,lab=lifeLabDefinition(key),zone=scene.querySelector('[data-life-drop]'),retry=scene.querySelector('[data-life-retry]'),status=scene.querySelector('[data-life-animation-status]');
  let state=freshLifeMix(key,scene.dataset.phase==='complete'),selected=null,playback=null,alive=true;
  const cleanups=[],inputs=[...scene.querySelectorAll('[data-life-input]')];
@@ -64,18 +68,18 @@ export function bindLifePairedReaction(scene,onComplete){
   scene.querySelectorAll('[data-life-product],[data-life-pair-label]').forEach(e=>e.setAttribute('aria-hidden',String(p===0)));
   scene.querySelectorAll('.life-result-wait').forEach(e=>e.setAttribute('aria-hidden',String(p>0)));
   scene.style.setProperty('--life-progress',String(p));scene.dataset.reactionProgress=p.toFixed(3);
-  if(key==='food')paintFood(scene,p);const dye=scene.querySelector('.life-dye-after');if(dye)dye.style.opacity=String(1-p*.9);
+  if(key==='food')paintFood(scene,p);scene.querySelectorAll('.life-dye-after').forEach(dye=>dye.style.opacity=String(1-p*.92));
  };
  const refresh=()=>{
   scene.dataset.phase=state.phase;
   for(const input of inputs){const added=state.added.includes(input.dataset.lifeInput);input.disabled=added||state.phase!=='ready';input.setAttribute('aria-pressed',String(selected===input.dataset.lifeInput));input.querySelector('[data-input-state]').textContent=added?'✓ 已加入':selected===input.dataset.lifeInput?'已拿起 · 放入 →':'拿取 →';}
   lab.inputs.forEach(x=>{const slot=scene.querySelector('[data-life-slot="'+x.id+'"]'),added=state.added.includes(x.id);slot.classList.toggle('added',added);slot.textContent=(added?'✓ ':'○ ')+x.label;});
-  scene.querySelector('[data-life-mix-count]').textContent=state.added.length+' / 2';zone.disabled=state.phase!=='ready';
+  scene.querySelector('[data-life-mix-count]').textContent=state.added.length+' / '+lab.inputs.length;zone.disabled=state.phase!=='ready';
   zone.classList.toggle('life-item-selected',!!selected);scene.querySelector('[data-life-drop-hint]').textContent=state.phase==='complete'?'✓ 觀察完成':state.phase==='running'?'反應進行中…':selected?'點這裡，放入反應物 ↓':'放到這裡 ↓';
  };
  const visible=()=>{const r=scene.getBoundingClientRect();playback?.setActive(alive&&state.phase==='running'&&!document.hidden&&!document.querySelector('dialog[open]')&&r.bottom>0&&r.top<innerHeight);};
  const start=()=>{
-  status.textContent='兩種反應物已到齊，留意它們同時變成什麼。';paint(0);
+  status.textContent=lab.inputs.length===1?'試劑已加入，觀察實物變化與兩邊的氧化還原。':'兩種反應物已到齊，留意它們同時變成什麼。';paint(0);
   playback=createFoodPlayback({duration:matchMedia('(prefers-reduced-motion:reduce)').matches?1:key==='food'?6500:4000,onTime:t=>paint(t/4),onState:s=>{if(alive&&s.complete&&finishLifeMix(state)){refresh();status.textContent=lifeReactionPair(key).finding;onComplete();}}});visible();
  };
  const add=id=>{
@@ -87,7 +91,7 @@ export function bindLifePairedReaction(scene,onComplete){
  const cancel=()=>{selected=null;refresh();if(state.phase==='ready')status.textContent='已放回反應物，可以重新拿取。';};
  for(const input of inputs){const id=input.dataset.lifeInput;cleanups.push(bindReactantPickup(input,zone,{disabled:()=>!usable()||state.phase!=='ready'||state.added.includes(id),onSelect:()=>{selected=selected===id?null:id;refresh();status.textContent=selected?'已拿起'+lab.inputs.find(x=>x.id===id).label+'，點'+lab.zone+'放入。':'已放回反應物。';},onDrop:()=>add(id),onMiss:()=>{selected=null;refresh();status.textContent='還沒放進'+lab.zone+'，請再拖一次；也可以先點反應物，再點反應區。';},onCancel:cancel}));}
  zone.onclick=()=>{if(!usable()||state.phase!=='ready')return;if(selected)add(selected);else status.textContent='先從反應物供應區拿取一份，再放進'+lab.zone+'。';};
- retry.onclick=()=>{if(!usable())return;playback?.dispose();playback=null;state=freshLifeMix(key);selected=null;refresh();paint(0);status.textContent='已備好新的反應物，重新拿取兩份，放入'+lab.zone+'。';};
+ retry.onclick=()=>{if(!usable())return;playback?.dispose();playback=null;state=freshLifeMix(key);selected=null;refresh();paint(0);status.textContent='已備好新的反應物，重新拿取，放入'+lab.zone+'。';};
  refresh();paint(state.phase==='complete'?1:0);
  const modalObserver=new MutationObserver(visible);modalObserver.observe(document.body,{attributes:true,subtree:true,attributeFilter:['open']});
  window.addEventListener('scroll',visible,{passive:true,capture:true});window.addEventListener('resize',visible);document.addEventListener('visibilitychange',visible);

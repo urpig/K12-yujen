@@ -35,3 +35,4 @@
  #card-4 .iron-sample-comparison{grid-template-columns:1fr 1fr}
  #card-4 .iron-sample-model{height:100px}
 }
+.affinity-bridge{margin:22px 0;padding:21px 24px;border:1px solid #c4ceb7;border-left:4px solid #9ba96e;border-radius:8px;background:#f4f5e9}.affinity-bridge>small{color:#7a8a6b;font-size:11px}.affinity-bridge h3{font-size:18px;margin:7px 0 14px;color:#315b4c}.affinity-chain{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.affinity-chain>b{padding:9px 15px;background:#e2e8d6;border:1px solid #b8c8a8;border-radius:6px;color:#365947;font-size:15px}.affinity-chain>i{font-style:normal;color:#ad8b4d;font-size:21px}.affinity-bridge p{font-size:13px;line-height:1.9;margin:13px 0;color:#516e5c}.affinity-bridge .affinity-next{border-top:1px solid #d7dfcb;padding-top:11px;color:#946d35}@media(max-width:600px){.affinity-bridge{padding:16px}.affinity-chain{gap:6px}.affinity-chain>b{font-size:12px;padding:7px}.affinity-chain>i{font-size:17px}}
