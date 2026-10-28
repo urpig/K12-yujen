@@ -1,3 +1,4 @@
+import {combustionNextAction,highlightNext} from './combustion-guidance.js';
 import {mountReactionObservations} from './combustion-observations.js';
 import {laboratoryBackground,spoonIllustration,alcoholLamp} from './laboratory-assets.js';
 import {mountBenchWater} from './bench-water.js';
@@ -76,6 +77,7 @@ export function mountCombustion(root,{key,isMetal,autoLoad=false,spoonOrigin=nul
   if(state.complete){label.textContent='觀察完成';detail.textContent=held?'鬆開匙柄，查看產物':'準備查看產物';message=held?'觀察完成；鬆開匙柄，再比較產物。':'觀察完成。';}
   meter.setAttribute('aria-valuenow',String(Math.round(ratio*100)));meter.querySelector('i').style.width=(ratio*100)+'%';
   const jarTarget=board.querySelector('[data-jar-target]');if(jarTarget)jarTarget.hidden=!state.ignited||inJar;
+  const next=combustionNextAction({...state,isMetal,inJar,near});highlightNext(board,next);if(next.instruction)message=next.instruction;
   if(message!==previousMessage){step.textContent=message;notice(message);previousMessage=message;}
   if(atmosphere)atmosphere.update({key,stage,isMetal,mobile:true,bowl:point,specimenActive:state.ignited&&!state.complete}, {preserveTime:true});
   shelfTarget(board);
@@ -90,5 +92,5 @@ export function mountCombustion(root,{key,isMetal,autoLoad=false,spoonOrigin=nul
  }
  const releaseDrag=bindFreeSpoon(spoon,board,{position:point,onGrab:()=>{held=true;},onMove:(next,grabbing)=>{point=next;held=grabbing;inJar=!isMetal&&state.ignited&&spoonInJar(point);show();},onRelease:p=>{const placed=spoonBottlePlacement(p,state);inJar=!!placed;if(placed)return placed;}});
  function dispose(){if(!alive)return;alive=false;clearTimeout(timer);releaseDrag();}
- onCleanup(dispose);tick();
+ onCleanup(dispose);show();tick();
 }

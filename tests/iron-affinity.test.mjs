@@ -2,10 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {lessons,restoreState,isReady} from '../dist/journey-cards.js';
 import {ironCandidates,freshIronTrials,chooseIronTrial,predictIronTrial,beginIronTrial,finishIronTrial,restoreIronTrials} from '../dist/iron-affinity-model.js';
-test('each iron comparison requires its own prediction and a completed heating observation',()=>{
+test('each iron comparison starts without a prediction but requires a completed heating observation',()=>{
  const s=freshIronTrials();for(const id of Object.keys(ironCandidates)){
-  chooseIronTrial(s,id);assert.equal(beginIronTrial(s),false);assert.equal(finishIronTrial(s),false);
-  assert.equal(predictIronTrial(s,!ironCandidates[id].canReduce),true);assert.equal(beginIronTrial(s),true);
+  chooseIronTrial(s,id);assert.equal(finishIronTrial(s),false);
+  assert.equal(s.predictions[id],undefined);assert.equal(beginIronTrial(s),true);
   assert.equal(beginIronTrial(s),false);assert.equal(predictIronTrial(s,true),false);assert.equal(s.results[id],undefined);
   assert.equal(finishIronTrial(s),true);assert.equal(s.results[id],true);assert.equal(finishIronTrial(s),false);
  }assert.equal(Object.keys(s.results).length,6);

@@ -8,7 +8,7 @@
 .prep-scene-art>span{position:absolute;bottom:9px;left:10px;padding:4px 8px;border:1px solid #fff6dc55;border-radius:4px;background:#253e35dc;color:#fffbed;font-size:10px;line-height:1.5;letter-spacing:.08em;box-shadow:0 2px 6px #142b2326;z-index:1}
 .prep-art-burn{background-image:url('./assets/story/prep-burn-realistic.png')}
 .prep-art-rust{background-image:url('./assets/story/prep-rust-realistic.png')}
-.prep-art-breath{background-image:url('./assets/story/prep-breath-cartoon.png')}
+.prep-art-breath{background-image:url('./assets/story/prep-biology-pair.png')}
 .prep-art-ice{background-image:url('./assets/story/prep-ice-realistic.png')}
 .prep-observation{border-color:#b8c4b0;box-shadow:0 4px 10px #30452b16,0 1px 2px #30452b0d;background:linear-gradient(#fffdf5,#f6f5eb)}
 .prep-observation:not(:disabled):hover{border-color:#9f7b43;box-shadow:0 7px 16px #30452b24}
@@ -92,3 +92,17 @@
 .reaction-formula{font-family:"Times New Roman",Times,serif;font-variant-numeric:lining-nums tabular-nums;align-items:baseline}.reaction-formula .reaction-species{font-weight:400}.reaction-formula .reaction-coefficient{font:inherit;vertical-align:baseline;margin-right:.04em}.reaction-mapping.reaction-mapping-above,.reaction-mapping.reaction-mapping-below{height:46px}.reaction-mapping .reaction-map-label{transform:translateX(-50%);white-space:nowrap;line-height:20px}.reaction-mapping-above .oxidation-label{top:6px}.reaction-mapping-below .reduction-label{top:18px}
 .reaction-atom-magnesium{background:radial-gradient(at 30% 22%,#faffee,#a4b5a0 55%,#536d5c)}.reaction-carbon-donor{display:flex;align-items:center;justify-content:center;margin:36px 0 28px;gap:0}.reaction-donor-bond{width:10px;height:4px;background:#a1b29c;flex-shrink:0}.iron-reaction[data-phase=running] .reaction-donor-bond{visibility:hidden}.magnesium-reaction .reaction-gas{margin:22px 0}.magnesium-reaction .reaction-board{min-height:245px}
 .prep-definitions{margin:0 0 24px;padding:22px 24px;background:#f4f3e6;border:1px solid #cbd1b9;border-radius:10px}.prep-definitions>small{font-size:11px;letter-spacing:.08em;color:#977841}.prep-definitions h3{font-size:21px;color:#31564a;margin:6px 0 16px}.prep-definitions dl{margin:0}.prep-definitions dl>div{display:grid;grid-template-columns:105px minmax(0,1fr);gap:18px;padding:15px 0;border-top:1px solid #d8dcc8}.prep-definitions dt{font-size:17px;font-weight:700;color:#936734}.prep-definitions dd{margin:0;color:#415e50;font-size:14px;line-height:1.85}.prep-definitions dd span{display:block;font-size:12px;color:#76806a;margin-top:3px}.prep-definitions>p{font-size:12px;line-height:1.9;color:#737d65;margin:10px 0 0;padding-top:14px;border-top:1px solid #d8dcc8}@media(max-width:600px){.prep-definitions{padding:16px}.prep-definitions h3{font-size:19px}.prep-definitions dl>div{grid-template-columns:1fr;gap:5px}.prep-definitions dd{font-size:13px}}
+
+/* Classification cards move from the rack into their destination. */
+.prep-bin-column{min-width:0;display:flex;flex-direction:column;gap:10px}
+.prep-bin-column>header{text-align:center;display:grid;gap:5px;min-height:52px}
+.prep-bin-column>header b{font-size:17px}.prep-bin-column>header small{color:#7d826f}
+.prep-bin-column>.prep-bin{display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:12px;width:100%;min-height:150px;flex:1;padding:12px}
+.prep-bin .prep-filed-card{display:block;width:100%;margin:0;padding:0;overflow:hidden;background:#fffdf5;border:1px solid #bcccb0;border-radius:10px;text-align:center}
+.prep-bin .prep-filed-card .prep-scene-art{height:125px;min-height:125px;width:100%;margin:0;display:block;border-radius:0}
+.prep-filed-card>strong{display:block;margin:10px 4px 3px}.prep-filed-card>small{display:block;margin-bottom:10px}
+.prep-source-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px dashed #c9d1bc;border-radius:10px;min-height:240px;color:#73836d;font-size:13px;background:#edf1e52b}
+.prep-source-empty small{font-size:11px}.prep-oxidation-intro>.story-speech+.story-speech{margin-top:12px}
+@media(max-width:700px){.prep-source-empty{min-height:190px}.prep-bin-column>header{min-height:0}.prep-bin-column>.prep-bin{min-height:120px}}
+
+.prep-scenes[hidden]{display:none}.prep-bin-column>.prep-bin:has(.prep-filed-card){justify-content:flex-start}.prep-bin .prep-scene-art>span{background:#254b43e8;color:#fff8e7;margin:0;padding:5px 8px}

@@ -1,4 +1,5 @@
-const speech=(who,expression,text)=>`<div class="story-speech story-speech--${who}"><span class="story-portrait story-portrait--${who}" data-expression="${expression}" aria-hidden="true"></span><p><b>${who==='kui'?'小葵':'阿公'}</b>${text}</p></div>`;
+import {storySpeech,notebookMarkup} from './story-dialogue.js';
+const speech=(who,expression,text)=>storySpeech(who,text,expression);
 function foodPhoto(kind){const names={C:'整顆柳橙與切開果肉的實拍照片',E:'帶殼杏仁的實拍照片',R:'一串紫葡萄的實拍照片'};return `<span class="antioxidant-food-photo food-photo-${kind}" role="img" aria-label="${names[kind]}"></span>`;}
 export function mountAntioxidantEpilogue(lesson){
  const section=document.createElement('section');section.id='epilogue-antioxidants';section.className='exploration-card antioxidant-epilogue';section.tabIndex=-1;section.setAttribute('aria-labelledby','epilogue-title');
@@ -23,9 +24,9 @@ export function mountAntioxidantEpilogue(lesson){
  <div class="epilogue-dialogue epilogue-closing">
  ${speech('kui','excited','「原來是幫忙保護細胞，不是把阿公變回小孩！那我多吃好多抗氧化劑，也不能讓你返老還童？」')}
  ${speech('grandpa','encourage','「對啦！<strong>有抗氧化作用，不代表吃越多越好，也不保證抗老。</strong>再說，沒有細胞呼吸提供能量，我哪來力氣陪你穿越、打鐵呀？」')}
- </div><p class="epilogue-endnote">小葵笑著補上一筆：<br>「氧化不全是壞事。看懂作用，也要看懂證據。」</p>
+ </div>${speech('kui','thinking','「氧化不全是壞事。看懂作用，也要看懂證據。」')}${notebookMarkup('end')}
  <details class="epilogue-sources epilogue-photo-credits"><summary>食物照片來源</summary><p>柑橘：<a href="https://commons.wikimedia.org/wiki/File:Orange-Fruit-Pieces.jpg" target="_blank" rel="noopener">Evan-Amos</a>；杏仁：<a href="https://commons.wikimedia.org/wiki/File:Almonds_1.jpg" target="_blank" rel="noopener">David R. Tribble（Loadmaster）</a>。兩張照片採 <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>，依版面縮放、裁切顯示。葡萄：<a href="https://commons.wikimedia.org/wiki/File:USDA_Eat_Healthy_Food_Group_Gallery_serving_size_medium_bunch_purple_grapes.jpg" target="_blank" rel="noopener">USDA，公有領域</a>。照片僅舉例食物來源。</p></details>
  <details class="epilogue-sources"><summary>阿公這段話的科學依據</summary><p>這是生物與營養的概念延伸。圖中的食物只舉例來源，沒有比較含量。成分具有化學作用，與補充後能否帶來人體健康效益，需要分別看證據。</p><ul><li><a href="https://www.nccih.nih.gov/health/antioxidant-supplements-what-you-need-to-know" target="_blank" rel="noopener">NCCIH：正常活性氧、身體防禦與抗氧化補充劑</a></li><li><a href="https://www.medlineplus.gov/ency/article/004012.htm" target="_blank" rel="noopener">MedlinePlus：老化是複雜的過程</a></li><li><a href="https://ods.od.nih.gov/factsheets/VitaminC-Consumer/" target="_blank" rel="noopener">NIH：維生素 C 與食物來源</a></li><li><a href="https://ods.od.nih.gov/factsheets/VitaminE-HealthProfessional/" target="_blank" rel="noopener">NIH：維生素 E 與食物來源</a></li><li><a href="https://lpi.oregonstate.edu/mic/dietary-factors/phytochemicals/resveratrol" target="_blank" rel="noopener">OSU：白藜蘆醇的體外作用與人體證據</a></li></ul></details></div>
- <footer class="chapter-footer"><a class="previous" href="#card-6">← 回看刀材的比較</a><span>小葵與阿公的鍛造筆記 · 完</span><a class="next" href="#card-1">回到故事起點 <b>↑</b></a></footer>`;
+ <footer class="chapter-footer"><a class="previous" href="#card-6">← 回看刀材的比較</a><span>小葵的筆記 · 完</span><a class="next" href="#card-1">回到故事起點 <b>↑</b></a></footer>`;
  lesson.append(section);return section;
 }

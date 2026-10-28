@@ -1,7 +1,7 @@
 export const prepScenes=[
  {id:'burn',title:'木炭燃燒',tag:'爐火中的線索',kind:'fast',symbol:'C',detail:'碳與氧氣反應，生成二氧化碳。',equation:'C + O₂ → CO₂'},
  {id:'rust',title:'鐵釘生鏽',tag:'潮濕角落的線索',kind:'slow',symbol:'Fe',detail:'鐵在有氧與水的環境中逐漸生鏽；沒有火焰，也有氧化。',equation:'鐵 ＋ 氧氣 ＋ 水 → 鐵鏽（組成較複雜）'},
- {id:'breath',title:'細胞呼吸',tag:'身體裡的線索',kind:'slow',symbol:'O₂',detail:'細胞利用氧逐步氧化養分，釋放能量，不需要火焰。',equation:'葡萄糖 ＋ 氧氣 → 二氧化碳 ＋ 水（總反應）'},
+ {id:'breath',title:'呼吸作用及光合作用',tag:'細胞裡的線索',kind:'slow',symbol:'O₂',detail:'兩者都包含沒有火焰、由多步反應完成的氧化與還原，本活動歸在「緩慢的氧化」。有氧呼吸中，葡萄糖被氧化、氧氣被還原；光合作用中，水被氧化、二氧化碳被還原。這不是說光合作用整體只是氧化，也不是比較兩者的實際反應速度。',equation:'呼吸：葡萄糖被氧化，氧氣被還原成水。光合：水被氧化成氧氣，CO₂ 被還原並用來合成糖。'},
  {id:'ice',title:'冰塊融化',tag:'水碗旁的線索',kind:'physical',symbol:'H₂O',detail:'冰變成水，仍是 H₂O；這是狀態改變，不是氧化。',equation:'H₂O（固態） → H₂O（液態）'}
 ];
 export const affinityOrder=['Mg','C','Fe','Cu'];
