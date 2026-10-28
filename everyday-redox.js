@@ -1,5 +1,4 @@
 import {lifePairedMarkup,bindLifePairedReaction} from './life-paired-reaction.js';
-import {hasPrediction} from './prediction.js';
 import {lifeBiology,lifeBleaches,lifeEvidence,lifeQuiz,freshLife,restoreLife,lifeReady,lifeMastered,lifeRecord} from './everyday-redox-model.js';
 const storageKey='lost-forge-everyday-redox-v1';
 const labels={photo:'光合作用',resp:'有氧呼吸',peroxide:'過氧化氫',chlorine:'次氯酸鈉',sulfur:'二氧化硫',food:'維生素 C'};
@@ -28,16 +27,16 @@ export function mountEverydayRedox(root,{tab=0}={}){
   <div class="life-integrated-footer"><small>${saved?'生活觀察與作答會自動保存。':'本次可操作，瀏覽器暫時無法保存。'}</small></div>
   <details class="prep-note"><summary>生活反應的模型與資料依據</summary><p>氧化是失去電子，還原是得到電子。生物反應經過許多步驟；圖示只追蹤整體收支。漂白比較各試劑適用的代表反應，不是同一色素的實測；抗氧化也不能取代冷藏、衛生與保存期限。</p><p><a href="https://openstax.org/books/biology-2e/pages/8-3-using-light-energy-to-make-organic-molecules" target="_blank" rel="noopener">OpenStax：光合作用</a> · <a href="https://openstax.org/books/biology-2e/pages/7-4-oxidative-phosphorylation" target="_blank" rel="noopener">OpenStax：電子轉移與氧化還原</a> · <a href="https://ift.onlinelibrary.wiley.com/doi/10.1111/j.1365-2621.1989.tb07931.x" target="_blank" rel="noopener">蘋果褐變與抗壞血酸研究</a></p></details>`;
   cleanup=bindLifePairedReaction(root.querySelector('[data-life-observation]'),()=>{
-   if(!hasPrediction('prep-3'))return;
+
    if(key==='food')s.time=4;else if(!s.seen.includes(key))s.seen.push(key);
    message='觀察完成，試著回答下面的小問題。';render('[data-life-retry]');save();root.dispatchEvent(new CustomEvent('life-observed',{bubbles:true}));
   });
   root.querySelectorAll('[data-life-choice]').forEach(b=>b.onclick=()=>{if(s.tab===0)s.bio=b.dataset.lifeChoice;else s.bleach=b.dataset.lifeChoice;message='';render('[data-life-choice="'+activeKey()+'"]');save();});
   root.querySelectorAll('[data-life-check]').forEach(b=>b.onclick=()=>{
-   if(!hasPrediction('prep-3'))return;const role=b.dataset.lifeCheck,correct=lifeRecord(s,key,role),answer=s.tab===1?lifeBleaches[key].role:'oxidation';
+   const role=b.dataset.lifeCheck,correct=lifeRecord(s,key,role),answer=s.tab===1?lifeBleaches[key].role:'oxidation';
    message=(correct?'✓ 答對了。':s.tab===0?'正確答案是左邊的選項，再試一次。':'正確答案是「自己'+roleName(answer)+'」，再試一次。')+(s.tab===0?lifeBiology[key].reason:s.tab===1?lifeBleaches[key].reason:'維生素 C 自己被氧化，使部分褐變中間產物被還原；保護作用有限。');render('[data-life-check="'+role+'"]');save();
   });
-  root.querySelectorAll('[data-life-answer]').forEach(b=>b.onclick=()=>{if(!lifeReady(s)||!hasPrediction('prep-3'))return;s.answer=+b.dataset.lifeAnswer;render('[data-life-answer="'+s.answer+'"]');save();});
+  root.querySelectorAll('[data-life-answer]').forEach(b=>b.onclick=()=>{if(!lifeReady(s))return;s.answer=+b.dataset.lifeAnswer;render('[data-life-answer="'+s.answer+'"]');save();});
   if(focus)root.querySelector(focus)?.focus({preventScroll:true});
  }
  render();save();return ()=>cleanup();

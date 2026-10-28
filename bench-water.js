@@ -1,3 +1,4 @@
+import {solidNextAction,highlightNext} from './combustion-guidance.js';
 import {bindDrop} from './direct-manipulation.js';
 import {scopeMarkup} from './card-markup.js';
 import {litmusResult} from './journey-cards.js';
@@ -13,23 +14,24 @@ export function mountBenchWater(board,{key,completed,spoonOrigin=null,delay,onCl
  board.append(station);
  const status=station.querySelector('.bench-water-status'),zone=station.querySelector('[data-bench-add]');
  function tell(t){status.textContent=t;notice(t);}
+ function guide(){const next=solidNextAction({completed,ready,adding:station.dataset.waterState==='adding',dipped:[...dipped]});highlightNext(station,next);if(next.instruction)tell(next.instruction);}
  for(const p of ['red','blue']){
   const paper=station.querySelector('[data-bench-paper="'+p+'"]'),tip=paper.querySelector('.paper-tip');
-  bindDrop(paper,station.querySelector('[data-bench-liquid]'),{disabled:()=>!ready,anchor:[.5,.96],keep:true,onMove:(hit,r,z)=>{tip.style.height=(hit?Math.min(r.height*.65,Math.max(0,r.bottom-z.top))/r.height*100:0)+'%';tip.style.background=litmusResult(d.kind,p);tip.style.opacity=hit?'1':'0';},onDrop:()=>{dipped.add(p);paper.classList.add('dipped');paper.style.left=(p==='red'?16:22)+'%';paper.style.top='60%';tip.style.height='30%';tell(dipped.size===1?'浸水端已完成測試，再放入另一張試紙。':d.kind==='base'?'紅紙浸水端變藍；藍紙不變 → 鹼性。':d.kind==='acid'?'藍紙浸水端變紅；紅紙不變 → 酸性。':'兩張試紙浸水端皆無明顯變色。');if(dipped.size===2){station.dataset.waterState='tested';onComplete();}},onMiss:()=>tell('把試紙下端放進水面以下；杯外不算浸入。')});
+  bindDrop(paper,station.querySelector('[data-bench-liquid]'),{disabled:()=>!ready,anchor:[.5,.96],keep:true,onMove:(hit,r,z)=>{tip.style.height=(hit?Math.min(r.height*.65,Math.max(0,r.bottom-z.top))/r.height*100:0)+'%';tip.style.background=litmusResult(d.kind,p);tip.style.opacity=hit?'1':'0';},onDrop:()=>{dipped.add(p);paper.classList.add('dipped');paper.style.left=(p==='red'?16:22)+'%';paper.style.top='60%';tip.style.height='30%';tell(dipped.size===1?'浸水端已完成測試，再放入另一張試紙。':d.kind==='base'?'紅紙浸水端變藍；藍紙不變 → 鹼性。':d.kind==='acid'?'藍紙浸水端變紅；紅紙不變 → 酸性。':'兩張試紙浸水端皆無明顯變色。');if(dipped.size===2){station.dataset.waterState='tested';onComplete();}guide();},onMiss:()=>tell('把試紙下端放進水面以下；杯外不算浸入。')});
  }
  if(!completed)return;
  function add(source){
-  station.dataset.waterState='adding';source.setAttribute('aria-disabled','true');zone.hidden=true;
+  station.dataset.waterState='adding';source.setAttribute('aria-disabled','true');zone.hidden=true;guide();
   {source.style.left=((147-29)/760*100)+'%';source.style.top=((277-207)/430*100)+'%';source.classList.add('spoon-pouring');tell(key==='Cu'?'將少量黑色氧化層加入水中，銅片仍留匙上。':'燃燒匙傾斜，冷卻後的產物落入水中……');}
   delay(()=>{if(!board.isConnected)return;ready=true;station.dataset.waterState='ready';onWaterAdded();if(!gas){source.innerHTML=scopeMarkup(spoonIllustration(key,{empty:key!=='Cu'})+'<span>'+(key==='Cu'?'銅片留在匙上':'空匙')+'</span>','empty-spoon-'+key);source.classList.remove('spoon-pouring');source.classList.add('spoon-empty');source.style.left=((235-29)/760*100)+'%';source.style.top=((340-207)/430*100)+'%';}
    if(['Cu','Mg','Zn'].includes(key))station.querySelector('[data-bench-sediment]').setAttribute('visibility','visible');
-   for(const paper of station.querySelectorAll('[data-bench-paper]'))paper.setAttribute('aria-disabled','false');tell(d.text+' 現在拖動兩張石蕊試紙。');
+   for(const paper of station.querySelectorAll('[data-bench-paper]'))paper.setAttribute('aria-disabled','false');tell(d.text+' 現在拖動兩張石蕊試紙。');guide();
   },1500);
  }
  board.classList.add('wet-connected');
  const source=document.createElement('div');source.className='combustion-spoon bench-product-spoon';source.dataset.benchProduct='';source.setAttribute('aria-label','燃燒匙上的'+(key==='Cu'?'黑色氧化層':'燃燒產物'));
  let x=spoonOrigin?spoonOrigin[0]:key==='P'?560:320,y=spoonOrigin?spoonOrigin[1]:key==='P'?283:224;
  source.style.left=((x-29)/760*100)+'%';source.style.top=((y-205)/430*100)+'%';source.innerHTML=scopeMarkup(spoonIllustration(key,{oxide:true,cool:true})+'<span>拖曳產物到杯口</span>','product-spoon-'+key);station.append(source);source.setAttribute('aria-disabled','false');
- tell('呈現冷卻後的產物。把燃燒匙的匙端拖到清水杯口。');
+ guide();
  bindDrop(source,zone,{anchor:[.181,.9],disabled:()=>ready||station.dataset.waterState==='adding',onDrop:()=>add(source),onMiss:()=>tell('把匙端對準杯口的虛線框，再鬆開。')});
 }
