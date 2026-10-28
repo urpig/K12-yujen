@@ -1,4 +1,4 @@
-import {scienceTerms,dictionaryChapters,dictionarySources,primerTerms} from './terminology-data.js';
+import {scienceTerms,dictionaryChapters,dictionarySources} from './terminology-data.js';
 import {dictionaryTermById,filterScienceTerms,matchScienceTerms} from './terminology-model.js';
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const chapterForCard=new Map(dictionaryChapters.map(chapter=>[chapter.target,chapter.id]));
@@ -46,21 +46,8 @@ export function mountTerminology(){
  }
  document.addEventListener('click',onClick);search.addEventListener('input',()=>{selected='';renderList();});filter.addEventListener('change',renderList);
  const skip='button,a,svg,canvas,script,style,input,select,textarea,label,summary,dialog,code,[data-glossary-skip],[role="status"],[aria-live],.interactive-lab,.prediction-block,.prediction-review,.practice,.prep-quiz,.evidence-panel,.keyboard-help,.reaction-equation,.life-equation,.prep-scenes,.oxygen-series,.iron-pair-scene';
- function ensurePrimer(card){
-  let chapter=chapterForCard.get(card.id);if(!chapter)return;
-  const host=card.querySelector('[data-prediction-host]');
-  if(chapter==='prep'&&host?.dataset.predictionHost==='prep-3')chapter='life';
-  const choices=primerTerms[chapter];
-  const lifeTab=['biology','bleach','food'].indexOf(card.querySelector('[data-redox-example][aria-pressed=true]')?.dataset.redoxExample);
-  const tab=Math.max(0,Math.min(2,chapter==='life'?lifeTab:Number(host?.dataset.predictionHost.split('-').at(-1))||0));
-  const ids=Array.isArray(choices[0])?choices[tab]:choices,signature=ids.join('|');
-  const existing=card.querySelector('[data-term-primer]');if(existing?.dataset.termPrimer===signature)return;
-  const primer=document.createElement('aside');primer.className='term-primer';primer.dataset.termPrimer=signature;primer.dataset.glossarySkip='';primer.setAttribute('aria-label','本卡名詞小抄');
-  primer.innerHTML=`<div><span class="term-primer-title">這張卡的新名詞</span><div class="term-primer-words">${ids.map(id=>termButton(id)).join('')}</div></div><button type="button" class="term-primer-all" data-open-glossary="${chapter}">查本卡所有名詞 ↗</button>`;
-  if(existing)existing.replaceWith(primer);else if(host)host.before(primer);else card.querySelector('.epilogue-intro')?.after(primer);
- }
  function annotate(card){
-  if(!card.isConnected)return;ensurePrimer(card);
+  if(!card.isConnected)return;
   const seen=new Set([...card.querySelectorAll('[data-inline-term]')].map(button=>button.dataset.scienceTerm));
   const nodes=[],walker=document.createTreeWalker(card,NodeFilter.SHOW_TEXT);
   while(walker.nextNode()){const node=walker.currentNode,parent=node.parentElement;if(parent&&!parent.closest(skip)&&parent.closest('p,li,dd'))nodes.push(node);}

@@ -1,11 +1,12 @@
 export const lessons=[
  {
   "id": 1,
+  "assessment": false,
   "act": "序章｜回家的條件",
   "day": "皇宮工坊",
   "type": "ore",
-  "title": "礦石裡的鐵，去了哪裡？",
-  "question": "礦石含有鐵，為什麼不能直接鍛成劍？",
+  "title": "打造一把削鐵如泥的神兵",
+  "question": "現在有了鐵礦，然後呢？",
   "opening": "皇帝沒收時空裝置，命人把兩人關進鍛刀房。阿公拿起礦石，和小葵一起找線索。一箱鐵礦石從小門送來：「造出神兵，才能離開。」",
   "task": "拖曳旋轉礦石，近看岩面。找得到能直接取出的金屬嗎？",
   "required": [
@@ -426,7 +427,8 @@ export const lessons=[
 export const materialCases={"metals":[["Cu","銅片"],["Mg","鎂帶"],["Zn","鋅粉"],["Na","鈉"]],"nonmetals":[["S","硫"],["P","紅磷"],["C","碳"]],"redox":[["alone","只有 CuO"],["carbon","CuO ＋ 碳"],["ZnCu","Zn ＋ CuO"],["CuZn","Cu ＋ ZnO"]],"steel":[["pig","① 生鐵 · 3.5% C"],["steel","② 鋼 · 0.8% C"],["wrought","③ 熟鐵 · 0.01% C"]],"combustion":[["Cu","銅片"],["Mg","鎂帶"],["Zn","鋅粉"],["Na","鈉"],["S","硫"],["P","紅磷"],["C","碳"]]};
 export function freshState(c){return {selected:materialCases[c.type]?.[0][0]||'',evidence:[],quizOpen:false,answer:null,tab:'burn'};}
 export function isReady(c,s){return c.required.every(key=>s.evidence.includes(key));}
-export function restoreState(c,raw){const s=freshState(c);if(!raw||typeof raw!=='object')return s;s.evidence=[...new Set((Array.isArray(raw.evidence)?raw.evidence:[]).filter(k=>c.required.includes(k)))];if(materialCases[c.type]?.some(([key])=>key===raw.selected))s.selected=raw.selected;s.quizOpen=isReady(c,s)&&raw.quizOpen===true;s.answer=s.quizOpen&&Number.isInteger(raw.answer)&&raw.answer>=0&&raw.answer<4?raw.answer:null;return s;}
+export function isMastered(c,s){return isReady(c,s)&&(c.assessment===false||s.answer===c.quiz.answer);}
+export function restoreState(c,raw){const s=freshState(c);if(!raw||typeof raw!=='object')return s;s.evidence=[...new Set((Array.isArray(raw.evidence)?raw.evidence:[]).filter(k=>c.required.includes(k)))];if(materialCases[c.type]?.some(([key])=>key===raw.selected))s.selected=raw.selected;s.quizOpen=c.assessment!==false&&isReady(c,s)&&raw.quizOpen===true;s.answer=s.quizOpen&&Number.isInteger(raw.answer)&&raw.answer>=0&&raw.answer<4?raw.answer:null;return s;}
 export function massBalance(key){return key==='Mg'?{solidBefore:24,oxygen:16,solidAfter:40,gas:0}:{solidBefore:12,oxygen:32,solidAfter:0,gas:44};}
 export function litmusResult(type,paper){return type==='acid'?'#c46579':type==='base'?'#526eb9':paper==='red'?'#c46579':'#526eb9';}
 
