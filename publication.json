@@ -18,12 +18,77 @@
     "sourceFolder": "/",
     "publishCommand": "node publish-pages.mjs",
     "url": "https://urpig.github.io/ch2/",
-    "sourceCommit": "670953a0663a17c4d706b457c6aa6cf27cc6a0c9",
-    "pagesCommit": "f5e3814f17c1f672cebcca2217e4400f3d36d3fd",
-    "sourceTree": "0213bddbe4e7d3fac082e5bd0dc16f4f3cb333ae",
-    "verifiedAt": "2026-10-26T06:26:26.563Z"
+    "sourceCommit": "473f860e68ac693a0716d5d019c3e4ec87eb2d89",
+    "pagesCommit": "b9a963c51d282c365b9c33d7913693253c6ee96d",
+    "sourceTree": "b2b961c758e03bd5e9d560539c1125ce92624ad8",
+    "verifiedAt": "2026-10-28T10:41:05.928Z"
   },
   "currentPublicDeployment": {
+    "provider": "github-pages",
+    "url": "https://urpig.github.io/ch2/",
+    "status": "published",
+    "sourceCommit": "473f860e68ac693a0716d5d019c3e4ec87eb2d89",
+    "pagesCommit": "b9a963c51d282c365b9c33d7913693253c6ee96d",
+    "sourceTree": "b2b961c758e03bd5e9d560539c1125ce92624ad8",
+    "fileCount": 197,
+    "anonymousHttpVerifiedAt": "2026-10-28T10:38:53.715Z",
+    "anonymousHttpChecksPassed": 14,
+    "httpVerification": "No cookies or authorization supplied. Fourteen files returned HTTP 200 and matched the committed source SHA-256; text line endings normalized and JPEG bytes compared exactly.",
+    "verifiedFiles": [
+      "index.html",
+      "story-app.js",
+      "journey-cards.js",
+      "iron-affinity-workshop.js",
+      "iron-affinity-bench.js",
+      "iron-affinity-model.js",
+      "respiration-art.js",
+      "everyday-redox.css",
+      "antioxidant-epilogue.js",
+      "antioxidant-epilogue.css",
+      "assets/story/antioxidants/oranges.jpg",
+      "assets/story/antioxidants/almonds.jpg",
+      "assets/story/antioxidants/grapes.jpg",
+      "chemistry/index.html"
+    ],
+    "browserVerifiedAt": "2026-10-28T10:41:05.928Z",
+    "browserVerification": [
+      "Public homepage renders the updated story and six-material navigation without a login requirement.",
+      "Card 03 accepts the overall prediction and a separate copper prediction; adding copper triggers the reaction and records that iron was not recovered.",
+      "All six specimen choices and the fixed iron-oxide crucible render on the public experiment bench.",
+      "Respiration displays the pale mitochondrion background with its 0.68 tint while foreground SVG opacity stays 1.",
+      "Three real food photograph elements are present and their downloaded files match the local originals.",
+      "No broken HTML images or captured console errors observed during the public smoke check."
+    ],
+    "automatedTestsPassed": 153,
+    "verificationLimits": "Publication smoke check covered the homepage, card 03 prediction and copper reaction, respiration background, and photo assets. It did not repeat every lesson or mobile-device interaction. Both standalone builds and all 153 automated tests passed for this source.",
+    "screenshot": "outputs/ch2-public-oct28-respiration.png",
+    "additionalScreenshot": "outputs/ch2-public-oct28-iron.png"
+  },
+  "previousPublicDeployment": {
+    "provider": "netlify",
+    "site": "whimsical-babka-221c30",
+    "url": "https://whimsical-babka-221c30.netlify.app/",
+    "deployId": "6add0fa73b84e3e7169c710e",
+    "status": "published",
+    "publishedAtDisplay": "2026-10-25 04:06 Asia/Taipei (minute precision from dashboard)",
+    "sourceCommit": "56efa9804420e626dd16b447a9496e8e7bf10a16",
+    "sourceDirectory": "dist",
+    "sourceTree": "53fdefc95427a3be896c1509a3bbf08d803c98ec",
+    "fileCount": 167,
+    "archiveSha256": "167ec8f7cb332dad3f7452f34bf1c3cc5e2672ff6ef102853190416e726af585",
+    "anonymousHttpVerifiedAt": "2026-10-24T20:14:11.409Z",
+    "anonymousHttpChecksPassed": 7,
+    "httpVerification": "No cookies or authorization supplied; all seven requests returned 200. JavaScript and image contents match the repo. HTML static text and app entry match after hosting link/comment processing.",
+    "browserVerification": [
+      "Public page renders the current story and antioxidant epilogue.",
+      "A prediction can be selected and submitted; the ore responds to keyboard rotation and records evidence.",
+      "Prediction and evidence survive reload; reset restores four choices and a visible scene preview.",
+      "No console errors or warnings observed during the smoke check."
+    ],
+    "verificationLimits": "This publication smoke check did not repeat every lesson interaction or mobile interaction. The unchanged application source previously passed all 123 automated tests.",
+    "publicationSequence": "Published to the existing Netlify site under the explicit public-link request before the user selected GitHub Pages for future publication. No further Netlify publication is authorized by this record."
+  },
+  "previousGitHubPagesDeployment": {
     "provider": "github-pages",
     "url": "https://urpig.github.io/ch2/",
     "status": "published",
@@ -60,48 +125,5 @@
     "automatedTestsPassed": 133,
     "verificationLimits": "Publication smoke check covered the homepage, glossary and ore interaction. It did not repeat every lesson or physical mobile-device interaction. Source is the same version that passed all 133 tests and the single-file build.",
     "screenshot": "outputs/ch2-GitHub-Pages-已發布.png"
-  },
-  "previousPublicDeployment": {
-    "provider": "netlify",
-    "site": "whimsical-babka-221c30",
-    "url": "https://whimsical-babka-221c30.netlify.app/",
-    "deployId": "6add0fa73b84e3e7169c710e",
-    "status": "published",
-    "publishedAtDisplay": "2026-10-25 04:06 Asia/Taipei (minute precision from dashboard)",
-    "sourceCommit": "56efa9804420e626dd16b447a9496e8e7bf10a16",
-    "sourceDirectory": "dist",
-    "sourceTree": "53fdefc95427a3be896c1509a3bbf08d803c98ec",
-    "fileCount": 167,
-    "archiveSha256": "167ec8f7cb332dad3f7452f34bf1c3cc5e2672ff6ef102853190416e726af585",
-    "anonymousHttpVerifiedAt": "2026-10-24T20:14:11.409Z",
-    "anonymousHttpChecksPassed": 7,
-    "httpVerification": "No cookies or authorization supplied; all seven requests returned 200. JavaScript and image contents match the repo. HTML static text and app entry match after hosting link/comment processing.",
-    "browserVerification": [
-      "Public page renders the current story and antioxidant epilogue.",
-      "A prediction can be selected and submitted; the ore responds to keyboard rotation and records evidence.",
-      "Prediction and evidence survive reload; reset restores four choices and a visible scene preview.",
-      "No console errors or warnings observed during the smoke check."
-    ],
-    "verificationLimits": "This publication smoke check did not repeat every lesson interaction or mobile interaction. The unchanged application source previously passed all 123 automated tests.",
-    "publicationSequence": "Published to the existing Netlify site under the explicit public-link request before the user selected GitHub Pages for future publication. No further Netlify publication is authorized by this record."
-  },
-  "previousGitHubPagesDeployment": {
-    "provider": "github-pages",
-    "url": "https://urpig.github.io/ch2/",
-    "status": "published",
-    "sourceCommit": "e1747fd904d1a84ac88bd0e71ddceddc16e17fe9",
-    "pagesCommit": "2812e58980fa6e8f2f12ebf7783b0a5cfbe5a1a0",
-    "fileCount": 168,
-    "anonymousHttpVerifiedAt": "2026-10-25T03:42:43.860Z",
-    "anonymousHttpChecksPassed": 7,
-    "httpVerification": "No cookies or authorization supplied. Homepage, story app, prediction module, antioxidant epilogue, story image, chemistry homepage and chemistry app all returned 200 and match source SHA-256 after text line-ending normalisation.",
-    "browserVerification": [
-      "Current story, navigation and visible scene previews render on the GitHub Pages project URL.",
-      "A prediction can be selected and submitted; keyboard ore rotation records observation evidence.",
-      "Prediction and observation survive reload; reset restores the four choices.",
-      "Everyday redox accepts the water-to-oxygen oxidation path and displays the paired oxidation/reduction explanation; reset works.",
-      "No console errors or warnings observed during these interactions."
-    ],
-    "verificationLimits": "Not every lesson interaction or mobile interaction was repeated for publication. The application code is unchanged from the version that passed all 123 automated tests. The publishing helper was executed successfully and verified the remote gh-pages commit and dist tree."
   }
 }
