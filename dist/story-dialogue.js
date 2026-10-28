@@ -1,15 +1,22 @@
 export function storySpeech(who,text,expression=who==='kui'?'curious':'gentle'){
  return `<div class="story-speech story-speech--${who}"><span class="story-portrait story-portrait--${who}" data-expression="${expression}" aria-hidden="true"></span><p><b>${({kui:'小葵',grandpa:'阿公',emperor:'皇上'})[who]}</b>${text}</p></div>`;
 }
-export function definitionDialogue(){return `<section class="prep-definitions" aria-labelledby="prep-definitions-title"><small>先聽小葵問，再跟阿公找答案</small><h3 id="prep-definitions-title">氧化、還原、活性：誰改變，誰讓它改變？</h3><div class="story-dialogue dialogue-stack">${[
- ['kui','「氧化和還原，到底是什麼？」'],
- ['grandpa','「先追蹤氧：<strong>物質得到氧，是氧化；氧化物失去氧，是還原。</strong>例如鐵與氧結合成氧化鐵，鐵被氧化；氧化鐵失去氧、留下金屬鐵，則是氧化鐵被還原。」'],
- ['kui','「那誰比較容易把氧拿走？這就是活性嗎？」'],
- ['grandpa','「<strong>對氧活性，是元素與氧結合的傾向。</strong>活性較大，通常較容易得到氧；能不能從另一種氧化物取氧，還要比較兩者，並看溫度等反應條件。」'],
- ['kui','「氧化劑和還原劑，是看自己變成什麼嗎？」'],
- ['grandpa','「名字要看它讓對方做什麼！<strong>氧化劑使別的物質氧化，自己被還原；還原劑使別的物質還原，自己被氧化。</strong>木炭燃燒時，氧氣使碳氧化，氧氣是氧化劑。煉鐵時，CO 使氧化鐵失氧，自己變成 CO₂，所以 CO 是還原劑。」'],
- ['grandpa','「更一般地說，<strong>失去電子是氧化，得到電子是還原</strong>，兩者同時發生。氧化劑接受電子，還原劑提供電子；角色要依這一次反應判斷。」']
- ].map(([who,line])=>storySpeech(who,line)).join('')}</div></section>`;}
+export function definitionDialogue(){return `<section class="prep-definitions" aria-labelledby="prep-definitions-title"><small>先看變化，再認識角色</small><h3 id="prep-definitions-title">五個名詞，一張圖看懂</h3><div class="story-dialogue dialogue-stack">${storySpeech('kui','「氧化、還原和活性有什麼不同？氧化劑、還原劑又是誰？」')}${storySpeech('grandpa','「先追蹤氧的去向，再看誰讓對方改變。把這五個名詞放在一起，就比較不會搞混了。」')}</div>
+<div class="redox-definition-map" aria-label="氧化、還原、對氧活性、氧化劑與還原劑定義圖卡">
+ <div class="definition-pair">
+  <section class="definition-tile definition-tile--oxidation"><h4>氧化</h4><p class="definition-key">物質<strong>得到氧</strong>，與氧結合</p><div class="definition-flow" aria-hidden="true"><span>物質</span><span class="definition-arrow">＋ <i>O</i> →</span><span>氧化物</span></div><p class="definition-example">例如：銅得到氧，形成氧化銅。</p></section>
+  <section class="definition-tile definition-tile--reduction"><h4>還原</h4><p class="definition-key">氧化物<strong>失去氧</strong></p><div class="definition-flow" aria-hidden="true"><span>氧化物</span><span class="definition-arrow">→ <i>O</i> 移走</span><span>留下物質</span></div><p class="definition-example">例如：氧化鐵失去氧，留下鐵。</p></section>
+ </div>
+ <section class="definition-affinity"><div><h4>對氧活性</h4><p>元素與氧結合的傾向；<strong>活性較大，通常較容易得到氧。</strong></p></div><div class="definition-ranking" aria-label="本課對氧活性由大到小：鎂、碳、鐵、銅"><span>較大</span><b>鎂 ＞ 碳 ＞ 鐵 ＞ 銅</b><span>較小</span></div><p class="definition-example">比較兩者的活性，可預測誰能取走氧；仍須符合溫度等反應條件。</p></section>
+ <div class="definition-role-heading">「劑」看它讓對方做什麼</div>
+ <div class="definition-pair">
+  <section class="definition-tile definition-tile--agent"><h4>氧化劑</h4><div class="definition-role-flow"><span>使對方<strong>被氧化</strong></span><span>同時</span><span>自己<strong>被還原</strong></span></div><p class="definition-example">例如：木炭燃燒時，氧氣是氧化劑。</p></section>
+  <section class="definition-tile definition-tile--agent"><h4>還原劑</h4><div class="definition-role-flow"><span>使對方<strong>被還原</strong></span><span>同時</span><span>自己<strong>被氧化</strong></span></div><p class="definition-example">例如：高溫煉鐵時，CO 是還原劑。</p></section>
+ </div>
+ <p class="definition-together"><strong>氧化與還原，同時發生。</strong>得氧／失氧是入門線索；圖中 O 示意氧的轉移。</p>
+ <details class="definition-electrons"><summary>再認識電子的說法</summary><p>失去電子是氧化，得到電子是還原。氧化劑接受電子，還原劑提供電子；角色要依這一次反應判斷。</p></details>
+</div></section>`;}
+
 const notes={
  1:['赤鐵礦主要含氧化鐵 Fe₂O₃；含有鐵元素，不等於已經是金屬鐵。','敲碎、磨細只改變大小；要取得鐵，需要化學反應讓氧化鐵失去氧。'],
  2:['燃燒是劇烈的氧化；銅加熱形成黑色氧化銅，沒有明顯火焰也能被氧化。','火焰顏色、產物外觀和反應式要一起看；變色不一定代表生成新物質。','氧化物遇水不一定都反應。石蕊用來比較酸鹼性：酸使藍色石蕊變紅，鹼使紅色石蕊變藍。'],
