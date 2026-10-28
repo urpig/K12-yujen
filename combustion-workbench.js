@@ -1,3 +1,4 @@
+import {mountReactionObservations} from './combustion-observations.js';
 import {laboratoryBackground,spoonIllustration,alcoholLamp} from './laboratory-assets.js';
 import {mountBenchWater} from './bench-water.js';
 import {createCombustionAtmosphere} from './combustion-atmosphere.js';
@@ -54,12 +55,14 @@ export function mountCombustion(root,{key,isMetal,autoLoad=false,spoonOrigin=nul
  const condition=(isMetal?(key==='Cu'?'空氣中加熱；銅片形成黑色表層，通常沒有自身火焰。':'空氣中加熱，觀察樣本的燃燒與產物。'):key==='CO'?'氧不足案例可能有混合產物；CO 不以有色煙呈現。':'瓶內預先充氧，用來觀察燃燒及保留產物；無色氣體不染色；移入路徑簡化示意。')+(key==='Na'||key==='P'||key==='CO'?' 此案例僅虛擬操作。':'');
  root.innerHTML=scopeMarkup(`<div class="combustion-workbench ${completed?'':'mobile-combustion'}" data-combustion-stage="${completed?'done':autoLoad?'loaded':'load'}" data-element="${key}" data-bottle-covered="${!isMetal&&completed?'true':'false'}">${combustionArtwork(key,completed?'done':'load',isMetal,cool,spoonOrigin)}<div data-shelf-target class="shelf-load-target drop-target"><span>放到燃燒匙凹槽 ↓</span></div>${completed?'':`<div class="heat-contact-zone" data-heat-zone aria-hidden="true"></div><div class="combustion-spoon" data-spoon aria-label="${autoLoad?'裝有'+name:'空的'}燃燒匙">${spoonIllustration(key,{empty:!autoLoad,progress:autoLoad})}${mobileSpecimenFallback(key)}<span>按住匙柄拖動 · 可移開</span></div>${isMetal?'':'<div class="drop-target jar-body-zone" data-jar-target><span>點燃後，拖進瓶內 ↓</span></div>'}<div class="spoon-heat-readout"><b data-heat-label></b><span data-heat-detail></span><div class="spoon-heat-progress" role="progressbar" aria-label="樣本受熱或觀察進度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div></div>`}</div><p class="combustion-step" aria-live="polite"></p><p class="combustion-condition">${condition}${completed?(['S','C','CO'].includes(key)?' 已自動取匙並省略冷卻時間；玻璃片自動開合。':' 產物呈現冷卻後外觀，省略冷卻時間。'):' 受熱時間簡化，未計殘熱。'}</p>`,'combustion-'+key);
  const board=root.querySelector('.combustion-workbench'),step=root.querySelector('.combustion-step');
+ const updateReaction=mountReactionObservations(board,key,{completed});updateReaction();
  if(atmosphere){board.append(atmosphere.canvas);board.classList.add('atmosphere-ready');atmosphere.update({key,stage:completed?'done':'load',isMetal,mobile:completed,bowl:spoonOrigin||[320,224],specimenActive:false});}
- mountBenchWater(board,{key,completed,cool,spoonOrigin,delay,onCleanup,notice,onCool,onComplete:onWetComplete});
+ mountBenchWater(board,{key,completed,cool,spoonOrigin,delay,onCleanup,notice,onCool,onWaterAdded:()=>updateReaction({waterAdded:true}),onComplete:onWetComplete});
  if(completed){shelfTarget(board);step.textContent=['S','C','CO'].includes(key)?'燃燒結束並示意冷卻後，直接加水、輕搖；玻璃片自動開合。再用滴管取液，滴在桌面的紅、藍石蕊試紙上。':'觀察完成。可直接把產物加入水中，或從架上取下一份樣本。';return;}
  let state=newSpoonHeating(key,isMetal,autoLoad),point=spoonOrigin?[...spoonOrigin]:[320,224],inJar=false,held=false,alive=true,started=false,last=performance.now(),timer=0,previousMessage='';
  const spoon=board.querySelector('[data-spoon]'),label=board.querySelector('[data-heat-label]'),detail=board.querySelector('[data-heat-detail]'),meter=board.querySelector('[role="progressbar"]');
  function show(){
+  updateReaction(state);
   const near=spoonNearFlame(point),heating=state.loaded&&!state.complete&&near;
   const stage=!state.loaded?'load':state.ignited?(isMetal||inJar?'react':'transfer'):heating?'ignite':'loaded';
   const ratio=key==='Cu'?state.heatMs/spoonTiming.copper:!state.ignited?state.heatMs/spoonTiming.ignition:isMetal?state.burnMs/spoonTiming.metal:state.observationMs/spoonTiming.nonmetal;

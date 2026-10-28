@@ -24,3 +24,14 @@
 .jar-spoon-extension{display:none}
 .combustion-workbench[data-bottle-covered=true] .jar-spoon-extension{display:inline}
 @media(prefers-reduced-motion:reduce){.jar-glass-cover{transition:none}}
+.specimen-reaction-live{position:absolute;left:2%;top:2%;width:43%;z-index:12;padding:12px 14px;border:1px solid #a9baa7;border-left:4px solid #c79a4c;border-radius:7px;background:#fffef5f5;box-shadow:0 3px 14px #233e4320;pointer-events:none;color:#254c4e}
+.show-specimen-reaction .spoon-heat-readout{visibility:hidden}
+.specimen-reaction-live b,.combustion-reaction-record b{display:block;font-size:13px;line-height:1.6}
+.specimen-reaction-live i,.combustion-reaction-record i{display:inline-block;width:12px;height:12px;margin-right:7px;border:1px solid #8a927a;border-radius:50%;background:var(--specimen-colour);box-shadow:0 0 7px var(--specimen-colour)}
+.specimen-equation{display:block;margin:6px 0;font:600 clamp(14px,1.4vw,19px)/1.6 Georgia,serif;letter-spacing:.02em;overflow-wrap:anywhere}
+.specimen-reaction-live small,.combustion-reaction-record small{display:block;font-size:11px;line-height:1.7;color:#64786d}
+.combustion-reaction-record{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:12px;background:#eef1e6;border-top:1px solid #c3cdb5}
+.combustion-reaction-record>div{padding:12px 14px;border:1px solid #c5ceb9;border-radius:6px;background:#fffdf4}
+.combustion-reaction-record:not(:has([data-water-reaction]:not([hidden])))>[data-burn-reaction]{grid-column:1/-1}
+.reaction-record-step{display:block;font-size:11px;color:#98733e;margin-bottom:5px}
+@media(max-width:650px){.specimen-reaction-live{width:48%;padding:6px 8px}.specimen-reaction-live b{font-size:10px}.specimen-reaction-live small{display:none}.specimen-reaction-live .specimen-equation{font-size:12px;margin:3px 0}.combustion-reaction-record{grid-template-columns:1fr}}

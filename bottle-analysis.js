@@ -3,7 +3,7 @@ import {scopeMarkup} from './card-markup.js';
 import {restingSpoon} from './bottle-analysis-art.js';
 import {newBottleLitmus,bottleLitmusStep,bottleLitmusResult,bottleNextAction,litmusColours} from './bottle-ph-state.js';
 
-export function mountBottleAnalysis(board,{key,completed,delay,onCleanup=()=>{},notice,onComplete}){
+export function mountBottleAnalysis(board,{key,completed,delay,onCleanup=()=>{},notice,onWaterAdded=()=>{},onComplete}){
  if(!completed){const hint=document.createElement('p');hint.className='bottle-idle';hint.textContent='燃燒後自動取匙、示意冷卻；加入水並輕搖，再用滴管取液滴到紅、藍石蕊試紙。';board.append(hint);return;}
  board.dataset.bottleAnalysis=key;
  let state=newBottleLitmus(),alive=true,committed=false,lastShake=560,shakingHeld=false,dropping=false;
@@ -32,7 +32,9 @@ export function mountBottleAnalysis(board,{key,completed,delay,onCleanup=()=>{},
  function say(t){station.querySelector('.bottle-analysis-status').textContent=t;notice(t);}
  function dispatch(event){const before=state;state=bottleLitmusStep(state,event);if(before!==state)show();}
  function enable(tool,yes){tool.classList.toggle('unavailable',!yes);tool.setAttribute('aria-disabled',String(!yes));tool.tabIndex=yes?0:-1;}
+ function onWaterAddedIfReady(){if(state.water)onWaterAdded();}
  function show(){
+  onWaterAddedIfReady();
   station.dataset.phase=state.phase;station.dataset.shake=String(Math.round(state.shake));water.setAttribute('visibility',state.water?'visible':'hidden');
   lid.classList.toggle('is-covered',state.phase==='shake');lid.tabIndex=-1;enable(wash,state.phase==='pour');enable(shaker,state.phase==='shake'||shakingHeld);mouth.hidden=state.phase!=='pour';
   const tool=station.querySelector('[data-pipette=sample]');enable(tool,state.phase==='test');tool.classList.toggle('charged',state.loaded);tool.dataset.loaded=String(state.loaded);
