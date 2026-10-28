@@ -19,15 +19,15 @@
 .locked-forge-scene{margin:0;position:relative;border-radius:10px;overflow:hidden;background:#4a3929;border:1px solid #a99574}
 .locked-forge-scene img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain}
 .locked-forge-scene figcaption{padding:9px 12px;font-size:12px;line-height:1.6;background:#f3ebdb;color:#705b3e}
-.with-forge-scene .story-dialogue{grid-template-columns:1fr;gap:10px}.with-forge-scene .story-speech{padding:10px;gap:10px;grid-template-columns:70px minmax(0,1fr)}
-.with-forge-scene .story-portrait{width:70px;height:70px}
+.with-forge-scene .story-dialogue{grid-template-columns:1fr;gap:10px}.with-forge-scene .story-speech{padding:10px;gap:10px;grid-template-columns:56px minmax(0,1fr)}
+.with-forge-scene .story-portrait{width:56px;height:56px}
 #card-5 .factory-hotspot{padding:5px 8px;min-height:30px}#card-5 .factory-hotspot:not([data-zone=charge]) small{display:none}
 #card-5 .factory-main-product{filter:drop-shadow(0 2px 3px #85460b26)}
 .comparison-sheet .combustion-product-record b{display:block;font-size:13px;color:#365c4b}
 .combustion-record-equation{display:block;font-size:15px;font-weight:650;white-space:nowrap;color:#78552c;margin:3px 0}
 .combustion-product-record small{display:block;font-size:11px;line-height:1.6;color:#71806e}
 .comparison-sheet table{width:100%;table-layout:auto}.comparison-sheet th:first-child{width:12%}.comparison-sheet .combustion-product-record{width:36%}
-@media(max-width:1100px){.story-scene-intro.with-forge-scene{grid-template-columns:1fr 1fr;gap:15px}.with-forge-scene .story-speech{grid-template-columns:54px 1fr}.with-forge-scene .story-portrait{width:54px;height:54px}}
+@media(max-width:1100px){.story-scene-intro.with-forge-scene{grid-template-columns:1fr 1fr;gap:15px}.with-forge-scene .story-speech{grid-template-columns:48px 1fr}.with-forge-scene .story-portrait{width:48px;height:48px}}
 @media(max-width:700px){.story-scene-intro.with-forge-scene{grid-template-columns:1fr}.comparison-sheet{overflow:auto}.comparison-sheet table{min-width:680px}}
 @media print{body{padding-left:0}.route-panel{display:none}}
 
