@@ -1,25 +1,17 @@
 export function storySpeech(who,text,expression=who==='kui'?'curious':'gentle'){
  return `<div class="story-speech story-speech--${who}"><span class="story-portrait story-portrait--${who}" data-expression="${expression}" aria-hidden="true"></span><p><b>${({kui:'小葵',grandpa:'阿公',emperor:'皇上'})[who]}</b>${text}</p></div>`;
 }
-export function definitionDialogue(){return `<section class="prep-definitions" aria-labelledby="prep-definitions-title"><small>先看變化，再認識角色</small><h3 id="prep-definitions-title">五個名詞，一張圖看懂</h3><div class="story-dialogue dialogue-stack">${storySpeech('kui','「氧化、還原和活性有什麼不同？氧化劑、還原劑又是誰？」')}${storySpeech('grandpa','「先追蹤氧的去向，再看誰讓對方改變。把這五個名詞放在一起，就比較不會搞混了。」')}</div>
-<div class="redox-definition-map" aria-label="氧化、還原、對氧活性、氧化劑與還原劑定義圖卡">
- <header class="definition-map-heading"><span>O</span><div><small>FOLLOW THE OXYGEN</small><h4>看懂氧的去向，就看懂兩邊的變化</h4><p>用同一個例子認識五個名詞：鎂與二氧化碳反應。</p></div></header>
- <div class="definition-section-label"><b>01</b><span>發生了什麼變化？</span><small>先看自己</small></div>
- <div class="definition-pair">
-  <section class="definition-tile definition-tile--oxidation"><div class="definition-term"><h4>氧化</h4><span>OXIDATION</span></div><p class="definition-key">物質<strong>得到氧</strong></p><p>與氧結合，形成氧化物。</p><div class="definition-specimen"><div><small>反應前</small><div class="definition-molecule"><i class="atom-mg">Mg</i></div><b>鎂</b></div><span class="definition-change">得到 O<span>⟶</span></span><div><small>反應後</small><div class="definition-molecule"><i class="atom-mg">Mg</i><i class="atom-o">O</i></div><b>氧化鎂</b></div></div><div class="definition-verdict">鎂得到氧，所以<strong>鎂被氧化</strong>。</div></section>
-  <section class="definition-tile definition-tile--reduction"><div class="definition-term"><h4>還原</h4><span>REDUCTION</span></div><p class="definition-key">氧化物<strong>失去氧</strong></p><p>氧被移走，原來結合的物質留下。</p><div class="definition-specimen"><div><small>反應前</small><div class="definition-molecule"><i class="atom-o">O</i><i class="atom-c">C</i><i class="atom-o">O</i></div><b>二氧化碳</b></div><span class="definition-change">失去 O<span>⟶</span></span><div><small>反應後</small><div class="definition-molecule"><i class="atom-c">C</i></div><b>碳</b></div></div><div class="definition-verdict">CO₂ 失去氧，所以<strong>CO₂ 被還原</strong>。</div></section>
- </div>
- <div class="definition-transfer"><span>鎂接走氧</span><b>⟵</b><span>同一批氧，從 CO₂ 轉移到鎂</span><b>⟵</b><span>CO₂ 交出氧</span></div>
- <div class="definition-reaction"><span>點燃的鎂可在 CO₂ 中繼續反應</span><b>2Mg + CO₂ → 2MgO + C</b><strong>一邊氧化，一邊還原；兩者同時發生。</strong><small>球模型用來辨認物質；完整反應的粒子數以反應式為準。</small></div>
- <div class="definition-section-label"><b>02</b><span>誰比較容易與氧結合？</span><small>比較傾向</small></div>
- <section class="definition-affinity"><div><h4>對氧活性</h4><p>元素與氧結合的傾向。<br><strong>活性較大，通常較容易得到氧。</strong></p></div><div class="definition-ranking" aria-label="本課對氧活性由大到小：鎂、碳、鐵、銅"><div><span>較大 · 較容易得氧</span><span>較小</span></div><ol><li><b>Mg</b>鎂</li><li><b>C</b>碳</li><li><b>Fe</b>鐵</li><li><b>Cu</b>銅</li></ol></div><p class="definition-example">這個例子中，鎂的對氧活性比碳大，能從 CO₂ 取氧。實際能否反應，還要看溫度等條件。</p></section>
- <div class="definition-section-label"><b>03</b><span>誰讓對方發生改變？</span><small>辨認角色</small></div>
- <div class="definition-pair definition-agents">
-  <section class="definition-tile definition-tile--reductant"><div class="definition-agent-id"><span>Mg</span><div><small>在這個反應中，鎂是</small><h4>還原劑</h4></div></div><p class="definition-agent-action">使對方<strong>被還原</strong></p><p class="definition-example">鎂取走 CO₂ 的氧，讓 CO₂ 被還原。</p><div class="definition-self">自己則<strong>被氧化</strong><span>Mg → MgO</span></div></section>
-  <section class="definition-tile definition-tile--oxidant"><div class="definition-agent-id"><span>CO₂</span><div><small>在這個反應中，CO₂ 是</small><h4>氧化劑</h4></div></div><p class="definition-agent-action">使對方<strong>被氧化</strong></p><p class="definition-example">CO₂ 提供氧給鎂，讓鎂被氧化。</p><div class="definition-self">自己則<strong>被還原</strong><span>CO₂ → C</span></div></section>
- </div>
- <p class="definition-memory"><b>記住這個差別</b><span>「氧化／還原」看<strong>自己的變化</strong>；<br>「氧化劑／還原劑」看<strong>讓對方發生的變化</strong>。</span></p>
- <details class="definition-electrons"><summary>進一步理解：用電子也能判斷</summary><p>失去電子是氧化，得到電子是還原。氧化劑接受電子，還原劑提供電子；角色要依這一次反應判斷。得氧、失氧是本圖使用的入門線索，並非所有氧化還原反應都涉及氧的轉移。</p></details>
+export function definitionDialogue(){return `<section class="prep-definitions" aria-labelledby="prep-definitions-title"><small>開始前，先認識</small><h3 id="prep-definitions-title">五個名詞，先抓住重點</h3><div class="story-dialogue dialogue-stack">${storySpeech('kui','「氧化、還原和活性是什麼？氧化劑、還原劑又是誰？」')}${storySpeech('grandpa','「先記住下面的意思，再親手操作，看看它們怎麼發生。」')}</div>
+<div class="redox-definition-map" aria-label="五個名詞的簡短解釋">
+ <p class="definition-intro">先從「氧的得失」認識氧化與還原。</p>
+ <dl class="definition-brief-list">
+  <div><dt>氧化</dt><dd>物質<strong>得到氧</strong>，與氧結合。</dd></div>
+  <div><dt>還原</dt><dd>氧化物<strong>失去氧</strong>。</dd></div>
+  <div><dt>對氧活性</dt><dd>元素與氧結合的傾向；<strong>活性越大，通常越容易得氧</strong>。</dd></div>
+  <div><dt>氧化劑</dt><dd>使別的物質<strong>被氧化</strong>，自己被還原。</dd></div>
+  <div><dt>還原劑</dt><dd>使別的物質<strong>被還原</strong>，自己被氧化。</dd></div>
+ </dl>
+ <p class="definition-next">氧化與還原同時發生。接著操作下方卡片，找出誰改變了。<span aria-hidden="true">↓</span></p>
 </div></section>`;}
 
 const notes={
