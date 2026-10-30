@@ -31,7 +31,7 @@ export function mountReactionObservations(board,key,{completed=false}={}){
  let lastBurn=false,lastWater=false;
  return function update(state={}){
   const data=reactionObservations(key,{...state,completed});
-  if(data.burn&&!lastBurn){const d=data.burn,html=`<b><i style="--specimen-colour:${d.colour}" aria-hidden="true"></i>${d.text}</b><strong class="specimen-equation">${d.equation}</strong><small>${d.detail}</small>`;live.innerHTML=html;burn.innerHTML='<span class="reaction-record-step">① 與氧反應 · 氧化</span>'+html;lastBurn=true;}
+  if(data.burn&&!lastBurn){const d=data.burn,html=`<b><i style="--specimen-colour:${d.colour}" aria-hidden="true"></i>${d.text}</b><strong class="specimen-equation">${d.equation}</strong><small>${d.detail}</small>`;live.innerHTML=`<b><i style="--specimen-colour:${d.colour}" aria-hidden="true"></i>${d.text}</b><strong class="specimen-equation">${d.equation}</strong>`;burn.innerHTML='<span class="reaction-record-step">① 與氧反應 · 氧化</span>'+html;lastBurn=true;}
   live.hidden=completed||!data.burn;board.classList.toggle('show-specimen-reaction',!live.hidden);burn.hidden=!completed||!data.burn;
   if(data.water&&!lastWater){const d=data.water;wet.innerHTML='<span class="reaction-record-step">② 產物加入水後</span><b>'+d.text+'</b>'+(d.equation?'<strong class="specimen-equation">'+d.equation+'</strong>':'')+'<small>'+d.detail+'</small>';lastWater=true;}
   wet.hidden=!data.water;record.hidden=burn.hidden&&wet.hidden;

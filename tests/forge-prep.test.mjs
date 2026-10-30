@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {freshPrep,restorePrep,prepReady,prepMastered,checkAffinity,ironAppearanceStage,oxygenAffinitySeries,compareWithCarbon,ironOxygenLedger} from '../dist/forge-prep-model.js';
 test('readiness requires complete correct evidence; a quiz answer alone is insufficient',()=>{const s=freshPrep();s.answers=[1,0,2];for(let i=0;i<3;i++)assert.equal(prepMastered(s,i),false);s.sorted=['burn','rust','breath','ice'];s.order=['Mg','C','Fe','Cu'];s.moved=[0,1];for(let i=0;i<3;i++)assert.equal(prepMastered(s,i),true);s.order=['C','Mg','Fe','Cu'];assert.equal(prepReady(s,1),false);assert.equal(checkAffinity(['Mg','C','Fe','Cu']),true);});
 test('restoration filters invalid duplicates and does not grant unearned quiz completion',()=>{const s=restorePrep({tab:9,sorted:['burn','burn','fake'],order:['Mg','Mg','fake'],moved:[0,0,4],answers:[1,0,2]});assert.deepEqual(s,{...freshPrep(),sorted:['burn'],order:['Mg'],moved:[0],targets:[0]});assert.deepEqual(restorePrep(null),freshPrep());});
-test('saved completion survives reload while partial transfers remain partial',()=>{const raw={version:2,tab:2,sorted:['burn','rust','breath','ice'],order:['Mg','C','Fe','Cu'],moved:[1],answers:[1,0,2]};const s=restorePrep(raw);assert.equal(prepMastered(s,0),true);assert.equal(prepMastered(s,1),true);assert.equal(prepReady(s,2),false);assert.equal(s.answers[2],null);});
+test('old A answer is cleared while B completion and partial transfers survive reload',()=>{const raw={version:2,tab:2,sorted:['burn','rust','breath','ice'],order:['Mg','C','Fe','Cu'],moved:[1],answers:[1,0,2]};const s=restorePrep(raw);assert.equal(prepMastered(s,0),false);assert.equal(prepMastered(s,1),true);assert.equal(prepReady(s,2),false);assert.equal(s.answers[2],null);});
 test('appearance remains bounded and distinguishes solid porous metal from molten iron',()=>{assert.equal(ironAppearanceStage(-5).fraction,0);assert.equal(ironAppearanceStage(NaN).fraction,0);assert.equal(ironAppearanceStage(1).fraction,1/3);assert.equal(ironAppearanceStage(2).fraction,2/3);assert.equal(ironAppearanceStage(30).fraction,1);assert.match(ironAppearanceStage(3).description,/固態/);assert.match(ironAppearanceStage(2).description,/不是成分比例/);});
 test('requested sequence has seventeen distinct elements and compares carbon on both sides',()=>{
  assert.equal(oxygenAffinitySeries.map(x=>x.name).join('、'),'鉀、鈉、鈣、鎂、鋁、碳、鋅、鉻、鐵、錫、鉛、氫、銅、汞、銀、鉑、金');
@@ -20,9 +20,9 @@ test('each accepted oxygen leaves the oxide and arrives at CO without duplicatin
  }
  assert.equal(ironOxygenLedger([2,2]).count,1);assert.equal(ironOxygenLedger(null).count,0);
 });
-test('migration keeps earlier operations and A answer but does not carry answers into revised B/C questions',()=>{
+test('migration keeps earlier operations but does not carry answers into revised B/C questions',()=>{
  const raw={tab:1,sorted:['burn','rust','breath','ice'],order:['Mg','C','Fe','Cu'],moved:[1,0],targets:[0,1],answers:[1,0,2]};
- const s=restorePrep(raw);assert.deepEqual(s.order,raw.order);assert.deepEqual(s.moved,raw.moved);assert.deepEqual(s.answers,[1,null,null]);assert.equal(s.version,3);
+ const s=restorePrep(raw);assert.deepEqual(s.order,raw.order);assert.deepEqual(s.moved,raw.moved);assert.deepEqual(s.answers,[null,null,null]);assert.equal(s.version,3);
 });
 test('removed iron intro migrates to magnesium without awarding its observation',()=>{
  const raw={...freshPrep(),ironPairs:[2,1,0],reaction:'iron',answers:[null,null,2]};
@@ -41,3 +41,5 @@ test('moving life examples to D preserves records and keeps C independently sele
  assert.equal(restorePrep({...freshPrep(),version:2,tab:2,reaction:'magnesium'}).tab,2);
  assert.equal(restorePrep({...freshPrep(),tab:3}).tab,3);
 });
+
+test('new A answer survives reload after answering the revised question',()=>{const raw={...freshPrep(),sorted:['burn','rust','breath','ice'],answers:[1,null,null]};assert.equal(prepMastered(restorePrep(raw),0),true);});

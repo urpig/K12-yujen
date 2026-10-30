@@ -1,9 +1,7 @@
 export const ironCandidates={
  C:{name:'碳',canReduce:true,oxide:'二氧化碳 CO₂',equation:'2Fe₂O₃ + 3C → 4Fe + 3CO₂',colour:'#303d38'},
  Zn:{name:'鋅',canReduce:true,oxide:'氧化鋅 ZnO',equation:'Fe₂O₃ + 3Zn → 2Fe + 3ZnO',colour:'#9baeb0'},
- Cr:{name:'鉻',canReduce:true,oxide:'氧化鉻 Cr₂O₃',equation:'Fe₂O₃ + 2Cr → 2Fe + Cr₂O₃',colour:'#849999'},
  Sn:{name:'錫',canReduce:false,colour:'#bec7c1'},
- Pb:{name:'鉛',canReduce:false,colour:'#768581'},
  Cu:{name:'銅',canReduce:false,colour:'#b87347'}
 };
 export function freshIronTrials(){return {selected:'C',predictions:{},results:{},phase:'ready'};}

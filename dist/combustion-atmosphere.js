@@ -17,18 +17,18 @@ export function createCombustionAtmosphere(){
   }
   if(active){
    if(element==1.){
-    light=flameOver(luminousFlame(p,bowl-vec2(0.,4.),vec2(21.,27.),vec3(.96,.98,1.),time+3.,1.),light);
-    vec2 q=(p-bowl)/vec2(30.,23.);float glare=exp(-dot(q,q)*2.2)*(.84+.1*flameNoise(p*.13-time*2.));light=flameOver(vec4(vec3(1.,1.,.98),glare),light);
+    light=flameOver(luminousFlame(p,bowl-vec2(0.,4.),vec2(33.,58.),vec3(.96,.98,1.),time+3.,1.),light);
+    vec2 q=(p-bowl)/vec2(43.,35.);float glare=exp(-dot(q,q)*2.2)*(.84+.1*flameNoise(p*.13-time*2.));light=flameOver(vec4(vec3(1.,1.,.98),glare),light);
    }else if(element>1.&&element<6.){
     vec3 tint=element==2.?vec3(.15,.65,.58):element==3.?vec3(1.,.61,.045):element==4.?vec3(.08,.28,.95):vec3(1.,.91,.66);
-    vec2 size=element==2.?vec2(24.,48.):element==3.?vec2(29.,68.):element==4.?vec2(24.,51.):vec2(30.,64.);
+    vec2 size=element==2.?vec2(35.,85.):element==3.?vec2(39.,100.):element==4.?vec2(33.,88.):vec2(40.,96.);
     light=flameOver(luminousFlame(p,bowl-vec2(0.,4.),size,tint,time+2.,element==5.?.6:0.),light);
    }else if(element>=6.){
-    vec2 q=(p-bowl)/vec2(19.,7.);float ember=exp(-dot(q,q)*2.)*(.55+.3*flameFbm(p*.21+vec2(0.,-time*.8)));float fissure=pow(flameNoise(p*.65-time*.5),8.);light=flameOver(vec4(mix(vec3(.9,.15,.008),vec3(1.,.65,.09),fissure),ember),light);
+    vec2 q=(p-bowl)/vec2(26.,11.);float ember=exp(-dot(q,q)*2.)*(.55+.3*flameFbm(p*.21+vec2(0.,-time*.8)));float fissure=pow(flameNoise(p*.65-time*.5),8.);light=flameOver(vec4(mix(vec3(.9,.15,.008),vec3(1.,.65,.09),fissure),ember),light);
    }
   }
   if((element==1.||element==2.||element==5.)&&(active||stage==5.)){
-   float strength=element==5.?1.45:element==1.?.76:.58;if(stage==5.)strength*=exp(-time*.75);
+   float strength=element==5.?1.05:element==1.?.46:.38;if(stage==5.)strength*=exp(-time*.75);
    vec4 smoke=oxidePlume(p,bowl-vec2(0.,9.),vec2(element==5.?88.:68.,190.),time,strength);
    if(jar){float halfWidth=p.y<130.?37.:p.y<176.?37.+(p.y-130.):82.;if(p.y<85.||p.y>340.||abs(p.x-560.)>halfWidth)smoke.a=0.;}
    light=flameOver(smoke,light);

@@ -35,10 +35,41 @@
 .combustion-reaction-record:not(:has([data-water-reaction]:not([hidden])))>[data-burn-reaction]{grid-column:1/-1}
 .reaction-record-step{display:block;font-size:11px;color:#98733e;margin-bottom:5px}
 @media(max-width:650px){.specimen-reaction-live{width:48%;padding:6px 8px}.specimen-reaction-live b{font-size:10px}.specimen-reaction-live small{display:none}.specimen-reaction-live .specimen-equation{font-size:12px;margin:3px 0}.combustion-reaction-record{grid-template-columns:1fr}}
-.experiment-next-tool{outline:3px solid #c18a25!important;outline-offset:4px;border-radius:6px;filter:drop-shadow(0 0 5px #f6c85d);animation:experiment-next-glow 1.7s ease-in-out infinite}
-.experiment-next-target{outline:3px dashed #bc8425!important;outline-offset:3px;border-radius:7px;background-color:#ffe7a544!important;box-shadow:0 0 0 6px #ffe4a333}
-.experiment-next-tool:after{content:attr(data-next-label);position:absolute;left:50%;top:-26px;transform:translateX(-50%);white-space:nowrap;background:#fff5ce;color:#684a16;border:1px solid #ba8b32;border-radius:12px;padding:3px 8px;font:600 11px/1.5 sans-serif;pointer-events:none;z-index:25}
+.experiment-next-tool{outline:none!important;box-shadow:none!important;animation:none}
+.experiment-next-target{outline:none!important;box-shadow:none!important}.experiment-next-target:after{content:none}
+.experiment-next-tool:after{content:"↓ " attr(data-next-label);position:absolute;left:50%;top:-26px;transform:translateX(-50%);white-space:nowrap;background:#fff5ce;color:#684a16;border:1px solid #ba8b32;border-radius:12px;padding:3px 8px;font:600 11px/1.5 sans-serif;pointer-events:none;z-index:25}
 .combustion-spoon.experiment-next-tool:after{top:45%;left:65%}
 .bench-paper.experiment-next-tool:after{top:-24px}
 @keyframes experiment-next-glow{50%{outline-color:#f4bc3f;filter:drop-shadow(0 0 9px #f6c85d)}}
 @media(prefers-reduced-motion:reduce){.experiment-next-tool{animation:none}}
+
+.combustion-workbench .combustion-observation-continue{width:auto;max-width:90%;justify-content:center;position:absolute;right:2%;bottom:3%;z-index:20;padding:10px 15px;font-size:13px;box-shadow:0 2px 8px #183e3325}.combustion-observation-continue[hidden]{display:none}
+
+.comparison-sheet table{min-width:880px}.comparison-sheet .water-product-record{min-width:210px}.water-acidity-record{min-width:110px}.water-acidity-record b,.water-acidity-record small{display:block}.water-acidity-record small{font-size:11px;color:#6b7f75;margin-top:5px}.acidity-acid{color:#a64551}.acidity-base{color:#345d9b}.acidity-neutral{color:#42675d}
+
+#card-2 .comparison-sheet table{table-layout:fixed;min-width:760px}.comparison-sheet thead th:nth-child(1){width:14%}.comparison-sheet thead th:nth-child(2){width:33%}.comparison-sheet thead th:nth-child(3){width:35%}.comparison-sheet thead th:nth-child(4){width:18%}.comparison-sheet .combustion-record-equation{font-size:14px;overflow-wrap:anywhere}.comparison-sheet td{vertical-align:top}
+
+.comparison-sheet .comparison-sample{vertical-align:middle;text-align:center;white-space:normal}.comparison-sample-art{width:88px;max-width:100%;height:48px;margin:0 auto 5px}.comparison-sample-art svg{display:block;width:100%;height:100%}.comparison-sample>span{display:block}
+
+.combustion-workbench .specimen-reaction-live{left:54%;top:44%;width:33%;padding:7px 9px;border-left-width:3px}.combustion-workbench .specimen-reaction-live b{font-size:11px;line-height:1.5}.combustion-workbench .specimen-reaction-live .specimen-equation{font-size:16px;line-height:1.5;margin:4px 0 0}.combustion-workbench .specimen-reaction-live i{width:9px;height:9px;margin-right:5px}@media(max-width:650px){.combustion-workbench .specimen-reaction-live{width:42%;left:54%;padding:5px 6px}.combustion-workbench .specimen-reaction-live b{font-size:9px}.combustion-workbench .specimen-reaction-live .specimen-equation{font-size:12px}}
+
+.bench-water-station[data-water-state="empty"] .bench-water-status{display:none}
+
+/* Follow the specimen's position without covering its flame or the jar. */
+.combustion-workbench[data-reaction-side="right"] .specimen-reaction-live{left:auto;right:2%;pointer-events:none}
+.combustion-workbench[data-reaction-side="left"] .specimen-reaction-live{left:2%;right:auto;pointer-events:none}
+
+/* Object cues guide the next action without a bottom instruction strip. */
+#card-2 .bench-water-status,#card-2 .bottle-analysis-status,#card-2 .combustion-step{display:none}
+#card-2 .comparison-sheet table{min-width:900px}
+#card-2 .comparison-sheet thead th:nth-child(1){width:12%}
+#card-2 .comparison-sheet thead th:nth-child(2){width:17%}
+#card-2 .comparison-sheet thead th:nth-child(3){width:26%}
+#card-2 .comparison-sheet thead th:nth-child(4){width:29%}
+#card-2 .comparison-sheet thead th:nth-child(5){width:16%}
+.flame-colour-record{line-height:1.7}.flame-colour-record i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;background:var(--flame-colour);box-shadow:0 0 0 1px #566c5a55,0 0 6px var(--flame-colour)}
+/* Keep the equation in an empty area on the left throughout heating. */
+.combustion-workbench .specimen-reaction-live,.combustion-workbench[data-reaction-side] .specimen-reaction-live{left:3%;right:auto;top:24%;width:31%;box-sizing:border-box}
+.combustion-workbench [data-jar-target]>span{display:none}
+.combustion-workbench [data-jar-target]{border:0;background:transparent;outline:none;box-shadow:none}
+.combustion-workbench .experiment-next-tool>svg{filter:drop-shadow(0 0 3px #e9c76a99)}

@@ -1,3 +1,4 @@
+import {mountOreHammer} from './ore-hammer.js';
 import {mountIronTransfer} from './iron-transfer.js';
 import {mountRedox} from './redox-workshop.js';
 import {bindDrop,bindPull} from './direct-manipulation.js';
@@ -15,8 +16,8 @@ const txt=(x,y,t,size=16)=>`<text x="${x}" y="${y}" text-anchor="middle" font-si
 export function mountNarrative(root,c,ctx){
  const {s,has,record,notice,delay,onCleanup}=ctx;
  if(c.type==='ore'){
- root.innerHTML='<section class="ore-viewer ore-solo" aria-label="赤鐵礦三維觀察台"><div class="specimen-view-heading"><b>赤鐵礦 · 岩面觀察</b><span data-ore-status>3D</span></div><div class="ore-render-stage"><canvas class="ore-canvas" tabindex="0" role="img" aria-label="立體赤鐵礦；拖曳旋轉、滾輪縮放，方向鍵亦可轉動"></canvas><span class="ore-gesture-hint">拖曳旋轉 · 滾輪縮放</span></div><div class="ore-view-toolbar"><button data-ore-view="whole" aria-pressed="true">整塊觀察</button><button data-ore-view="detail" aria-pressed="false">近看岩面</button><button data-ore-reset aria-label="還原礦石視角與縮放">↺</button></div><p class="model-caption">三維外觀示意；不以表面顏色直接判定成分。</p></section>';
- onCleanup(mountOre(root.querySelector('canvas'),()=>{record('ore');notice('不同角度都沒有看見可直接取出的鐵片。成分紀錄會提供下一個線索。');}));return;
+ root.innerHTML='<section class="ore-viewer ore-solo" aria-label="赤鐵礦三維觀察台"><div class="specimen-view-heading"><b>赤鐵礦 · 岩面觀察</b><span data-ore-status>3D</span></div><div class="ore-render-stage"><canvas class="ore-canvas" tabindex="0" role="img" aria-label="立體赤鐵礦；拖曳旋轉、滾輪縮放，方向鍵亦可轉動"></canvas><span class="ore-gesture-hint">拖曳旋轉 · 滾輪縮放</span></div><div class="ore-view-toolbar"><button data-ore-view="whole" aria-pressed="true">整塊觀察</button><button data-ore-view="detail" aria-pressed="false">近看岩面</button><button data-ore-reset aria-label="還原礦石視角與縮放">↺</button></div></section>';
+ onCleanup(mountOre(root.querySelector('canvas'),()=>{record('ore');}));onCleanup(mountOreHammer(root.querySelector('.ore-viewer'),{onCrushed:()=>{record('ore-crushed');}}));return;
  }
  if(c.type==='redox')return mountRedox(root,c,ctx);
  if(c.type==='iron')return mountIronTransfer(root,c,ctx);
