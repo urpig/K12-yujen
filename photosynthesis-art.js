@@ -2,7 +2,7 @@ import {moleculeDefinitions,moleculeFragment} from './bio-molecule-art.js';
 const leafPath='M139 351C102 197 242 44 706 19C664 193 464 346 139 351Z';
 function leafVeins(){return Array.from({length:16},(_,i)=>{const t=i/16,x=155+t*510,y=337-t*295;return `<path d="M${x} ${y}Q${x-43} ${y-68} ${x+5} ${y-128*(1-t)}M${x} ${y}Q${x+96} ${y+24} ${x+126*(1-t)} ${y+17}"/>`;}).join('');}
 function granum(x,y,scale=1){return `<g transform="translate(${x} ${y}) scale(${scale})" filter="url(#photo-depth)">${[0,1,2,3,4].map(i=>`<path d="M-48 ${i*8}v5a48 11 0 0 0 96 0v-5Z" fill="url(#photo-disc-side)" stroke="#3c6f3c" stroke-width=".6"/><ellipse cy="${i*8}" rx="48" ry="11" fill="url(#photo-disc)" stroke="#aac475" stroke-width=".8"/><path d="M-34 ${i*8-2}Q0 ${i*8-11} 32 ${i*8-2}" fill="none" stroke="#eff4ba" stroke-opacity=".26"/>`).join('')}</g>`;}
-export function photosynthesisArt(){return `<svg class="photo-detailed-art" viewBox="0 0 760 405" role="img" aria-label="陽光照亮具有葉脈的葉片，放大葉片內的葉綠體，追蹤水裂解及碳反應">
+export function photosynthesisArt(){return `<svg class="photo-detailed-art" viewBox="0 0 760 405" role="img" aria-label="陽光照亮具有葉脈的葉片，放大葉片內的葉綠體，認識水被氧化與二氧化碳被還原">
  <defs>
  <linearGradient id="photo-air" x2="1" y2="1"><stop stop-color="#fbf1d7"/><stop offset=".5" stop-color="#e5edcc"/><stop offset="1" stop-color="#cadbb8"/></linearGradient>
  <linearGradient id="photo-leaf" x1=".2" y1=".8" x2=".8" y2=".1"><stop stop-color="#1f503b"/><stop offset=".4" stop-color="#659541"/><stop offset=".7" stop-color="#8bb54b"/><stop offset="1" stop-color="#d6df82"/></linearGradient>
@@ -36,17 +36,14 @@ export function photosynthesisArt(){return `<svg class="photo-detailed-art" view
  ${Array.from({length:68},(_,i)=>`<circle cx="${112+(i*83)%557}" cy="${120+(i*47)%195}" r="${.7+(i%3)*.6}" fill="#658344" opacity=".2"/>`).join('')}
  <path d="M147 242Q204 220 292 243T379 218M211 220Q240 201 303 206" fill="none" stroke="#648547" stroke-width="8"/><path d="M147 239Q204 217 292 240T379 215" fill="none" stroke="#cedb8d" stroke-width="2"/>
  ${granum(148,221,.62)}${granum(301,197,.76)}${granum(213,171,1.02)}
- <ellipse cx="367" cy="276" rx="22" ry="10" transform="rotate(-18 367 276)" fill="#dbe3b4" stroke="#b0c48d"/>
  </g>
  <g class="photo-sun-rays" aria-hidden="true" fill="none" stroke="url(#photo-sun-ray)" stroke-width="2.6" stroke-linecap="round">${['M106 73L195 148','M102 77L178 165','M97 81L158 180','M91 84L137 191','M85 86L113 199'].map(d=>`<path class="bio-photon-path bio-sun-ray" d="${d}" stroke-dasharray="7 5"/>`).join('')}</g>
  <rect x="267" y="91" width="242" height="27" rx="13" fill="#eef3d4" fill-opacity=".94" stroke="#adbf88"/><text x="388" y="110" text-anchor="middle" font-size="14" fill="#3b603d" font-weight="bold">葉綠體 · 葉片內部放大</text>
- <g fill="#315733" font-size="13"><text x="213" y="142" text-anchor="middle">① 光反應 · 水裂解</text><text x="534" y="142" text-anchor="middle">② 碳反應</text></g>
+ <g fill="#315733" font-size="13"><text x="213" y="142" text-anchor="middle">① 水被氧化</text><text x="534" y="142" text-anchor="middle">② 二氧化碳被還原</text></g>
  <circle cx="529" cy="215" r="67" fill="#e9f0cc" fill-opacity=".53" stroke="#9ab773" stroke-width="1.3"/>
  <path d="M485 171Q541 142 581 197M579 183l4 17-17-3M573 254Q522 288 479 234M480 248l-3-17 17 2" fill="none" stroke="#537c4b" stroke-width="2.5"/>
  <g data-bio-input-one opacity="0"><g transform="translate(-1 169) scale(.45)">${moleculeFragment('water','photo-particles')}</g><g transform="translate(-1 207) scale(.45)">${moleculeFragment('water','photo-particles')}</g></g>
  <g data-bio-oxygen-out opacity="0"><g transform="translate(198 94) scale(.55)">${moleculeFragment('oxygen','photo-particles')}</g><text x="242" y="165" text-anchor="middle" font-size="12" fill="#355b41">O₂ 排出</text></g>
  <g data-bio-input-two opacity="0"><g transform="translate(695 179) scale(.5)">${moleculeFragment('co2','photo-particles')}</g></g>
- <g data-bio-intermediate opacity="0"><rect x="481" y="190" width="96" height="50" rx="10" fill="#fff8de" stroke="#aeb97d"/><text x="529" y="212" text-anchor="middle" font-size="13" fill="#557349">三碳糖</text><text x="529" y="229" text-anchor="middle" font-size="11" fill="#81915d">G3P</text></g>
  <g data-bio-product opacity="0"><path d="M585 253L613 271" stroke="#859553" stroke-width="2" fill="none"/><g transform="translate(599 243) scale(.85)">${moleculeFragment('glucose','photo-particles')}</g><rect x="616" y="345" width="99" height="24" rx="12" fill="#fff2d4" stroke="#c3ac70"/><text x="666" y="362" text-anchor="middle" font-size="12" fill="#66512d">葡萄糖</text></g>
- <text x="388" y="388" text-anchor="middle" fill="#506848" font-size="11">葉綠體與分子為放大示意 · 先追水，再追碳；兩階段相互配合</text>
  </svg>`;}

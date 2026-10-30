@@ -13,8 +13,8 @@ export function bindWorkbenchDrag(item,{targets,onDrop,onMiss=()=>{},blocked=()=
  const events=[['pointerdown',down],['pointermove',move],['pointerup',up],['pointercancel',cancel],['lostpointercapture',cancel],['blur',cancel],['keydown',key]];for(const [n,f]of events)item.addEventListener(n,f);
  return ()=>{end(true);for(const [n,f]of events)item.removeEventListener(n,f);};
 }
-export function bindLoadGrip(item,board,{enabled,onMove,onRelease}){
- let drag=null,q=0;const length=()=>board.getBoundingClientRect().height*.37;
+export function bindLoadGrip(item,board,{enabled,onMove,onRelease,travelFraction=.37}){
+ let drag=null,q=0;const length=()=>board.getBoundingClientRect().height*travelFraction;
  const paint=v=>{q=Math.max(0,Math.min(1,v));item.style.transform=`translateY(${q*length()}px)`;item.setAttribute('aria-valuenow',String(Math.round(q*100)));onMove(q);};
  const end=cancel=>{if(!drag)return;const id=drag.id,value=q;drag=null;q=0;item.style.transform='';item.classList.remove('dragging');item.setAttribute('aria-valuenow','0');if(id!==undefined&&item.hasPointerCapture(id))item.releasePointerCapture(id);if(cancel)onMove(0);else onRelease(value);};
  const down=e=>{if(e.button!==0||drag||!enabled())return;e.preventDefault();drag={id:e.pointerId,y:e.clientY};item.classList.add('dragging');item.setPointerCapture(e.pointerId);};

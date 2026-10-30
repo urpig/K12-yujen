@@ -16,10 +16,9 @@ export function affinityReference(symbol){
  const first=x.relation==='greater'?x:{symbol:'Fe',name:'鐵'},last=x.relation==='greater'?{symbol:'Fe',name:'鐵'}:x;
  return `<section class="oxygen-reference" aria-label="元素對氧活性大小">
   <div class="oxygen-reference-heading"><div><small>先找位置，再做預測</small><h4>元素對氧的活性，由大到小</h4></div><span>點元素，和鐵比較</span></div>
-  <p class="oxygen-definition"><b>活性較大：</b>較容易與氧結合，形成氧化物後，氧也較難被拿走。<br><b>活性較小：</b>較不容易與氧結合，形成氧化物後，氧較容易被活性更大的元素拿走。</p>
-  <div class="oxygen-series-direction"><b>活性大</b><span>由左到右，換行接續 ↓</span><b>活性小</b></div>
+  <p class="oxygen-definition"><b>活性較大：</b><strong>較容易與氧結合</strong>，形成氧化物後，氧也<strong>較難被拿走</strong>。<br><b>活性較小：</b><strong>較不容易與氧結合</strong>，形成氧化物後，氧<strong>較容易被活性更大的元素拿走</strong>。</p>
+  <div class="oxygen-series-direction"><b>活性大</b><b>活性小</b></div>
   <ol class="oxygen-series">${oxygenAffinitySeries.map((a,j)=>`<li><button data-affinity="${a.symbol}" aria-pressed="${x.symbol===a.symbol}" aria-label="${a.name} ${a.symbol}，與鐵比較" class="${a.symbol==='Fe'?'iron-marker':''} ${a.symbol==='H'?'hydrogen-marker':''}"><small>${String(j+1).padStart(2,'0')}</small>${specimenArt(a.symbol)}<strong>${a.symbol}</strong><span>${a.name}</span></button>${j<oxygenAffinitySeries.length-1?'<i aria-hidden="true">›</i>':''}</li>`).join('')}</ol>
-  <p class="element-specimen-note">圖為物質的代表外觀示意，不能只憑外觀辨認元素。氫氣無色，圖中以密閉容器表示。</p>
   <div class="oxygen-comparison" role="status" aria-live="polite">
    <div class="oxygen-versus"><div><strong>${first.symbol}</strong><span>${first.name}</span></div><b>${x.relation==='same'?'＝':'＞'}</b><div><strong>${last.symbol}</strong><span>${last.name}</span></div><small>對氧活性</small></div>
    <div><h4>${copy[0]}</h4></div>

@@ -16,7 +16,7 @@ export function lifeReactionPair(key){
   return {title:b.name,equation:b.equation,condition:b.condition,oxidation,reduction,finding:b.reason};
  }
  if(lifeBleaches[key]){
-  const b=lifeBleaches[key],agent={from:b.name+' '+b.formula,to:b.role==='oxidation'?'氧化後的產物':'還原後的產物'},dye={from:'有色物質',to:'色素結構改變 · 褪色'};
+  const b=lifeBleaches[key],agent={from:b.name+' '+b.formula,to:b.role==='oxidation'?'氧化後的產物':'還原後的產物'},dye={from:'色素',to:'漂白'};
   return {title:b.name+'的漂白作用',condition:'適用色素與合適條件下的代表反應',oxidation:b.role==='oxidation'?agent:dye,reduction:b.role==='reduction'?agent:dye,finding:b.reason};
  }
  if(key==='food')return {title:'維生素 C 延緩蘋果褐變',condition:'相同蘋果、空氣與溫度；比較有無維生素 C',oxidation:{from:'維生素 C',to:'氧化後的維生素 C'},reduction:{from:'褐變中間產物',to:'還原成較不易褐變的物質'},finding:'維生素 C 自己被氧化，幫部分褐變中間產物還原；保護用完後，蘋果仍會逐漸變褐。'};
@@ -46,9 +46,9 @@ export function lifePairedMarkup(key,complete=false){
  <div class="life-mix-slots" aria-label="反應物加入進度">${lab.inputs.map(x=>`<span data-life-slot="${x.id}" class="${complete?'added':''}">${complete?'✓':'○'} ${x.label}</span>`).join('')}<b data-life-mix-count>${complete?lab.inputs.length:0} / ${lab.inputs.length}</b></div>
  ${key==='food'?'<div class="life-paired-time"><b data-life-time-label>剛切開</b><span>維生素 C 的保護能力：<strong data-life-reserve-label>尚未消耗</strong></span></div>':''}</div></div>
  <p class="life-observe-status" data-life-animation-status role="status">${complete?p.finding:lab.inputs.length===1?(key==='sulfur'?'拿取氣體注射筒，加入左側密閉罩；右側保留原樣對照。':'拿取燒杯，加入左側'+lab.zone+'；右側保留原樣對照。'):'反應物還沒到齊，先取一份放進'+lab.zone+'。'}</p>
- <div class="life-manual-results" aria-label="同時追蹤氧化與還原">${['oxidation','reduction'].map((role,i)=>`<div class="life-result-path ${role}"><div class="life-source-name">${p[role].from}</div><span class="life-result-arrow" aria-hidden="true">→</span><div class="life-result-destination"><span class="life-result-wait">等候反應</span><strong data-life-product>${p[role].to}</strong></div><p class="life-pair-label" data-life-pair-label><b>${p[role].from.replace(/ (?:H₂O₂|H₂O|CO₂|O₂|C₆H₁₂O₆|SO₂|NaClO)$/,'')}${i===0?'被氧化':'被還原'}</b><small>${i===0?'失去電子':'得到電子'}</small></p></div>`).join('')}</div>
+ <div class="life-manual-results" aria-label="同時追蹤氧化與還原">${['oxidation','reduction'].map((role,i)=>`<div class="life-result-path ${role}"><div class="life-source-name">${p[role].from}</div><span class="life-result-arrow" aria-hidden="true">→</span><div class="life-result-destination"><span class="life-result-wait">等候反應</span><strong data-life-product>${p[role].to}</strong></div><p class="life-pair-label" data-life-pair-label><b>${p[role].from.replace(/ (?:H₂O₂|H₂O|CO₂|O₂|C₆H₁₂O₆|SO₂|NaClO)$/,'')}${i===0?'被氧化':'被還原'}</b></p></div>`).join('')}</div>
  <div class="life-paired-equation"><small>${p.equation?'多步反應的整體表示':'適用情境的質性比較'}</small>${p.equation?`<b>${p.equation}</b>`:'<b class="life-qualitative-equation">兩邊同時改變：一方被氧化，另一方被還原。</b>'}</div>
- <p class="life-pair-model">每張反應物圖卡代表一種物質的供應，並非各一個分子；顏色、速度與位置為示意。電子的得失表示整體收支，不代表數量或實際路徑。${lab.note}${key==='photo'?'放出的氧氣來自水；葡萄糖用來表示合成的養分。':key==='food'?'時間與變色為示意，保護用完後仍會褐變。':''}</p></section>`;
+ </section>`;
 }
 function paintFood(scene,progress){
  const time=progress*4,x=appleComparison(time);

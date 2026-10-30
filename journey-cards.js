@@ -1,7 +1,6 @@
 export const lessons=[
  {
   "id": 1,
-  "assessment": false,
   "act": "序章｜回家的條件",
   "day": "皇宮工坊",
   "type": "ore",
@@ -117,19 +116,20 @@ export const lessons=[
   "equation": "2Cu + O₂ → 2CuO　｜　2Mg + O₂ → 2MgO\n2Zn + O₂ → 2ZnO　｜　2Na + O₂ → Na₂O₂（氧充足代表式）\nS + O₂ → SO₂　｜　4P + 5O₂ → P₄O₁₀\nC + O₂ → CO₂",
   "bridge": "小葵看著黑色氧化銅：「氧能不能換個夥伴？」阿公指著先前的活性紀錄：「碳比銅更容易與氧結合。現在試試，它能不能把銅取回來。」",
   "quiz": {
-   "question": "從樣本架完成實驗後，哪一個推論值得接著驗證？",
+   "revision": 2,
+   "question": "銅片加熱時沒有明顯火焰，卻形成黑色氧化銅。銅有被氧化嗎？",
    "options": [
-    "鎂最亮，所以一定比鈉更活潑",
-    "碳能與氧結合，值得再試它能否取走氧化物中的氧",
-    "氧化銅遇水不變色，表示它沒有和氧結合",
-    "所有白色產物都是同一種物質"
+    "沒有，出現火焰才算氧化",
+    "有，銅與氧結合形成氧化銅",
+    "沒有，變黑就表示被還原",
+    "只有產生氣體，才算氧化"
    ],
    "answer": 1,
    "explanations": [
-    "火焰亮度受形態與條件影響，不能直接當作對氧活性的量尺。",
-    "對。燃燒提供候選線索；是否能取回金屬，要做下一張的氧化銅對照試驗。",
-    "CuO 已含有氧；它難溶於水，石蕊不變色不能用來否定氧化反應。",
-    "顏色相同不能證明成分相同；MgO、冷卻的 ZnO 與磷氧化物都須分別比較。"
+    "氧化不一定有火焰；判斷重點是物質是否得到氧。",
+    "銅得到氧，形成氧化銅，所以銅被氧化。",
+    "顏色不能直接判定氧化或還原；這裡是銅得到氧。",
+    "氧化產物也可以是固體，銅加熱後就形成固態氧化銅。"
    ]
   },
   "sourceId": 2,
@@ -166,10 +166,10 @@ export const lessons=[
   "act": "第一章｜跟著氧找線索",
   "day": "小爐試煉",
   "type": "redox",
-  "title": "誰能拿走氧化物的氧？",
+  "title": "誰能把氧化鐵的氧拿走？",
   "question": "碳、鋅、錫、銅，誰能還原氧化鐵？",
-  "opening": "小葵拿出碳、鋅、錫和銅。先沿用 01 的對氧活性線索，逐一加入材料，觀察誰能帶走氧化鐵的氧。氧化鐵已放在加熱架上，這次由小葵親手加入每一種幫手。",
-  "task": "從樣本架抓取碳、鋅、錫或銅，放進已在加熱架上的氧化鐵，觀察前後差別。",
+  "opening": "氧化鐵已放上加熱架。誰能幫它把氧拿走？",
+  "task": "拖一份材料到坩堝，觀察能否得到金屬鐵。",
   "required": [
    "iron-C",
    "iron-Zn",
@@ -216,11 +216,11 @@ export const lessons=[
   "dialogue": [
    [
     "kui",
-    "都是加熱，四種材料都能幫鐵拿走氧嗎？"
+    "阿公，那我們可以用什麼物質，把氧化鐵變回鐵呢？"
    ],
    [
     "grandpa",
-    "先看誰更容易得到氧，再用實驗和對照來查證。"
+    "比較它們和鐵的對氧活性，再動手試試看。"
    ]
   ],
   "portraits": {
@@ -297,8 +297,8 @@ export const lessons=[
   "day": "爐場藍圖",
   "type": "furnace",
   "title": "看見爐內的分工",
-  "question": "煉出鐵與去掉雜質，是同一份工作嗎？",
-  "opening": "工坊還缺一套煉鐵安排。阿公借現代高爐模型推演，和小葵、鐵匠一起分清供熱、還原與除雜。",
+  "question": "煉鐵爐裡發生了哪些反應？",
+  "opening": "",
   "task": "把礦石、焦炭與石灰石拖進送料車，再點「加熱」。跟著 1–8 亮起，對照右側反應式。",
   "required": [
    "ore",
@@ -364,7 +364,7 @@ export const lessons=[
   "type": "steel",
   "title": "從生鐵到鋼，再到熟鐵",
   "question": "把碳減少，刀就一定越好用嗎？",
-  "opening": "鐵匠拿出生鐵、鋼與熟鐵的代表刀材。小葵要選的，是能符合用途的材料，不只是名字響亮的「鐵」。",
+  "opening": "",
   "task": "從上架抓刀，放到支點上；拉右側把手到金線再鬆開。直接換下一把，比較卸載結果。",
   "required": [
    "pig",
@@ -379,7 +379,7 @@ export const lessons=[
   "finding": "本組案例中，生鐵脆裂、經適當熱處理的鋼回彈、熟鐵留下彎曲。",
   "explanation": "生鐵含碳較多，通常硬脆；熟鐵含碳極低，通常較軟。 鋼需控制含碳量、雜質與熱處理，讓性質符合用途。 彎折試驗不直接測硬度；形狀、組織與熱處理也會影響結果。",
   "equation": "生鐵（高碳） → 減碳、除雜與製鋼 → 鋼\n繼續減碳至極低含量：比較熟鐵的柔軟與可加工性",
-  "bridge": "小葵選好刀材，和阿公完成神兵。兩人獻上寶劍、取回時空裝置；回家後，小葵又想到細胞裡的氧化。",
+  "bridge": "小葵選好刀材，和阿公完成神兵。兩人獻上寶劍、取回時空裝置，卻發現皇帝仍為百姓缺鹽而憂心。",
   "quiz": {
    "question": "這三把刀的結果，支持哪個選材原則？",
    "options": [
@@ -423,10 +423,10 @@ export const lessons=[
  }
 ];
 export const materialCases={"metals":[["Cu","銅片"],["Mg","鎂帶"],["Zn","鋅粉"],["Na","鈉"]],"nonmetals":[["S","硫"],["P","紅磷"],["C","碳"]],"redox":[["alone","只有 CuO"],["carbon","CuO ＋ 碳"],["ZnCu","Zn ＋ CuO"],["CuZn","Cu ＋ ZnO"]],"steel":[["pig","① 生鐵 · 3.5% C"],["steel","② 鋼 · 0.8% C"],["wrought","③ 熟鐵 · 0.01% C"]],"combustion":[["Cu","銅片"],["Mg","鎂帶"],["Zn","鋅粉"],["Na","鈉"],["S","硫"],["P","紅磷"],["C","碳"]]};
-export function freshState(c){return {selected:materialCases[c.type]?.[0][0]||'',evidence:[],quizOpen:false,answer:null,tab:'burn'};}
+export function freshState(c){return {selected:materialCases[c.type]?.[0][0]||'',evidence:[],quizOpen:false,quizRevision:c.quiz.revision||1,answer:null,tab:'burn'};}
 export function isReady(c,s){return c.required.every(key=>s.evidence.includes(key));}
-export function isMastered(c,s){return isReady(c,s)&&(c.assessment===false||s.answer===c.quiz.answer);}
-export function restoreState(c,raw){const s=freshState(c);if(!raw||typeof raw!=='object')return s;s.evidence=[...new Set((Array.isArray(raw.evidence)?raw.evidence:[]).filter(k=>c.required.includes(k)))];if(materialCases[c.type]?.some(([key])=>key===raw.selected))s.selected=raw.selected;s.quizOpen=c.assessment!==false&&isReady(c,s)&&raw.quizOpen===true;s.answer=s.quizOpen&&Number.isInteger(raw.answer)&&raw.answer>=0&&raw.answer<4?raw.answer:null;return s;}
+export function isMastered(c,s){return isReady(c,s)&&s.answer===c.quiz.answer;}
+export function restoreState(c,raw){const s=freshState(c);if(!raw||typeof raw!=='object')return s;s.evidence=[...new Set((Array.isArray(raw.evidence)?raw.evidence:[]).filter(k=>c.required.includes(k)))];if(materialCases[c.type]?.some(([key])=>key===raw.selected))s.selected=raw.selected;s.answer=(raw.quizRevision??1)===s.quizRevision&&Number.isInteger(raw.answer)&&raw.answer>=0&&raw.answer<c.quiz.options.length?raw.answer:null;s.quizOpen=raw.quizOpen===true||s.answer!==null;return s;}
 export function massBalance(key){return key==='Mg'?{solidBefore:24,oxygen:16,solidAfter:40,gas:0}:{solidBefore:12,oxygen:32,solidAfter:0,gas:44};}
 export function litmusResult(type,paper){return type==='acid'?'#c46579':type==='base'?'#526eb9':paper==='red'?'#c46579':'#526eb9';}
 

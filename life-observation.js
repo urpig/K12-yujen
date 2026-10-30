@@ -19,7 +19,7 @@ export function biologyObservation(s,message=''){
  <p class="life-key-finding" ${seen?'':'hidden'}>${photo?'葉子放出的氧氣來自水。水被氧化的同時，二氧化碳被還原成養分。':'葡萄糖被氧化、氧氣被還原，兩者一起發生。沒有火焰，也能釋放能量。植物也會呼吸！'}</p>
  </section>
  <div class="life-path-task"><h4>${photo?'光合作用放出氧氣，代表它沒有氧化嗎？':'細胞裡沒有火焰，養分還會被氧化嗎？'}</h4><div class="life-role-choices">${(photo?['有氧化，也有還原','只有還原，沒有氧化']:['會，氧化不一定有火焰','不會，只有燃燒才算氧化']).map((label,i)=>`<button data-life-bio-check="${i}" ${seen?'':'disabled'}>${label}</button>`).join('')}</div>${feedback(message)}</div>
- <details class="prep-note"><summary>展開反應式與解釋</summary><p>${b.equation}</p><p>${b.condition}。${b.energy}。</p><p>這些反應要經過很多步。判斷電子收支：失去電子是氧化，得到電子是還原；兩者同時發生。</p></details>`;
+ <details class="prep-note"><summary>展開反應式與解釋</summary><p>${b.equation}</p><p>${b.condition}。${b.energy}。</p><p>這些反應要經過很多步。氧化與還原會同時發生；找出兩邊各自的變化。</p></details>`;
 }
 export function bleachObservation(s,message=''){
  const b=lifeBleaches[s.bleach],seen=s.seen.includes(s.bleach),done=s.evidence.includes(s.bleach);

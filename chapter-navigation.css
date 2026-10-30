@@ -21,3 +21,11 @@
 @media(max-width:430px){.sidebar-volume>b{font-size:9px;max-width:90px;line-height:1.5}.sidebar-volume i{font-size:19px}.chapter-sidebar #route{grid-template-columns:repeat(2,minmax(0,1fr))}.chapter-sidebar #route a{min-height:45px;font-size:10px}}
 @media(prefers-reduced-motion:reduce){.chapter-sidebar #route a,.chapter-sidebar #mastery-progress::-webkit-progress-value{transition:none}}
 @media print{body{padding-left:0}.chapter-sidebar{display:none!important}}
+
+/* Mobile dictionary access stays reachable while the lesson scrolls. */
+@media screen and (max-width:760px){
+ .chapter-sidebar .glossary-launch--sidebar{display:none}
+ .sidebar-bottom{padding-top:0}
+ .glossary-launch--floating{display:flex;position:fixed;inset:auto max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) auto;z-index:80;min-height:44px;box-shadow:0 4px 16px #173a3433}
+ body{padding-bottom:76px}
+}
