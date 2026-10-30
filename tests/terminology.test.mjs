@@ -30,8 +30,9 @@ test('inline terms prefer complete concepts and never turn chemical formula frag
  assert.deepEqual(matchScienceTerms('維生素 C 和維生素 E').map(match=>match.term),['vitaminc','vitamine']);
 });
 test('key distinctions remain explicit instead of teaching a misleading shortcut',()=>{
- assert.match(dictionaryTermById.get('oxidation').definition,/失去電子/);
- assert.match(dictionaryTermById.get('reduction').definition,/得到電子/);
+ assert.match(dictionaryTermById.get('oxidation').definition,/物質得到氧/);
+ assert.match(dictionaryTermById.get('reduction').definition,/氧化物失去氧/);
+ for(const id of ['oxidation','reduction','redox','oxidizer','reducingagent'])assert.doesNotMatch(dictionaryTermById.get(id).definition,/電子/);
  assert.match(dictionaryTermById.get('reducingagent').definition,/自己被氧化/);
  assert.match(dictionaryTermById.get('neutral').note,/未溶解/);
  assert.match(dictionaryTermById.get('hardness').note,/不能直接量出硬度/);

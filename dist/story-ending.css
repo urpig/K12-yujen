@@ -1,0 +1,13 @@
+.story-ending .story-ending-intro{margin:0 0 14px;line-height:1.9;color:#50665c}
+.story-ending .dialogue-stack{margin:24px 0;gap:12px}
+.story-ending-invitation{margin-top:28px;padding:26px 28px;background:#eff2e4;border:1px solid #c9d3b6;border-left:4px solid #b99a57;border-radius:10px}
+.story-ending-invitation>span{font-size:12px;letter-spacing:.08em;color:#7e6945}
+.story-ending-invitation h3{margin:10px 0;color:#244f49;font-size:21px;line-height:1.5}
+.story-ending-invitation p{margin:0 0 20px;color:#52695c;line-height:1.7}
+.next-unit-link{display:inline-flex;align-items:center;justify-content:space-between;gap:32px;padding:14px 22px;border-radius:7px;background:#315d4c;color:#fffdf3;font-weight:700;text-decoration:none;line-height:1.5}
+.next-unit-link:hover{background:#234a3b}
+.next-unit-link:focus-visible{outline:3px solid #b99a57;outline-offset:4px}
+@media(max-width:600px){.story-ending-invitation{padding:20px}.story-ending-invitation h3{font-size:19px}.next-unit-link{width:100%;box-sizing:border-box;gap:16px}}
+
+.story-ending-scene{margin:0 0 24px;overflow:hidden;border-radius:12px;border:1px solid #d8cfb8;background:#ece4d2}
+.story-ending-scene img{display:block;width:100%;height:auto}

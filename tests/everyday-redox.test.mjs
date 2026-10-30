@@ -26,9 +26,11 @@ test('保護為有限、定性、比較同一時點；必須看到後段才可�
  assert.deepEqual(appleComparison(Infinity),appleComparison(0));assert.deepEqual(appleComparison(-3),appleComparison(0));
 });
 test('全六份證據和正確短題才算掌握；重設及restore不虛增進度',()=>{
- const s=freshLife();s.answer=2;assert.equal(lifeMastered(s),false);assert.equal(restoreLife(s).answer,null);
+ const s=freshLife();s.answer=2;assert.equal(lifeMastered(s),false);assert.equal(restoreLife(s).answer,2);
  s.evidence=[...lifeEvidence];assert.equal(lifeMastered(s),true);assert.equal(lifeMastered(restoreLife(s)),true);
  const restored=restoreLife({...s,time:NaN,tab:99,bleach:'<script>',seen:['sulfur','sulfur','bad'],evidence:[...lifeEvidence,'photo','bad']});
  assert.equal(restored.tab,0);assert.equal(restored.time,0);assert.equal(restored.bleach,'peroxide');assert.deepEqual(restored.seen,['sulfur']);assert.equal(restored.evidence.length,6);
  const reset=freshLife();assert.equal(lifeReady(reset),false);assert.equal(reset.answer,null);assert.equal(s.evidence.length,6);
 });
+
+test('life review preserves an early wrong answer and rejects invalid answers',()=>{const raw={...freshLife(),answer:0},restored=restoreLife(raw);assert.equal(restored.answer,0);assert.equal(lifeMastered(restored),false);for(const answer of [-1,4,'2',null])assert.equal(restoreLife({...raw,answer}).answer,null);});

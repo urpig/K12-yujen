@@ -22,8 +22,8 @@ test('reactant molecular models have the atom composition of their labels',()=>{
   assert.deepEqual(atoms.reduce((counts,atom)=>(counts[atom]=(counts[atom]||0)+1,counts),{}),composition,id);
  }
 });
-test('staged biology preserves the paired processes and does not imply direct carbon-to-glucose or oxygen-free respiration',()=>{
+test('biology keeps paired outcomes without advanced mechanisms or oxygen-free respiration',()=>{
  assert.deepEqual(biologyStages.photo.map(s=>s.id),['water','co2']);
- assert.match(biologyMarkup('photo'),/水被氧化/);assert.match(biologyMarkup('photo'),/三碳糖/);assert.doesNotMatch(biologyMarkup('photo'),/電子|NADPH|ATP/);
+ assert.match(biologyMarkup('photo'),/水被氧化/);assert.match(biologyMarkup('photo'),/二氧化碳被還原/);assert.doesNotMatch(biologyMarkup('photo'),/電子|NADPH|ATP|三碳糖|G3P|碳反應/);
  assert.match(biologyMarkup('resp'),/氧氣被還原/);assert.match(biologyMarkup('resp'),/有氧條件/);assert.doesNotMatch(biologyMarkup('resp'),/電子|life-pair-model/);
 });

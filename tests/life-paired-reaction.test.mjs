@@ -16,6 +16,7 @@ test('all scenes expose manual supply and paired changes with model boundaries',
  for(const key of ['photo','resp','peroxide','chlorine','sulfur']){
   const initial=lifePairedMarkup(key);assert.match(initial,/data-phase="ready"/);assert.match(initial,/data-life-drop/);assert.equal((initial.match(/data-life-input=/g)||[]).length,['peroxide','chlorine','sulfur'].includes(key)?1:2);assert.doesNotMatch(initial,/data-life-play/);if(['photo','resp'].includes(key))assert.doesNotMatch(initial,/電子|life-pair-model/);
   assert.equal((initial.match(/data-life-pair-label/g)||[]).length,2);
+  assert.doesNotMatch(initial,/電子|有色物質|色素結構改變|life-pair-model/);
   assert.match(lifePairedMarkup(key,true),/data-phase="complete"/);
  }
  const food=lifePairedMarkup('food');assert.match(food,/data-life-input="vitaminc"/);assert.match(food,/data-apple-reset/);assert.match(food,/對照組/);assert.match(food,/實驗組/);assert.match(food,/data-life-drop/);assert.doesNotMatch(food,/褐變中間產物|data-apple-start/);

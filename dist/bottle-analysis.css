@@ -42,3 +42,5 @@
 .bottle-analysis .sample-source.analysis-next-target{background:transparent;border:0}
 .bottle-analysis .bottle-litmus-strip.analysis-next-target{outline:none;box-shadow:0 0 4px #e9c76a88}
 .bottle-analysis .analysis-shaker{border:0}
+
+.bottle-analysis[data-phase=pour] .analysis-wash>.water-purpose{display:block;top:-28%;left:-40%;width:210%;white-space:normal;text-align:center;font-size:14px;font-weight:700;line-height:1.5;color:#315e68;text-shadow:0 1px 2px #fff;pointer-events:none}

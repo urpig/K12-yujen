@@ -5,3 +5,5 @@
 .factory-simulator{scroll-margin-top:12px}@media(min-width:901px){.factory-visual{width:min(100%,calc((100svh - 280px)*1.384615));margin:auto}.factory-panel{padding-top:18px;padding-bottom:15px}.factory-panel h3{font-size:23px;margin:9px 0 14px}.factory-equation{min-height:70px;font-size:21px;padding-block:10px}.factory-next-hint{margin-top:10px}.factory-product-status{padding-top:10px}}
 @media(prefers-reduced-motion:reduce){.factory-flow,.factory-gas-arrows>path,.factory-air-trace>path,.factory-liquid-sheen,.charging .factory-skip{animation:none!important}.factory-heat-bed,.factory-charge-layers,.factory-lime-layers,.factory-iron-stream,.factory-slag-stream{transition:none}}
 .factory-atmosphere{clip-path:polygon(46.9% 18.9%,53.1% 18.9%,53.8% 33.5%,57.3% 59.5%,55% 81.4%,44.9% 81.4%,42.6% 59.5%,46.2% 33.5%)}
+
+.factory-coke-layers{opacity:0;transition:opacity 1s}.factory-simulator[data-has-coke=true] .factory-coke-layers{opacity:1}@media(prefers-reduced-motion:reduce){.factory-coke-layers{transition:none}}

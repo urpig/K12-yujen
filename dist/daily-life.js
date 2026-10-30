@@ -17,7 +17,7 @@ function dailyRolePair(oxidation,reduction,active=true){
 }
 
 function dailySources(d){
- return d.source?`<details class="science-detail daily-sources"><summary>這個例子的科學依據</summary><p>${d.source.map(([title,url])=>`<a href="${url}" target="_blank" rel="noopener">${title} ↗</a>`).join('　')}</p></details>`:'';
+ return d.source?``:'';
 }
 
 function dailyLifeArtwork(id,done,mode='photo'){
