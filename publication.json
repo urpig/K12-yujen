@@ -18,34 +18,42 @@
     "sourceFolder": "/",
     "publishCommand": "node publish-pages.mjs",
     "url": "https://urpig.github.io/ch2/",
-    "sourceCommit": "49de4cf64bd410f337d90840cc0f22193a4b821e",
-    "pagesCommit": "f615925c335bfc15349de320e9b102ef3445b533",
-    "sourceTree": "60076215ab9b225af3574204fee57ef5728cdcfd",
-    "verifiedAt": "2026-10-30T09:51:48.002Z"
+    "sourceCommit": "7e7052cfdcb4bd0cfe8372b3855a6d6eb526bdf6",
+    "pagesCommit": "6ad4b040a709dd7eb64bbcc548012cc7b399f7b6",
+    "sourceTree": "6bc38de7203639fa2b4060f76f067d575bc5d8d0",
+    "verifiedAt": "2026-10-30T10:11:37.784Z"
   },
   "currentPublicDeployment": {
     "provider": "github-pages",
     "url": "https://urpig.github.io/ch2/",
     "status": "published",
-    "sourceCommit": "49de4cf64bd410f337d90840cc0f22193a4b821e",
-    "pagesCommit": "f615925c335bfc15349de320e9b102ef3445b533",
-    "sourceTree": "60076215ab9b225af3574204fee57ef5728cdcfd",
+    "sourceCommit": "7e7052cfdcb4bd0cfe8372b3855a6d6eb526bdf6",
+    "pagesCommit": "6ad4b040a709dd7eb64bbcc548012cc7b399f7b6",
+    "sourceTree": "6bc38de7203639fa2b4060f76f067d575bc5d8d0",
     "fileCount": 225,
-    "anonymousHttpVerifiedAt": "2026-10-30T09:51:48.002Z",
-    "anonymousHttpChecksPassed": 1,
-    "httpVerification": "Anonymous HTTP 200 stylesheet matches committed CSS after line-ending normalization.",
+    "anonymousHttpVerifiedAt": "2026-10-30T10:11:37.784Z",
+    "anonymousHttpChecksPassed": 7,
+    "httpVerification": "Six public files match committed dist after line-ending normalization; the specified chapter 1 destination returns HTTP 200.",
     "verifiedFiles": [
-      "lesson-refinement.css"
+      "index.html",
+      "forge-prep-model.js",
+      "forge-prep.css",
+      "narrative-labs.js",
+      "ore-hammer.js",
+      "oxygen-affinity.js"
     ],
-    "browserVerifiedAt": "2026-10-30T09:53:17.826Z",
+    "browserVerifiedAt": "2026-10-30T10:14:09.840Z",
     "browserVerification": [
-      "Public main-card and A-D practice choices and letters render at 18px.",
-      "Public card 03 can still be answered and shows correct feedback.",
+      "Public A-D workshop practice and all five main-card quizzes have four choices.",
+      "Public C practice accepts both the new D option and the correct C option with appropriate feedback.",
+      "Public activity table shows the new 26px heading and question; definition map fills the available content width.",
+      "Ore view toolbar is absent; local hammer interaction still crushes the ore.",
+      "Public chapter 1 header link was clicked and opened https://urpig.github.io/ch1/dist/chemistry/index.html.",
       "No captured console errors."
     ],
-    "automatedTestsPassed": 170,
-    "verificationLimits": "Responsive local check at 390px confirms 17px choices and no horizontal overflow. Public smoke check verifies desktop 18px choices and card 03 answering.",
-    "screenshot": "outputs/ch2-public-larger-options.png"
+    "automatedTestsPassed": 171,
+    "verificationLimits": "Local 390px check confirmed four 17px choices without horizontal overflow and persistence of option D. Public smoke checks cover revised practice, headings and navigation; unchanged experiments were not all replayed.",
+    "screenshot": "outputs/ch2-public-four-choice-practice.png"
   },
   "previousPublicDeployment": {
     "provider": "netlify",
@@ -75,36 +83,24 @@
     "provider": "github-pages",
     "url": "https://urpig.github.io/ch2/",
     "status": "published",
-    "sourceCommit": "5506896dae97a497b6c4eb9e53df6b2a92e2b05d",
-    "pagesCommit": "d96151977ad01baad2be1c183b83995ec906a2c7",
-    "sourceTree": "67b505b92db2f1b388c3b909a381985f1d3a9b35",
+    "sourceCommit": "49de4cf64bd410f337d90840cc0f22193a4b821e",
+    "pagesCommit": "f615925c335bfc15349de320e9b102ef3445b533",
+    "sourceTree": "60076215ab9b225af3574204fee57ef5728cdcfd",
     "fileCount": 225,
-    "anonymousHttpVerifiedAt": "2026-10-30T09:25:22.597Z",
-    "anonymousHttpChecksPassed": 10,
-    "httpVerification": "Ten anonymous requests returned HTTP 200 and matched the published source SHA-256; text line endings normalized and image bytes compared exactly.",
+    "anonymousHttpVerifiedAt": "2026-10-30T09:51:48.002Z",
+    "anonymousHttpChecksPassed": 1,
+    "httpVerification": "Anonymous HTTP 200 stylesheet matches committed CSS after line-ending normalization.",
     "verifiedFiles": [
-      "index.html",
-      "story-app.js",
-      "journey-cards.js",
-      "forge-prep.js",
-      "everyday-redox.js",
-      "story-ending.js",
-      "respiration-art.js",
-      "lesson-refinement.css",
-      "assets/story/sword-offering.png",
-      "assets/story/mitochondrion-isolated.png"
+      "lesson-refinement.css"
     ],
-    "browserVerifiedAt": "2026-10-30T09:30:34.349Z",
+    "browserVerifiedAt": "2026-10-30T09:53:17.826Z",
     "browserVerification": [
-      "Public page renders without login.",
-      "All five exploration cards and A-D end with a visible notebook followed by one practice question.",
-      "Card 03 wrong answers display the correct answer and explanation, allow retry, and preserve the selected answer on reload.",
-      "Workshop D practice appears after its notebook, and wrong/correct answers display the expected feedback.",
-      "The salt continuation links to https://urpig.github.io/ch3.1/?v=2ed4c60#homecoming.",
-      "No captured console errors during public browser verification."
+      "Public main-card and A-D practice choices and letters render at 18px.",
+      "Public card 03 can still be answered and shows correct feedback.",
+      "No captured console errors."
     ],
     "automatedTestsPassed": 170,
-    "verificationLimits": "Public smoke check covers notebook/question ordering, card 03 and D answer feedback, reload persistence and the next-unit link; it does not repeat every laboratory interaction or mobile viewport.",
-    "screenshot": "outputs/ch2-public-5506896.png"
+    "verificationLimits": "Responsive local check at 390px confirms 17px choices and no horizontal overflow. Public smoke check verifies desktop 18px choices and card 03 answering.",
+    "screenshot": "outputs/ch2-public-larger-options.png"
   }
 }
