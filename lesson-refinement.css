@@ -281,3 +281,8 @@
 .blade-studio .finish-blade-target.finish-drop-active:not(.loaded){border-color:#008eaa;background:#bfeffa50}
 .blade-studio .finish-blade-target.finish-drop-hover:not(.loaded){border-style:solid;border-color:#005c70;background:#b4f4ff66;box-shadow:0 0 12px #00a5c055}
 @media(max-width:600px){.blade-studio .finish-blade-target:not(.loaded)>span{transform:translateY(5px)}}
+
+/* Larger practice choices across the chapter and workshop cards. */
+.practice .quiz-option,.prep-quiz .prep-answers button,.life-role-choices button{font-size:18px;line-height:1.75;min-height:60px;padding:14px 16px}
+.practice .quiz-option>span{font-size:inherit;line-height:inherit;padding-top:0}
+@media(max-width:600px){.practice .quiz-option,.prep-quiz .prep-answers button,.life-role-choices button{font-size:17px;padding:13px 14px}}
