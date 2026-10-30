@@ -286,3 +286,5 @@
 .practice .quiz-option,.prep-quiz .prep-answers button,.life-role-choices button{font-size:18px;line-height:1.75;min-height:60px;padding:14px 16px}
 .practice .quiz-option>span{font-size:inherit;line-height:inherit;padding-top:0}
 @media(max-width:600px){.practice .quiz-option,.prep-quiz .prep-answers button,.life-role-choices button{font-size:17px;padding:13px 14px}}
+
+.iron-candidate-label{padding:0 3px 6px;text-align:center;color:#375e50}.iron-candidate-label b{display:block}.iron-candidate-label small{display:block;margin-top:8px;color:#748166}.iron-cup-target{cursor:default}
