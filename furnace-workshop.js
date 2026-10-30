@@ -1,3 +1,4 @@
+import {furnaceNextAction} from './furnace-guidance.js';
 import {bindDrop} from './direct-manipulation.js';
 import {rockIllustration} from './lesson-materials.js';
 import {scopeMarkup} from './card-markup.js';
@@ -16,7 +17,7 @@ export const furnaceZones=[
 ].map(([id,name,tag,at,pos,formula,text,need])=>({id,name,tag,at,pos,formula,text,need}));
 export function furnaceState(feeds){const heat=feeds.has('coke')&&feeds.has('air'),iron=heat&&feeds.has('ore'),slag=iron&&feeds.has('lime');return {heat,iron,slag};}
 export function mountFurnace(root,c,{record,notice,delay,onCleanup}){
- const loaded=new Set();let loading=false,selected='charge',paused=false,tour=0,alive=true,running=false,completed=false,step=-1,elapsed=0;root.dataset.furnaceFeeds='';root.dataset.furnaceLoading='';
+ const loaded=new Set();let heldFeed=null;let loading=false,selected='charge',paused=false,tour=0,alive=true,running=false,completed=false,step=-1,elapsed=0;root.dataset.furnaceFeeds='';root.dataset.furnaceLoading='';
  const labels={ore:'① 鐵礦石',coke:'② 焦炭',air:'③ 熱風管',lime:'③ 石灰石'},col={ore:'#9a6047',coke:'#303b38',lime:'#c5bda3'},hint={ore:'含 Fe₂O₃、雜質',coke:'供熱與 CO 來源',air:'接到風口',lime:'形成熔渣除雜'};
  const air=`<svg viewBox="0 0 140 74" aria-hidden="true"><defs><linearGradient id="air-token"><stop stop-color="#273f47"/><stop offset=".36" stop-color="#b4c3bb"/><stop offset=".56" stop-color="#56747a"/><stop offset="1" stop-color="#1d363f"/></linearGradient></defs><path d="M15 42H75Q95 42 95 20V10" fill="none" stroke="url(#air-token)" stroke-width="23"/><path d="M23 26V57M66 26V57M78 8H113" stroke="#98aea5" stroke-width="5"/><path d="M9 42H65" stroke="#d6bc7b" stroke-width="2" stroke-dasharray="7 5"/></svg>`;
  root.innerHTML=scopeMarkup(`<section class="factory-simulator" aria-label="現代高爐互動工廠"><header class="factory-topline"><div><span>BLAST FURNACE</span><b>讓整座高爐運作起來</b></div><span class="factory-live" data-factory-live>待投料</span></header><div class="factory-feed-rack" aria-label="可拖曳原料">${['ore','coke','lime'].map(k=>`<div class="factory-feed" data-feed="${k}" aria-label="${labels[k]}，${hint[k]}" title="${hint[k]}">${k==='air'?air:rockIllustration(col[k],'factory-'+k)}<span>${labels[k]}</span></div>`).join('')}</div><div class="factory-layout"><div class="factory-stage"><div class="factory-visual">${factoryArt()}<canvas class="factory-atmosphere" aria-hidden="true"></canvas><canvas class="factory-molten" aria-hidden="true"></canvas><div class="factory-charge-target drop-target" data-charge-target><span>送料車 ↓</span></div><button class="factory-heater" data-factory-heat disabled aria-label="原料齊備後，從熱風管啟動加熱">加熱</button>${furnaceZones.map((z,i)=>`<button class="factory-hotspot" data-zone="${z.id}" aria-pressed="false" disabled style="left:${z.pos[0]}%;top:${z.pos[1]}%"><i>${i+1}</i><span>${z.name}<small>${z.tag}</small></span></button>`).join('')}</div><div class="factory-motion-controls"><button data-factory-pause disabled>暫停說明</button><button data-factory-replay disabled>重播 1–8</button></div></div><aside class="factory-panel" aria-live="polite" aria-atomic="true"><span class="factory-panel-kicker" data-zone-kicker></span><h3 data-zone-title></h3><p class="factory-equation" data-zone-equation></p><p data-zone-description></p><div class="factory-requirement" data-zone-requirement></div><div class="factory-product-status"><div><i class="iron-dot"></i><span>含碳鐵水</span><b data-iron-status>尚未形成</b></div><div><i class="slag-dot"></i><span>熔渣分離</span><b data-slag-status>尚未形成</b></div></div><p class="factory-next-hint">每一步自動停留約 6 秒；可暫停閱讀。</p></aside></div><p class="factory-message" aria-live="polite"></p><div class="factory-progress">${['ore','coke','air','lime'].map(k=>`<span data-furnace-step="${k}">${k==='air'?'○ 加熱與完整觀察':'○ '+labels[k].slice(2)}</span>`).join('')}</div></section><p class="model-caption">現代高爐剖面教學模型，並非古代設備。1–8 是解說順序；運作中的各區反應可同時進行。料層、時間與位置簡化；無色氣體用箭頭追蹤，還原實際分多步進行。此處以 SiO₂、CaSiO₃ 代表除雜。</p>`,'industrial-furnace');
@@ -34,6 +35,14 @@ export function mountFurnace(root,c,{record,notice,delay,onCleanup}){
  const tokenObserver=new ResizeObserver(resizeTokens);tokenObserver.observe(visual);resizeTokens();onCleanup(()=>tokenObserver.disconnect());
  const ready=()=>['ore','coke','lime'].every(k=>loaded.has(k))&&!loading;
  onCleanup(()=>{alive=false;tour++;fx?.dispose();molten?.dispose();});
+ function guideNext(){
+  root.querySelectorAll('.factory-guided').forEach(el=>{el.classList.remove('factory-guided');el.removeAttribute('data-next-label');});
+  pauseButton.setAttribute('aria-label',pauseButton.textContent);replayButton.setAttribute('aria-label',replayButton.textContent);
+  const next=furnaceNextAction({loaded:[...loaded],loading,running,paused,completed,held:heldFeed,step});sim.dataset.nextAction=next.id;
+  let tool=next.id==='feed'?root.querySelector('[data-feed="'+next.feed+'"]'):next.id==='charge'?root.querySelector('[data-charge-target]'):next.id==='heat'?heatButton:next.id==='resume'?pauseButton:next.id==='replay'?replayButton:next.id==='observe'&&step>=0?root.querySelector('[data-zone="'+furnaceZones[step].id+'"]'):null;
+  if(tool){tool.classList.add('factory-guided');tool.dataset.nextLabel=next.label;}
+  for(const el of root.querySelectorAll('[data-feed]'))el.setAttribute('aria-pressed',String(heldFeed===el.dataset.feed));
+ }
  function paint(){
   const heating=running||step>=1,iron=step>=3,slag=step>=5;
   root.dataset.furnaceFeeds=[...loaded].join(',');root.dataset.furnacePhase=completed?'complete':running?(paused?'paused':'running'):'loading';root.dataset.furnaceStep=String(step+1);
@@ -43,7 +52,7 @@ export function mountFurnace(root,c,{record,notice,delay,onCleanup}){
   root.querySelector('[data-iron-status]').textContent=step>=7?'由下層出口流出':iron?'爐內形成，等待出鐵':'尚未形成';
   root.querySelector('[data-slag-status]').textContent=step>=6?'由上層出口排出':slag?'浮在鐵水上，等待出渣':'尚未形成';
   for(const k of ['ore','coke','lime'])root.querySelector('[data-furnace-step="'+k+'"]').textContent=(loaded.has(k)?'✓ ':'○ ')+labels[k].slice(2);
-  root.querySelector('[data-furnace-step="air"]').textContent=completed?'✓ 加熱與完整觀察':'○ 加熱與完整觀察';
+  root.querySelector('[data-furnace-step="air"]').textContent=completed?'✓ 加熱與完整觀察':'○ 加熱與完整觀察';guideNext();
  }
  function inspect(index){
   const z=furnaceZones[index];selected=z.id;
@@ -63,10 +72,16 @@ export function mountFurnace(root,c,{record,notice,delay,onCleanup}){
    delay(tick,100);
   }delay(tick,100);
  }
- for(const item of root.querySelectorAll('[data-feed]')){const k=item.dataset.feed;bindDrop(item,root.querySelector('[data-charge-target]'),{disabled:()=>loading||running||completed,onDrop:()=>{
-  item.classList.add('feed-loaded');item.setAttribute('aria-disabled','true');loading=true;root.dataset.furnaceLoading=k;sim.classList.add('charging');heatButton.disabled=true;say('送料車正在把原料送入爐頂……');
-  delay(()=>{if(!alive)return;loaded.add(k);loading=false;root.dataset.furnaceLoading='';sim.classList.remove('charging');record(k);paint();say(ready()?'三種原料已備妥。熱風管已接好，點「加熱」觀看 1–8。':'原料已入爐，繼續把其餘原料拖入送料車。');},1900);
- },onMiss:()=>say('把原料拖進送料車的虛線框，再鬆開。')});}
+ function addFeed(k){
+  if(!k||loaded.has(k)||loading||running||completed)return;
+  const item=root.querySelector('[data-feed="'+k+'"]');item.classList.add('feed-loaded');item.setAttribute('aria-disabled','true');heldFeed=null;loading=true;root.dataset.furnaceLoading=k;sim.classList.add('charging');paint();say('送料車正在把原料送入爐頂……');
+  delay(()=>{if(!alive)return;loaded.add(k);loading=false;root.dataset.furnaceLoading='';sim.classList.remove('charging');record(k);paint();say(ready()?'三種原料已備妥，點「加熱」開始觀察。':'原料已入爐，拿取下一種原料。');},1900);
+ }
+ for(const item of root.querySelectorAll('[data-feed]')){const k=item.dataset.feed;
+  bindDrop(item,root.querySelector('[data-charge-target]'),{disabled:()=>loaded.has(k)||loading||running||completed,highlightOnPickup:false,onMove:()=>{if(!loading&&!running&&!completed&&!loaded.has(k)){heldFeed=k;guideNext();}},onDrop:()=>addFeed(k),onMiss:()=>{heldFeed=null;paint();say('把原料放進送料車，或先點原料再點送料車。');}});
+  item.addEventListener('click',()=>{if(loaded.has(k)||loading||running||completed)return;heldFeed=heldFeed===k?null:k;paint();});
+ }
+ const chargeTarget=root.querySelector('[data-charge-target]');chargeTarget.tabIndex=0;chargeTarget.setAttribute('role','button');chargeTarget.setAttribute('aria-label','將選取的原料放入送料車');chargeTarget.addEventListener('click',()=>addFeed(heldFeed));chargeTarget.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();addFeed(heldFeed);}});
  heatButton.addEventListener('click',begin);replayButton.addEventListener('click',begin);
  pauseButton.addEventListener('click',()=>{if(!running)return;paused=!paused;sim.classList.toggle('factory-paused',paused);pauseButton.textContent=paused?'繼續說明':'暫停說明';paint();});
  for(const [i,b] of [...root.querySelectorAll('button[data-zone]')].entries())b.addEventListener('click',()=>{if(completed)inspect(i);});

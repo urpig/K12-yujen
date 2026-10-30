@@ -18,14 +18,14 @@ export function bindFreeInstrument(item,board,{position=[320,224],offset=[29,205
  paint();return ()=>{for(const [event,fn] of [['pointerdown',down],['pointermove',move],['pointerup',up],['pointercancel',cancel],['lostpointercapture',lost],['keydown',key]])item.removeEventListener(event,fn);if(drag?.id!==undefined&&item.hasPointerCapture(drag.id))item.releasePointerCapture(drag.id);drag=null;};
 }
 // Pointer and keyboard paths share the same hit test and completion callback.
-export function bindDrop(item,zone,{onDrop,onMove=()=>{},onMiss=()=>{},anchor=[.5,.5],keep=false,disabled=()=>false}={}){
+export function bindDrop(item,zone,{onDrop,onMove=()=>{},onMiss=()=>{},anchor=[.5,.5],keep=false,highlightOnPickup=true,disabled=()=>false}={}){
  let drag=null,x=0,y=0,settled=false;
  const target=()=>typeof zone==='function'?zone():zone;
  item.classList.add('draggable');item.tabIndex=0;item.setAttribute('role','button');
  const initialLabel=item.getAttribute('aria-label')||item.textContent.trim();item.setAttribute('aria-label',initialLabel+'；拖曳，或 Enter 拿起、方向鍵移動、Enter 放下');
  function point(){const r=item.getBoundingClientRect();return {x:r.left+r.width*anchor[0],y:r.top+r.height*anchor[1]};}
  function paint(){item.style.transform=`translate(${x}px,${y}px)`;const z=target();if(!z)return false;const r=z.getBoundingClientRect(),hit=inside(point(),r);z.classList.toggle('drop-hover',hit);onMove(hit,item.getBoundingClientRect(),r);return hit;}
- function start(){if(settled||disabled())return false;const z=target();if(!z)return false;item.classList.add('dragging');item.setAttribute('aria-pressed','true');z.classList.add('drop-active');return true;}
+ function start(){if(settled||disabled())return false;const z=target();if(!z)return false;item.classList.add('dragging');item.setAttribute('aria-pressed','true');if(highlightOnPickup)z.classList.add('drop-active');return true;}
  function finish(cancel=false){const hit=!cancel&&paint(),z=target();item.classList.remove('dragging');item.setAttribute('aria-pressed','false');z?.classList.remove('drop-active','drop-hover');drag=null;if(hit){settled=true;item.classList.add('placed');item.setAttribute('aria-label',initialLabel+'；已放置');if(keep){const r=item.getBoundingClientRect(),parent=item.offsetParent.getBoundingClientRect();item.style.left=((r.left-parent.left)/parent.width*100)+'%';item.style.top=((r.top-parent.top)/parent.height*100)+'%';}x=0;y=0;item.style.transform='';onDrop();}else{x=0;y=0;item.style.transform='';if(z)onMove(false,item.getBoundingClientRect(),z.getBoundingClientRect());if(!cancel)onMiss();}}
  item.addEventListener('pointerdown',e=>{if(e.button!==0||!start())return;e.preventDefault();drag={id:e.pointerId,sx:e.clientX-x,sy:e.clientY-y};item.setPointerCapture(e.pointerId);});
  item.addEventListener('pointermove',e=>{if(!drag||drag.id!==e.pointerId)return;x=e.clientX-drag.sx;y=e.clientY-drag.sy;paint();});

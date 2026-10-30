@@ -36,3 +36,9 @@
 @keyframes analysis-next-glow{50%{outline-color:#f0bc41;filter:drop-shadow(0 0 10px #f4ce61bd)}}
 @media(prefers-reduced-motion:reduce){.bottle-analysis .analysis-next-tool{animation:none}}
 @media(max-width:850px){.bottle-analysis .analysis-next-tool:before{font-size:9px;padding:2px 6px;top:-24px}}
+/* The cue follows the instrument silhouette rather than its hit box. */
+.bottle-analysis .analysis-next-tool,.bottle-analysis .analysis-next-target{outline:none;box-shadow:none;animation:none;filter:none}
+.bottle-analysis .analysis-next-tool>svg{filter:drop-shadow(0 0 3px #edc96599)}
+.bottle-analysis .sample-source.analysis-next-target{background:transparent;border:0}
+.bottle-analysis .bottle-litmus-strip.analysis-next-target{outline:none;box-shadow:0 0 4px #e9c76a88}
+.bottle-analysis .analysis-shaker{border:0}

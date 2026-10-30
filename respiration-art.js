@@ -1,20 +1,12 @@
 import {moleculeDefinitions,moleculeFragment} from './bio-molecule-art.js';
-
-// The textured organelle is a reconstruction, not a microscope photograph.
-export function respirationArt(){return `<svg class="resp-detailed-art" viewBox="0 0 760 520" role="img" aria-label="細胞環境中的立體粒線體剖面，顯示外膜、內膜摺疊與基質；追蹤養分及氧氣的變化">
- ${moleculeDefinitions('resp-particles')}
- <defs><linearGradient id="resp-edge-wash" x2="0" y2="1"><stop stop-color="#f7f4e7" stop-opacity=".45"/><stop offset=".3" stop-color="#f7f4e7" stop-opacity=".02"/><stop offset=".8" stop-color="#f7f4e7" stop-opacity=".02"/><stop offset="1" stop-color="#f7f4e7" stop-opacity=".85"/></linearGradient></defs>
- <rect width="760" height="520" fill="url(#resp-edge-wash)"/>
- <g fill="#fffdf1" fill-opacity=".94" stroke="#b5bda2" stroke-width=".8"><rect x="244" y="14" width="272" height="30" rx="15"/><rect x="17" y="73" width="278" height="54" rx="9"/><rect x="459" y="73" width="285" height="54" rx="9"/></g>
- <g text-anchor="middle" fill="#35584a"><text x="380" y="35" font-size="15" font-weight="bold">粒線體 · 立體剖面示意</text><text x="156" y="95" font-size="14" font-weight="bold">① 追蹤養分 · 葡萄糖被氧化</text><text x="156" y="115" font-size="11">先在細胞質分解，後續產物進入粒線體</text><text x="601" y="95" font-size="14" font-weight="bold">② 內膜上的電子傳遞鏈</text><text x="601" y="115" font-size="11">氧氣接受電子，與氫離子形成水</text></g>
- <g fill="none" stroke="#f5f0ce" stroke-width="1.5"><path d="M139 319L101 287"/><path d="M374 176L350 154"/><path d="M408 299L441 312"/></g>
- <g font-size="11" fill="#35584a"><rect x="63" y="260" width="69" height="22" rx="11" fill="#fff9e9e8"/><text x="97" y="275" text-anchor="middle">外膜</text><rect x="314" y="132" width="112" height="22" rx="11" fill="#fff9e9e8"/><text x="370" y="147" text-anchor="middle">內膜摺疊（嵴）</text><rect x="432" y="312" width="65" height="22" rx="11" fill="#fff9e9e8"/><text x="464" y="327" text-anchor="middle">基質</text></g>
- <g data-bio-input-one opacity="0"><g transform="translate(-7 165) scale(.5)">${moleculeFragment('glucose','resp-particles')}</g></g>
- <g data-bio-oxygen-out opacity="0"><g transform="translate(-160 285)"><rect x="177" y="108" width="130" height="89" rx="14" fill="#fffdf0" fill-opacity=".88"/><g transform="translate(194 111) scale(.6)">${moleculeFragment('co2','resp-particles')}</g><text x="242" y="185" text-anchor="middle" font-size="12" fill="#35584a">CO₂ 釋出</text></g></g>
- <g data-bio-hydrogen opacity="0"><rect x="141" y="224" width="161" height="27" rx="13" fill="#fff7d6" stroke="#c8b375"/><text x="221" y="242" text-anchor="middle" font-size="12" fill="#6f5a2d">電子交給攜帶者</text></g>
- <g data-bio-carrier opacity="0"><path d="M280 257Q378 322 481 249" fill="none" stroke="#fff1af" stroke-width="4" stroke-dasharray="6 5"/><rect x="245" y="378" width="291" height="30" rx="15" fill="#fff9dc" stroke="#c4ac70"/><text x="390" y="398" text-anchor="middle" fill="#66532b" font-size="12">電子攜帶者：把電子接續傳至內膜</text></g>
- <g data-bio-input-two opacity="0"><g transform="translate(695 172) scale(.5)">${moleculeFragment('oxygen','resp-particles')}</g></g>
- <g data-bio-intermediate opacity="0"><rect x="455" y="170" width="138" height="73" rx="12" fill="#fff8de" fill-opacity=".95" stroke="#aeb97d"/><text x="524" y="198" text-anchor="middle" font-size="14" fill="#456b4c">O₂ 接受電子</text><text x="524" y="223" text-anchor="middle" font-size="13" fill="#758554">＋ H⁺</text></g>
- <g data-bio-product opacity="0"><rect x="586" y="265" width="130" height="95" rx="16" fill="#fffdf1" fill-opacity=".93" stroke="#c1cba9"/><g transform="translate(601 272) scale(.6)">${moleculeFragment('water','resp-particles')}</g><text x="650" y="345" text-anchor="middle" font-size="13" fill="#456a69">水 H₂O</text></g>
- <rect x="86" y="465" width="590" height="39" rx="9" fill="#fffdf1" fill-opacity=".92"/><text x="381" y="482" text-anchor="middle" fill="#4d6551" font-size="11">立體構造重建示意，非顯微照片；物質與反應路徑經簡化。</text><text x="381" y="497" text-anchor="middle" fill="#4d6551" font-size="11">葡萄糖先在細胞質分解，圖中合併追蹤後續粒線體反應。</text>
- </svg>`;}
+export function respirationArt(){return `<svg class="resp-matched-art" viewBox="0 0 760 405" role="img" aria-label="細胞中的粒線體放大示意：葡萄糖被氧化成二氧化碳，氧氣被還原成水">
+${moleculeDefinitions('resp-particles')}
+<image href="./assets/story/prep-breath-realistic.png" width="760" height="405" preserveAspectRatio="xMidYMid slice"/>
+<rect width="760" height="405" fill="#fff9e8" opacity=".23"/>
+<rect x="236" y="15" width="288" height="30" rx="15" fill="#fffdf1f2" stroke="#c9b990"/><text x="380" y="36" text-anchor="middle" fill="#345349" font-size="15" font-weight="bold">粒線體 · 細胞內部放大</text>
+<g text-anchor="middle" font-size="14" fill="#345349" font-weight="bold"><rect x="100" y="64" width="240" height="35" rx="12" fill="#fffdf2ed"/><text x="220" y="86">① 葡萄糖被氧化</text><rect x="422" y="64" width="240" height="35" rx="12" fill="#fffdf2ed"/><text x="542" y="86">② 氧氣被還原</text></g>
+<g data-bio-input-one opacity="0"><g transform="translate(0 175) scale(.55)">${moleculeFragment('glucose','resp-particles')}</g></g>
+<g data-bio-oxygen-out opacity="0"><g transform="translate(106 133) scale(.65)">${moleculeFragment('co2','resp-particles')}</g><text x="160" y="216" fill="#244c48" stroke="#fff9e8" stroke-width="3" paint-order="stroke" text-anchor="middle" font-size="12">二氧化碳 CO₂</text></g>
+<g data-bio-input-two opacity="0"><g transform="translate(662 181) scale(.55)">${moleculeFragment('oxygen','resp-particles')}</g></g>
+<g data-bio-product opacity="0"><g transform="translate(588 257) scale(.65)">${moleculeFragment('water','resp-particles')}</g><text x="643" y="344" text-anchor="middle" fill="#244c48" stroke="#fff9e8" stroke-width="3" paint-order="stroke" font-size="12">水 H₂O</text></g>
+<rect x="100" y="360" width="560" height="30" rx="12" fill="#fffdf2ed"/><text x="380" y="380" text-anchor="middle" fill="#345349" font-size="13">葡萄糖 → 二氧化碳　｜　氧氣 → 水　｜　釋放能量</text></svg>`;}

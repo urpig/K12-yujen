@@ -12,16 +12,20 @@ export function compareWithCarbon(symbol){
  const index=oxygenAffinitySeries.findIndex(x=>x.symbol===symbol),carbon=oxygenAffinitySeries.findIndex(x=>x.symbol==='C');
  return index<0?null:{...oxygenAffinitySeries[index],relation:index<carbon?'greater':index===carbon?'same':'less'};
 }
+export function compareWithIron(symbol){
+ const index=oxygenAffinitySeries.findIndex(x=>x.symbol===symbol),iron=oxygenAffinitySeries.findIndex(x=>x.symbol==='Fe');
+ return index<0?null:{...oxygenAffinitySeries[index],relation:index<iron?'greater':index===iron?'same':'less'};
+}
 export function ironOxygenLedger(pairs){
  const count=new Set((Array.isArray(pairs)?pairs:[]).filter(x=>Number.isInteger(x)&&x>=0&&x<3)).size;
  return {count,oxideOxygen:3-count,gasOxygen:3+count,carbonDioxide:count,total:{Fe:2,C:3,O:6}};
 }
 export const prepQuizzes=[
- {question:'哪個說法能解釋沒有火焰的生鏽？',options:['沒有火焰，就不算氧化','生鏽也涉及鐵與氧結合，只是進行較慢','冰含有氧，所以融冰就是氧化'],answer:1,reason:'生鏽是較緩慢的氧化；判斷要看化學變化，不能只看火焰或物質名稱裡有沒有氧。'},
+ {question:'以下哪個反應不是氧化還原反應？',options:['木炭燃燒','冰塊融化','鐵釘生鏽'],answer:1,reason:'冰塊融化只改變狀態，水仍是 H₂O，屬於物理變化；木炭燃燒與鐵釘生鏽都涉及氧化還原。'},
  {question:'為什麼碳可以用來還原鐵，卻不能照樣用來提煉鎂？',options:['碳對氧活性比鐵大、比鎂小；還原仍需要合適條件','只要溫度夠高，碳就能還原所有金屬氧化物','因為碳是金屬，而且比鐵重'],answer:0,reason:'本課排列為 Mg ＞ C ＞ Fe。碳較能與氧結合，可在合適高溫條件下使鐵的氧化物失氧；MgO 較難把氧交給碳。高爐中，碳還會生成 CO，由 CO 帶走鐵礦中的氧。'},
  {question:'追蹤同一批氧後，哪個說法正確？',options:['氧化物失去氧，氧就消失了','只有失氧的一方反應，得氧的一方沒有變化','得氧的一方被氧化，失氧的一方被還原；兩者同時發生'],answer:2,reason:'在這裡的氧轉移反應中，氧離開一方，也同時與另一方結合。氧化必定伴隨還原，還原也必定伴隨氧化；更一般的判斷是失去電子與得到電子必須配對。'}
 ];
-export function freshPrep(){return {version:3,tab:0,sorted:[],order:[],moved:[],targets:[],ironPairs:[],reaction:'magnesium',referenceElement:'Fe',answers:[null,null,null]};}
+export function freshPrep(){return {version:3,aQuizVersion:2,tab:0,sorted:[],order:[],moved:[],targets:[],ironPairs:[],reaction:'magnesium',referenceElement:'Fe',answers:[null,null,null]};}
 export function restorePrep(raw){
  const s=freshPrep();if(!raw||typeof raw!=='object')return s;
  s.tab=Number.isInteger(raw.tab)&&raw.tab>=0&&raw.tab<4?raw.tab:0;
@@ -35,7 +39,7 @@ export function restorePrep(raw){
  if(raw.version!==3&&s.tab===2&&s.reaction!=='magnesium')s.tab=3;
  s.referenceElement=compareWithCarbon(raw.referenceElement)?raw.referenceElement:'Fe';
  // Preserve previous observations; revised B/C questions need a fresh answer.
- s.answers=s.answers.map((_,i)=>(i===0||[2,3].includes(raw.version))&&prepReady(s,i)&&Number.isInteger(raw.answers?.[i])&&raw.answers[i]>=0&&raw.answers[i]<3?raw.answers[i]:null);return s;
+ s.answers=s.answers.map((_,i)=>(i===0||[2,3].includes(raw.version))&&prepReady(s,i)&&Number.isInteger(raw.answers?.[i])&&raw.answers[i]>=0&&raw.answers[i]<3?raw.answers[i]:null);if(raw.aQuizVersion!==2)s.answers[0]=null;return s;
 }
 export function prepReady(s,i){return i===0?s.sorted.length===4:i===1?s.order.length===4&&s.order.every((v,j)=>v===affinityOrder[j]):i===2&&s.moved.length===2;}
 export function prepMastered(s,i){return prepReady(s,i)&&s.answers[i]===prepQuizzes[i].answer;}

@@ -1,15 +1,15 @@
 export function storySpeech(who,text,expression=who==='kui'?'curious':'gentle'){
  return `<div class="story-speech story-speech--${who}"><span class="story-portrait story-portrait--${who}" data-expression="${expression}" aria-hidden="true"></span><p><b>${({kui:'小葵',grandpa:'阿公',emperor:'皇上'})[who]}</b>${text}</p></div>`;
 }
-export function definitionDialogue(){return `<section class="prep-definitions" aria-labelledby="prep-definitions-title"><small>開始前，先認識</small><h3 id="prep-definitions-title">五個名詞，先抓住重點</h3><div class="story-dialogue dialogue-stack">${storySpeech('kui','「氧化、還原和活性是什麼？氧化劑、還原劑又是誰？」')}${storySpeech('grandpa','「先記住下面的意思，再親手操作，看看它們怎麼發生。」')}</div>
+export function definitionDialogue(){return `<section class="prep-definitions" aria-label="氧化還原基本名詞"><div class="story-dialogue dialogue-stack">${storySpeech('kui','「氧化鐵是什麼？跟鐵有什麼不一樣？」')}${storySpeech('grandpa','「在開始之前，我們要先了解什麼是氧化還原！」')}</div>
 <div class="redox-definition-map" aria-label="五個名詞的簡短解釋">
  <p class="definition-intro">先從「氧的得失」認識氧化與還原。</p>
  <dl class="definition-brief-list">
-  <div><dt>氧化</dt><dd>物質<strong>得到氧</strong>，與氧結合。</dd></div>
-  <div><dt>還原</dt><dd>氧化物<strong>失去氧</strong>。</dd></div>
-  <div><dt>對氧活性</dt><dd>元素與氧結合的傾向；<strong>活性越大，通常越容易得氧</strong>。</dd></div>
-  <div><dt>氧化劑</dt><dd>使別的物質<strong>被氧化</strong>，自己被還原。</dd></div>
-  <div><dt>還原劑</dt><dd>使別的物質<strong>被還原</strong>，自己被氧化。</dd></div>
+  <div><dt>氧化</dt><dd>物質<strong class="definition-oxidation">得到氧</strong>，與氧結合。</dd></div>
+  <div><dt>還原</dt><dd>氧化物<strong class="definition-reduction">失去氧</strong>。</dd></div>
+  <div><dt>對氧活性</dt><dd>元素與氧結合的傾向；<strong class="definition-affinity">活性越大，通常越容易得氧</strong>。</dd></div>
+  <div><dt>氧化劑</dt><dd>使別的物質<strong class="definition-oxidation">被氧化</strong>，自己<strong class="definition-reduction">被還原</strong>。</dd></div>
+  <div><dt>還原劑</dt><dd>使別的物質<strong class="definition-reduction">被還原</strong>，自己<strong class="definition-oxidation">被氧化</strong>。</dd></div>
  </dl>
  <p class="definition-next">氧化與還原同時發生。接著操作下方卡片，找出誰改變了。<span aria-hidden="true">↓</span></p>
 </div></section>`;}
@@ -27,7 +27,7 @@ const notes={
  D:['光合作用：水被氧化並釋出氧氣，CO₂ 被還原並用來合成糖；有氧呼吸：葡萄糖被氧化，氧氣被還原成水。','本課漂白模型中，過氧化氫、次氯酸鈉使色素氧化，自己被還原；二氧化硫使色素還原，自己被氧化。','維生素 C 可先被氧化，延緩食物氧化；保護會消耗，也不等於殺菌或永久保鮮。'],
  end:['氧化是生命活動的一部分；活性氧過多、超過身體防禦能力時，可能造成氧化壓力。','維生素 C、E 在發揮還原作用時，自己也會被氧化；抗氧化不是把所有氧拿走。','化學上的抗氧化作用，不等於已證實能延緩人體老化；白藜蘆醇等成分仍要看人體研究證據。']
 };
-export function notebookMarkup(key){return `<aside class="kui-notebook" aria-label="小葵的筆記"><header><span class="story-portrait story-portrait--kui" data-expression="thinking" aria-hidden="true"></span><div><small>這個單元，我記住了</small><h3>小葵的筆記</h3></div></header><ul>${notes[key].map(line=>`<li>${line}</li>`).join('')}</ul></aside>`;}
+export function notebookMarkup(key){return `<aside class="kui-notebook" aria-label="小葵的筆記"><header><span class="story-portrait story-portrait--kui" data-expression="thinking" aria-hidden="true"></span><div><h3>小葵的筆記</h3></div></header><ul>${notes[key].map(line=>`<li>${line}</li>`).join('')}</ul></aside>`;}
 export function bridgeMarkup(c){
  const dialogue={1:[['kui','「氧化是什麼？」'],['grandpa','「先認識物質與氧結合這件事，再到實驗箱觀察。」']],2:[['kui','「氧能不能換個夥伴？」'],['grandpa','「沿用活性紀錄，拿不同材料和氧化鐵比較，看看誰能把氧帶走。」']],3:[['grandpa','「高爐常用的幫手是 CO。它已經含有氧，還能再取得氧嗎？」']],4:[['grandpa','「鐵的去向清楚了。接著用高爐模型看看：熱和 CO 從哪裡來，雜質又怎麼處理？」']],5:[['kui','「終於有了生鐵，可以立刻鍛劍了嗎？」'],['grandpa','「先試刀材。有的會裂，有的彎了就回不來。」']]};
  return dialogue[c.id]?`<div class="story-dialogue dialogue-stack">${dialogue[c.id].map(([who,line])=>storySpeech(who,line)).join('')}</div>`:`<p>${c.bridge}</p>`;
