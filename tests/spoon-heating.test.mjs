@@ -8,3 +8,11 @@ test('moving an unignited sample away stops preheating but removing heat does no
 test('an ignited nonmetal requires bottle observation, not just heating or waiting outside',()=>{let s=advanceSpoonHeating(newSpoonHeating('S',false,true),{near:true,dt:3000});assert.equal(s.ignited,true);assert.equal(s.complete,false);assert.equal(s.observationMs,0);s=advanceSpoonHeating(s,{inJar:true,dt:2000});s=advanceSpoonHeating(s,{inJar:false,dt:30000});assert.equal(s.observationMs,2000);s=advanceSpoonHeating(s,{inJar:true,dt:800});assert.equal(s.complete,true);assert.ok(spoonAtMouth([560,110]));assert.ok(!spoonAtMouth([560,283]));assert.ok(spoonInJar([560,283]));assert.ok(!spoonInJar([320,224]));});
 test('an ignited nonmetal can enter anywhere in the bottle body without first touching its mouth',()=>{for(const point of [[560,283],[500,180],[620,320]]){assert.equal(spoonAtMouth(point),false);assert.deepEqual(spoonBottlePlacement(point,{ignited:true}),point);let s=advanceSpoonHeating(newSpoonHeating('P',false,true),{near:true,dt:900});s=advanceSpoonHeating(s,{inJar:!!spoonBottlePlacement(point,s),dt:2800});assert.equal(s.complete,true);}assert.deepEqual(spoonBottlePlacement([560,110],{ignited:true}),[560,283]);});
 test('cold or metal specimens and drops outside the bottle cannot bypass burning and collection',()=>{for(const point of [[560,283],[560,110]]){assert.equal(spoonBottlePlacement(point),null);assert.equal(spoonBottlePlacement(point,{isMetal:true,ignited:true}),null);}for(const point of [[320,224],[650,280],[560,360],[NaN,283]])assert.equal(spoonBottlePlacement(point,{ignited:true}),null);});
+
+test('the visible bottle neck, shoulders, body edges and bottom all accept an ignited sample',()=>{
+ for(const point of [[560,90],[535,128],[560,150],[505,160],[480,220],[640,320],[560,341]]){
+  assert.equal(spoonInJar(point),true,String(point));
+  assert.ok(spoonBottlePlacement(point,{ignited:true}),String(point));
+ }
+ for(const point of [[480,100],[500,140],[650,220],[560,348],[Infinity,200],[560,NaN]])assert.equal(spoonInJar(point),false,String(point));
+});

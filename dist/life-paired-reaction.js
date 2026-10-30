@@ -41,8 +41,8 @@ export function lifePairedMarkup(key,complete=false){
  const p=lifeReactionPair(key),lab=lifeLabDefinition(key);
  return `<section class="life-paired-reaction life-manual-reaction" data-glossary-skip data-life-observation data-life-reaction="${key}" data-phase="${complete?'complete':'ready'}" style="--life-progress:${complete?1:0}" aria-label="${p.title}的氧化還原配對">
  <div class="reaction-heading"><div><small>親手加入反應物 · 看兩邊一起變</small><h4>${p.title}</h4></div><button type="button" class="text-button" data-life-retry>↺ 重新取用</button></div>
- <p class="life-mix-instruction">${lab.inputs.length===1?(key==='sulfur'?'拿取氣體注射筒，將二氧化硫送入左側的':'拿取燒杯，將試劑加入左側的'):'把兩種反應物拖進'}<strong>${lab.zone}</strong>，觀察反應。<span>也可以先點反應物，再點反應區。</span></p>
- <div class="life-mix-workbench life-bleach-workbench"><div class="life-reactor-panel"><div class="life-reactor-condition">${lab.condition}</div><div class="life-reactor-art life-reactor-${key}">${lifeReactorArt(key)}${laboratoryTransfer(key)}${lab.inputs.map(x=>`<button type="button" class="life-reactant bleach-bench-reagent" data-life-input="${x.id}" aria-pressed="false" aria-label="拿取${x.label}${key==='sulfur'?'氣體注射筒，加入左側密閉罩':'燒杯，加入左側實驗組'}" ${complete?'disabled':''}>${bleachSupply(key)}<span data-input-state>${complete?'✓ 已加入':'拿取 →'}</span></button>`).join('')}<button type="button" class="life-reactor-drop" data-life-drop aria-label="${lab.zone}，放入選取的反應物" ${complete?'disabled':''}><span class="life-zone-name">實驗組</span><span class="life-drop-hint" data-life-drop-hint>放到這裡 ↓</span></button></div>
+ <p class="life-mix-instruction">${lab.inputs.length===1?(key==='sulfur'?'拿取氣體注射筒，將二氧化硫送入左側的':'拿取燒杯，將試劑加入左側的'):'把兩種反應物拖進'}<strong>${lab.zone}</strong>，觀察反應。<span>將試劑拖進實驗組才會反應。</span></p>
+ <div class="life-mix-workbench life-bleach-workbench"><div class="life-reactor-panel"><div class="life-reactor-condition">${lab.condition}</div><div class="life-reactor-art life-reactor-${key}">${lifeReactorArt(key)}${laboratoryTransfer(key)}${lab.inputs.map(x=>`<button type="button" class="life-reactant bleach-bench-reagent" data-life-input="${x.id}" aria-pressed="false" aria-label="拿取${x.label}${key==='sulfur'?'氣體注射筒，加入左側密閉罩':'燒杯，加入左側實驗組'}" ${complete?'disabled':''}>${bleachSupply(key)}<span data-input-state>${complete?'✓ 已加入':'拿取 →'}</span></button>`).join('')}<button type="button" class="life-reactor-drop" data-life-drop tabindex="-1" aria-label="${lab.zone}，將反應物拖入此處" ${complete?'disabled':''}><span class="life-zone-name">實驗組</span><span class="life-drop-hint" data-life-drop-hint>放到這裡 ↓</span></button></div>
  <div class="life-mix-slots" aria-label="反應物加入進度">${lab.inputs.map(x=>`<span data-life-slot="${x.id}" class="${complete?'added':''}">${complete?'✓':'○'} ${x.label}</span>`).join('')}<b data-life-mix-count>${complete?lab.inputs.length:0} / ${lab.inputs.length}</b></div>
  ${key==='food'?'<div class="life-paired-time"><b data-life-time-label>剛切開</b><span>維生素 C 的保護能力：<strong data-life-reserve-label>尚未消耗</strong></span></div>':''}</div></div>
  <p class="life-observe-status" data-life-animation-status role="status">${complete?p.finding:lab.inputs.length===1?(key==='sulfur'?'拿取氣體注射筒，加入左側密閉罩；右側保留原樣對照。':'拿取燒杯，加入左側'+lab.zone+'；右側保留原樣對照。'):'反應物還沒到齊，先取一份放進'+lab.zone+'。'}</p>
@@ -64,7 +64,7 @@ export function bindLifePairedReaction(scene,onComplete){
  if(!scene)return ()=>{};
  if(['photo','resp'].includes(scene.dataset.lifeReaction))return bindBiologyLab(scene,onComplete);
  const key=scene.dataset.lifeReaction,lab=lifeLabDefinition(key),zone=scene.querySelector('[data-life-drop]'),retry=scene.querySelector('[data-life-retry]'),status=scene.querySelector('[data-life-animation-status]');
- let state=freshLifeMix(key,scene.dataset.phase==='complete'),selected=null,playback=null,alive=true;
+ let state=freshLifeMix(key,scene.dataset.phase==='complete'),playback=null,alive=true;
  const cleanups=[],inputs=[...scene.querySelectorAll('[data-life-input]')];
  const usable=()=>alive&&!scene.closest('[inert]');
  const paint=p=>{
@@ -75,10 +75,10 @@ export function bindLifePairedReaction(scene,onComplete){
  };
  const refresh=()=>{
   scene.dataset.phase=state.phase;
-  for(const input of inputs){const added=state.added.includes(input.dataset.lifeInput);input.disabled=added||state.phase!=='ready';input.setAttribute('aria-pressed',String(selected===input.dataset.lifeInput));input.querySelector('[data-input-state]').textContent=added?'✓ 已加入':selected===input.dataset.lifeInput?'已拿起 · 放入 →':'拿取 →';}
+  for(const input of inputs){const added=state.added.includes(input.dataset.lifeInput);input.disabled=added||state.phase!=='ready';input.setAttribute('aria-pressed','false');input.querySelector('[data-input-state]').textContent=added?'✓ 已加入':'拖曳加入 →';}
   lab.inputs.forEach(x=>{const slot=scene.querySelector('[data-life-slot="'+x.id+'"]'),added=state.added.includes(x.id);slot.classList.toggle('added',added);slot.textContent=(added?'✓ ':'○ ')+x.label;});
   scene.querySelector('[data-life-mix-count]').textContent=state.added.length+' / '+lab.inputs.length;zone.disabled=state.phase!=='ready';
-  zone.classList.toggle('life-item-selected',!!selected);scene.querySelector('[data-life-drop-hint]').textContent=state.phase==='complete'?'✓ 觀察完成':state.phase==='running'?'反應進行中…':selected?'點這裡，放入反應物 ↓':'放到這裡 ↓';
+  scene.querySelector('[data-life-drop-hint]').textContent=state.phase==='complete'?'✓ 觀察完成':state.phase==='running'?'反應進行中…':'放到這裡 ↓';
  };
  const visible=()=>{const r=scene.getBoundingClientRect();playback?.setActive(alive&&state.phase==='running'&&!document.hidden&&!document.querySelector('dialog[open]')&&r.bottom>0&&r.top<innerHeight);};
  const start=()=>{
@@ -87,16 +87,16 @@ export function bindLifePairedReaction(scene,onComplete){
  };
  const add=id=>{
   if(!usable()||!addLifeReactant(state,id))return;
-  selected=null;refresh();const missing=lab.inputs.filter(x=>!state.added.includes(x.id));
+  refresh();const missing=lab.inputs.filter(x=>!state.added.includes(x.id));
   if(state.phase==='running'){zone.focus({preventScroll:true});start();}
   else status.textContent='已加入'+lab.inputs.find(x=>x.id===id).label+'；還需要'+missing.map(x=>x.label).join('、')+'。';
  };
- const cancel=()=>{selected=null;refresh();if(state.phase==='ready')status.textContent='已放回反應物，可以重新拿取。';};
- for(const input of inputs){const id=input.dataset.lifeInput;cleanups.push(bindReactantPickup(input,zone,{disabled:()=>!usable()||state.phase!=='ready'||state.added.includes(id),onSelect:()=>{selected=selected===id?null:id;refresh();status.textContent=selected?'已拿起'+lab.inputs.find(x=>x.id===id).label+'，點'+lab.zone+'放入。':'已放回反應物。';},onDrop:()=>add(id),onMiss:()=>{selected=null;refresh();status.textContent='還沒放進'+lab.zone+'，請再拖一次；也可以先點反應物，再點反應區。';},onCancel:cancel}));}
- zone.onclick=()=>{if(!usable()||state.phase!=='ready')return;if(selected)add(selected);else status.textContent='先拿取場景左邊的試劑，再放進'+lab.zone+'。';};
- retry.onclick=()=>{if(!usable())return;playback?.dispose();playback=null;state=freshLifeMix(key);selected=null;refresh();paint(0);status.textContent='已備好新的反應物，重新拿取，放入'+lab.zone+'。';};
+ const cancel=()=>{refresh();if(state.phase==='ready')status.textContent='已放回反應物，可以重新拿取。';};
+ for(const input of inputs){const id=input.dataset.lifeInput;cleanups.push(bindReactantPickup(input,zone,{disabled:()=>!usable()||state.phase!=='ready'||state.added.includes(id),onDrop:()=>add(id),onMiss:()=>{refresh();status.textContent='還沒放進'+lab.zone+'，請再拖一次；將試劑拖進實驗組才會反應。';},onCancel:cancel}));}
+
+ retry.onclick=()=>{if(!usable())return;cleanups.forEach(f=>f.cancel());playback?.dispose();playback=null;state=freshLifeMix(key);refresh();paint(0);status.textContent='已備好新的反應物，重新拿取，放入'+lab.zone+'。';};
  refresh();paint(state.phase==='complete'?1:0);
  const modalObserver=new MutationObserver(visible);modalObserver.observe(document.body,{attributes:true,subtree:true,attributeFilter:['open']});
  window.addEventListener('scroll',visible,{passive:true,capture:true});window.addEventListener('resize',visible);document.addEventListener('visibilitychange',visible);
- return ()=>{alive=false;playback?.dispose();cleanups.forEach(f=>f());zone.onclick=null;retry.onclick=null;modalObserver.disconnect();window.removeEventListener('scroll',visible,true);window.removeEventListener('resize',visible);document.removeEventListener('visibilitychange',visible);};
+ return ()=>{alive=false;playback?.dispose();cleanups.forEach(f=>f());retry.onclick=null;modalObserver.disconnect();window.removeEventListener('scroll',visible,true);window.removeEventListener('resize',visible);document.removeEventListener('visibilitychange',visible);};
 }

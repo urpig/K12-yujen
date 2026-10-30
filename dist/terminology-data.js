@@ -3,11 +3,9 @@ export const dictionaryChapters=[
  {id:'prep',label:'01 · 氧化、活性與還原',target:'forge-prep'},
  {id:'life',label:'01 D · 日常生活中的氧化還原',target:'everyday-redox'},
  {id:'combustion',label:'02 · 燃燒與產物',target:'card-2'},
- {id:'copper',label:'03 · 活性與氧的轉移',target:'card-3'},
- {id:'iron',label:'04 · CO 與氧化鐵',target:'card-4'},
- {id:'furnace',label:'05 · 高爐裡的分工',target:'card-5'},
- {id:'blade',label:'06 · 生鐵、鋼與熟鐵',target:'card-6'},
- {id:'epilogue',label:'尾聲 · 身體與抗氧化',target:'epilogue-antioxidants'}
+ {id:'copper',label:'03 · 氧化鐵的還原',target:'card-3'},
+ {id:'furnace',label:'04 · 看見爐內的分工',target:'card-5'},
+ {id:'blade',label:'05 · 生鐵、鋼與熟鐵',target:'card-6'},
 ];
 export const dictionarySources={
  chemistry:{title:'OpenStax · 原子、元素與化合物',url:'https://openstax.org/books/chemistry-2e/pages/2-1-early-ideas-in-atomic-theory'},
@@ -26,27 +24,27 @@ export const dictionarySources={
 };
 const term=(id,label,definition,example,note,chapters,related=[],aliases=[],source='chemistry')=>({id,label,definition,example,note,chapters,related,aliases,source});
 export const scienceTerms=[
- term('oxide','氧化物','氧與另一種元素組成的一類化合物，本課常見如 CuO 與 Fe₂O₃。','銅得到氧，形成氧化銅。','不能把所有氧化物遇水後的性質都當成一樣；鈉的代表燃燒產物另介紹為過氧化鈉。',['ore','prep','combustion','copper','iron'],['oxidation','copperoxide','sodiumperoxide']),
- term('oxidation','氧化','本課先用「物質得到氧、與氧結合」來理解。','碳得到氧成為 CO₂，被氧化。','沒有火焰也可能氧化；氧化必定伴隨還原。',['prep','life','combustion','copper','iron','epilogue'],['reduction','redox'],['氧化反應','被氧化'],'redox'),
- term('reduction','還原','本課先用「氧化物失去氧」來理解。','氧化銅失去氧，生成金屬銅，被還原。','還原不只是把外觀變回原樣，也不是讓物質或原子消失。',['prep','life','copper','iron','furnace'],['oxidation','redox','reducingagent'],['還原反應','被還原'],'redox'),
- term('redox','氧化還原反應','同時發生氧化與還原的化學反應；在氧轉移的反應中，一方得氧，另一方失氧。','CO 得氧被氧化時，氧化鐵同時失氧被還原。','不能只看單一物質變色，就把整個反應判斷完。',['prep','life','copper','iron','epilogue'],['oxidation','reduction'],['氧化還原'],'redox'),
- term('affinity','對氧活性','本課用來比較元素與氧結合傾向的說法，幫助預測誰較能從氧化物中取走氧。','在合適條件下，碳能幫助鐵的氧化物失氧。','排序是比較線索，仍受溫度、材料表面與反應條件影響，不是無條件保證。',['prep','combustion','copper','iron'],['reducingagent','condition'],['對氧活性大小','對氧氣活性','元素對氧的活性'],'affinity'),
+ term('oxide','氧化物','氧與另一種元素組成的一類化合物，本課常見如 CuO 與 Fe₂O₃。','銅得到氧，形成氧化銅。','不能把所有氧化物遇水後的性質都當成一樣；鈉的代表燃燒產物另介紹為過氧化鈉。',['ore','prep','combustion','copper','furnace'],['oxidation','copperoxide','sodiumperoxide']),
+ term('oxidation','氧化','本課先用「物質得到氧、與氧結合」來理解。','碳得到氧成為 CO₂，被氧化。','沒有火焰也可能氧化；氧化必定伴隨還原。',['prep','life','combustion','copper','furnace'],['reduction','redox'],['氧化反應','被氧化'],'redox'),
+ term('reduction','還原','本課先用「氧化物失去氧」來理解。','氧化銅失去氧，生成金屬銅，被還原。','還原不只是把外觀變回原樣，也不是讓物質或原子消失。',['prep','life','copper','furnace'],['oxidation','redox','reducingagent'],['還原反應','被還原'],'redox'),
+ term('redox','氧化還原反應','同時發生氧化與還原的化學反應；在氧轉移的反應中，一方得氧，另一方失氧。','CO 得氧被氧化時，氧化鐵同時失氧被還原。','不能只看單一物質變色，就把整個反應判斷完。',['prep','life','copper','furnace'],['oxidation','reduction'],['氧化還原'],'redox'),
+ term('affinity','對氧活性','本課用來比較元素與氧結合傾向的說法，幫助預測誰較能從氧化物中取走氧。','在合適條件下，碳能幫助鐵的氧化物失氧。','排序是比較線索，仍受溫度、材料表面與反應條件影響，不是無條件保證。',['prep','combustion','copper','furnace'],['reducingagent','condition'],['對氧活性大小','對氧氣活性','元素對氧的活性'],'affinity'),
  term('oxidizer','氧化劑','使其他物質被氧化、自己被還原的物質。','本課的過氧化氫漂白案例中，過氧化氫是氧化劑。','不是「自己被氧化」就叫氧化劑；角色名稱要看它對另一方的作用。',['prep','life'],['reducingagent','peroxide','reduction'],[],'redox'),
- term('reducingagent','還原劑','使其他物質被還原、自己被氧化的物質。','高爐中 CO 使氧化鐵失氧，扮演還原劑。','還原劑會參與反應，不是只站在旁邊幫忙的催化劑。',['prep','life','copper','iron','furnace'],['oxidizer','carbonmonoxide','oxidation'],[],'redox'),
+ term('reducingagent','還原劑','使其他物質被還原、自己被氧化的物質。','高爐中 CO 使氧化鐵失氧，扮演還原劑。','還原劑會參與反應，不是只站在旁邊幫忙的催化劑。',['prep','life','copper','furnace'],['oxidizer','carbonmonoxide','oxidation'],[],'redox'),
  term('completeburn','完全燃燒','在適當條件及足夠氧氣下，燃料進行充分的燃燒；產物仍要依物質判斷。','本課碳完全燃燒的代表式是 C + O₂ → CO₂。','「完全」不代表物質消失，也不代表所有燃料都生成同一種產物。',['combustion'],[]),
- term('condition','反應條件','讓某個反應能發生、或影響其進行的環境因素。','碳還原氧化銅，需要合適的加熱條件。','只知道原料名稱，還不能保證任何溫度下都會有相同結果。',['prep','combustion','copper','iron','furnace'],['affinity']),
- term('equation','化學反應式','用化學式、係數與箭號，記錄反應物如何轉變成生成物。','Fe₂O₃ + 3CO → 2Fe + 3CO₂ 記錄這裡的總反應。','箭號不是等號；總反應式也不代表實際只發生一步。',['prep','combustion','copper','iron','furnace'],['conservation']),
- term('conservation','原子收支','把反應前後各種原子的數量分別數清楚，檢查它們去了哪裡。','還原模型前後都能數到 2 Fe、3 C、6 O。','反應改變組合方式；一般化學反應不會把某種元素變成另一種元素。',['prep','iron'],['equation']),
+ term('condition','反應條件','讓某個反應能發生、或影響其進行的環境因素。','碳還原氧化銅，需要合適的加熱條件。','只知道原料名稱，還不能保證任何溫度下都會有相同結果。',['prep','combustion','copper','furnace'],['affinity']),
+ term('equation','化學反應式','用化學式、係數與箭號，記錄反應物如何轉變成生成物。','Fe₂O₃ + 3CO → 2Fe + 3CO₂ 記錄這裡的總反應。','箭號不是等號；總反應式也不代表實際只發生一步。',['prep','combustion','copper','furnace'],['conservation']),
+ term('conservation','原子收支','把反應前後各種原子的數量分別數清楚，檢查它們去了哪裡。','還原模型前後都能數到 2 Fe、3 C、6 O。','反應改變組合方式；一般化學反應不會把某種元素變成另一種元素。',['prep','furnace'],['equation']),
  term('decomposition','熱分解','一種物質受熱後，經化學反應形成其他物質。','CaCO₃ 受熱，生成 CaO 與 CO₂。','不是單純把物體敲碎；受熱熔化也不一定是分解。',['furnace'],['limestone','lime'],['受熱分解']),
- term('hematite','赤鐵礦','一種鐵礦物，主要成分是氧化鐵 Fe₂O₃。','序章觀察台上的紅棕色樣本，以赤鐵礦作代表。','天然礦石還會含其他成分；不能只憑顏色確定成分。',['ore','iron'],['ironoxide'],['赤鐵礦石'],'affinity'),
- term('ironoxide','氧化鐵','鐵與氧組成的化合物類別；本課赤鐵礦的主要成分用 Fe₂O₃ 表示。','CO 在高溫下，能讓 Fe₂O₃ 中的鐵被還原。','氧化鐵不只一種；也不能把成分複雜的鐵鏽都當成純 Fe₂O₃。',['ore','prep','iron','furnace'],['hematite','reduction','rust'],['三氧化二鐵','Fe₂O₃','Fe2O3'],'affinity'),
+ term('hematite','赤鐵礦','一種鐵礦物，主要成分是氧化鐵 Fe₂O₃。','序章觀察台上的紅棕色樣本，以赤鐵礦作代表。','天然礦石還會含其他成分；不能只憑顏色確定成分。',['ore','furnace'],['ironoxide'],['赤鐵礦石'],'affinity'),
+ term('ironoxide','氧化鐵','鐵與氧組成的化合物類別；本課赤鐵礦的主要成分用 Fe₂O₃ 表示。','CO 在高溫下，能讓 Fe₂O₃ 中的鐵被還原。','氧化鐵不只一種；也不能把成分複雜的鐵鏽都當成純 Fe₂O₃。',['ore','prep','copper','furnace'],['hematite','reduction','rust'],['三氧化二鐵','Fe₂O₃','Fe2O3'],'affinity'),
  term('copperoxide','氧化銅','銅與氧組成的化合物；本課以黑色的 CuO 為例。','銅片加熱後的黑色表層，可用氧化銅解釋。','CuO 難溶於水；試紙沒明顯變色，不等於它是中性氧化物。',['combustion','copper'],['oxide','reduction'],['CuO']),
  term('magnesiumoxide','氧化鎂','鎂燃燒後常見的白色固體產物，化學式 MgO。','鎂帶燃燒後，可留下白色氧化鎂。','產物不是一團白色氣體；與水作用的情形也和 CuO 不同。',['prep','combustion'],['oxide','alkali'],['MgO']),
  term('zincoxide','氧化鋅','鋅與氧形成的化合物，化學式 ZnO。','氧化鋅受熱偏黃，冷卻後可回到白色。','冷卻變白不代表還原成鋅；ZnO 難溶於水，不能只靠試紙判斷其全部酸鹼性質。',['combustion','copper'],['oxide'],['ZnO']),
  term('sodiumperoxide','過氧化鈉','鈉與氧形成的一種過氧化物，化學式 Na₂O₂，是本課採用的代表燃燒產物。','它與水反應可形成氫氧化鈉，使溶液呈鹼性。','Na₂O₂ 與氧化鈉 Na₂O 不同；反應產物會受供氧等條件影響。',['combustion'],['sodiumhydroxide','peroxide'],['Na₂O₂','Na2O2']),
  term('sodiumhydroxide','氫氧化鈉','一種鹼，化學式 NaOH，溶於水後的水溶液呈鹼性。','本課鈉的燃燒產物入水後，藍色石蕊維持藍色、紅色石蕊變藍。','溶液有腐蝕性；字典說明是概念辨認，不是自行操作的指引。',['combustion'],['alkali','litmus'],['NaOH']),
  term('phosphorusoxide','磷氧化物','磷與氧形成的化合物；本課紅磷充分燃燒，用 P₄O₁₀ 表示代表產物。','白煙中的固體微粒可含 P₄O₁₀。','俗稱五氧化二磷；白煙不是「白色氣體」。',['combustion'],['smoke','oxide'],['五氧化二磷','P₄O₁₀','P4O10','P₂O₅','P2O5']),
- term('carbonmonoxide','一氧化碳','由碳與氧組成的無色氣體，化學式 CO；在合適高溫下能還原某些金屬氧化物。','Fe₂O₃ 的氧轉移給 CO，形成 CO₂。','CO 有毒；它和 CO₂ 是不同物質，不能因為都含氧就認為性質一樣。',['iron','furnace'],['reducingagent'],['CO'],'affinity'),
+ term('carbonmonoxide','一氧化碳','由碳與氧組成的無色氣體，化學式 CO；在合適高溫下能還原某些金屬氧化物。','Fe₂O₃ 的氧轉移給 CO，形成 CO₂。','CO 有毒；它和 CO₂ 是不同物質，不能因為都含氧就認為性質一樣。',['furnace'],['reducingagent'],['CO'],'affinity'),
  term('sulfurdioxide','二氧化硫','硫燃燒常見的無色氣體產物，化學式 SO₂，溶於水後可使水呈酸性。','本課硫燃燒後，收集瓶內液體測試酸鹼性。','它有刺激性；在某些漂白反應中也能扮演還原劑，角色要看所參與的反應。',['life','combustion'],['acid','bleaching','reducingagent'],['SO₂','SO2']),
  term('redphosphorus','紅磷','磷元素的一種固態形式，常呈紅棕色。','本課以紅磷燃燒，觀察磷氧化物的白煙。','紅磷與白磷雖然都由磷元素組成，性質仍不同；這裡只做虛擬觀察。',['combustion'],['phosphorusoxide','smoke']),
  term('litmus','石蕊試紙','含有石蕊指示劑，用顏色變化辨認溶液酸鹼性的試紙。','酸性液體使藍色石蕊變紅；鹼性液體使紅色石蕊變藍。','試紙不變色不能一概證明原來的固體是中性；還要看它是否溶解或與水反應。',['combustion'],['acid','alkali','neutral'],['紅色石蕊','藍色石蕊','石蕊'],'acid'),
@@ -74,14 +72,8 @@ export const scienceTerms=[
  term('bleaching','漂白','讓色素的發色結構改變，使顏色變淡的過程。','本課用不同漂白劑比較氧化與還原的角色。','不一定所有漂白都走同一路徑，也不等於已經殺死所有微生物。',['life'],['oxidizer','reducingagent','peroxide'],['漂白劑']),
  term('peroxide','過氧化氫','化學式 H₂O₂ 的化合物，可依反應條件扮演不同的氧化還原角色。','本課漂白案例中，它使色素被氧化，自己被還原。','H₂O₂ 不是水 H₂O；「雙氧水」通常是過氧化氫的水溶液。',['life','combustion'],['oxidizer','sodiumperoxide'],['H₂O₂','H2O2','雙氧水']),
  term('hypochlorite','次氯酸鈉','化學式 NaClO 的化合物，是一些含氯漂白水的主要有效成分。','本課漂白案例中，次氯酸鈉是氧化劑。','含氯漂白水不可與酸性清潔劑混合；這裡只比較概念，不提供混合操作。',['life'],['oxidizer','bleaching'],['NaClO','NaOCl']),
- term('antioxidant','抗氧化劑','能延緩或抑制其他物質被氧化的成分；有些會先被氧化，保護其他物質。','維生素 C 可延緩部分食物成分的氧化，但保護會隨消耗而減弱。','具有抗氧化作用，不代表能永久保鮮、保證抗老，或吃越多越好。',['life','epilogue'],['vitaminc','vitamine','oxidation'],['抗氧化物','抗氧化'],'antioxidants'),
- term('vitaminc','維生素 C','又稱抗壞血酸，是水溶性維生素，也能參與抗氧化保護。','本課用它延緩食物氧化；在身體中也能協助再生部分抗氧化物。','發揮還原作用時自己會被氧化；化學作用不等於補充越多越有效。',['life','epilogue'],['antioxidant','vitamine'],['維生素C','維他命 C','維他命C','抗壞血酸'],'vitaminC'),
- term('vitamine','維生素 E','一類脂溶性維生素，其中的抗氧化作用可幫忙保護細胞膜等脂質部分。','它能中斷部分脂質氧化的連鎖反應。','在身體中的保護作用，不等於高劑量補充品一定能預防老化。',['epilogue'],['antioxidant'],['維生素E','維他命 E','維他命E'],'vitaminE'),
- term('resveratrol','白藜蘆醇','一種存在於葡萄皮、花生等食物中的植物多酚。','試管與細胞研究中，可觀察它的抗氧化等作用。','人體攝入後會代謝；不能把體外結果直接當作能延緩人體老化或延長壽命的證據。',['epilogue'],['polyphenol','antioxidant'],[],'resveratrol'),
- term('ros','活性氧','一群反應較活躍的含氧物質，有些屬於自由基。','正常細胞活動會產生活性氧，部分還參與傳遞訊息。','不是所有活性氧都一樣，也不是全部都應該被消滅。',['epilogue'],['radical','oxidativestress'],['ROS'],'antioxidants'),
- term('radical','自由基','含有未成對電子的粒子，常較容易和其他物質反應。','部分活性氧就是自由基。','不是所有活性氧都是自由基；名稱也不是指「自由活動的原子」。',['epilogue'],['ros'],[],'antioxidants'),
- term('oxidativestress','氧化壓力','當活性氧等造成的氧化作用，超過身體調節、防禦及修復能力的失衡情形。','過量活性氧可能傷害細胞膜或其他細胞成分。','它可能參與老化，但不能用它解釋全部老化原因。',['epilogue'],['ros','antioxidant'],[],'antioxidants'),
- term('polyphenol','植物多酚','植物製造的一大類具有多個酚性結構的化合物，成員的性質與作用不全相同。','白藜蘆醇是本課提到的一種植物多酚。','「多酚」是分類，不代表每一種都有相同的人體效果。',['epilogue'],['resveratrol','antioxidant'],['多酚'],'resveratrol')
+ term('antioxidant','抗氧化劑','能延緩或抑制其他物質被氧化的成分；有些會先被氧化，保護其他物質。','維生素 C 可延緩部分食物成分的氧化，但保護會隨消耗而減弱。','具有抗氧化作用，不代表能永久保鮮、保證抗老，或吃越多越好。',['life'],['vitaminc','oxidation'],['抗氧化物','抗氧化'],'antioxidants'),
+ term('vitaminc','維生素 C','又稱抗壞血酸，是水溶性維生素，也能參與抗氧化保護。','本課用它延緩食物氧化；在身體中也能協助再生部分抗氧化物。','發揮還原作用時自己會被氧化；化學作用不等於補充越多越有效。',['life'],['antioxidant'],['維生素C','維他命 C','維他命C','抗壞血酸'],'vitaminC'),
 ];
 
 export const primerTerms={
@@ -89,7 +81,6 @@ export const primerTerms={
  prep:[['oxidation','completeburn','oxide'],['affinity','oxide','reducingagent'],['redox','oxidation','reduction']],
  life:[['redox','oxidation','reduction'],['bleaching','oxidizer','reducingagent'],['antioxidant','vitaminc','oxidation']],
  combustion:['oxide','litmus','acid','alkali'],copper:['reduction','reducingagent','ironoxide'],
- iron:['ironoxide','carbonmonoxide','conservation'],furnace:['coke','slag','pigiron'],
+ furnace:['coke','slag','pigiron'],
  blade:['pigiron','steel','wrought'],
- epilogue:['ros','oxidativestress','antioxidant']
 };

@@ -1,9 +1,14 @@
 export const spoonTiming={copper:2600,ignition:900,metal:1700,nonmetal:2800};
 // Teaching time, not a calibrated temperature or a reaction-speed control.
 export function spoonNearFlame([x,y]){return Number.isFinite(x)&&Number.isFinite(y)&&Math.abs(x-320)<=27&&y>=211&&y<=263;}
-export function spoonInJar([x,y]){return x>=492&&x<=628&&y>=170&&y<=329;}
+export function spoonInJar([x,y]){
+ if(!Number.isFinite(x)||!Number.isFinite(y)||y<85||y>347)return false;
+ // Follow the visible neck, widening shoulders and body of the collection bottle.
+ const halfWidth=y<128?37:y<175?37+(y-128)/47*47:84;
+ return Math.abs(x-560)<=halfWidth;
+}
 export function spoonAtMouth([x,y]){return x>=522&&x<=598&&y>=78&&y<=137;}
-export function spoonBottlePlacement(point,{isMetal=false,ignited=false}={}){if(isMetal||!ignited)return null;if(spoonInJar(point))return [...point];return spoonAtMouth(point)?[560,283]:null;}
+export function spoonBottlePlacement(point,{isMetal=false,ignited=false}={}){if(isMetal||!ignited)return null;if(spoonAtMouth(point))return [560,283];return spoonInJar(point)?[...point]:null;}
 export function newSpoonHeating(key,isMetal,loaded=false){return {key,isMetal,loaded,heatMs:0,burnMs:0,observationMs:0,ignited:false,externalHeating:false,complete:false};}
 export function advanceSpoonHeating(state,{near=false,inJar=false,dt=0}={}){
  const s={...state};dt=Number.isFinite(dt)?Math.max(0,dt):0;s.externalHeating=!!(s.loaded&&!s.complete&&near);

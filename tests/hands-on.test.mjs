@@ -3,6 +3,12 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {lessons,materialCases,restoreState,freshState,isReady,isMastered,migrateLegacy,litmusResult} from '../dist/journey-cards.js';
 import {inside} from '../dist/direct-manipulation.js';
+test('crushing the ore completes the prologue operation without requiring rotation, including saved work',()=>{
+ const c=lessons.find(c=>c.id===1),s=freshState(c);s.evidence=['ore-crushed'];s.answer=c.quiz.answer;
+ assert.equal(isReady(c,s),true);assert.equal(isMastered(c,s),true);
+ assert.equal(isMastered(c,restoreState(c,s)),true);
+ assert.equal(isReady(c,{...s,evidence:['ore']}),false);
+});
 test('six core inquiry cards cover the supplied story and retain one four-option quiz each',()=>{assert.equal(lessons.length,6);for(const [i,c] of lessons.entries()){assert.equal(c.id,i+1);for(const k of ['question','task','finding','explanation','bridge'])assert.ok(c[k].length>10);if([2,5,6].includes(c.id))assert.equal(c.opening,'');else assert.ok(c.opening.length>10);assert.equal(c.labels.length,c.required.length);assert.equal(c.quiz.options.length,4);assert.equal(new Set(c.quiz.explanations).size,4);}assert.ok(!lessons.some(c=>c.type==='rust'));assert.ok(!lessons.some(c=>['mass','cell'].includes(c.type)));});
 test('all material observations, not merely a case selection, are required for mastery',()=>{for(const c of lessons){const state=freshState(c);for(const key of c.required){assert.equal(isReady(c,state),false);state.evidence.push(key);}assert.equal(isReady(c,state),true);}for(const type of ['combustion']){const c=lessons.find(c=>c.type===type);for(const [key] of materialCases[type])assert.ok(c.required.includes(key+':burn')&&c.required.includes(key+(['S','C','CO'].includes(key)?':ph':':wet')));}assert.ok(lessons[1].required.includes('Zn:cool'));});
 test('early answers survive reload without inventing observations or mastery',()=>{for(const c of lessons){const state={...freshState(c),evidence:[...c.required.slice(1),'bogus'],quizOpen:true,answer:c.quiz.answer,selected:'bogus'};const s=restoreState(c,state);assert.equal(isReady(c,s),false);assert.equal(s.quizOpen,true);assert.equal(s.answer,c.quiz.answer);assert.equal(isMastered(c,s),false);assert.ok(!s.evidence.includes('bogus'));const full=restoreState(c,{...state,evidence:c.required});assert.equal(full.answer,c.quiz.answer);assert.equal(isMastered(c,full),true);for(const answer of [-1,9,NaN,'1'])assert.equal(restoreState(c,{...state,answer}).answer,null);}});

@@ -22,12 +22,13 @@ test('formula and spacing searches accept classroom notation without accepting m
  assert.ok(filterScienceTerms('維 生 素Ｃ').some(term=>term.id==='vitaminc'));
  assert.deepEqual(filterScienceTerms('<img src=x onerror=alert(1)>'),[]);
  assert.ok(!filterScienceTerms('白藜蘆醇','ore').length);
- assert.ok(filterScienceTerms('白藜蘆醇','epilogue').some(term=>term.id==='resveratrol'));
+ assert.deepEqual(filterScienceTerms('白藜蘆醇'),[]);
+ assert.ok(filterScienceTerms('CO','furnace').some(term=>term.id==='carbonmonoxide'));
 });
 test('inline terms prefer complete concepts and never turn chemical formula fragments into buttons',()=>{
  assert.deepEqual(matchScienceTerms('氧化還原反應與抗氧化劑、氧化銅').map(match=>match.term),['redox','antioxidant','copperoxide']);
  assert.deepEqual(matchScienceTerms('Fe₂O₃ + 3CO → 2Fe + 3CO₂'),[]);
- assert.deepEqual(matchScienceTerms('維生素 C 和維生素 E').map(match=>match.term),['vitaminc','vitamine']);
+ assert.deepEqual(matchScienceTerms('維生素 C 和維生素 E').map(match=>match.term),['vitaminc']);
 });
 test('key distinctions remain explicit instead of teaching a misleading shortcut',()=>{
  assert.match(dictionaryTermById.get('oxidation').definition,/物質得到氧/);
@@ -37,5 +38,12 @@ test('key distinctions remain explicit instead of teaching a misleading shortcut
  assert.match(dictionaryTermById.get('neutral').note,/未溶解/);
  assert.match(dictionaryTermById.get('hardness').note,/不能直接量出硬度/);
  assert.match(dictionaryTermById.get('rust').note,/不是單一純/);
- assert.match(dictionaryTermById.get('resveratrol').note,/不能.*直接/);
+ assert.match(dictionaryTermById.get('antioxidant').note,/不代表.*永久保鮮/);
+});
+
+test('dictionary navigation uses current visible lesson numbers without removed-card links',()=>{
+ assert.deepEqual(dictionaryChapters.filter(c=>!['ore','life'].includes(c.id)).map(c=>c.label.slice(0,2)),['01','02','03','04','05']);
+ assert.ok(!dictionaryChapters.some(c=>['card-4','epilogue-antioxidants'].includes(c.target)));
+ assert.equal(dictionaryChapters.find(c=>c.id==='furnace').target,'card-5');
+ assert.equal(dictionaryChapters.find(c=>c.id==='blade').target,'card-6');
 });
