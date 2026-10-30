@@ -108,7 +108,7 @@
 .prep-scenes[hidden]{display:none}.prep-bin-column>.prep-bin:has(.prep-filed-card){justify-content:flex-start}.prep-bin .prep-scene-art>span{background:#254b43e8;color:#fff8e7;margin:0;padding:5px 8px}
 
 /* Brief definitions; exploration stays in the interactive cards below. */
-.redox-definition-map{box-sizing:border-box;max-width:820px;margin:18px auto 0;padding:12px 18px;border:1px solid #cbd3bf;border-radius:10px;background:#fffdf6}
+.redox-definition-map{box-sizing:border-box;width:100%;max-width:none;margin:18px 0 0;padding:12px 18px;border:1px solid #cbd3bf;border-radius:10px;background:#fffdf6}
 .redox-definition-map .definition-intro{margin:0 0 8px;font-size:12px;color:#78836b;line-height:1.6}
 .definition-brief-list{margin:0}.definition-brief-list>div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:20px;align-items:baseline;padding:8px 0;border-bottom:1px solid #e3e6d8}.definition-brief-list>div:last-child{border-bottom:0}.definition-brief-list dt{font-size:20px;font-weight:700;color:#355f52}.definition-brief-list dd{margin:0;font-size:20px;line-height:1.55;color:#456054}.definition-brief-list strong{font-weight:700}.definition-brief-list .definition-oxidation{color:#a34720}.definition-brief-list .definition-reduction{color:#17677d}.definition-brief-list .definition-affinity{color:#73528b}
 .redox-definition-map .definition-next{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px 0 0;padding-top:8px;border-top:1px solid #d4dcc8;font-size:12px;line-height:1.7;color:#6d7b60}.definition-next>span{font-size:20px;color:#97743d}
@@ -129,3 +129,7 @@
 .transfer-example-tabs{display:flex;flex-wrap:wrap;gap:10px;margin:20px 24px}.transfer-example-tabs button{flex:1;min-width:160px;padding:13px 16px;border:1px solid #b9cbb2;border-radius:7px;background:#fffef6;color:#31574d;font:inherit;cursor:pointer}.transfer-example-tabs button[aria-pressed=true]{background:#31574d;color:#fff8e6;border-color:#31574d}.reaction-atom-copper{background:radial-gradient(at 28% 22%,#ffd8b2,#b46a3e 60%,#70432e)}.reaction-atom-hydrogen{background:radial-gradient(at 28% 22%,#f5ffff,#80aaa9 60%,#457373)}.reaction-receiver-molecule{min-height:155px}.iron-reaction[data-phase=complete] .reaction-donor-bond{visibility:hidden}.iron-reaction .reaction-heading{padding-bottom:16px}
 .redox-definition-map .definition-brief-list>div{padding:8px 0;border-top:0}
 .redox-definition-map .definition-brief-list dt{line-height:1.55}
+
+.oxygen-reference-heading h3{margin:0 0 8px;font-size:26px;line-height:1.4;color:#31564a}
+.oxygen-reference-heading h4{font-size:20px;line-height:1.5}
+@media(max-width:600px){.oxygen-reference-heading h3{font-size:23px}.oxygen-reference-heading h4{font-size:18px}}

@@ -8,7 +8,7 @@ export function mountOreHammer(host,{onCrushed=()=>{}}={}){
  const target=document.createElement('button');target.type='button';target.className='ore-strike-target';target.setAttribute('aria-label','用槌子敲擊鐵礦');target.hidden=true;stage.append(target);
  const swing=document.createElement('div');swing.className='ore-hammer-swing';swing.innerHTML=hammerArt;swing.hidden=true;swing.setAttribute('aria-hidden','true');stage.append(swing);
  const result=document.createElement('div');result.className='ore-crush-result';result.hidden=true;result.innerHTML='<b>碎成小塊，仍是氧化鐵 Fe₂O₃。</b><p>敲碎只改變大小，沒有把氧移走；還不能直接拿來鍛劍。</p>';host.append(result);
- const tool=tools.querySelector('.ore-hammer-tool');stage.append(tool);const reset=tools.querySelector('.ore-hammer-reset');const resetBar=document.createElement('div');resetBar.className='interaction-reset-bar';resetBar.append(reset,host.querySelector('[data-ore-reset]'));host.prepend(resetBar);tools.remove();
+ const tool=tools.querySelector('.ore-hammer-tool');stage.append(tool);const reset=tools.querySelector('.ore-hammer-reset');const resetBar=document.createElement('div');resetBar.className='interaction-reset-bar';resetBar.append(reset);host.prepend(resetBar);tools.remove();
  let hits=0,armed=false,busy=false,alive=true,frame=0,start=0,snapshot=null;
  const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
  function draw(t=1){const ease=1-Math.pow(1-t,3);overlay.style.opacity=String(Math.min(1,t*3));overlay.style.transform=`translateY(${-10*(1-ease)}px) scale(${.92+.08*ease})`;}

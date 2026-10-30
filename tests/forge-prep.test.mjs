@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {freshPrep,restorePrep,prepReady,prepMastered,checkAffinity,ironAppearanceStage,oxygenAffinitySeries,compareWithCarbon,ironOxygenLedger} from '../dist/forge-prep-model.js';
+import {prepQuizzes,freshPrep,restorePrep,prepReady,prepMastered,checkAffinity,ironAppearanceStage,oxygenAffinitySeries,compareWithCarbon,ironOxygenLedger} from '../dist/forge-prep-model.js';
 test('readiness requires complete correct evidence; a quiz answer alone is insufficient',()=>{const s=freshPrep();s.answers=[1,0,2];for(let i=0;i<3;i++)assert.equal(prepMastered(s,i),false);s.sorted=['burn','rust','breath','ice'];s.order=['Mg','C','Fe','Cu'];s.moved=[0,1];for(let i=0;i<3;i++)assert.equal(prepMastered(s,i),true);s.order=['C','Mg','Fe','Cu'];assert.equal(prepReady(s,1),false);assert.equal(checkAffinity(['Mg','C','Fe','Cu']),true);});
 test('restoration filters invalid duplicates and does not grant unearned quiz completion',()=>{const s=restorePrep({tab:9,sorted:['burn','burn','fake'],order:['Mg','Mg','fake'],moved:[0,0,4],answers:[1,0,2]});assert.deepEqual(s,{...freshPrep(),sorted:['burn'],order:['Mg'],moved:[0],targets:[0]});assert.deepEqual(restorePrep(null),freshPrep());});
 test('old A answer is cleared while B completion and partial transfers survive reload',()=>{const raw={version:2,tab:2,sorted:['burn','rust','breath','ice'],order:['Mg','C','Fe','Cu'],moved:[1],answers:[1,0,2]};const s=restorePrep(raw);assert.equal(prepMastered(s,0),false);assert.equal(prepMastered(s,1),true);assert.equal(prepReady(s,2),false);assert.equal(s.answers[2],2);});
@@ -44,4 +44,6 @@ test('moving life examples to D preserves records and keeps C independently sele
 
 test('new A answer survives reload after answering the revised question',()=>{const raw={...freshPrep(),sorted:['burn','rust','breath','ice'],answers:[1,null,null]};assert.equal(prepMastered(restorePrep(raw),0),true);});
 
-test('early A-C answers persist, while mastery still requires the corresponding operation',()=>{for(const answers of [[1,0,2],[0,1,0]]){const raw={...freshPrep(),answers};const restored=restorePrep(raw);assert.deepEqual(restored.answers,answers);for(let i=0;i<3;i++)assert.equal(prepMastered(restored,i),false);}assert.deepEqual(restorePrep({...freshPrep(),answers:[3,-1,'2']}).answers,[null,null,null]);});
+test('early A-C answers persist, while mastery still requires the corresponding operation',()=>{for(const answers of [[1,0,2],[0,1,0]]){const raw={...freshPrep(),answers};const restored=restorePrep(raw);assert.deepEqual(restored.answers,answers);for(let i=0;i<3;i++)assert.equal(prepMastered(restored,i),false);}assert.deepEqual(restorePrep({...freshPrep(),answers:[4,-1,'2']}).answers,[null,null,null]);});
+
+test('all workshop practice questions have four distinct choices and one valid answer',()=>{for(const q of prepQuizzes){assert.equal(q.options.length,4);assert.equal(new Set(q.options).size,4);assert.ok(q.answer>=0&&q.answer<4);}for(let i=0;i<3;i++){const raw={...freshPrep(),answers:[null,null,null]};raw.answers[i]=3;assert.equal(restorePrep(raw).answers[i],3);}});
