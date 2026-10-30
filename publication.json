@@ -18,12 +18,71 @@
     "sourceFolder": "/",
     "publishCommand": "node publish-pages.mjs",
     "url": "https://urpig.github.io/ch2/",
-    "sourceCommit": "e112f26a84b830a241c1b9536e6bdc9de0a75b4c",
-    "pagesCommit": "223c4405bcf1a6e1f01066e4533bc74b6847c4f6",
-    "sourceTree": "c2237b219eb3ca4831dc7383c8ab786cdad9f36a",
-    "verifiedAt": "2026-10-28T19:12:00.978702+00:00"
+    "sourceCommit": "211935e7834b1caa82ff5aef1f0246953d36b59d",
+    "pagesCommit": "9ec77ca1989faf765fb4a6c31a7942e785b7ff12",
+    "sourceTree": "8c11faa3de96914d929c04f9b49a9286f1cca7ed",
+    "verifiedAt": "2026-10-30T03:17:15.294Z"
   },
   "currentPublicDeployment": {
+    "provider": "github-pages",
+    "url": "https://urpig.github.io/ch2/",
+    "status": "published",
+    "sourceCommit": "211935e7834b1caa82ff5aef1f0246953d36b59d",
+    "pagesCommit": "9ec77ca1989faf765fb4a6c31a7942e785b7ff12",
+    "sourceTree": "8c11faa3de96914d929c04f9b49a9286f1cca7ed",
+    "fileCount": 220,
+    "deploymentRun": "https://github.com/urpig/ch2/actions/runs/40996380508",
+    "anonymousHttpVerifiedAt": "2026-10-30T03:17:15.294Z",
+    "anonymousHttpChecksPassed": 10,
+    "httpVerification": "Ten anonymous requests returned HTTP 200 and matched the published source SHA-256; text line endings normalized and image bytes compared exactly.",
+    "verifiedFiles": [
+      "index.html",
+      "finishing-art.js",
+      "respiration-art.js",
+      "iron-affinity-bench.js",
+      "life-laboratory-scene.js",
+      "apple-comparison.js",
+      "combustion-guidance.js",
+      "furnace-guidance.js",
+      "assets/story/tofu-cutout-comparison.png",
+      "assets/story/ore-forge-floor.png"
+    ],
+    "browserVerifiedAt": "2026-10-30T03:19:39.144Z",
+    "browserVerification": [
+      "Public homepage renders without login.",
+      "The oxide replenishment button resets the experiment. Selecting carbon and adding it to iron oxide completes the reaction and displays both oxidation and reduction.",
+      "The blade testing bench renders on its wooden forge table with a clear placement area.",
+      "No captured console errors during the public smoke check."
+    ],
+    "automatedTestsPassed": 164,
+    "verificationLimits": "Smoke check covers oxide replenishment, a carbon reaction and the blade-bench appearance; it does not repeat every lesson interaction or responsive viewport.",
+    "screenshot": "outputs/ch2-public-211935e.jpg"
+  },
+  "previousPublicDeployment": {
+    "provider": "netlify",
+    "site": "whimsical-babka-221c30",
+    "url": "https://whimsical-babka-221c30.netlify.app/",
+    "deployId": "6add0fa73b84e3e7169c710e",
+    "status": "published",
+    "publishedAtDisplay": "2026-10-25 04:06 Asia/Taipei (minute precision from dashboard)",
+    "sourceCommit": "56efa9804420e626dd16b447a9496e8e7bf10a16",
+    "sourceDirectory": "dist",
+    "sourceTree": "53fdefc95427a3be896c1509a3bbf08d803c98ec",
+    "fileCount": 167,
+    "archiveSha256": "167ec8f7cb332dad3f7452f34bf1c3cc5e2672ff6ef102853190416e726af585",
+    "anonymousHttpVerifiedAt": "2026-10-24T20:14:11.409Z",
+    "anonymousHttpChecksPassed": 7,
+    "httpVerification": "No cookies or authorization supplied; all seven requests returned 200. JavaScript and image contents match the repo. HTML static text and app entry match after hosting link/comment processing.",
+    "browserVerification": [
+      "Public page renders the current story and antioxidant epilogue.",
+      "A prediction can be selected and submitted; the ore responds to keyboard rotation and records evidence.",
+      "Prediction and evidence survive reload; reset restores four choices and a visible scene preview.",
+      "No console errors or warnings observed during the smoke check."
+    ],
+    "verificationLimits": "This publication smoke check did not repeat every lesson interaction or mobile interaction. The unchanged application source previously passed all 123 automated tests.",
+    "publicationSequence": "Published to the existing Netlify site under the explicit public-link request before the user selected GitHub Pages for future publication. No further Netlify publication is authorized by this record."
+  },
+  "previousGitHubPagesDeployment": {
     "provider": "github-pages",
     "url": "https://urpig.github.io/ch2/",
     "status": "published",
@@ -54,63 +113,5 @@
     "automatedTestsPassed": 159,
     "verificationLimits": "Publication smoke check covers definitions and glossary interaction; it does not repeat every lesson interaction.",
     "screenshot": "outputs/ch2-public-e112f26.png"
-  },
-  "previousPublicDeployment": {
-    "provider": "netlify",
-    "site": "whimsical-babka-221c30",
-    "url": "https://whimsical-babka-221c30.netlify.app/",
-    "deployId": "6add0fa73b84e3e7169c710e",
-    "status": "published",
-    "publishedAtDisplay": "2026-10-25 04:06 Asia/Taipei (minute precision from dashboard)",
-    "sourceCommit": "56efa9804420e626dd16b447a9496e8e7bf10a16",
-    "sourceDirectory": "dist",
-    "sourceTree": "53fdefc95427a3be896c1509a3bbf08d803c98ec",
-    "fileCount": 167,
-    "archiveSha256": "167ec8f7cb332dad3f7452f34bf1c3cc5e2672ff6ef102853190416e726af585",
-    "anonymousHttpVerifiedAt": "2026-10-24T20:14:11.409Z",
-    "anonymousHttpChecksPassed": 7,
-    "httpVerification": "No cookies or authorization supplied; all seven requests returned 200. JavaScript and image contents match the repo. HTML static text and app entry match after hosting link/comment processing.",
-    "browserVerification": [
-      "Public page renders the current story and antioxidant epilogue.",
-      "A prediction can be selected and submitted; the ore responds to keyboard rotation and records evidence.",
-      "Prediction and evidence survive reload; reset restores four choices and a visible scene preview.",
-      "No console errors or warnings observed during the smoke check."
-    ],
-    "verificationLimits": "This publication smoke check did not repeat every lesson interaction or mobile interaction. The unchanged application source previously passed all 123 automated tests.",
-    "publicationSequence": "Published to the existing Netlify site under the explicit public-link request before the user selected GitHub Pages for future publication. No further Netlify publication is authorized by this record."
-  },
-  "previousGitHubPagesDeployment": {
-    "provider": "github-pages",
-    "url": "https://urpig.github.io/ch2/",
-    "status": "published",
-    "sourceCommit": "e030bae787704f3a5dfe4a9915b1165758f31152",
-    "pagesCommit": "db91398974b003a7d4b2984e3457acef8ecb6563",
-    "sourceTree": "cedd5f18057f3e2cb650985861b4c368a4a72b0e",
-    "fileCount": 202,
-    "deploymentRun": "https://github.com/urpig/ch2/actions/runs/40740243701",
-    "anonymousHttpVerifiedAt": "2026-10-28T17:57:05.43Z",
-    "anonymousHttpChecksPassed": 10,
-    "httpVerification": "No cookies or authorization supplied. All ten files returned HTTP 200 and matched local committed source SHA-256; text line endings normalized and image bytes compared exactly.",
-    "verifiedFiles": [
-      "index.html",
-      "story-app.js",
-      "story-dialogue.js",
-      "forge-prep.js",
-      "forge-prep-model.js",
-      "combustion-guidance.js",
-      "bench-water.js",
-      "journey-cards.js",
-      "assets/story/emperor-portrait.png",
-      "assets/story/prep-biology-pair.png"
-    ],
-    "browserVerifiedAt": "2026-10-28T18:00:09.4793892Z",
-    "browserVerification": [
-      "Public homepage renders the updated story, navigation and images without requiring login.",
-      "Science glossary opens and selecting the oxidizing-agent entry displays the correct definition; Escape closes the dialog.",
-      "No captured console errors observed during the public smoke check."
-    ],
-    "automatedTestsPassed": 159,
-    "verificationLimits": "Publication smoke check covered the homepage and glossary interaction, plus ten asset hash comparisons. It did not repeat every lesson or mobile interaction. Both standalone builds and all 159 automated tests passed for this source before publication.",
-    "screenshot": "outputs/ch2-public-e030bae.png"
   }
 }
