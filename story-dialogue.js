@@ -27,7 +27,8 @@ const notes={
  D:['光合作用：水被氧化並釋出氧氣，CO₂ 被還原並用來合成糖；有氧呼吸：葡萄糖被氧化，氧氣被還原成水。','本課漂白模型中，過氧化氫、次氯酸鈉使色素氧化，自己被還原；二氧化硫使色素還原，自己被氧化。','維生素 C 可先被氧化，延緩食物氧化；保護會消耗，也不等於殺菌或永久保鮮。'],
  end:['氧化是生命活動的一部分；活性氧過多、超過身體防禦能力時，可能造成氧化壓力。','維生素 C、E 在發揮還原作用時，自己也會被氧化；抗氧化不是把所有氧拿走。','化學上的抗氧化作用，不等於已證實能延緩人體老化；白藜蘆醇等成分仍要看人體研究證據。']
 };
-export function notebookMarkup(key){return `<aside class="kui-notebook" aria-label="小葵的筆記"><header><span class="story-portrait story-portrait--kui" data-expression="thinking" aria-hidden="true"></span><div><h3>小葵的筆記</h3></div></header><ul>${notes[key].map(line=>`<li>${line}</li>`).join('')}</ul></aside>`;}
+function affinityMnemonic(){return `<section class="affinity-mnemonic" aria-label="活性表小口訣"><h4>活性表小口訣</h4><p class="affinity-mnemonic-verse">賈娜蓋美旅，探新個鐵，喜牽情，童恭迎薄金！</p><p class="affinity-mnemonic-story">賈娜要蓋一間美麗的旅館，所以探訪新的一個摩鐵，他喜歡幫人牽情緣，讓小花童恭迎薄金！</p><p class="affinity-mnemonic-order"><span>活性由大到小</span>鉀、鈉、鈣、鎂、鋁、碳、鋅、鉻、鐵、錫、鉛、氫、銅、汞、銀、鉑、金</p></section>`;}
+export function notebookMarkup(key){return `<aside class="kui-notebook" aria-label="小葵的筆記"><header><span class="story-portrait story-portrait--kui" data-expression="thinking" aria-hidden="true"></span><div><h3>小葵的筆記</h3></div></header><ul>${notes[key].map(line=>`<li>${line}</li>`).join('')}</ul>${key==='B'?affinityMnemonic():''}</aside>`;}
 export function bridgeMarkup(c){
  const dialogue={1:[['kui','「氧化是什麼？」'],['grandpa','「先認識物質與氧結合這件事，再到實驗箱觀察。」']],2:[['kui','「氧能不能換個夥伴？」'],['grandpa','「沿用活性紀錄，拿不同材料和氧化鐵比較，看看誰能把氧帶走。」']],3:[['grandpa','「高爐常用的幫手是 CO。它已經含有氧，還能再取得氧嗎？」']],4:[['grandpa','「鐵的去向清楚了。接著用高爐模型看看：熱和 CO 從哪裡來，雜質又怎麼處理？」']],5:[['kui','「終於有了生鐵，可以立刻鍛劍了嗎？」'],['grandpa','「先試刀材。有的會裂，有的彎了就回不來。」']]};
  return dialogue[c.id]?`<div class="story-dialogue dialogue-stack">${dialogue[c.id].map(([who,line])=>storySpeech(who,line)).join('')}</div>`:`<p>${c.bridge}</p>`;
