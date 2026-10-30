@@ -21,9 +21,9 @@ export function ironOxygenLedger(pairs){
  return {count,oxideOxygen:3-count,gasOxygen:3+count,carbonDioxide:count,total:{Fe:2,C:3,O:6}};
 }
 export const prepQuizzes=[
- {question:'以下哪個反應不是氧化還原反應？',options:['木炭燃燒','冰塊融化','鐵釘生鏽'],answer:1,reason:'冰塊融化只改變狀態，水仍是 H₂O，屬於物理變化；木炭燃燒與鐵釘生鏽都涉及氧化還原。'},
- {question:'為什麼碳可以用來還原鐵，卻不能照樣用來提煉鎂？',options:['碳對氧活性比鐵大、比鎂小；還原仍需要合適條件','只要溫度夠高，碳就能還原所有金屬氧化物','因為碳是金屬，而且比鐵重'],answer:0,reason:'Mg ＞ C ＞ Fe。碳的對氧活性比鐵大、比鎂小；高溫下能還原氧化鐵，卻不易從氧化鎂拿走氧。'},
- {question:'追蹤同一批氧後，哪個說法正確？',options:['氧化物失去氧，氧就消失了','只有失氧的一方反應，得氧的一方沒有變化','得氧的一方被氧化，失氧的一方被還原；兩者同時發生'],answer:2,reason:'在這裡的氧轉移反應中，氧離開一方，也同時與另一方結合。氧化必定伴隨還原，還原也必定伴隨氧化。'}
+ {question:'以下哪個反應不是氧化還原反應？',options:['木炭燃燒','冰塊融化','鐵釘生鏽','鎂帶燃燒'],answer:1,reason:'冰塊融化只改變狀態，水仍是 H₂O，屬於物理變化；木炭燃燒與鐵釘生鏽都涉及氧化還原。'},
+ {question:'為什麼碳可以用來還原鐵，卻不能照樣用來提煉鎂？',options:['碳對氧活性比鐵大、比鎂小；還原仍需要合適條件','只要溫度夠高，碳就能還原所有金屬氧化物','因為碳是金屬，而且比鐵重','因為氧化鐵只要加熱，就一定會自動變成鐵'],answer:0,reason:'Mg ＞ C ＞ Fe。碳的對氧活性比鐵大、比鎂小；高溫下能還原氧化鐵，卻不易從氧化鎂拿走氧。'},
+ {question:'關於氧化還原，哪個敘述是正確的？',options:['氧化物失去氧，氧就消失了','只有失氧的一方反應，得氧的一方沒有變化','得氧的一方被氧化，失氧的一方被還原；兩者同時發生','得氧與失氧的兩方都被氧化'],answer:2,reason:'在這裡的氧轉移反應中，氧離開一方，也同時與另一方結合。氧化必定伴隨還原，還原也必定伴隨氧化。'}
 ];
 export function freshPrep(){return {version:3,aQuizVersion:2,tab:0,sorted:[],order:[],moved:[],targets:[],ironPairs:[],transferExample:'magnesium',observedTransfers:[],reaction:'magnesium',referenceElement:'Fe',answers:[null,null,null]};}
 export function restorePrep(raw){
@@ -42,7 +42,7 @@ export function restorePrep(raw){
  if(raw.version!==3&&s.tab===2&&s.reaction!=='magnesium')s.tab=3;
  s.referenceElement=compareWithCarbon(raw.referenceElement)?raw.referenceElement:'Fe';
  // Preserve previous observations; revised B/C questions need a fresh answer.
- s.answers=s.answers.map((_,i)=>(i===0||[2,3].includes(raw.version))&&Number.isInteger(raw.answers?.[i])&&raw.answers[i]>=0&&raw.answers[i]<3?raw.answers[i]:null);if(raw.aQuizVersion!==2)s.answers[0]=null;return s;
+ s.answers=s.answers.map((_,i)=>(i===0||[2,3].includes(raw.version))&&Number.isInteger(raw.answers?.[i])&&raw.answers[i]>=0&&raw.answers[i]<prepQuizzes[i].options.length?raw.answers[i]:null);if(raw.aQuizVersion!==2)s.answers[0]=null;return s;
 }
 export function prepReady(s,i){return i===0?s.sorted.length===4:i===1?s.order.length===4&&s.order.every((v,j)=>v===affinityOrder[j]):i===2&&s.moved.length===2;}
 export function prepMastered(s,i){return prepReady(s,i)&&s.answers[i]===prepQuizzes[i].answer;}

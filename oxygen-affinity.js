@@ -15,7 +15,7 @@ export function affinityReference(symbol){
  const x=compareWithIron(symbol)||compareWithIron('Fe'),copy=comparisonCopy(x.symbol);
  const first=x.relation==='greater'?x:{symbol:'Fe',name:'鐵'},last=x.relation==='greater'?{symbol:'Fe',name:'鐵'}:x;
  return `<section class="oxygen-reference" aria-label="元素對氧活性大小">
-  <div class="oxygen-reference-heading"><div><small>先找位置，再做預測</small><h4>元素對氧的活性，由大到小</h4></div><span>點元素，和鐵比較</span></div>
+  <div class="oxygen-reference-heading"><div><h3>元素對氧的活性大小</h3><h4>哪些元素的活性比鐵大呢？</h4></div><span>點元素，和鐵比較</span></div>
   <p class="oxygen-definition"><b>活性較大：</b><strong>較容易與氧結合</strong>，形成氧化物後，氧也<strong>較難被拿走</strong>。<br><b>活性較小：</b><strong>較不容易與氧結合</strong>，形成氧化物後，氧<strong>較容易被活性更大的元素拿走</strong>。</p>
   <div class="oxygen-series-direction"><b>活性大</b><b>活性小</b></div>
   <ol class="oxygen-series">${oxygenAffinitySeries.map((a,j)=>`<li><button data-affinity="${a.symbol}" aria-pressed="${x.symbol===a.symbol}" aria-label="${a.name} ${a.symbol}，與鐵比較" class="${a.symbol==='Fe'?'iron-marker':''} ${a.symbol==='H'?'hydrogen-marker':''}"><small>${String(j+1).padStart(2,'0')}</small>${specimenArt(a.symbol)}<strong>${a.symbol}</strong><span>${a.name}</span></button>${j<oxygenAffinitySeries.length-1?'<i aria-hidden="true">›</i>':''}</li>`).join('')}</ol>
@@ -28,7 +28,7 @@ export function affinityReference(symbol){
 }
 
 export function pairedRedoxPrinciple(){
- return `<div class="redox-principle"><span>一個反應，兩邊一起變</span><strong>氧化必定伴隨還原，還原也必定伴隨氧化。</strong><p>在這些氧轉移反應中：一方得到氧，另一方就失去氧。追蹤同一批氧，便能同時找到兩邊。</p></div>`;
+ return `<div class="redox-principle"><span>一個反應，兩邊一起變</span><strong>氧化必定伴隨還原，還原也必定伴隨氧化。</strong></div>`;
 }
 
 export function ironRedoxScene(pairs){return ironReactionMarkup(pairs);}
