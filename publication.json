@@ -18,12 +18,60 @@
     "sourceFolder": "/",
     "publishCommand": "node publish-pages.mjs",
     "url": "https://urpig.github.io/ch2/",
-    "sourceCommit": "5506896dae97a497b6c4eb9e53df6b2a92e2b05d",
-    "pagesCommit": "d96151977ad01baad2be1c183b83995ec906a2c7",
-    "sourceTree": "67b505b92db2f1b388c3b909a381985f1d3a9b35",
-    "verifiedAt": "2026-10-30T09:25:22.597Z"
+    "sourceCommit": "49de4cf64bd410f337d90840cc0f22193a4b821e",
+    "pagesCommit": "f615925c335bfc15349de320e9b102ef3445b533",
+    "sourceTree": "60076215ab9b225af3574204fee57ef5728cdcfd",
+    "verifiedAt": "2026-10-30T09:51:48.002Z"
   },
   "currentPublicDeployment": {
+    "provider": "github-pages",
+    "url": "https://urpig.github.io/ch2/",
+    "status": "published",
+    "sourceCommit": "49de4cf64bd410f337d90840cc0f22193a4b821e",
+    "pagesCommit": "f615925c335bfc15349de320e9b102ef3445b533",
+    "sourceTree": "60076215ab9b225af3574204fee57ef5728cdcfd",
+    "fileCount": 225,
+    "anonymousHttpVerifiedAt": "2026-10-30T09:51:48.002Z",
+    "anonymousHttpChecksPassed": 1,
+    "httpVerification": "Anonymous HTTP 200 stylesheet matches committed CSS after line-ending normalization.",
+    "verifiedFiles": [
+      "lesson-refinement.css"
+    ],
+    "browserVerifiedAt": "2026-10-30T09:53:17.826Z",
+    "browserVerification": [
+      "Public main-card and A-D practice choices and letters render at 18px.",
+      "Public card 03 can still be answered and shows correct feedback.",
+      "No captured console errors."
+    ],
+    "automatedTestsPassed": 170,
+    "verificationLimits": "Responsive local check at 390px confirms 17px choices and no horizontal overflow. Public smoke check verifies desktop 18px choices and card 03 answering.",
+    "screenshot": "outputs/ch2-public-larger-options.png"
+  },
+  "previousPublicDeployment": {
+    "provider": "netlify",
+    "site": "whimsical-babka-221c30",
+    "url": "https://whimsical-babka-221c30.netlify.app/",
+    "deployId": "6add0fa73b84e3e7169c710e",
+    "status": "published",
+    "publishedAtDisplay": "2026-10-25 04:06 Asia/Taipei (minute precision from dashboard)",
+    "sourceCommit": "56efa9804420e626dd16b447a9496e8e7bf10a16",
+    "sourceDirectory": "dist",
+    "sourceTree": "53fdefc95427a3be896c1509a3bbf08d803c98ec",
+    "fileCount": 167,
+    "archiveSha256": "167ec8f7cb332dad3f7452f34bf1c3cc5e2672ff6ef102853190416e726af585",
+    "anonymousHttpVerifiedAt": "2026-10-24T20:14:11.409Z",
+    "anonymousHttpChecksPassed": 7,
+    "httpVerification": "No cookies or authorization supplied; all seven requests returned 200. JavaScript and image contents match the repo. HTML static text and app entry match after hosting link/comment processing.",
+    "browserVerification": [
+      "Public page renders the current story and antioxidant epilogue.",
+      "A prediction can be selected and submitted; the ore responds to keyboard rotation and records evidence.",
+      "Prediction and evidence survive reload; reset restores four choices and a visible scene preview.",
+      "No console errors or warnings observed during the smoke check."
+    ],
+    "verificationLimits": "This publication smoke check did not repeat every lesson interaction or mobile interaction. The unchanged application source previously passed all 123 automated tests.",
+    "publicationSequence": "Published to the existing Netlify site under the explicit public-link request before the user selected GitHub Pages for future publication. No further Netlify publication is authorized by this record."
+  },
+  "previousGitHubPagesDeployment": {
     "provider": "github-pages",
     "url": "https://urpig.github.io/ch2/",
     "status": "published",
@@ -58,64 +106,5 @@
     "automatedTestsPassed": 170,
     "verificationLimits": "Public smoke check covers notebook/question ordering, card 03 and D answer feedback, reload persistence and the next-unit link; it does not repeat every laboratory interaction or mobile viewport.",
     "screenshot": "outputs/ch2-public-5506896.png"
-  },
-  "previousPublicDeployment": {
-    "provider": "netlify",
-    "site": "whimsical-babka-221c30",
-    "url": "https://whimsical-babka-221c30.netlify.app/",
-    "deployId": "6add0fa73b84e3e7169c710e",
-    "status": "published",
-    "publishedAtDisplay": "2026-10-25 04:06 Asia/Taipei (minute precision from dashboard)",
-    "sourceCommit": "56efa9804420e626dd16b447a9496e8e7bf10a16",
-    "sourceDirectory": "dist",
-    "sourceTree": "53fdefc95427a3be896c1509a3bbf08d803c98ec",
-    "fileCount": 167,
-    "archiveSha256": "167ec8f7cb332dad3f7452f34bf1c3cc5e2672ff6ef102853190416e726af585",
-    "anonymousHttpVerifiedAt": "2026-10-24T20:14:11.409Z",
-    "anonymousHttpChecksPassed": 7,
-    "httpVerification": "No cookies or authorization supplied; all seven requests returned 200. JavaScript and image contents match the repo. HTML static text and app entry match after hosting link/comment processing.",
-    "browserVerification": [
-      "Public page renders the current story and antioxidant epilogue.",
-      "A prediction can be selected and submitted; the ore responds to keyboard rotation and records evidence.",
-      "Prediction and evidence survive reload; reset restores four choices and a visible scene preview.",
-      "No console errors or warnings observed during the smoke check."
-    ],
-    "verificationLimits": "This publication smoke check did not repeat every lesson interaction or mobile interaction. The unchanged application source previously passed all 123 automated tests.",
-    "publicationSequence": "Published to the existing Netlify site under the explicit public-link request before the user selected GitHub Pages for future publication. No further Netlify publication is authorized by this record."
-  },
-  "previousGitHubPagesDeployment": {
-    "provider": "github-pages",
-    "url": "https://urpig.github.io/ch2/",
-    "status": "published",
-    "sourceCommit": "211935e7834b1caa82ff5aef1f0246953d36b59d",
-    "pagesCommit": "9ec77ca1989faf765fb4a6c31a7942e785b7ff12",
-    "sourceTree": "8c11faa3de96914d929c04f9b49a9286f1cca7ed",
-    "fileCount": 220,
-    "deploymentRun": "https://github.com/urpig/ch2/actions/runs/40996380508",
-    "anonymousHttpVerifiedAt": "2026-10-30T03:17:15.294Z",
-    "anonymousHttpChecksPassed": 10,
-    "httpVerification": "Ten anonymous requests returned HTTP 200 and matched the published source SHA-256; text line endings normalized and image bytes compared exactly.",
-    "verifiedFiles": [
-      "index.html",
-      "finishing-art.js",
-      "respiration-art.js",
-      "iron-affinity-bench.js",
-      "life-laboratory-scene.js",
-      "apple-comparison.js",
-      "combustion-guidance.js",
-      "furnace-guidance.js",
-      "assets/story/tofu-cutout-comparison.png",
-      "assets/story/ore-forge-floor.png"
-    ],
-    "browserVerifiedAt": "2026-10-30T03:19:39.144Z",
-    "browserVerification": [
-      "Public homepage renders without login.",
-      "The oxide replenishment button resets the experiment. Selecting carbon and adding it to iron oxide completes the reaction and displays both oxidation and reduction.",
-      "The blade testing bench renders on its wooden forge table with a clear placement area.",
-      "No captured console errors during the public smoke check."
-    ],
-    "automatedTestsPassed": 164,
-    "verificationLimits": "Smoke check covers oxide replenishment, a carbon reaction and the blade-bench appearance; it does not repeat every lesson interaction or responsive viewport.",
-    "screenshot": "outputs/ch2-public-211935e.jpg"
   }
 }
