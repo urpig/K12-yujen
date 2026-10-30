@@ -18,12 +18,76 @@
     "sourceFolder": "/",
     "publishCommand": "node publish-pages.mjs",
     "url": "https://urpig.github.io/ch2/",
-    "sourceCommit": "7e7052cfdcb4bd0cfe8372b3855a6d6eb526bdf6",
-    "pagesCommit": "6ad4b040a709dd7eb64bbcc548012cc7b399f7b6",
-    "sourceTree": "6bc38de7203639fa2b4060f76f067d575bc5d8d0",
-    "verifiedAt": "2026-10-30T10:11:37.784Z"
+    "sourceCommit": "da2b1232256b5c0d641f22b1a27f3f809dba3067",
+    "pagesCommit": "07ef63abd0ce4bf9cc1f71d7561a38c3dcad6ca0",
+    "sourceTree": "de2be82ad46f0d0cd677c69685026d7879e7c18e",
+    "verifiedAt": "2026-10-30T15:07:01.840Z"
   },
   "currentPublicDeployment": {
+    "provider": "github-pages",
+    "url": "https://urpig.github.io/ch2/",
+    "status": "published",
+    "sourceCommit": "da2b1232256b5c0d641f22b1a27f3f809dba3067",
+    "pagesCommit": "07ef63abd0ce4bf9cc1f71d7561a38c3dcad6ca0",
+    "sourceTree": "de2be82ad46f0d0cd677c69685026d7879e7c18e",
+    "fileCount": 229,
+    "anonymousHttpVerifiedAt": "2026-10-30T15:01:11.996Z",
+    "anonymousHttpChecksPassed": 8,
+    "httpVerification": "All eight public files return anonymous HTTP 200 and match committed dist; text compared after line-ending normalization, PNG files compared byte-for-byte.",
+    "verifiedFiles": [
+      "index.html",
+      "biology-polish.css",
+      "biology-organelle-art.js",
+      "life-biology-lab.js",
+      "story-dialogue.js",
+      "character-story.css",
+      "assets/story/chloroplast-cutaway-v2.png",
+      "assets/story/mitochondrion-cutaway-v2.png"
+    ],
+    "deploymentRun": "https://github.com/urpig/ch2/actions/runs/41076573069",
+    "deploymentConclusion": "success",
+    "browserVerifiedAt": "2026-10-30T15:07:01.840Z",
+    "browserVerification": [
+      "Public B notebook preserves the exact user-supplied mnemonic and story, with the 17-element activity order.",
+      "Public respiration card accepts native pointer drags of glucose and oxygen and completes both stages.",
+      "Public photosynthesis card displays the new cutaway and completed products with five sun rays.",
+      "Local desktop tests cover both complete biology flows and reset clearing products.",
+      "Local 390px viewport accepts a molecule drag without horizontal overflow; the mnemonic wraps at 20px.",
+      "No captured public console errors."
+    ],
+    "automatedTestsPassed": 175,
+    "verificationLimits": "Unchanged combustion, iron-reduction, blast-furnace and blade experiments were not replayed during this visual/mnemonic release. Public photosynthesis visual completion uses previously saved progress; its full drag flow was replayed locally.",
+    "screenshot": "outputs/affinity-mnemonic-public.png",
+    "biologyScreenshots": [
+      "outputs/biology-photo-public.png",
+      "outputs/biology-respiration-public.png"
+    ]
+  },
+  "previousPublicDeployment": {
+    "provider": "netlify",
+    "site": "whimsical-babka-221c30",
+    "url": "https://whimsical-babka-221c30.netlify.app/",
+    "deployId": "6add0fa73b84e3e7169c710e",
+    "status": "published",
+    "publishedAtDisplay": "2026-10-25 04:06 Asia/Taipei (minute precision from dashboard)",
+    "sourceCommit": "56efa9804420e626dd16b447a9496e8e7bf10a16",
+    "sourceDirectory": "dist",
+    "sourceTree": "53fdefc95427a3be896c1509a3bbf08d803c98ec",
+    "fileCount": 167,
+    "archiveSha256": "167ec8f7cb332dad3f7452f34bf1c3cc5e2672ff6ef102853190416e726af585",
+    "anonymousHttpVerifiedAt": "2026-10-24T20:14:11.409Z",
+    "anonymousHttpChecksPassed": 7,
+    "httpVerification": "No cookies or authorization supplied; all seven requests returned 200. JavaScript and image contents match the repo. HTML static text and app entry match after hosting link/comment processing.",
+    "browserVerification": [
+      "Public page renders the current story and antioxidant epilogue.",
+      "A prediction can be selected and submitted; the ore responds to keyboard rotation and records evidence.",
+      "Prediction and evidence survive reload; reset restores four choices and a visible scene preview.",
+      "No console errors or warnings observed during the smoke check."
+    ],
+    "verificationLimits": "This publication smoke check did not repeat every lesson interaction or mobile interaction. The unchanged application source previously passed all 123 automated tests.",
+    "publicationSequence": "Published to the existing Netlify site under the explicit public-link request before the user selected GitHub Pages for future publication. No further Netlify publication is authorized by this record."
+  },
+  "previousGitHubPagesDeployment": {
     "provider": "github-pages",
     "url": "https://urpig.github.io/ch2/",
     "status": "published",
@@ -54,53 +118,5 @@
     "automatedTestsPassed": 171,
     "verificationLimits": "Local 390px check confirmed four 17px choices without horizontal overflow and persistence of option D. Public smoke checks cover revised practice, headings and navigation; unchanged experiments were not all replayed.",
     "screenshot": "outputs/ch2-public-four-choice-practice.png"
-  },
-  "previousPublicDeployment": {
-    "provider": "netlify",
-    "site": "whimsical-babka-221c30",
-    "url": "https://whimsical-babka-221c30.netlify.app/",
-    "deployId": "6add0fa73b84e3e7169c710e",
-    "status": "published",
-    "publishedAtDisplay": "2026-10-25 04:06 Asia/Taipei (minute precision from dashboard)",
-    "sourceCommit": "56efa9804420e626dd16b447a9496e8e7bf10a16",
-    "sourceDirectory": "dist",
-    "sourceTree": "53fdefc95427a3be896c1509a3bbf08d803c98ec",
-    "fileCount": 167,
-    "archiveSha256": "167ec8f7cb332dad3f7452f34bf1c3cc5e2672ff6ef102853190416e726af585",
-    "anonymousHttpVerifiedAt": "2026-10-24T20:14:11.409Z",
-    "anonymousHttpChecksPassed": 7,
-    "httpVerification": "No cookies or authorization supplied; all seven requests returned 200. JavaScript and image contents match the repo. HTML static text and app entry match after hosting link/comment processing.",
-    "browserVerification": [
-      "Public page renders the current story and antioxidant epilogue.",
-      "A prediction can be selected and submitted; the ore responds to keyboard rotation and records evidence.",
-      "Prediction and evidence survive reload; reset restores four choices and a visible scene preview.",
-      "No console errors or warnings observed during the smoke check."
-    ],
-    "verificationLimits": "This publication smoke check did not repeat every lesson interaction or mobile interaction. The unchanged application source previously passed all 123 automated tests.",
-    "publicationSequence": "Published to the existing Netlify site under the explicit public-link request before the user selected GitHub Pages for future publication. No further Netlify publication is authorized by this record."
-  },
-  "previousGitHubPagesDeployment": {
-    "provider": "github-pages",
-    "url": "https://urpig.github.io/ch2/",
-    "status": "published",
-    "sourceCommit": "49de4cf64bd410f337d90840cc0f22193a4b821e",
-    "pagesCommit": "f615925c335bfc15349de320e9b102ef3445b533",
-    "sourceTree": "60076215ab9b225af3574204fee57ef5728cdcfd",
-    "fileCount": 225,
-    "anonymousHttpVerifiedAt": "2026-10-30T09:51:48.002Z",
-    "anonymousHttpChecksPassed": 1,
-    "httpVerification": "Anonymous HTTP 200 stylesheet matches committed CSS after line-ending normalization.",
-    "verifiedFiles": [
-      "lesson-refinement.css"
-    ],
-    "browserVerifiedAt": "2026-10-30T09:53:17.826Z",
-    "browserVerification": [
-      "Public main-card and A-D practice choices and letters render at 18px.",
-      "Public card 03 can still be answered and shows correct feedback.",
-      "No captured console errors."
-    ],
-    "automatedTestsPassed": 170,
-    "verificationLimits": "Responsive local check at 390px confirms 17px choices and no horizontal overflow. Public smoke check verifies desktop 18px choices and card 03 answering.",
-    "screenshot": "outputs/ch2-public-larger-options.png"
   }
 }
